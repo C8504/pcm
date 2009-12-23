@@ -9,9 +9,9 @@ int main(void)
     CLinkedList *mylist1 = NULL;
     CLinkedList *mylist2 = NULL;
 
-    fp = fopen ("makefile", "r");
+    fp = fopen ("..\\src\\linkedlist.c", "r");
     if ( fp == NULL)  {
-        printf ("fopen error!\n");
+        printf ("Cui Error: fopen error!\n");
         goto TERMINATE;
     }
     error = CLinkedList_Init (&mylist1);
