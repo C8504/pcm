@@ -9,7 +9,7 @@ int main(void)
     ORCLinkedList *mylist1 = NULL;
     ORCLinkedList *mylist2 = NULL;
 
-    fp = fopen ("..\\src\\linkedlist.c", "r");
+    fp = fopen ("..\\README", "r");
     if ( fp == NULL)  {
         printf ("ORC Error: fopen error!\n");
         goto TERMINATE;

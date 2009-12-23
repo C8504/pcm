@@ -6,6 +6,10 @@ TESTDIR=../test/
 LOG=.log
 
 SRCFILES=../src/linkedlist$(C)
+EXEFILES=test_init_and_free$(E)\
+         test_one_element$(E)\
+         test_many_element$(E)\
+         test_readfile$(E)
 TESTFILES=$(TESTDIR)test_init_and_free$(C)\
           $(TESTDIR)test_one_element$(C)\
           $(TESTDIR)test_many_element$(C)\
@@ -38,12 +42,15 @@ test_readfile$(E): $(SRCFILES) $(TESTDIR)test_readfile$(C)
 	test_readfile$(E) > test_readfile$(LOG)
 
 test: test_init_and_free$(E) test_one_element$(E) test_many_element$(E) test_readfile$(E)
-	@if test `cat $(LOGFILES) | grep 'Cui Error' | wc -l` -gt 0; then \
+	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
-	  echo "Cui Errors found! try  grep 'Cui Error' *.log"; \
+	  echo "ORC Errors found! try  grep 'ORC Error' *.log"; \
 	  echo "";\
 	else \
 	  echo "All tests completed successfully"; \
 	fi
+splint: $(SRCFILES) $(TESTFILES)
+	splint -I $(INCLUDE) $(SRCFILES) $(TESTFILES) > splint
 clean:
-	rm -f *$(E) *$(LOG)
+	rm -f *$(E) *$(LOG) splint
+
