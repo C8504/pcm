@@ -7,11 +7,11 @@ typedef struct {
 
 static
 ErrorMap errorMap[] = {
-   {CERR_NO_MEMORY,                "Out of memory "},
-   {CERR_NULL_POINTER,             "Null pointer for required data "},
-   {CERR_NOTVALID_INDEX,           "Not valid index"},
-   {CERR_ELEMENT_NOT_FOUND,        "Element not found"},
-   {CERR_EMPTY_LIST,               "Empty list"},
-   {CERR_NOT_STACK_AND_QUEUE,      "Cannot use pop in stack and queue"},
+   {ORCERR_NO_MEMORY,                "Out of memory "},
+   {ORCERR_NULL_POINTER,             "Null pointer for required data "},
+   {ORCERR_NOTVALID_INDEX,           "Not valid index"},
+   {ORCERR_ELEMENT_NOT_FOUND,        "Element not found"},
+   {ORCERR_EMPTY_LIST,               "Empty list"},
+   {ORCERR_NOT_STACK_AND_QUEUE,      "Cannot use pop in stack and queue"},
 };
 #endif

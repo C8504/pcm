@@ -1,34 +1,34 @@
 #ifndef H_LINKEDLIST
 #define H_LINKEDLIST
 #include "C.h" 
-typedef struct CLinkedNode {
+typedef struct ORCLinkedNode {
     char               *elem;     
-    struct CLinkedNode *next;
-    struct CLinkedNode *prev;
-} CLinkedNode;
+    struct ORCLinkedNode *next;
+    struct ORCLinkedNode *prev;
+} ORCLinkedNode;
 
-typedef struct CLinkedList{
-    struct CLinkedNode *first;
-    struct CLinkedNode *last;
-} CLinkedList;
+typedef struct ORCLinkedList{
+    struct ORCLinkedNode *first;
+    struct ORCLinkedNode *last;
+} ORCLinkedList;
 
-typedef CLinkedNode* CLinkedNode_p;
-typedef CLinkedList* CLinkedList_p;
+typedef ORCLinkedNode* ORCLinkedNode_p;
+typedef ORCLinkedList* ORCLinkedList_p;
 
-/* CLinkedNode functions */
-void CNode_Free           (CLinkedNode **node);
-int  CNode_Alloc_and_Init (CLinkedNode **node, const char* elem);
+/* ORCLinkedNode functions */
+void ORCNode_Free           (ORCLinkedNode **node);
+int  ORCNode_Alloc_and_Init (ORCLinkedNode **node, const char* elem);
 
-/* CLinkedList functions */
-int  CLinkedList_Init   (CLinkedList **list);
-int  CLinkedList_Clear  (CLinkedList *list);
-int  CLinkedList_Free   (CLinkedList **list);
+/* ORCLinkedList functions */
+int  ORCLinkedList_Init   (ORCLinkedList **list);
+int  ORCLinkedList_Clear  (ORCLinkedList *list);
+int  ORCLinkedList_Free   (ORCLinkedList **list);
 
-int  CLinkedList_Append (CLinkedList *list, const char* elem);
-int  CLinkedList_Insert (CLinkedList *list, int pos, const char* elem);
-int  CLinkedList_Pop    (CLinkedList *list, int flag);
+int  ORCLinkedList_Append (ORCLinkedList *list, const char* elem);
+int  ORCLinkedList_Insert (ORCLinkedList *list, int pos, const char* elem);
+int  ORCLinkedList_Pop    (ORCLinkedList *list, int flag);
 
-int  CLinkedList_Length (CLinkedList *list);
+int  ORCLinkedList_Length (ORCLinkedList *list);
 
-int  CLinkedList_Output (CLinkedList *list, const char* sp);
+int  ORCLinkedList_Output (ORCLinkedList *list, const char* sp);
 #endif

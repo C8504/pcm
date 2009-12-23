@@ -3,90 +3,90 @@ int test_many_elements()
 {
     int i;
     int error = 0;
-    CLinkedList* mylist = NULL;
+    ORCLinkedList* mylist = NULL;
 
-    error = CLinkedList_Init (&mylist);
+    error = ORCLinkedList_Init (&mylist);
     if ( error )  goto TERMINATE;
 
     // insert  elements here
-    error = CLinkedList_Insert (mylist, 0, "1");
+    error = ORCLinkedList_Insert (mylist, 0, "1");
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Insert (mylist, 1, "2");
+    error = ORCLinkedList_Insert (mylist, 1, "2");
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Insert (mylist, CLinkedList_Length(mylist), "end");
+    error = ORCLinkedList_Insert (mylist, ORCLinkedList_Length(mylist), "end");
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // append 10 elements 
     for (i = 0; i < 10; ++i) {
-        error = CLinkedList_Append (mylist, "a");
+        error = ORCLinkedList_Append (mylist, "a");
         if ( error )  goto TERMINATE;
     }
 
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // append 10 elements too
     for (i = 0; i < 10; ++i) {
-        error = CLinkedList_Append (mylist, "b");
+        error = ORCLinkedList_Append (mylist, "b");
         if ( error )  goto TERMINATE;
     }
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // insert  elements here
-    error = CLinkedList_Insert (mylist, 1, "3");
+    error = ORCLinkedList_Insert (mylist, 1, "3");
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Insert (mylist, 2, "4");
+    error = ORCLinkedList_Insert (mylist, 2, "4");
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Insert (mylist, CLinkedList_Length(mylist), "end");
+    error = ORCLinkedList_Insert (mylist, ORCLinkedList_Length(mylist), "end");
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // pop like stack
     for (i = 0; i < 5; ++i) {
-        error  = CLinkedList_Pop (mylist, C_STACK);
+        error  = ORCLinkedList_Pop (mylist, ORC_STACK);
         if ( error )  goto TERMINATE;
     }
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // pop like queue
     for (i = 0; i < 5; ++i) {
-        error  = CLinkedList_Pop (mylist, C_QUEUE);
+        error  = ORCLinkedList_Pop (mylist, ORC_QUEUE);
         if ( error )  goto TERMINATE;
 
     }
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // pop like stack
     for (i = 0; i < 10; ++i) {
-        error  = CLinkedList_Pop (mylist, C_STACK);
+        error  = ORCLinkedList_Pop (mylist, ORC_STACK);
         if ( error )  goto TERMINATE;
     }
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // insert 10 elements again 
     for (i = 0; i < 10; ++i) {
-        error = CLinkedList_Append (mylist, "a");
+        error = ORCLinkedList_Append (mylist, "a");
         if ( error )  goto TERMINATE;
     }
 
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Free (&mylist);
+    error = ORCLinkedList_Free (&mylist);
     if ( error )  goto TERMINATE;
 
     if ( NULL == mylist )  printf ("free list successfully!\n\n");
 
 TERMINATE:
 
-    if ( mylist )  CLinkedList_Free (&mylist);
+    if ( mylist )  ORCLinkedList_Free (&mylist);
     return error;
 }
 
@@ -104,7 +104,7 @@ TERMINATE:
 
         for (i = 0; i < nErrors; ++i) {
             if ( errorMap[i].error == error ) {
-                printf ("Cui Error: %s\n", errorMap[i].str);
+                printf ("ORC Error: %s\n", errorMap[i].str);
             }
         }
     }

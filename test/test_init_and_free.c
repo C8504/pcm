@@ -5,15 +5,15 @@ int main(void)
     int i = 0;
     int error = 0;
 
-    CLinkedList *mylist = NULL;
+    ORCLinkedList *mylist = NULL;
 
-    error = CLinkedList_Init (&mylist);
+    error = ORCLinkedList_Init (&mylist);
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Free (&mylist);
+    error = ORCLinkedList_Free (&mylist);
     if ( error )  goto TERMINATE;
 
 TERMINATE:
@@ -22,7 +22,7 @@ TERMINATE:
 
         for (i = 0; i < nErrors; ++i) {
             if ( errorMap[i].error == error ) {
-                printf ("Cui Error: %s\n", errorMap[i].str);
+                printf ("ORC Error: %s\n", errorMap[i].str);
             }
         }
     }

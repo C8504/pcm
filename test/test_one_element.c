@@ -6,58 +6,58 @@ int test_one_element(void)
 
     // Use pointer of list object use the _init function and _free function to
     // manage memory
-    CLinkedList *mylist = NULL;
-    error = CLinkedList_Init (&mylist);
+    ORCLinkedList *mylist = NULL;
+    error = ORCLinkedList_Init (&mylist);
     if ( error )  goto TERMINATE;
 
     printf ("mylist = %p, mylist->first = %p, mylist->last = %p\n", 
         mylist, mylist->first, mylist->last);
 
     // append 1 elements 
-    error = CLinkedList_Append (mylist, "a");
+    error = ORCLinkedList_Append (mylist, "a");
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
 
     // pop like stack
-    error  = CLinkedList_Pop (mylist, C_STACK);
+    error  = ORCLinkedList_Pop (mylist, ORC_STACK);
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
     // append 1 elements 
-    error = CLinkedList_Append (mylist, "b");
+    error = ORCLinkedList_Append (mylist, "b");
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
 
     // pop like queue
-    error  = CLinkedList_Pop (mylist, C_QUEUE);
+    error  = ORCLinkedList_Pop (mylist, ORC_QUEUE);
     if ( error )  goto TERMINATE;
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Clear (mylist);
+    error = ORCLinkedList_Clear (mylist);
     if ( error )  goto TERMINATE;
     if ( NULL != mylist )  printf ("list is not NULL after calling clear function!\n\n");
 
     // append 10 elements again 
     for (i = 0; i < 10; ++i) {
-        error = CLinkedList_Append (mylist, "a");
+        error = ORCLinkedList_Append (mylist, "a");
         if ( error )  goto TERMINATE;
     }
 
-    error = CLinkedList_Output (mylist, ":");
+    error = ORCLinkedList_Output (mylist, ":");
     if ( error )  goto TERMINATE;
 
-    error = CLinkedList_Free (&mylist);
+    error = ORCLinkedList_Free (&mylist);
     if ( error )  goto TERMINATE;
 
     if ( NULL == mylist )  printf ("list is NULL after calling free list function!\n\n");
 
 TERMINATE:
 
-    if ( mylist )  CLinkedList_Free (&mylist);
+    if ( mylist )  ORCLinkedList_Free (&mylist);
     return error;
 }
 
@@ -75,7 +75,7 @@ TERMINATE:
 
         for (i = 0; i < nErrors; ++i) {
             if ( errorMap[i].error == error ) {
-                printf ("Cui Error: %s\n", errorMap[i].str);
+                printf ("ORC Error: %s\n", errorMap[i].str);
             }
         }
     }
