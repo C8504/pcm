@@ -13,18 +13,18 @@ help:
 	)
 
 compile =                                                    \
-         $(CCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRCFILES) \
+         $(CCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
          -o $(1)$(E);                                         \
          $(1)$(E) > $(1)$(LOG);                               \
 			cat $(1)$(LOG)
 
 cppcompile =                                                  \
-         $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRCFILES) \
+         $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                    \
 			$(1)$(E) > $(1)$(LOG);                                          \
 			cat $(1)$(LOG)
          
-reader: $(EXEFILES)
+reader: $(EXE)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
 	  echo "ORC Errors found! try  grep 'ORC Error' *.log"; \
@@ -32,37 +32,37 @@ reader: $(EXEFILES)
 	else \
 	  echo "All tests completed successfully"; \
 	fi
-splint: $(CSRCFILES) $(CTESTFILES)
-	@splint -I $(INCLUDE) $(CSRCFILES) $(CTESTFILES) > splint
+splint: $(CSRC) $(CTEST)
+	@splint -I $(INCLUDE) $(CSRC) $(CTEST) > splint
 clean:
 	@rm -f *$(E) *$(LOG) splint
 # C files
-test_link_init_and_free$(E): $(CSRCFILES) $(TESTDIR)test_link_init_and_free$(C)
+test_link_init_and_free$(E): $(CSRC) $(TESTDIR)test_link_init_and_free$(C)
 	@$(call compile,test_link_init_and_free)
-test_link_one_element$(E): $(CSRCFILES) $(TESTDIR)test_link_one_element$(C)
+test_link_one_element$(E): $(CSRC) $(TESTDIR)test_link_one_element$(C)
 	@$(call compile,test_link_one_element)
-test_link_many_element$(E): $(CSRCFILES) $(TESTDIR)test_link_many_element$(C)
+test_link_many_element$(E): $(CSRC) $(TESTDIR)test_link_many_element$(C)
 	@$(call compile,test_link_many_element)
-test_link_readfile$(E): $(CSRCFILES) $(TESTDIR)test_link_readfile$(C)
+test_link_readfile$(E): $(CSRC) $(TESTDIR)test_link_readfile$(C)
 	@$(call compile,test_link_readfile)
-check_bounds$(E): $(CSRCFILES) $(TESTDIR)check_bounds$(C)
+check_bounds$(E): $(CSRC) $(TESTDIR)check_bounds$(C)
 	@$(call compile,check_bounds)
-getchar$(E): $(CSRCFILES) $(TESTDIR)getchar$(C)
+getchar$(E): $(CSRC) $(TESTDIR)getchar$(C)
 	@$(call compile,getchar)
-test_sq_inout$(E): $(CSRCFILES) $(TESTDIR)test_sq_inout$(C)
+test_sq_inout$(E): $(CSRC) $(TESTDIR)test_sq_inout$(C)
 	@$(call compile,test_sq_inout)
-test_sq_init_and_free$(E):$(CSRCFILES) $(TESTDIR)test_sq_init_and_free$(C)
+test_sq_init_and_free$(E):$(CSRC) $(TESTDIR)test_sq_init_and_free$(C)
 	@$(call compile,test_sq_init_and_free)
-test_sq_delete$(E): $(CSRCFILES) $(TESTDIR)test_sq_delete$(C)
+test_sq_delete$(E): $(CSRC) $(TESTDIR)test_sq_delete$(C)
 	@$(call compile,test_sq_delete)
-test_sq_insert$(E): $(CSRCFILES) $(TESTDIR)test_sq_insert$(C)
+test_sq_insert$(E): $(CSRC) $(TESTDIR)test_sq_insert$(C)
 	@$(call compile,test_sq_insert)
-test_sq_merge$(E): $(CSRCFILES) $(TESTDIR)test_sq_merge$(C)
+test_sq_merge$(E): $(CSRC) $(TESTDIR)test_sq_merge$(C)
 	@$(call compile,test_sq_merge)
-test_sq_sort_and_find$(E): $(CSRCFILES) $(TESTDIR)test_sq_sort_and_find$(C)
+test_sq_sort_and_find$(E): $(CSRC) $(TESTDIR)test_sq_sort_and_find$(C)
 	@$(call compile,test_sq_sort_and_find)
 # C++ files
-cast$(E): $(CPPSRCFILES) $(TESTDIR)cast$(CPP)
+cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)
 	@$(call cppcompile,cast)
 .PHONY: test splint clean
 

@@ -7,12 +7,12 @@ INCLUDE=../include/
 TESTDIR=../test/
 LOG=.log
 
-CSRCFILES=../src/linkedlist$(C)\
+CSRC=../src/linkedlist$(C)\
           ../src/inout$(C)\
           ../src/find$(C)\
           ../src/sort$(C)\
           ../src/seqlist$(C)
-EXEFILES=test_link_init_and_free$(E)\
+EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
          test_link_readfile$(E)\
@@ -24,7 +24,7 @@ EXEFILES=test_link_init_and_free$(E)\
          test_sq_insert$(E)\
          test_sq_merge$(E)\
          test_sq_sort_and_find$(E)
-CTESTFILES=$(TESTDIR)test_link_init_and_free$(C)\
+CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\
           $(TESTDIR)test_link_readfile$(C)\
