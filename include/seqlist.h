@@ -20,5 +20,5 @@ int ORCSeqList_Delete(ORCSeqList *list, int index, int* e);
 int ORCSeqList_DeleteR(ORCSeqList *list);
 int ORCSeqList_Output(ORCSeqList *list);
 int ORCSeqList_Sort(ORCSeqList *list, int length, int alg);
-int ORCSeqList_Find(ORCSeqList *list, int length, const int elem, 
+int ORCSeqList_Find(ORCSeqList *list, int length, const int elem,
                     int *index, int alg);
