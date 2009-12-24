@@ -1,5 +1,5 @@
-#ifndef H_C
-#define H_C
+#ifndef H_ORC
+#define H_ORC
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
