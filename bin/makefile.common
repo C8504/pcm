@@ -15,7 +15,8 @@ help:
 compile =                                                    \
          $(GCC) -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(SRCFILES) \
          -o $(1)$(E);                                         \
-         $(1)$(E) > $(1)$(LOG)
+         $(1)$(E) > $(1)$(LOG);                               \
+			cat $(1)$(LOG)
 test: $(EXEFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
@@ -25,22 +26,22 @@ test: $(EXEFILES)
 	  echo "All tests completed successfully"; \
 	fi
 splint: $(SRCFILES) $(FILEFILES)
-	splint -I $(INCLUDE) $(SRCFILES) $(FILEFILES) > splint
+	@splint -I $(INCLUDE) $(SRCFILES) $(FILEFILES) > splint
 clean:
-	rm -f *$(E) *$(LOG) splint
+	@rm -f *$(E) *$(LOG) splint
 
 test_init_and_free$(E): $(SRCFILES) $(TESTDIR)test_init_and_free$(C)
-	$(call compile,test_init_and_free)
+	@$(call compile,test_init_and_free)
 test_one_element$(E): $(SRCFILES) $(TESTDIR)test_one_element$(C)
-	$(call compile,test_one_element)
+	@$(call compile,test_one_element)
 test_many_element$(E): $(SRCFILES) $(TESTDIR)test_many_element$(C)
-	$(call compile,test_many_element)
+	@$(call compile,test_many_element)
 test_readfile$(E): $(SRCFILES) $(TESTDIR)test_readfile$(C)
-	$(call compile,test_readfile)
+	@$(call compile,test_readfile)
 check_bounds$(E): $(SRCFILES) $(TESTDIR)check_bounds$(C)
-	$(call compile,check_bounds)
+	@$(call compile,check_bounds)
 getchar$(E): $(SRCFILES) $(TESTDIR)getchar$(C)
-	$(call compile,getchar)
+	@$(call compile,getchar)
 
 .PHONY: test splint clean
 
