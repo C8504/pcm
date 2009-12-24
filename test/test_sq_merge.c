@@ -8,8 +8,8 @@ int main(void)
     int a[5] = {1, 3, 3, 7, 7};
     int b[5] = {1, 3, 6, 6, 10};
     
-    CSList odd = NULL;
-    CSList even = NULL;
+    ORCSList odd = NULL;
+    ORCSList even = NULL;
 
     error = ORCSeqList_Init (&odd);
     if ( error )  goto TERMINATE;

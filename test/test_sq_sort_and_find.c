@@ -66,7 +66,7 @@ int main(void)
    error = ORCSeqList_Free (&mylist);
    if ( error )  goto TERMINATE;
    
-   if ( mylist == NULL )  printf("sqlist free successfully!");
+   if ( mylist == NULL )  printf("sqlist free successfully!\n");
 TERMINATE:
    if ( error ) {
       int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);

@@ -21,7 +21,7 @@ int main(void)
     if ( error )  goto TERMINATE;
 
     printf ("Insert 3-5 elements");
-    for (i = 3; i < C_LIST_INIT_SIZE ; ++i) {
+    for (i = 3; i < ORC_LIST_INIT_SIZE ; ++i) {
         error = ORCSeqList_Insert (mylist, i, i);
         if ( error )  goto TERMINATE;
     }

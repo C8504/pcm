@@ -11,27 +11,43 @@ CSRCFILES=../src/linkedlist$(C)\
           ../src/inout$(C)\
           ../src/find$(C)\
           ../src/sort$(C)\
-			 ../src/seqlist$(C)
-EXEFILES=test_init_and_free$(E)\
-         test_one_element$(E)\
-         test_many_element$(E)\
-         test_readfile$(E)\
-			check_bounds$(E)\
-			getchar$(E)\
-         test_inout$(E)
-CTESTFILES=$(TESTDIR)test_init_and_free$(C)\
-          $(TESTDIR)test_one_element$(C)\
-          $(TESTDIR)test_many_element$(C)\
-          $(TESTDIR)test_readfile$(C)\
-			 $(TESTDIR)check_bounds$(C)\
-			 $(TESTDIR)getchar$(C)\
-          $(TESTDIR)test_inout$(C)
+          ../src/seqlist$(C)
+EXEFILES=test_link_init_and_free$(E)\
+         test_link_one_element$(E)\
+         test_link_many_element$(E)\
+         test_link_readfile$(E)\
+         check_bounds$(E)\
+         getchar$(E)\
+         test_sq_inout$(E)\
+         test_sq_init_and_free$(E)\
+         test_sq_delete$(E)\
+         test_sq_insert$(E)\
+         test_sq_merge$(E)\
+         test_sq_sort_and_find$(E)
+CTESTFILES=$(TESTDIR)test_link_init_and_free$(C)\
+          $(TESTDIR)test_link_one_element$(C)\
+          $(TESTDIR)test_link_many_element$(C)\
+          $(TESTDIR)test_link_readfile$(C)\
+          $(TESTDIR)check_bounds$(C)\
+          $(TESTDIR)getchar$(C)\
+          $(TESTDIR)test_sq_inout$(C)\
+          $(TESTDIR)test_sq_init_and_free$(C)\
+          $(TESTDIR)test_sq_delete$(C)\
+          $(TESTDIR)test_sq_insert$(C)\
+          $(TESTDIR)test_sq_merge$(C)\
+          $(TESTDIR)test_sq_sort_and_find$(C)
 
-LOGFILES=test_init_and_free$(LOG)\
-         test_one_element$(LOG)\
-         test_many_element$(LOG)\
-         test_readfile$(LOG)\
-			check_bounds$(LOG)\
-			getchar$(LOG)\
-         test_inout$(LOG)
+LOGFILES=test_link_init_and_free$(LOG)\
+         test_link_one_element$(LOG)\
+         test_link_many_element$(LOG)\
+         test_link_readfile$(LOG)\
+         check_bounds$(LOG)\
+         getchar$(LOG)\
+         test_sq_inout$(LOG)\
+         test_sq_init_and_free$(LOG)\
+         test_sq_delete$(LOG)\
+         test_sq_insert$(LOG)\
+         test_sq_merge$(LOG)\
+         test_sq_sort_and_find$(LOG)
+
 include makefile.common

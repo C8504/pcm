@@ -8,7 +8,7 @@ typedef  struct {
    int  capacity;      /* The capacity of list*/
 } ORCSeqList;
 
-//typedef ORCSeqList* ORCSList;
+typedef ORCSeqList* ORCSList;
 
 int ORCSeqList_Init(ORCSeqList **list);
 int ORCSeqList_Free(ORCSeqList **list);
