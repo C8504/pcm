@@ -12,23 +12,10 @@ help:
 	;echo "make [splint] -- use splint to check all C files" \
 	)
 
-test_init_and_free$(E): $(SRCFILES) $(TESTDIR)test_init_and_free$(C)
-	$(GCC) -I $(INCLUDE) $(TESTDIR)test_init_and_free$(C) $(SRCFILES) \
-    -o test_init_and_free$(E)
-	test_init_and_free$(E) > test_init_and_free$(LOG)
-test_one_element$(E): $(SRCFILES) $(TESTDIR)test_one_element$(C)
-	$(GCC) -I $(INCLUDE) $(TESTDIR)test_one_element$(C) $(SRCFILES) \
-    -o test_one_element$(E)
-	test_one_element$(E) > test_one_element$(LOG)
-test_many_element$(E): $(SRCFILES) $(TESTDIR)test_many_element$(C)
-	$(GCC) -I $(INCLUDE) $(TESTDIR)test_many_element$(C) $(SRCFILES) \
-    -o test_many_element$(E)
-	test_many_element$(E) > test_many_element$(LOG)
-test_readfile$(E): $(SRCFILES) $(TESTDIR)test_readfile$(C)
-	$(GCC) -I $(INCLUDE) $(TESTDIR)test_readfile$(C) $(SRCFILES) \
-    -o test_readfile$(E)
-	test_readfile$(E) > test_readfile$(LOG)
-	
+compile =                                                    \
+         $(GCC) -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(SRCFILES) \
+         -o $(1)$(E);                                         \
+         $(1)$(E) > $(1)$(LOG)
 test: $(EXEFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
@@ -37,15 +24,23 @@ test: $(EXEFILES)
 	else \
 	  echo "All tests completed successfully"; \
 	fi
-splint: $(SRCFILES) $(TESTFILES)
-	splint -I $(INCLUDE) $(SRCFILES) $(TESTFILES) > splint
+splint: $(SRCFILES) $(FILEFILES)
+	splint -I $(INCLUDE) $(SRCFILES) $(FILEFILES) > splint
 clean:
 	rm -f *$(E) *$(LOG) splint
 
-# other tests
-check_bounds$(E): $(TESTDIR)check_bounds$(C)
-	$(GCC) $(TESTDIR)check_bounds$(C) -o check_bounds$(E)
-	check_bounds$(E) > check_bounds$(LOG)
+test_init_and_free$(E): $(SRCFILES) $(TESTDIR)test_init_and_free$(C)
+	$(call compile,test_init_and_free)
+test_one_element$(E): $(SRCFILES) $(TESTDIR)test_one_element$(C)
+	$(call compile,test_one_element)
+test_many_element$(E): $(SRCFILES) $(TESTDIR)test_many_element$(C)
+	$(call compile,test_many_element)
+test_readfile$(E): $(SRCFILES) $(TESTDIR)test_readfile$(C)
+	$(call compile,test_readfile)
+check_bounds$(E): $(SRCFILES) $(TESTDIR)check_bounds$(C)
+	$(call compile,check_bounds)
+getchar$(E): $(SRCFILES) $(TESTDIR)getchar$(C)
+	$(call compile,getchar)
 
 .PHONY: test splint clean
 
