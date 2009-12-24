@@ -28,7 +28,7 @@ test_readfile$(E): $(SRCFILES) $(TESTDIR)test_readfile$(C)
 	$(GCC) -I $(INCLUDE) $(TESTDIR)test_readfile$(C) $(SRCFILES) \
     -o test_readfile$(E)
 	test_readfile$(E) > test_readfile$(LOG)
-
+	
 test: $(EXEFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
@@ -41,5 +41,11 @@ splint: $(SRCFILES) $(TESTFILES)
 	splint -I $(INCLUDE) $(SRCFILES) $(TESTFILES) > splint
 clean:
 	rm -f *$(E) *$(LOG) splint
+
+# other tests
+check_bounds$(E): $(TESTDIR)check_bounds$(C)
+	$(GCC) $(TESTDIR)check_bounds$(C) -o check_bounds$(E)
+	check_bounds$(E) > check_bounds$(LOG)
+
 .PHONY: test splint clean
 
