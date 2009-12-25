@@ -13,11 +13,12 @@ help:
 	)
 
 compile =                                                    \
-         $(CCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
+         $(CCOMPILE) -g -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
          -o $(1)$(E);                                         \
          $(1)$(E) > $(1)$(LOG);                               \
 			cat $(1)$(LOG)
-
+tags:
+	@cd ../;ctags -R
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                    \
@@ -35,7 +36,7 @@ reader: $(EXE)
 splint: $(CSRC) $(CTEST)
 	@splint -I $(INCLUDE) $(CSRC) $(CTEST) > splint
 clean:
-	@rm -f *$(E) *$(LOG) splint
+	@rm -f *$(E) *$(LOG) splint *.stackdump
 # C files
 test_link_init_and_free$(E): $(CSRC) $(TESTDIR)test_link_init_and_free$(C)
 	@$(call compile,test_link_init_and_free)
@@ -61,6 +62,8 @@ test_sq_merge$(E): $(CSRC) $(TESTDIR)test_sq_merge$(C)
 	@$(call compile,test_sq_merge)
 test_sq_sort_and_find$(E): $(CSRC) $(TESTDIR)test_sq_sort_and_find$(C)
 	@$(call compile,test_sq_sort_and_find)
+test_ORCstring$(E): $(CSRC) $(TESTDIR)test_ORCstring$(C)
+	@$(call compile,test_ORCstring)
 # C++ files
 cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)
 	@$(call cppcompile,cast)
