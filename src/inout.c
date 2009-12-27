@@ -6,7 +6,7 @@
    如果遇到错误或遇到end of file，返回值为EOF。
    */
 #include "inout.h"
-#include "seqlist.h"
+#include "ORCseqlist.h"
 
 int inout()
 {

@@ -1,8 +1,8 @@
 /* sequence list by John Cui*/
 #include "ORC.h"
-#include "sort.h"
-#include "find.h"
-#include "seqlist.h"
+#include "ORCsort.h"
+#include "ORCfind.h"
+#include "ORCseqlist.h"
 
    int
 ORCseqlistinit (ORCseqlist **list)

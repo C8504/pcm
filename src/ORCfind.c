@@ -1,4 +1,4 @@
-#include "find.h"
+#include "ORCfind.h"
    void
 ORCoriginfind(int *a,
       int length,

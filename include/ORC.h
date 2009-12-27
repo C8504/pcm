@@ -2,9 +2,8 @@
 #define H_ORC
 #include<stdio.h>
 #include<stdlib.h>
-/* #define NDEBUG */
 #include<assert.h>
-#include "constant.h"
-#include "errormap.h"
+#include "ORCconstant.h"
+#include "ORCerrormap.h"
 void ORCcheckerror (int error);
 #endif

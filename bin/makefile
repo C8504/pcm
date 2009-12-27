@@ -7,11 +7,11 @@ INCLUDE=../include/
 TESTDIR=../test/
 LOG=.log
 
-CSRC=../src/linkedlist$(C)\
+CSRC=../src/ORClinkedlist$(C)\
           ../src/inout$(C)\
-          ../src/find$(C)\
-          ../src/sort$(C)\
-          ../src/seqlist$(C)\
+          ../src/ORCfind$(C)\
+          ../src/ORCsort$(C)\
+          ../src/ORCseqlist$(C)\
           ../src/ORC$(C)\
           ../src/ORCstring$(C)\
           ../src/ORCmath$(C)

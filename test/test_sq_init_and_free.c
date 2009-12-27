@@ -1,4 +1,4 @@
-#include "seqlist.h"
+#include "ORCseqlist.h"
 
 int main(void)
 {

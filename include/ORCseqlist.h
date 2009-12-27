@@ -1,8 +1,8 @@
 #ifndef H_SEQLIST
 #define H_SEQLIST
 #include "ORC.h"
-#include "sort.h"
-#include "find.h"
+#include "ORCsort.h"
+#include "ORCfind.h"
 
 typedef  struct {
    int *elemp;     /* The basic address of list */
