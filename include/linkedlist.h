@@ -1,34 +1,34 @@
-#ifndef H_LINKEDLIST
-#define H_LINKEDLIST
+#ifndef HLINKEDLIST
+#define HLINKEDLIST
 #include "ORC.h"
-typedef struct ORCLinkedNode {
+typedef struct ORClinkednode {
     char               *elem;
-    struct ORCLinkedNode *next;
-    struct ORCLinkedNode *prev;
-} ORCLinkedNode;
+    struct ORClinkednode *next;
+    struct ORClinkednode *prev;
+} ORClinkednode;
 
-typedef struct ORCLinkedList{
-    struct ORCLinkedNode *first;
-    struct ORCLinkedNode *last;
-} ORCLinkedList;
+typedef struct ORClinkedlist{
+    struct ORClinkednode *first;
+    struct ORClinkednode *last;
+} ORClinkedlist;
 
-typedef ORCLinkedNode* ORCLinkedNode_p;
-typedef ORCLinkedList* ORCLinkedList_p;
+typedef ORClinkednode* ORClinkednodep;
+typedef ORClinkedlist* ORClinkedlistp;
 
-/* ORCLinkedNode functions */
-void ORCNode_Free           (ORCLinkedNode **node);
-int  ORCNode_Alloc_and_Init (ORCLinkedNode **node, const char* elem);
+/* ORClinkednode functions */
+void ORCnodefree           (ORClinkednode **node);
+int  ORCnodeallocandinit (ORClinkednode **node, const char* elem);
 
-/* ORCLinkedList functions */
-int  ORCLinkedList_Init   (ORCLinkedList **list);
-int  ORCLinkedList_Clear  (ORCLinkedList *list);
-int  ORCLinkedList_Free   (ORCLinkedList **list);
+/* ORClinkedlist functions */
+int  ORClinkedlistinit   (ORClinkedlist **list);
+int  ORClinkedlistclear  (ORClinkedlist *list);
+int  ORClinkedlistfree   (ORClinkedlist **list);
 
-int  ORCLinkedList_Append (ORCLinkedList *list, const char* elem);
-int  ORCLinkedList_Insert (ORCLinkedList *list, int pos, const char* elem);
-int  ORCLinkedList_Pop    (ORCLinkedList *list, int flag);
+int  ORClinkedlistappend (ORClinkedlist *list, const char* elem);
+int  ORClinkedlistinsert (ORClinkedlist *list, int pos, const char* elem);
+int  ORClinkedlistpop    (ORClinkedlist *list, int flag);
 
-int  ORCLinkedList_Length (ORCLinkedList *list);
+int  ORClinkedlistlength (ORClinkedlist *list);
 
-int  ORCLinkedList_Output (ORCLinkedList *list, const char* sp);
+int  ORClinkedlistoutput (ORClinkedlist *list, const char* sp);
 #endif

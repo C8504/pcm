@@ -12,7 +12,9 @@ CSRC=../src/linkedlist$(C)\
           ../src/find$(C)\
           ../src/sort$(C)\
           ../src/seqlist$(C)\
-          ../src/ORCstring$(C)
+          ../src/ORC$(C)\
+          ../src/ORCstring$(C)\
+          ../src/ORCmath$(C)
 EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
@@ -25,7 +27,8 @@ EXE=test_link_init_and_free$(E)\
          test_sq_insert$(E)\
          test_sq_merge$(E)\
          test_sq_sort_and_find$(E)\
-         test_ORCstring$(E)
+         test_ORCstring$(E)\
+         test_ORCmath$(E)
 CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\
@@ -38,7 +41,8 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_sq_insert$(C)\
           $(TESTDIR)test_sq_merge$(C)\
           $(TESTDIR)test_sq_sort_and_find$(C)\
-          $(TESTDIR)test_ORCstring$(C)
+          $(TESTDIR)test_ORCstring$(C)\
+          $(TESTDIR)test_ORCmath$(C)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
@@ -52,6 +56,7 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_sq_insert$(LOG)\
          test_sq_merge$(LOG)\
          test_sq_sort_and_find$(LOG)\
-         test_ORCstring$(LOG)
+         test_ORCstring$(LOG)\
+         test_ORCmath$(LOG)\ 
 
 include makefile.common

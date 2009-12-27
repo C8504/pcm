@@ -64,6 +64,8 @@ test_sq_sort_and_find$(E): $(CSRC) $(TESTDIR)test_sq_sort_and_find$(C)
 	@$(call compile,test_sq_sort_and_find)
 test_ORCstring$(E): $(CSRC) $(TESTDIR)test_ORCstring$(C)
 	@$(call compile,test_ORCstring)
+test_ORCmath$(E): $(CSRC) $(TESTDIR)test_ORCmath$(C)
+	@$(call compile,test_ORCmath)
 # C++ files
 cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)
 	@$(call cppcompile,cast)

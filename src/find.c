@@ -1,7 +1,6 @@
 #include "find.h"
-
    void
-ORCOrigin_Find(int *a,
+ORCoriginfind(int *a,
       int length,
       const int elem,
       int* index)
@@ -14,4 +13,4 @@ ORCOrigin_Find(int *a,
       }
    }
 
-} /* End of ORCOrigin_Find*/
+} /* End of ORCoriginfind*/

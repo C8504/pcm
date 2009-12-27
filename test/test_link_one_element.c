@@ -1,63 +1,63 @@
 #include "linkedlist.h"
-int test_one_element(void)
+int testoneelement(void)
 {
    int i;
    int error = 0;
 
-   // Use pointer of list object use the _init function and _free function to
+   // Use pointer of list object use the init function and free function to
    // manage memory
-   ORCLinkedList *mylist = NULL;
-   error = ORCLinkedList_Init (&mylist);
+   ORClinkedlist *mylist = NULL;
+   error = ORClinkedlistinit (&mylist);
    if ( error )  goto TERMINATE;
 
    printf ("mylist = %p, mylist->first = %p, mylist->last = %p\n",
          mylist, mylist->first, mylist->last);
 
    // append 1 elements
-   error = ORCLinkedList_Append (mylist, "a");
+   error = ORClinkedlistappend (mylist, "a");
    if ( error )  goto TERMINATE;
 
-   error = ORCLinkedList_Output (mylist, ":");
+   error = ORClinkedlistoutput (mylist, ":");
 
    // pop like stack
-   error  = ORCLinkedList_Pop (mylist, ORC_STACK);
+   error  = ORClinkedlistpop (mylist, ORCSTACK);
    if ( error )  goto TERMINATE;
-   error = ORCLinkedList_Output (mylist, ":");
+   error = ORClinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // append 1 elements
-   error = ORCLinkedList_Append (mylist, "b");
+   error = ORClinkedlistappend (mylist, "b");
    if ( error )  goto TERMINATE;
 
-   error = ORCLinkedList_Output (mylist, ":");
+   error = ORClinkedlistoutput (mylist, ":");
 
    // pop like queue
-   error  = ORCLinkedList_Pop (mylist, ORC_QUEUE);
+   error  = ORClinkedlistpop (mylist, ORCQUEUE);
    if ( error )  goto TERMINATE;
-   error = ORCLinkedList_Output (mylist, ":");
+   error = ORClinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
-   error = ORCLinkedList_Clear (mylist);
+   error = ORClinkedlistclear (mylist);
    if ( error )  goto TERMINATE;
    if ( NULL != mylist )  printf ("list is not NULL after calling clear function!\n\n");
 
    // append 10 elements again
    for (i = 0; i < 10; ++i) {
-      error = ORCLinkedList_Append (mylist, "a");
+      error = ORClinkedlistappend (mylist, "a");
       if ( error )  goto TERMINATE;
    }
 
-   error = ORCLinkedList_Output (mylist, ":");
+   error = ORClinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
-   error = ORCLinkedList_Free (&mylist);
+   error = ORClinkedlistfree (&mylist);
    if ( error )  goto TERMINATE;
 
    if ( NULL == mylist )  printf ("list is NULL after calling free list function!\n\n");
 
 TERMINATE:
 
-   if ( mylist )  ORCLinkedList_Free (&mylist);
+   if ( mylist )  ORClinkedlistfree (&mylist);
    return error;
 }
 
@@ -66,19 +66,10 @@ int main(void)
    int i;
    int error = 0;
 
-   error = test_one_element();
+   error = testoneelement();
    if ( error )  goto TERMINATE;
 
 TERMINATE:
-   if ( error ) {
-      int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
-
-      for (i = 0; i < nErrors; ++i) {
-         if ( errorMap[i].error == error ) {
-            printf ("ORC Error: %s\n", errorMap[i].str);
-         }
-      }
-   }
-
+   ORCcheckerror (error); 
    return 0;
 }

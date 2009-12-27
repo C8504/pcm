@@ -5,31 +5,23 @@ int main(void)
    int i;
    int error = 0;
    
-   ORCSeqList* mylist = NULL;
+   ORCseqlist* mylist = NULL;
 
-   printf ("Init my list\n");
-   error = ORCSeqList_Init (&mylist);
+   printf ("init my list\n");
+   error = ORCseqlistinit (&mylist);
    if ( error )  goto TERMINATE;
     
-   error = ORCSeqList_Output(mylist);
+   error = ORCseqlistoutput(mylist);
    if ( error )  goto TERMINATE;
 
-   printf ("Free my list\n");
-   error = ORCSeqList_Free (&mylist);
+   printf ("free my list\n");
+   error = ORCseqlistfree (&mylist);
    if ( error )  goto TERMINATE;
   
-   if ( mylist == NULL )  printf("Free mylist successfully!");
+   if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:
-   if ( error ) {
-      int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
-
-      for (i = 0; i < nErrors; ++i) {
-         if ( errorMap[i].error == error ) {
-            printf ("ORC Error: %s\n", errorMap[i].str);
-         }
-      }
-      if ( NULL != mylist )  ORCSeqList_Free (&mylist);
-   }
+   ORCcheckerror (error);
+   if ( NULL != mylist )  ORCseqlistfree (&mylist);
 
    return 0;
 }

@@ -9,7 +9,7 @@ ORCdelcharofstring(char * str,
 
    /*    assert (str != NULL); */
    if ( str == NULL ) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 

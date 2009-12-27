@@ -5,47 +5,47 @@
 #include "seqlist.h"
 
    int
-ORCSeqList_Init (ORCSeqList **list)
+ORCseqlistinit (ORCseqlist **list)
 {
    int error = 0;
 
    *list = malloc(sizeof **list);
    if ( *list == NULL ) {
-      error = ORCERR_NO_MEMORY;
+      error = ORCERRNOMEMORY;
       goto TERMINATE;
    }
-   (*list)->elem_p = malloc(ORC_LIST_INIT_SIZE * sizeof(int));
-   if ( (*list)->elem_p == NULL ) {
-      error = ORCERR_NO_MEMORY;
+   (*list)->elemp = malloc(ORCLISTINITSIZE * sizeof(int));
+   if ( (*list)->elemp == NULL ) {
+      error = ORCERRNOMEMORY;
       goto TERMINATE;
    }
    (*list)->length = 0;
-   (*list)->capacity = ORC_LIST_INIT_SIZE;
+   (*list)->capacity = ORCLISTINITSIZE;
 
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Init */
+} /* End of ORCseqlistinit */
 
 /* Free the list*/
    int
-ORCSeqList_Free (ORCSeqList **list)
+ORCseqlistfree (ORCseqlist **list)
 {
    int error = 0;
    int temp = 0;
 
    if ( NULL == list ) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 
-   if ( (*list)->elem_p != NULL) {
+   if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
-         error = ORCSeqList_Delete(*list, 0, &temp);
+         error = ORCseqlistdelete(*list, 0, &temp);
          if ( error != 0 )  goto TERMINATE;
       }
-      free((*list)->elem_p);
-      (*list)->elem_p = NULL;
+      free((*list)->elemp);
+      (*list)->elemp = NULL;
       (*list)->capacity = 0;
    }
 
@@ -55,76 +55,76 @@ ORCSeqList_Free (ORCSeqList **list)
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Free */
+} /* End of ORCseqlistfree */
 
 /* Copy an array to the list with count */
    int
-ORCSeqList_Copy (ORCSeqList *list, const int *arr, int count)
+ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)
 {
    int i;
    int error = 0;
 
    if ( NULL == list || NULL == arr) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 
    for (i = 0; i < count; ++i) {
-      error = ORCSeqList_Insert(list, list->length, arr[i]);
+      error = ORCseqlistinsert(list, list->length, arr[i]);
       if ( error != 0 )  goto TERMINATE;
    }
 
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Copy*/
+} /* End of ORCseqlistcopy*/
 
 /* Merge two lists */
    int
-ORCSeqList_Merge (ORCSeqList *des, const ORCSeqList* src)
+ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)
 {
    int i;
    int error = 0;
    int index = -1;
 
    if ( NULL == des || NULL == src) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 
    for (i = 0; i < src->length ; ++i) {
-      error = ORCSeqList_Insert(des, des->length, src->elem_p[i]);
+      error = ORCseqlistinsert(des, des->length, src->elemp[i]);
       if ( error != 0 )  goto TERMINATE;
    }
 
-   error = ORCSeqList_Sort (des, des->length, 0);
+   error = ORCseqlistsort (des, des->length, 0);
    if ( error )  goto TERMINATE;
 
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Merge*/
+} /* End of ORCseqlistmerge*/
 
 /* Clear the whole list*/
    int
-ORCSeqList_Clear (ORCSeqList *list)
+ORCseqlistclear (ORCseqlist *list)
 {
    int error = 0;
    int temp = 0;
 
    while (list->length != 0) {
-      error = ORCSeqList_Delete(list, 0, &temp);
+      error = ORCseqlistdelete(list, 0, &temp);
       if ( error != 0 )  goto TERMINATE;
    }
 
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Clear*/
+} /* End of ORCseqlistclear*/
 
 /* Insert an elem to the list with index*/
    int
-ORCSeqList_Insert (ORCSeqList *list,
+ORCseqlistinsert (ORCseqlist *list,
       int index,
       const int elem)
 {
@@ -136,26 +136,26 @@ ORCSeqList_Insert (ORCSeqList *list,
    //check index
    if ( index < 0            ||
          index > list->length   ) {
-      error = ORCERR_NOTVALID_INDEX;
+      error = ORCERRNOTVALIDINDEX;
       goto TERMINATE;
    }
 
-   assert (list->elem_p != NULL);
+   assert (list->elemp != NULL);
    //extend capacity if length >= capacity in realloc
    if ( list-> length == list->capacity) {
-      list->elem_p =
-         (int*) realloc (list->elem_p,
-               sizeof (int) * (list->capacity + ORC_LISTINCREMENT));
-      if ( list->elem_p == NULL ) {
-         error = ORCERR_NO_MEMORY;
+      list->elemp =
+         (int*) realloc (list->elemp,
+               sizeof (int) * (list->capacity + ORCLISTINCREMENT));
+      if ( list->elemp == NULL ) {
+         error = ORCERRNOMEMORY;
          goto TERMINATE;
       }
-      list->capacity += ORC_LISTINCREMENT;
+      list->capacity += ORCLISTINCREMENT;
    }
 
    //move elements which is after list[index] to next
-   p = &(list->elem_p[index]);
-   for (q = &(list->elem_p[list->length - 1]); q >= p; --q) {
+   p = &(list->elemp[index]);
+   for (q = &(list->elemp[list->length - 1]); q >= p; --q) {
       *(q+1) = *q;
    }
 
@@ -166,11 +166,11 @@ ORCSeqList_Insert (ORCSeqList *list,
 TERMINATE:
 
    return error;
-} /* END of ORCSeqList_Insert */
+} /* END of ORCseqlistinsert */
 
 /* Delete an element in index, and save the deleted element to *e*/
    int
-ORCSeqList_Delete (ORCSeqList *list,
+ORCseqlistdelete (ORCseqlist *list,
       int index,
       int *e)
 {
@@ -182,16 +182,16 @@ ORCSeqList_Delete (ORCSeqList *list,
    //check index
    if ( index < 0              ||
          index > list->length - 1   ) {
-      error = ORCERR_NOTVALID_INDEX;
+      error = ORCERRNOTVALIDINDEX;
       goto TERMINATE;
    }
 
    //keep the deleted element
-   *e = list->elem_p[index];
+   *e = list->elemp[index];
 
    //move the element which after list[index] to previous
-   p = &list->elem_p[index];
-   for (q = p; q <= &(list->elem_p[list->length-1]); ++q) {
+   p = &list->elemp[index];
+   for (q = p; q <= &(list->elemp[list->length-1]); ++q) {
       *q = *(q+1);
    }
    --list->length;
@@ -199,21 +199,21 @@ ORCSeqList_Delete (ORCSeqList *list,
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Delete */
+} /* End of ORCseqlistdelete */
 
 /* Delete the repeat element in list */
    int
-ORCSeqList_DeleteR(ORCSeqList *list)
+ORCseqlistdeleteR(ORCseqlist *list)
 {
    int error = 0;
    int i, index, e;
 
    for (i = list->length; i > 0; --i) {
-      error = ORCSeqList_Find(list, i-1, list->elem_p[i-1], &index, 0);
+      error = ORCseqlistfind(list, i-1, list->elemp[i-1], &index, 0);
       if ( error != 0 )  goto TERMINATE;
 
       if ( index != -1 ) {
-         error = ORCSeqList_Delete (list, index, &e);
+         error = ORCseqlistdelete (list, index, &e);
          if ( error != 0 )  goto TERMINATE;
       }
    }
@@ -222,17 +222,17 @@ TERMINATE:
 
    return error;
 
-} /* End of ORCSeqList_DeleteR */
+} /* End of ORCseqlistdeleteR */
 
 /* Output the list */
    int
-ORCSeqList_Output (ORCSeqList *list)
+ORCseqlistoutput (ORCseqlist *list)
 {
    int i;
    int error = 0;
 
    if ( NULL == list ) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -242,7 +242,7 @@ ORCSeqList_Output (ORCSeqList *list)
    if ( list->length != 0 ) {
       printf ("elements:\n");
       for (i = 0; i < list->length; ++i) {
-         printf ("%d ", list->elem_p[i]);
+         printf ("%d ", list->elemp[i]);
       }
    }
    else {
@@ -253,18 +253,18 @@ ORCSeqList_Output (ORCSeqList *list)
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Output */
+} /* End of ORCseqlistoutput */
 
 /* Sort list by customize algorithm, bubble sort by default */
    int
-ORCSeqList_Sort (ORCSeqList *list,
+ORCseqlistsort (ORCseqlist *list,
       int length,
       int alg)
 {
    int error = 0;
 
    if ( NULL == list ) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -272,15 +272,15 @@ ORCSeqList_Sort (ORCSeqList *list,
       length = list->length;
    }
 
-   // take ORCBubble_Sort as default alg
-   if ( alg == ORC_ALG_SORT_SELECT) {
-      ORCSelect_Sort(list->elem_p, length);
+   // take ORCbubblesort as default alg
+   if ( alg == ORCALGSORTSELECT) {
+      ORCselectsort(list->elemp, length);
    }
-   else if ( ORC_ALG_SORT_BUBBLE ) {
-      ORCBubble_Sort(list->elem_p, list->length);
+   else if ( ORCALGSORTBUBBLE ) {
+      ORCbubblesort(list->elemp, list->length);
    }
    else {
-      ORCBubble_Sort(list->elem_p, list->length);
+      ORCbubblesort(list->elemp, list->length);
    }
 
 TERMINATE:
@@ -290,7 +290,7 @@ TERMINATE:
 
 /* Find element in list by customize algorithm, Origin Find by default */
    int
-ORCSeqList_Find (ORCSeqList *list,
+ORCseqlistfind (ORCseqlist *list,
       int length,
       const int elem,
       int *index,
@@ -299,7 +299,7 @@ ORCSeqList_Find (ORCSeqList *list,
    int error = 0;
 
    if ( NULL == list ) {
-      error = ORCERR_NULL_POINTER;
+      error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -309,17 +309,17 @@ ORCSeqList_Find (ORCSeqList *list,
       length = list->length;
    }
 
-   // take ORCOrigin_Find as default alg
-   if ( ORC_ALG_ORIGIN_FIND == alg ) {
-      ORCOrigin_Find (list->elem_p, length, elem, index);
+   // take ORCoriginfind as default alg
+   if ( ORCALGORIGINFIND == alg ) {
+      ORCoriginfind (list->elemp, length, elem, index);
    }
    /*else if () {
      }*/
    else {
-      ORCOrigin_Find (list->elem_p, length, elem, index);
+      ORCoriginfind (list->elemp, length, elem, index);
    }
 
 TERMINATE:
 
    return error;
-} /* End of ORCSeqList_Find */
+} /* End of ORCseqlistfind */

@@ -5,27 +5,18 @@ int main(void)
    int i = 0;
    int error = 0;
 
-   ORCLinkedList *mylist = NULL;
+   ORClinkedlist *mylist = NULL;
 
-   error = ORCLinkedList_Init (&mylist);
+   error = ORClinkedlistinit (&mylist);
    if ( error )  goto TERMINATE;
 
-   error = ORCLinkedList_Output (mylist, ":");
+   error = ORClinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
-   error = ORCLinkedList_Free (&mylist);
+   error = ORClinkedlistfree (&mylist);
    if ( error )  goto TERMINATE;
 
 TERMINATE:
-   if ( error ) {
-      int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
-
-      for (i = 0; i < nErrors; ++i) {
-         if ( errorMap[i].error == error ) {
-            printf ("ORC Error: %s\n", errorMap[i].str);
-         }
-      }
-   }
-
+   ORCcheckerror (error); 
    return 0;
 }

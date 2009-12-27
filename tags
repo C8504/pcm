@@ -22,6 +22,7 @@ H_FIND	include/find.h	2;"	d
 H_INOUT	include/inout.h	2;"	d
 H_LINKEDLIST	include/linkedlist.h	2;"	d
 H_ORC	include/ORC.h	2;"	d
+H_ORCMATH	include/ORCmath.h	2;"	d
 H_ORCSTRING	include/ORCstring.h	2;"	d
 H_SORT	include/sort.h	2;"	d
 IN	test/getchar.c	6;"	d	file:
@@ -75,6 +76,7 @@ ORC_LIST_INIT_SIZE	include/constant.h	7;"	d
 ORC_QUEUE	include/constant.h	5;"	d
 ORC_STACK	include/constant.h	4;"	d
 ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring(char * str, $/;"	f
+ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f
 OUT	test/getchar.c	7;"	d	file:
 STATISTICS	test/getchar.c	/^} STATISTICS;$/;"	t	typeref:struct:statistics	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
@@ -95,6 +97,7 @@ m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
 main	test/cast.cpp	/^int main()$/;"	f
 main	test/check_bounds.c	/^int main(void)$/;"	f
 main	test/getchar.c	/^main(void)$/;"	f
+main	test/test_ORCmath.c	/^int main (void)$/;"	f
 main	test/test_ORCstring.c	/^int main (void)$/;"	f
 main	test/test_link_init_and_free.c	/^int main(void)$/;"	f
 main	test/test_link_many_element.c	/^int main(void)$/;"	f

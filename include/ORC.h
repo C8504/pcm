@@ -6,4 +6,5 @@
 #include<assert.h>
 #include "constant.h"
 #include "errormap.h"
+void ORCcheckerror (int error);
 #endif

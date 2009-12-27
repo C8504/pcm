@@ -1,7 +1,7 @@
 #include "sort.h"
 
    void
-ORCSelect_Sort(int *a,
+ORCselectsort(int *a,
       int len)
 {
    int i, j, min;
@@ -21,10 +21,10 @@ ORCSelect_Sort(int *a,
          a[min] = t;
       }
    }
-} /* End of ORCSelect_Sort*/
+} /* End of ORCselectsort*/
 
    void
-ORCBubble_Sort(int *a,
+ORCbubblesort(int *a,
       int len)
 {
    int i, j;
@@ -39,5 +39,5 @@ ORCBubble_Sort(int *a,
          }
       }
    }
-} /* End of ORCBubble_Sort*/
+} /* End of ORCbubblesort*/
 

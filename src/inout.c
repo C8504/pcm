@@ -17,14 +17,14 @@ int inout()
    int count = 0;
    int sum = 0;
 
-   ORCSeqList *list = NULL;
-   error = ORCSeqList_Init(&list);
+   ORCseqlist *list = NULL;
+   error = ORCseqlistinit(&list);
    if ( error )  goto TERMINATE;
 
    printf("Please input intergers:\n");
 
    while (1 == scanf ("%d", &num)) {
-      error = ORCSeqList_Insert(list, count, num);
+      error = ORCseqlistinsert(list, count, num);
       if ( error )  goto TERMINATE;
       sum += num;
 
@@ -39,19 +39,19 @@ int inout()
       count++;
    }
 
-   error = ORCSeqList_Sort (list, list->length, ORC_ALG_SORT_SELECT);
+   error = ORCseqlistsort (list, list->length, ORCALGSORTSELECT);
    if ( error )  goto TERMINATE;
 
-   //error = ORCSeqList_Sort (list, list->length, ORC_ALG_SORT_BUBBLE);
+   //error = ORCseqlistsort (list, list->length, ORCALGSORTBUBBLE);
    //if ( error )  goto TERMINATE;
 
-   // error = ORCSeqList_Sort (list, list->length, 0);
+   // error = ORCseqlistsort (list, list->length, 0);
    //if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Output (list);
+   error = ORCseqlistoutput (list);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Free (&list);
+   error = ORCseqlistfree (&list);
    if ( error )  goto TERMINATE;
 
    printf ("You have input %d integers\n", count);

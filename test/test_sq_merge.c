@@ -11,50 +11,42 @@ int main(void)
    ORCSList odd = NULL;
    ORCSList even = NULL;
 
-   error = ORCSeqList_Init (&odd);
+   error = ORCseqlistinit (&odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Init (&even);
+   error = ORCseqlistinit (&even);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Copy (odd, a, 5);
+   error = ORCseqlistcopy (odd, a, 5);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Copy (even, b, 5);
+   error = ORCseqlistcopy (even, b, 5);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Merge (odd, even);
+   error = ORCseqlistmerge (odd, even);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_DeleteR (odd);
+   error = ORCseqlistdeleteR (odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Output (odd);
+   error = ORCseqlistoutput (odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Output (even);
+   error = ORCseqlistoutput (even);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Free (&odd);
+   error = ORCseqlistfree (&odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCSeqList_Free (&even);
+   error = ORCseqlistfree (&even);
    if ( error )  goto TERMINATE;
 
-   if ( even == NULL )  printf ("Free even successfully!\n");
-   if ( odd == NULL  )  printf ("Free odd successfully!\n");
+   if ( even == NULL )  printf ("free even successfully!\n");
+   if ( odd == NULL  )  printf ("free odd successfully!\n");
 TERMINATE:
-   if ( error ) {
-      int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
-
-      for (i = 0; i < nErrors; ++i) {
-         if ( errorMap[i].error == error ) {
-            printf ("ORC Error: %s\n", errorMap[i].str);
-         }
-      }
-      if ( NULL != odd  )  ORCSeqList_Free (&odd);
-      if ( NULL != even )  ORCSeqList_Free (&even);
-   }
+   ORCcheckerror (error);
+   if ( NULL != odd  )  ORCseqlistfree (&odd);
+   if ( NULL != even )  ORCseqlistfree (&even);
 
    return 0;
 }
