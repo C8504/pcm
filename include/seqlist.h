@@ -1,3 +1,5 @@
+#ifndef H_SEQLIST
+#define H_SEQLIST
 #include "ORC.h"
 #include "sort.h"
 #include "find.h"
@@ -22,3 +24,4 @@ int ORCseqlistoutput(ORCseqlist *list);
 int ORCseqlistsort(ORCseqlist *list, int length, int alg);
 int ORCseqlistfind(ORCseqlist *list, int length, const int elem,
                     int *index, int alg);
+#endif

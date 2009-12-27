@@ -1,5 +1,5 @@
-#ifndef HCONSTANT
-#define HCONSTANT
+#ifndef H_CONSTANT
+#define H_CONSTANT
 
 #define ORCSTACK 1
 #define ORCQUEUE 0

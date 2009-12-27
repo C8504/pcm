@@ -1,5 +1,5 @@
-#ifndef HLINKEDLIST
-#define HLINKEDLIST
+#ifndef H_LINKEDLIST
+#define H_LINKEDLIST
 #include "ORC.h"
 typedef struct ORClinkednode {
     char               *elem;
