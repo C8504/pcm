@@ -4,24 +4,23 @@ ORCpower(int base,
       int  n,
       long long *result)
 {
-   long long p = 1LL;
    int error = 0;
+   long long p = 1LL;
 
    if ( n < 0 ) {
       error = ORCERRNOTVALIDINDEX;
-      goto TERMINATE;
    }
-
-   if ( base == 0 ) {
-      *result = 0;
-      goto TERMINATE;
+   else {
+      if ( base == 0 ) {
+         *result = 0;
+      }
+      else {
+         for (; n > 0; --n ) {
+            p = p * base;
+         }
+         *result = p;
+      }
    }
-
-   for (; n > 0; --n ) {
-      p = p * base;
-   }
-
-   *result = p; 
 
 TERMINATE:
    return error;
