@@ -24,73 +24,75 @@ H_LINKEDLIST	include/linkedlist.h	2;"	d
 H_ORC	include/ORC.h	2;"	d
 H_ORCMATH	include/ORCmath.h	2;"	d
 H_ORCSTRING	include/ORCstring.h	2;"	d
+H_SEQLIST	include/seqlist.h	2;"	d
 H_SORT	include/sort.h	2;"	d
 IN	test/getchar.c	6;"	d	file:
 INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
 LENOFFILENAME	test/getchar.c	11;"	d	file:
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
-ORCBubble_Sort	src/sort.c	/^ORCBubble_Sort(int *a,$/;"	f
-ORCERR_ELEMENT_NOT_FOUND	include/constant.h	14;"	d
-ORCERR_EMPTY_LIST	include/constant.h	15;"	d
-ORCERR_NOTVALID_INDEX	include/constant.h	12;"	d
-ORCERR_NOT_STACK_AND_QUEUE	include/constant.h	16;"	d
-ORCERR_NO_MEMORY	include/constant.h	11;"	d
-ORCERR_NULL_POINTER	include/constant.h	13;"	d
-ORCLinkedList	include/linkedlist.h	/^typedef struct ORCLinkedList{$/;"	s
-ORCLinkedList	include/linkedlist.h	/^} ORCLinkedList;$/;"	t	typeref:struct:ORCLinkedList
-ORCLinkedList_Append	src/linkedlist.c	/^ORCLinkedList_Append (ORCLinkedList *list,$/;"	f
-ORCLinkedList_Clear	src/linkedlist.c	/^ORCLinkedList_Clear (ORCLinkedList *list)$/;"	f
-ORCLinkedList_Free	src/linkedlist.c	/^ORCLinkedList_Free (ORCLinkedList **list)$/;"	f
-ORCLinkedList_Init	src/linkedlist.c	/^ORCLinkedList_Init (ORCLinkedList **list)$/;"	f
-ORCLinkedList_Insert	src/linkedlist.c	/^ORCLinkedList_Insert (ORCLinkedList *list,$/;"	f
-ORCLinkedList_Length	src/linkedlist.c	/^ORCLinkedList_Length(ORCLinkedList *list)$/;"	f
-ORCLinkedList_Output	src/linkedlist.c	/^ORCLinkedList_Output (ORCLinkedList *list,$/;"	f
-ORCLinkedList_Pop	src/linkedlist.c	/^ORCLinkedList_Pop (ORCLinkedList *list,$/;"	f
-ORCLinkedList_p	include/linkedlist.h	/^typedef ORCLinkedList* ORCLinkedList_p;$/;"	t
-ORCLinkedNode	include/linkedlist.h	/^typedef struct ORCLinkedNode {$/;"	s
-ORCLinkedNode	include/linkedlist.h	/^} ORCLinkedNode;$/;"	t	typeref:struct:ORCLinkedNode
-ORCLinkedNode_p	include/linkedlist.h	/^typedef ORCLinkedNode* ORCLinkedNode_p;$/;"	t
-ORCNode_Alloc_and_Init	src/linkedlist.c	/^ORCNode_Alloc_and_Init (ORCLinkedNode **node,$/;"	f
-ORCNode_Free	src/linkedlist.c	/^ORCNode_Free (ORCLinkedNode **node)$/;"	f
-ORCOrigin_Find	src/find.c	/^ORCOrigin_Find(int *a,$/;"	f
-ORCSList	include/seqlist.h	/^typedef ORCSeqList* ORCSList;$/;"	t
-ORCSelect_Sort	src/sort.c	/^ORCSelect_Sort(int *a,$/;"	f
-ORCSeqList	include/seqlist.h	/^} ORCSeqList;$/;"	t	typeref:struct:__anon2
-ORCSeqList_Clear	src/seqlist.c	/^ORCSeqList_Clear (ORCSeqList *list)$/;"	f
-ORCSeqList_Copy	src/seqlist.c	/^ORCSeqList_Copy (ORCSeqList *list, const int *arr, int count)$/;"	f
-ORCSeqList_Delete	src/seqlist.c	/^ORCSeqList_Delete (ORCSeqList *list,$/;"	f
-ORCSeqList_DeleteR	src/seqlist.c	/^ORCSeqList_DeleteR(ORCSeqList *list)$/;"	f
-ORCSeqList_Find	src/seqlist.c	/^ORCSeqList_Find (ORCSeqList *list,$/;"	f
-ORCSeqList_Free	src/seqlist.c	/^ORCSeqList_Free (ORCSeqList **list)$/;"	f
-ORCSeqList_Init	src/seqlist.c	/^ORCSeqList_Init (ORCSeqList **list)$/;"	f
-ORCSeqList_Insert	src/seqlist.c	/^ORCSeqList_Insert (ORCSeqList *list,$/;"	f
-ORCSeqList_Merge	src/seqlist.c	/^ORCSeqList_Merge (ORCSeqList *des, const ORCSeqList* src)$/;"	f
-ORCSeqList_Output	src/seqlist.c	/^ORCSeqList_Output (ORCSeqList *list)$/;"	f
-ORCSeqList_Sort	src/seqlist.c	/^ORCSeqList_Sort (ORCSeqList *list,$/;"	f
-ORC_ALG_ORIGIN_FIND	include/constant.h	21;"	d
-ORC_ALG_SORT_BUBBLE	include/constant.h	20;"	d
-ORC_ALG_SORT_SELECT	include/constant.h	19;"	d
-ORC_LISTINCREMENT	include/constant.h	8;"	d
-ORC_LIST_INIT_SIZE	include/constant.h	7;"	d
-ORC_QUEUE	include/constant.h	5;"	d
-ORC_STACK	include/constant.h	4;"	d
+ORCALGORIGINFIND	include/constant.h	21;"	d
+ORCALGSORTBUBBLE	include/constant.h	20;"	d
+ORCALGSORTSELECT	include/constant.h	19;"	d
+ORCERRELEMENTNOTFOUND	include/constant.h	14;"	d
+ORCERREMPTYLIST	include/constant.h	15;"	d
+ORCERRNOMEMORY	include/constant.h	11;"	d
+ORCERRNOTSTACKANDQUEUE	include/constant.h	16;"	d
+ORCERRNOTVALIDINDEX	include/constant.h	12;"	d
+ORCERRNULLPOINTER	include/constant.h	13;"	d
+ORCLISTINCREMENT	include/constant.h	8;"	d
+ORCLISTINITSIZE	include/constant.h	7;"	d
+ORCQUEUE	include/constant.h	5;"	d
+ORCSList	include/seqlist.h	/^typedef ORCseqlist* ORCSList;$/;"	t
+ORCSTACK	include/constant.h	4;"	d
+ORCbubblesort	src/sort.c	/^ORCbubblesort(int *a,$/;"	f
+ORCcheckerror	src/ORC.c	/^void ORCcheckerror (int error) {$/;"	f
 ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring(char * str, $/;"	f
+ORClinkedlist	include/linkedlist.h	/^typedef struct ORClinkedlist{$/;"	s
+ORClinkedlist	include/linkedlist.h	/^} ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
+ORClinkedlistappend	src/linkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
+ORClinkedlistclear	src/linkedlist.c	/^ORClinkedlistclear (ORClinkedlist *list)$/;"	f
+ORClinkedlistfree	src/linkedlist.c	/^ORClinkedlistfree (ORClinkedlist **list)$/;"	f
+ORClinkedlistinit	src/linkedlist.c	/^ORClinkedlistinit (ORClinkedlist **list)$/;"	f
+ORClinkedlistinsert	src/linkedlist.c	/^ORClinkedlistinsert (ORClinkedlist *list,$/;"	f
+ORClinkedlistlength	src/linkedlist.c	/^ORClinkedlistlength(ORClinkedlist *list)$/;"	f
+ORClinkedlistoutput	src/linkedlist.c	/^ORClinkedlistoutput (ORClinkedlist *list,$/;"	f
+ORClinkedlistp	include/linkedlist.h	/^typedef ORClinkedlist* ORClinkedlistp;$/;"	t
+ORClinkedlistpop	src/linkedlist.c	/^ORClinkedlistpop (ORClinkedlist *list,$/;"	f
+ORClinkednode	include/linkedlist.h	/^typedef struct ORClinkednode {$/;"	s
+ORClinkednode	include/linkedlist.h	/^} ORClinkednode;$/;"	t	typeref:struct:ORClinkednode
+ORClinkednodep	include/linkedlist.h	/^typedef ORClinkednode* ORClinkednodep;$/;"	t
+ORCnodeallocandinit	src/linkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f
+ORCnodefree	src/linkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f
+ORCoriginfind	src/find.c	/^ORCoriginfind(int *a,$/;"	f
 ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f
+ORCselectsort	src/sort.c	/^ORCselectsort(int *a,$/;"	f
+ORCseqlist	include/seqlist.h	/^} ORCseqlist;$/;"	t	typeref:struct:__anon2
+ORCseqlistclear	src/seqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f
+ORCseqlistcopy	src/seqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f
+ORCseqlistdelete	src/seqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f
+ORCseqlistdeleteR	src/seqlist.c	/^ORCseqlistdeleteR(ORCseqlist *list)$/;"	f
+ORCseqlistfind	src/seqlist.c	/^ORCseqlistfind (ORCseqlist *list,$/;"	f
+ORCseqlistfree	src/seqlist.c	/^ORCseqlistfree (ORCseqlist **list)$/;"	f
+ORCseqlistinit	src/seqlist.c	/^ORCseqlistinit (ORCseqlist **list)$/;"	f
+ORCseqlistinsert	src/seqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
+ORCseqlistmerge	src/seqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
+ORCseqlistoutput	src/seqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
+ORCseqlistsort	src/seqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
 OUT	test/getchar.c	7;"	d	file:
 STATISTICS	test/getchar.c	/^} STATISTICS;$/;"	t	typeref:struct:statistics	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 WORDCOUNT	test/getchar.c	9;"	d	file:
 capacity	include/seqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon2
-elem	include/linkedlist.h	/^    char               *elem;$/;"	m	struct:ORCLinkedNode
-elem_p	include/seqlist.h	/^   int *elem_p;     \/* The basic address of list *\/$/;"	m	struct:__anon2
+elem	include/linkedlist.h	/^    char               *elem;$/;"	m	struct:ORClinkednode
+elemp	include/seqlist.h	/^   int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon2
 error	include/errormap.h	/^   int        error;$/;"	m	struct:__anon1
 errorMap	include/errormap.h	/^ErrorMap errorMap[] = {$/;"	v
 filename	test/getchar.c	/^   char filename[LENOFFILENAME];$/;"	m	struct:statistics	file:
-first	include/linkedlist.h	/^    struct ORCLinkedNode *first;$/;"	m	struct:ORCLinkedList	typeref:struct:ORCLinkedList::ORCLinkedNode
+first	include/linkedlist.h	/^    struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 fun	test/cast.cpp	/^void fun(Base* base)$/;"	f
 inout	src/inout.c	/^int inout()$/;"	f
-last	include/linkedlist.h	/^    struct ORCLinkedNode *last;$/;"	m	struct:ORCLinkedList	typeref:struct:ORCLinkedList::ORCLinkedNode
+last	include/linkedlist.h	/^    struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 length	include/seqlist.h	/^   int  length;        \/* The length of list *\/$/;"	m	struct:__anon2
 m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base
 m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
@@ -111,12 +113,12 @@ main	test/test_sq_merge.c	/^int main(void)$/;"	f
 main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f
 nchar	test/getchar.c	/^   int nchar  ;$/;"	m	struct:statistics	file:
 ndigit	test/getchar.c	/^   int ndigit ;$/;"	m	struct:statistics	file:
-next	include/linkedlist.h	/^    struct ORCLinkedNode *next;$/;"	m	struct:ORCLinkedNode	typeref:struct:ORCLinkedNode::ORCLinkedNode
+next	include/linkedlist.h	/^    struct ORClinkednode *next;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
 nline	test/getchar.c	/^   int nline  ;$/;"	m	struct:statistics	file:
 nword	test/getchar.c	/^   int nword  ;$/;"	m	struct:statistics	file:
-prev	include/linkedlist.h	/^    struct ORCLinkedNode *prev;$/;"	m	struct:ORCLinkedNode	typeref:struct:ORCLinkedNode::ORCLinkedNode
+prev	include/linkedlist.h	/^    struct ORClinkednode *prev;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
 readfile	test/getchar.c	/^readfile (const char *filename, int show){$/;"	f
 statistics	test/getchar.c	/^typedef struct statistics{$/;"	s	file:
 str	include/errormap.h	/^   const char *str;$/;"	m	struct:__anon1
-test_many_elements	test/test_link_many_element.c	/^int test_many_elements()$/;"	f
-test_one_element	test/test_link_one_element.c	/^int test_one_element(void)$/;"	f
+testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
+testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f

@@ -6,26 +6,30 @@ help:
 	@(echo "" \
 	;echo "Choose a target:" \
 	;echo "" \
-	;echo "make [help]   -- print this help screen" \
+	;echo "make [help]      -- print this help screen" \
 	;echo "make [test_readfile.exe]   -- build test_init_and_free.exe" \
-	;echo "make [test]   -- build all tests" \
-	;echo "make [splint] -- use splint to check all C files" \
+	;echo "make [fulltest]  -- build all tests" \
+	;echo "make [splint]    -- use splint to check all C files" \
+	;echo "make [clean]     -- delete all *.exe and *.log files"\
+	;echo "make [testclean] -- delete all *.log files"\
+	;echo "make [exe]"      -- compile all c/c++ programs\
+	;echo "make [tags]"     -- generate ctags\
 	)
 
 compile =                                                    \
          $(CCOMPILE) -g -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
-         -o $(1)$(E);                                         \
+         -o $(1)$(E);
+test =                                                        \
          $(1)$(E) > $(1)$(LOG);                               \
-			cat $(1)$(LOG)
+         #cat $(1)$(LOG)
 tags:
 	@cd ../;ctags -R
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
-			-o $(1)$(E);                                                    \
-			$(1)$(E) > $(1)$(LOG);                                          \
-			cat $(1)$(LOG)
-         
-reader: $(EXE)
+			-o $(1)$(E);                                                   
+exe: $(EXE)
+
+fulltest: $(LOGFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
 	  echo "ORC Errors found! try  grep 'ORC Error' *.log"; \
@@ -35,39 +39,86 @@ reader: $(EXE)
 	fi
 splint: $(CSRC) $(CTEST)
 	@splint -I $(INCLUDE) $(CSRC) $(CTEST) > splint
-clean:
-	@rm -f *$(E) *$(LOG) splint *.stackdump
+testclean:
+	@rm -f  *$(LOG)
+clean: testclean
+	@rm -f *$(E) splint *.stackdump
 # C files
 test_link_init_and_free$(E): $(CSRC) $(TESTDIR)test_link_init_and_free$(C)
-	@$(call compile,test_link_init_and_free)
+	$(call compile,test_link_init_and_free)
+test_link_init_and_free$(LOG): test_link_init_and_free$(E)
+	$(call test,test_link_init_and_free)
+
 test_link_one_element$(E): $(CSRC) $(TESTDIR)test_link_one_element$(C)
-	@$(call compile,test_link_one_element)
+	$(call compile,test_link_one_element)
+test_link_one_element$(LOG): test_link_one_element$(E)
+	$(call test,test_link_one_element)
+
 test_link_many_element$(E): $(CSRC) $(TESTDIR)test_link_many_element$(C)
-	@$(call compile,test_link_many_element)
+	$(call compile,test_link_many_element)
+test_link_many_element$(LOG): test_link_many_element$(E)
+	$(call test,test_link_many_element)
+
 test_link_readfile$(E): $(CSRC) $(TESTDIR)test_link_readfile$(C)
-	@$(call compile,test_link_readfile)
+	$(call compile,test_link_readfile)
+test_link_readfile$(LOG): test_link_readfile$(E)
+	$(call test,test_link_readfile)
+
 check_bounds$(E): $(CSRC) $(TESTDIR)check_bounds$(C)
-	@$(call compile,check_bounds)
+	$(call compile,check_bounds)
+check_bounds$(LOG): check_bounds$(E)
+	$(call test,check_bounds)
+
 getchar$(E): $(CSRC) $(TESTDIR)getchar$(C)
-	@$(call compile,getchar)
+	$(call compile,getchar)
+getchar$(LOG): getchar$(E)
+	$(call test,getchar)
+
 test_sq_inout$(E): $(CSRC) $(TESTDIR)test_sq_inout$(C)
-	@$(call compile,test_sq_inout)
+	$(call compile,test_sq_inout)
+test_sq_inout$(LOG): test_sq_inout$(E)
+	$(call test,test_sq_inout)
+
 test_sq_init_and_free$(E):$(CSRC) $(TESTDIR)test_sq_init_and_free$(C)
-	@$(call compile,test_sq_init_and_free)
+	$(call compile,test_sq_init_and_free)
+test_sq_init_and_free$(LOG): test_sq_init_and_free$(E)
+	$(call test,test_sq_init_and_free)
+
 test_sq_delete$(E): $(CSRC) $(TESTDIR)test_sq_delete$(C)
-	@$(call compile,test_sq_delete)
+	$(call compile,test_sq_delete)
+test_sq_delete$(LOG): test_sq_delete$(E)
+	$(call test,test_sq_delete)
+
 test_sq_insert$(E): $(CSRC) $(TESTDIR)test_sq_insert$(C)
-	@$(call compile,test_sq_insert)
+	$(call compile,test_sq_insert)
+test_sq_insert$(LOG): test_sq_insert$(E)
+	$(call test,test_sq_insert)
+
 test_sq_merge$(E): $(CSRC) $(TESTDIR)test_sq_merge$(C)
-	@$(call compile,test_sq_merge)
+	$(call compile,test_sq_merge)
+test_sq_merge$(LOG): test_sq_merge$(E)
+	$(call test,test_sq_merge)
+
 test_sq_sort_and_find$(E): $(CSRC) $(TESTDIR)test_sq_sort_and_find$(C)
-	@$(call compile,test_sq_sort_and_find)
+	$(call compile,test_sq_sort_and_find)
+test_sq_sort_and_find$(LOG): test_sq_sort_and_find$(E)
+	$(call test,test_sq_sort_and_find)
+
 test_ORCstring$(E): $(CSRC) $(TESTDIR)test_ORCstring$(C)
-	@$(call compile,test_ORCstring)
+	$(call compile,test_ORCstring)
+test_ORCstring$(LOG): test_ORCstring$(E)
+	$(call test,test_ORCstring)
+
 test_ORCmath$(E): $(CSRC) $(TESTDIR)test_ORCmath$(C)
-	@$(call compile,test_ORCmath)
+	$(call compile,test_ORCmath)
+test_ORCmath$(LOG): test_ORCmath$(E)
+	$(call test,test_ORCmath)
+
 # C++ files
 cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)
-	@$(call cppcompile,cast)
+	$(call cppcompile,cast)
+cast$(LOG): cast$(E)
+	$(call test,cast)
+
 .PHONY: test splint clean
 

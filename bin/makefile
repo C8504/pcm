@@ -57,6 +57,6 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_sq_merge$(LOG)\
          test_sq_sort_and_find$(LOG)\
          test_ORCstring$(LOG)\
-         test_ORCmath$(LOG)\ 
+         test_ORCmath$(LOG) 
 
 include makefile.common
