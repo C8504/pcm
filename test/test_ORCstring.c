@@ -17,14 +17,18 @@ int main (void)
 {
    int i = 0;
    int error = 0;
-   char str[20] = {0};
-/*    char str[] = {'T', 'h', 'i', 's', '\0'}; */
-/*    char str[] = "Thip"; */
-/*    char *str = "Thip"; */
-/*    str[1] = 'o'; */
-   //strncat(str, "This is a string", 10);
-   //strncpy(str, "This is a string", 10);
+   char str[5] = {0};
+   /*    char str[] = {'T', 'h', 'i', 's', '\0'}; */
+   /*    char str[] = "Thip"; */
+   /*    char *str = "Thip"; */
+   /*    str[1] = 'o'; */
+   size_t len = 0;
    strcpy(str, "This is a string");
+   /*    strncat(str, "This is a string", 10); */
+   /* strncpy(str, "This is a string", 10); */
+   error = ORCstrlen (str, &len);
+   printf ("str = %s, len = %d\n", str,len);
+   if ( error )  goto TERMINATE;
    error = ORCdelcharofstring(str, 'p');
    if ( error )  goto TERMINATE;
    printf (str);
@@ -34,7 +38,11 @@ int main (void)
    if ( error )  goto TERMINATE;
    printf (str);
    printf ("\n");
-
+   
+   error = ORCstrlen (str, &len);
+   if ( error )  goto TERMINATE;
+   printf ("str = %s, len = %d\n", str,len);
+   
    error = ORCdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
    printf (str);
