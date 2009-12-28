@@ -10,16 +10,16 @@ ORCdelcharofstring(char * str,
    /*    assert (str != NULL); */
    if ( str == NULL ) {
       error = ORCERRNULLPOINTER;
-      goto TERMINATE;
    }
-
-   for (i = 0, j = 0; str[i] != '\0'; ++i) {
-      if ( str[i] != c )
-         str[j++] = str[i];
+   else {
+      for (i = 0, j = 0; str[i] != '\0'; ++i) {
+         if ( str[i] != c )
+            str[j++] = str[i];
+      }
+      str[j] = '\0';
    }
-   str[j] = '\0';
 
 TERMINATE:
    return error;
-}
+} /* End of ORCdelcharofstring */
 
