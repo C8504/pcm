@@ -23,14 +23,16 @@ int main(void)
    if ( error )  goto TERMINATE;
 
    printf ("find the index of element '5'\n");
-   error = ORCseqlistfind (mylist, mylist->length, 5, &ind, 0);
+   enum ORCSEARCHALG findalg = ORCALGORIGINFIND;
+   error = ORCseqlistfind (mylist, mylist->length, 5, &ind, findalg);
    if ( error )  goto TERMINATE;
    printf ("Index of 5 is %d\n", ind);
 
    printf ("output mylist\n");
    ORCseqlistoutput (mylist);
    printf ("sort mylist\n");
-   ORCseqlistsort (mylist, mylist->length, 0);
+   enum ORCSORTALG sortalg = ORCALGSORTBUBBLE;
+   ORCseqlistsort (mylist, mylist->length, sortalg);
    printf("output mylist after sort\n");
    ORCseqlistoutput (mylist);
 

@@ -5,6 +5,7 @@ ORCoriginfind(int *a,
       const int elem,
       int* index)
 {
+   printf ("CALL ORCoriginfind\n");
    int i;
 
    for (i = 0; i < length; ++i) {

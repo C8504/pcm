@@ -259,7 +259,7 @@ TERMINATE:
    int
 ORCseqlistsort (ORCseqlist *list,
       int length,
-      int alg)
+      enum ORCSORTALG alg)
 {
    int error = 0;
 
@@ -294,7 +294,7 @@ ORCseqlistfind (ORCseqlist *list,
       int length,
       const int elem,
       int *index,
-      int alg)
+      enum ORCSEARCHALG alg)
 {
    int error = 0;
 

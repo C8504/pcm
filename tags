@@ -9,95 +9,102 @@ C	bin/makefile	/^C=.c$/;"	m
 CCOMPILE	bin/makefile	/^CCOMPILE=gcc$/;"	m
 CPP	bin/makefile	/^CPP=.cpp$/;"	m
 CPPCOMPILE	bin/makefile	/^CPPCOMPILE=g++$/;"	m
-CSRC	bin/makefile	/^CSRC=..\/src\/linkedlist$(C)\\$/;"	m
+CPU	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
+CSRC	bin/makefile	/^CSRC=..\/src\/ORClinkedlist$(C)\\$/;"	m
 CTEST	bin/makefile	/^CTEST=$(TESTDIR)test_link_init_and_free$(C)\\$/;"	m
 DIGIT	test/getchar.c	10;"	d	file:
 Derived	test/cast.cpp	/^class Derived:public Base$/;"	c	file:
 E	bin/makefile	/^E=.exe$/;"	m
 EXE	bin/makefile	/^EXE=test_link_init_and_free$(E)\\$/;"	m
-ErrorMap	include/errormap.h	/^} ErrorMap;$/;"	t	typeref:struct:__anon1
-H_CONSTANT	include/constant.h	2;"	d
-H_ERRORMAP	include/errormap.h	2;"	d
-H_FIND	include/find.h	2;"	d
+ErrorMap	include/ORCerrormap.h	/^} ErrorMap;$/;"	t	typeref:struct:__anon1
+H_CONSTANT	include/ORCconstant.h	2;"	d
+H_ERRORMAP	include/ORCerrormap.h	2;"	d
+H_FIND	include/ORCfind.h	2;"	d
 H_INOUT	include/inout.h	2;"	d
-H_LINKEDLIST	include/linkedlist.h	2;"	d
+H_LINKEDLIST	include/ORClinkedlist.h	2;"	d
 H_ORC	include/ORC.h	2;"	d
 H_ORCMATH	include/ORCmath.h	2;"	d
 H_ORCSTRING	include/ORCstring.h	2;"	d
-H_SEQLIST	include/seqlist.h	2;"	d
-H_SORT	include/sort.h	2;"	d
+H_SEQLIST	include/ORCseqlist.h	2;"	d
+H_SORT	include/ORCsort.h	2;"	d
 IN	test/getchar.c	6;"	d	file:
 INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
 LENOFFILENAME	test/getchar.c	11;"	d	file:
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
-ORCALGORIGINFIND	include/constant.h	21;"	d
-ORCALGSORTBUBBLE	include/constant.h	20;"	d
-ORCALGSORTSELECT	include/constant.h	19;"	d
-ORCERRELEMENTNOTFOUND	include/constant.h	14;"	d
-ORCERREMPTYLIST	include/constant.h	15;"	d
-ORCERRNOMEMORY	include/constant.h	11;"	d
-ORCERRNOTSTACKANDQUEUE	include/constant.h	16;"	d
-ORCERRNOTVALIDINDEX	include/constant.h	12;"	d
-ORCERRNULLPOINTER	include/constant.h	13;"	d
-ORCLISTINCREMENT	include/constant.h	8;"	d
-ORCLISTINITSIZE	include/constant.h	7;"	d
-ORCQUEUE	include/constant.h	5;"	d
-ORCSList	include/seqlist.h	/^typedef ORCseqlist* ORCSList;$/;"	t
-ORCSTACK	include/constant.h	4;"	d
-ORCbubblesort	src/sort.c	/^ORCbubblesort(int *a,$/;"	f
+ORCALGORIGINFIND	include/ORCconstant.h	/^enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
+ORCALGSORTBUBBLE	include/ORCconstant.h	/^                 ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
+ORCALGSORTSELECT	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001, $/;"	e	enum:ORCSORTALG
+ORCERRELEMENTNOTFOUND	include/ORCconstant.h	14;"	d
+ORCERREMPTYLIST	include/ORCconstant.h	15;"	d
+ORCERRNOMEMORY	include/ORCconstant.h	11;"	d
+ORCERRNOTSTACKANDQUEUE	include/ORCconstant.h	16;"	d
+ORCERRNOTVALIDINDEX	include/ORCconstant.h	12;"	d
+ORCERRNULLPOINTER	include/ORCconstant.h	13;"	d
+ORCLISTINCREMENT	include/ORCconstant.h	8;"	d
+ORCLISTINITSIZE	include/ORCconstant.h	7;"	d
+ORCQUEUE	include/ORCconstant.h	5;"	d
+ORCSEARCHALG	include/ORCconstant.h	/^enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	g
+ORCSList	include/ORCseqlist.h	/^typedef ORCseqlist* ORCSList;$/;"	t
+ORCSORTALG	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001, $/;"	g
+ORCSTACK	include/ORCconstant.h	4;"	d
+ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f
 ORCcheckerror	src/ORC.c	/^void ORCcheckerror (int error) {$/;"	f
-ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring(char * str, $/;"	f
-ORClinkedlist	include/linkedlist.h	/^typedef struct ORClinkedlist{$/;"	s
-ORClinkedlist	include/linkedlist.h	/^} ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
-ORClinkedlistappend	src/linkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
-ORClinkedlistclear	src/linkedlist.c	/^ORClinkedlistclear (ORClinkedlist *list)$/;"	f
-ORClinkedlistfree	src/linkedlist.c	/^ORClinkedlistfree (ORClinkedlist **list)$/;"	f
-ORClinkedlistinit	src/linkedlist.c	/^ORClinkedlistinit (ORClinkedlist **list)$/;"	f
-ORClinkedlistinsert	src/linkedlist.c	/^ORClinkedlistinsert (ORClinkedlist *list,$/;"	f
-ORClinkedlistlength	src/linkedlist.c	/^ORClinkedlistlength(ORClinkedlist *list)$/;"	f
-ORClinkedlistoutput	src/linkedlist.c	/^ORClinkedlistoutput (ORClinkedlist *list,$/;"	f
-ORClinkedlistp	include/linkedlist.h	/^typedef ORClinkedlist* ORClinkedlistp;$/;"	t
-ORClinkedlistpop	src/linkedlist.c	/^ORClinkedlistpop (ORClinkedlist *list,$/;"	f
-ORClinkednode	include/linkedlist.h	/^typedef struct ORClinkednode {$/;"	s
-ORClinkednode	include/linkedlist.h	/^} ORClinkednode;$/;"	t	typeref:struct:ORClinkednode
-ORClinkednodep	include/linkedlist.h	/^typedef ORClinkednode* ORClinkednodep;$/;"	t
-ORCnodeallocandinit	src/linkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f
-ORCnodefree	src/linkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f
-ORCoriginfind	src/find.c	/^ORCoriginfind(int *a,$/;"	f
+ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
+ORClinkedlist	include/ORClinkedlist.h	/^typedef struct ORClinkedlist{$/;"	s
+ORClinkedlist	include/ORClinkedlist.h	/^} ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
+ORClinkedlistappend	src/ORClinkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
+ORClinkedlistclear	src/ORClinkedlist.c	/^ORClinkedlistclear (ORClinkedlist *list)$/;"	f
+ORClinkedlistfree	src/ORClinkedlist.c	/^ORClinkedlistfree (ORClinkedlist **list)$/;"	f
+ORClinkedlistinit	src/ORClinkedlist.c	/^ORClinkedlistinit (ORClinkedlist **list)$/;"	f
+ORClinkedlistinsert	src/ORClinkedlist.c	/^ORClinkedlistinsert (ORClinkedlist *list,$/;"	f
+ORClinkedlistlength	src/ORClinkedlist.c	/^ORClinkedlistlength(ORClinkedlist *list)$/;"	f
+ORClinkedlistoutput	src/ORClinkedlist.c	/^ORClinkedlistoutput (ORClinkedlist *list,$/;"	f
+ORClinkedlistp	include/ORClinkedlist.h	/^typedef ORClinkedlist* ORClinkedlistp;$/;"	t
+ORClinkedlistpop	src/ORClinkedlist.c	/^ORClinkedlistpop (ORClinkedlist *list,$/;"	f
+ORClinkednode	include/ORClinkedlist.h	/^typedef struct ORClinkednode {$/;"	s
+ORClinkednode	include/ORClinkedlist.h	/^} ORClinkednode;$/;"	t	typeref:struct:ORClinkednode
+ORClinkednodep	include/ORClinkedlist.h	/^typedef ORClinkednode* ORClinkednodep;$/;"	t
+ORCnodeallocandinit	src/ORClinkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f
+ORCnodefree	src/ORClinkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f
+ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f
 ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f
-ORCselectsort	src/sort.c	/^ORCselectsort(int *a,$/;"	f
-ORCseqlist	include/seqlist.h	/^} ORCseqlist;$/;"	t	typeref:struct:__anon2
-ORCseqlistclear	src/seqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f
-ORCseqlistcopy	src/seqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f
-ORCseqlistdelete	src/seqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f
-ORCseqlistdeleteR	src/seqlist.c	/^ORCseqlistdeleteR(ORCseqlist *list)$/;"	f
-ORCseqlistfind	src/seqlist.c	/^ORCseqlistfind (ORCseqlist *list,$/;"	f
-ORCseqlistfree	src/seqlist.c	/^ORCseqlistfree (ORCseqlist **list)$/;"	f
-ORCseqlistinit	src/seqlist.c	/^ORCseqlistinit (ORCseqlist **list)$/;"	f
-ORCseqlistinsert	src/seqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
-ORCseqlistmerge	src/seqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
-ORCseqlistoutput	src/seqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
-ORCseqlistsort	src/seqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
+ORCselectsort	src/ORCsort.c	/^ORCselectsort(int *a,$/;"	f
+ORCseqlist	include/ORCseqlist.h	/^} ORCseqlist;$/;"	t	typeref:struct:__anon2
+ORCseqlistclear	src/ORCseqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f
+ORCseqlistcopy	src/ORCseqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f
+ORCseqlistdelete	src/ORCseqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f
+ORCseqlistdeleteR	src/ORCseqlist.c	/^ORCseqlistdeleteR(ORCseqlist *list)$/;"	f
+ORCseqlistfind	src/ORCseqlist.c	/^ORCseqlistfind (ORCseqlist *list,$/;"	f
+ORCseqlistfree	src/ORCseqlist.c	/^ORCseqlistfree (ORCseqlist **list)$/;"	f
+ORCseqlistinit	src/ORCseqlist.c	/^ORCseqlistinit (ORCseqlist **list)$/;"	f
+ORCseqlistinsert	src/ORCseqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
+ORCseqlistmerge	src/ORCseqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
+ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
+ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
+ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
 OUT	test/getchar.c	7;"	d	file:
 STATISTICS	test/getchar.c	/^} STATISTICS;$/;"	t	typeref:struct:statistics	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 WORDCOUNT	test/getchar.c	9;"	d	file:
-capacity	include/seqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon2
-elem	include/linkedlist.h	/^    char               *elem;$/;"	m	struct:ORClinkednode
-elemp	include/seqlist.h	/^   int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon2
-error	include/errormap.h	/^   int        error;$/;"	m	struct:__anon1
-errorMap	include/errormap.h	/^ErrorMap errorMap[] = {$/;"	v
+capacity	include/ORCseqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon2
+computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:
+elem	include/ORClinkedlist.h	/^    char               *elem;$/;"	m	struct:ORClinkednode
+elemp	include/ORCseqlist.h	/^   int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon2
+error	include/ORCerrormap.h	/^   int        error;$/;"	m	struct:__anon1
+errorMap	include/ORCerrormap.h	/^ErrorMap errorMap[] = {$/;"	v
 filename	test/getchar.c	/^   char filename[LENOFFILENAME];$/;"	m	struct:statistics	file:
-first	include/linkedlist.h	/^    struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
+first	include/ORClinkedlist.h	/^    struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 fun	test/cast.cpp	/^void fun(Base* base)$/;"	f
 inout	src/inout.c	/^int inout()$/;"	f
-last	include/linkedlist.h	/^    struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
-length	include/seqlist.h	/^   int  length;        \/* The length of list *\/$/;"	m	struct:__anon2
+keyboard	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
+last	include/ORClinkedlist.h	/^    struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
+length	include/ORCseqlist.h	/^   int  length;        \/* The length of list *\/$/;"	m	struct:__anon2
 m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base
 m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
 main	test/cast.cpp	/^int main()$/;"	f
 main	test/check_bounds.c	/^int main(void)$/;"	f
+main	test/enum.c	/^int main(void)$/;"	f
 main	test/getchar.c	/^main(void)$/;"	f
 main	test/test_ORCmath.c	/^int main (void)$/;"	f
 main	test/test_ORCstring.c	/^int main (void)$/;"	f
@@ -111,14 +118,17 @@ main	test/test_sq_inout.c	/^main (void)$/;"	f
 main	test/test_sq_insert.c	/^int main(void)$/;"	f
 main	test/test_sq_merge.c	/^int main(void)$/;"	f
 main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f
+mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 nchar	test/getchar.c	/^   int nchar  ;$/;"	m	struct:statistics	file:
 ndigit	test/getchar.c	/^   int ndigit ;$/;"	m	struct:statistics	file:
-next	include/linkedlist.h	/^    struct ORClinkednode *next;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
+next	include/ORClinkedlist.h	/^    struct ORClinkednode *next;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
 nline	test/getchar.c	/^   int nline  ;$/;"	m	struct:statistics	file:
 nword	test/getchar.c	/^   int nword  ;$/;"	m	struct:statistics	file:
-prev	include/linkedlist.h	/^    struct ORClinkednode *prev;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
+prev	include/ORClinkedlist.h	/^    struct ORClinkednode *prev;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
+printer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 readfile	test/getchar.c	/^readfile (const char *filename, int show){$/;"	f
+screen	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 statistics	test/getchar.c	/^typedef struct statistics{$/;"	s	file:
-str	include/errormap.h	/^   const char *str;$/;"	m	struct:__anon1
+str	include/ORCerrormap.h	/^   const char *str;$/;"	m	struct:__anon1
 testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
 testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f

@@ -21,7 +21,7 @@ int ORCseqlistinsert(ORCseqlist *list, int index, const int elem);
 int ORCseqlistdelete(ORCseqlist *list, int index, int* e);
 int ORCseqlistdeleteR(ORCseqlist *list);
 int ORCseqlistoutput(ORCseqlist *list);
-int ORCseqlistsort(ORCseqlist *list, int length, int alg);
+int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);
 int ORCseqlistfind(ORCseqlist *list, int length, const int elem,
-                    int *index, int alg);
+                    int *index, enum ORCSEARCHALG alg);
 #endif

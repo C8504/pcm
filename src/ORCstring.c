@@ -1,8 +1,7 @@
 #include "ORCstring.h"
-   int 
-ORCdelcharofstring(char * str, 
-      int  c)
-{
+int
+ORCdelcharofstring (char * str,
+      int  c) {
    int i = 0;
    int j = 0;
    int error = 0;
@@ -24,7 +23,8 @@ TERMINATE:
 } /* End of ORCdelcharofstring */
 
 int
-ORCstrlen (const char *str, size_t *len){
+ORCstrlen (const char *str,
+      size_t     *len) {
    int i = 0;
    int error = 0;
 

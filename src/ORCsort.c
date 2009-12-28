@@ -4,6 +4,7 @@
 ORCselectsort(int *a,
       int len)
 {
+   printf ("CALL ORCselectsort\n");
    int i, j, min;
    int t;
 
@@ -27,6 +28,7 @@ ORCselectsort(int *a,
 ORCbubblesort(int *a,
       int len)
 {
+   printf ("CALL ORCbubblesort\n");
    int i, j;
    int t;
 
