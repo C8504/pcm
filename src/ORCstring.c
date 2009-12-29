@@ -36,7 +36,6 @@ ORCstrlen (const char *str,
          ++i;
    }
    *len = i;
-   printf ("%d", strlen(str));
 
 TERMINATE:
    return error;

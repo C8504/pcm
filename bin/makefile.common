@@ -32,8 +32,9 @@ orc: $(EXE) tags
 orctest: $(LOGFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
-	  echo "ORC Errors found! try  grep 'ORC Error' *.log"; \
+	  echo "ORC Errors found!"; \
 	  echo "";\
+     grep 'ORC Error' *.log > error;cat error;\
 	else \
 	  echo "All tests completed successfully"; \
 	fi
@@ -68,11 +69,6 @@ check_bounds$(E): $(CSRC) $(TESTDIR)check_bounds$(C)
 	$(call compile,check_bounds)
 check_bounds$(LOG): check_bounds$(E)
 	$(call test,check_bounds)
-
-getchar$(E): $(CSRC) $(TESTDIR)getchar$(C)
-	$(call compile,getchar)
-getchar$(LOG): getchar$(E)
-	$(call test,getchar)
 
 test_sq_inout$(E): $(CSRC) $(TESTDIR)test_sq_inout$(C)
 	$(call compile,test_sq_inout)
@@ -113,6 +109,11 @@ test_ORCmath$(E): $(CSRC) $(TESTDIR)test_ORCmath$(C)
 	$(call compile,test_ORCmath)
 test_ORCmath$(LOG): test_ORCmath$(E)
 	$(call test,test_ORCmath)
+
+test_ORCfile$(E): $(CSRC) $(TESTDIR)test_ORCfile$(C)
+	$(call compile,test_ORCfile)
+test_ORCfile$(LOG): test_ORCfile$(E)
+	$(call test,test_ORCfile)
 
 # C++ files
 cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)

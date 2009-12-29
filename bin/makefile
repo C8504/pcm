@@ -14,13 +14,13 @@ CSRC=../src/ORClinkedlist$(C)\
           ../src/ORCseqlist$(C)\
           ../src/ORC$(C)\
           ../src/ORCstring$(C)\
-          ../src/ORCmath$(C)
+          ../src/ORCmath$(C)\
+          ../src/ORCfile$(C)
 EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
          test_link_readfile$(E)\
          check_bounds$(E)\
-         getchar$(E)\
          test_sq_inout$(E)\
          test_sq_init_and_free$(E)\
          test_sq_delete$(E)\
@@ -34,7 +34,6 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_many_element$(C)\
           $(TESTDIR)test_link_readfile$(C)\
           $(TESTDIR)check_bounds$(C)\
-          $(TESTDIR)getchar$(C)\
           $(TESTDIR)test_sq_inout$(C)\
           $(TESTDIR)test_sq_init_and_free$(C)\
           $(TESTDIR)test_sq_delete$(C)\
@@ -42,14 +41,14 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_sq_merge$(C)\
           $(TESTDIR)test_sq_sort_and_find$(C)\
           $(TESTDIR)test_ORCstring$(C)\
-          $(TESTDIR)test_ORCmath$(C)
+          $(TESTDIR)test_ORCmath$(C)\
+          $(TESTDIR)test_ORCfile$(C)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
          test_link_many_element$(LOG)\
          test_link_readfile$(LOG)\
          check_bounds$(LOG)\
-         getchar$(LOG)\
          test_sq_inout$(LOG)\
          test_sq_init_and_free$(LOG)\
          test_sq_delete$(LOG)\
@@ -57,6 +56,7 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_sq_merge$(LOG)\
          test_sq_sort_and_find$(LOG)\
          test_ORCstring$(LOG)\
-         test_ORCmath$(LOG) 
+         test_ORCmath$(LOG)\
+         test_ORCfile$(LOG)
 
 include makefile.common

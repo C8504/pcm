@@ -12,7 +12,6 @@ CPPCOMPILE	bin/makefile	/^CPPCOMPILE=g++$/;"	m
 CPU	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 CSRC	bin/makefile	/^CSRC=..\/src\/ORClinkedlist$(C)\\$/;"	m
 CTEST	bin/makefile	/^CTEST=$(TESTDIR)test_link_init_and_free$(C)\\$/;"	m
-DIGIT	test/getchar.c	10;"	d	file:
 Derived	test/cast.cpp	/^class Derived:public Base$/;"	c	file:
 E	bin/makefile	/^E=.exe$/;"	m
 EXE	bin/makefile	/^EXE=test_link_init_and_free$(E)\\$/;"	m
@@ -23,13 +22,12 @@ H_FIND	include/ORCfind.h	2;"	d
 H_INOUT	include/inout.h	2;"	d
 H_LINKEDLIST	include/ORClinkedlist.h	2;"	d
 H_ORC	include/ORC.h	2;"	d
+H_ORCFILE	include/ORCfile.h	2;"	d
 H_ORCMATH	include/ORCmath.h	2;"	d
 H_ORCSTRING	include/ORCstring.h	2;"	d
 H_SEQLIST	include/ORCseqlist.h	2;"	d
 H_SORT	include/ORCsort.h	2;"	d
-IN	test/getchar.c	6;"	d	file:
 INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
-LENOFFILENAME	test/getchar.c	11;"	d	file:
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
 ORCALGORIGINFIND	include/ORCconstant.h	/^enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
@@ -41,6 +39,7 @@ ORCERRNOMEMORY	include/ORCconstant.h	11;"	d
 ORCERRNOTSTACKANDQUEUE	include/ORCconstant.h	16;"	d
 ORCERRNOTVALIDINDEX	include/ORCconstant.h	12;"	d
 ORCERRNULLPOINTER	include/ORCconstant.h	13;"	d
+ORCERROPENFILE	include/ORCconstant.h	17;"	d
 ORCLISTINCREMENT	include/ORCconstant.h	8;"	d
 ORCLISTINITSIZE	include/ORCconstant.h	7;"	d
 ORCQUEUE	include/ORCconstant.h	5;"	d
@@ -51,6 +50,12 @@ ORCSTACK	include/ORCconstant.h	4;"	d
 ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f
 ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f
 ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
+ORCfile	include/ORCfile.h	/^} ORCfile;$/;"	t	typeref:struct:__anon2
+ORCfilecreate	src/ORCfile.c	/^ORCfilecreate (ORCfile **fp) {$/;"	f
+ORCfilefree	src/ORCfile.c	/^ORCfilefree (ORCfile **fp){$/;"	f
+ORCfileopen	src/ORCfile.c	/^ORCfileopen (ORCfile *fp, const char *name){$/;"	f
+ORCfilepgetinfo	src/ORCfile.c	/^ORCfilepgetinfo (ORCfile *fp){$/;"	f	file:
+ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp){$/;"	f
 ORClinkedlist	include/ORClinkedlist.h	/^typedef struct ORClinkedlist{$/;"	s
 ORClinkedlist	include/ORClinkedlist.h	/^} ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
 ORClinkedlistappend	src/ORClinkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
@@ -70,7 +75,7 @@ ORCnodefree	src/ORClinkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f
 ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f
 ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f
 ORCselectsort	src/ORCsort.c	/^ORCselectsort(int *a,$/;"	f
-ORCseqlist	include/ORCseqlist.h	/^} ORCseqlist;$/;"	t	typeref:struct:__anon2
+ORCseqlist	include/ORCseqlist.h	/^} ORCseqlist;$/;"	t	typeref:struct:__anon3
 ORCseqlistclear	src/ORCseqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f
 ORCseqlistcopy	src/ORCseqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f
 ORCseqlistdelete	src/ORCseqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f
@@ -87,29 +92,25 @@ ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
 ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f
 ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str) {$/;"	f
 ORCswapint	src/ORC.c	/^ORCswapint (int *i, $/;"	f
-OUT	test/getchar.c	7;"	d	file:
-STATISTICS	test/getchar.c	/^} STATISTICS;$/;"	t	typeref:struct:statistics	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
-WORDCOUNT	test/getchar.c	9;"	d	file:
-capacity	include/ORCseqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon2
+capacity	include/ORCseqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon3
 computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:
 elem	include/ORClinkedlist.h	/^    char               *elem;$/;"	m	struct:ORClinkednode
-elemp	include/ORCseqlist.h	/^   int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon2
+elemp	include/ORCseqlist.h	/^   int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon3
 error	include/ORCerrormap.h	/^   int        error;$/;"	m	struct:__anon1
 errorMap	include/ORCerrormap.h	/^ErrorMap errorMap[] = {$/;"	v
-filename	test/getchar.c	/^   char filename[LENOFFILENAME];$/;"	m	struct:statistics	file:
 first	include/ORClinkedlist.h	/^    struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 fun	test/cast.cpp	/^void fun(Base* base)$/;"	f
 inout	src/inout.c	/^int inout()$/;"	f
 keyboard	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 last	include/ORClinkedlist.h	/^    struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
-length	include/ORCseqlist.h	/^   int  length;        \/* The length of list *\/$/;"	m	struct:__anon2
+length	include/ORCseqlist.h	/^   int  length;        \/* The length of list *\/$/;"	m	struct:__anon3
 m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base
 m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
 main	test/cast.cpp	/^int main()$/;"	f
 main	test/check_bounds.c	/^int main(void)$/;"	f
 main	test/enum.c	/^int main(void)$/;"	f
-main	test/getchar.c	/^main(void)$/;"	f
+main	test/test_ORCfile.c	/^main ()$/;"	f
 main	test/test_ORCmath.c	/^int main (void)$/;"	f
 main	test/test_ORCstring.c	/^int main (void)$/;"	f
 main	test/test_link_init_and_free.c	/^int main(void)$/;"	f
@@ -123,16 +124,16 @@ main	test/test_sq_insert.c	/^int main(void)$/;"	f
 main	test/test_sq_merge.c	/^int main(void)$/;"	f
 main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f
 mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
-nchar	test/getchar.c	/^   int nchar  ;$/;"	m	struct:statistics	file:
-ndigit	test/getchar.c	/^   int ndigit ;$/;"	m	struct:statistics	file:
+name	include/ORCfile.h	/^   char name[20];$/;"	m	struct:__anon2
+nchars	include/ORCfile.h	/^   long long nchars;$/;"	m	struct:__anon2
+ndigits	include/ORCfile.h	/^   long long ndigits;$/;"	m	struct:__anon2
 next	include/ORClinkedlist.h	/^    struct ORClinkednode *next;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
-nline	test/getchar.c	/^   int nline  ;$/;"	m	struct:statistics	file:
-nword	test/getchar.c	/^   int nword  ;$/;"	m	struct:statistics	file:
+nlines	include/ORCfile.h	/^   long long nlines;$/;"	m	struct:__anon2
+nwords	include/ORCfile.h	/^   long long nwords;$/;"	m	struct:__anon2
+p	include/ORCfile.h	/^   FILE *p;$/;"	m	struct:__anon2
 prev	include/ORClinkedlist.h	/^    struct ORClinkednode *prev;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
 printer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
-readfile	test/getchar.c	/^readfile (const char *filename, int show){$/;"	f
 screen	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
-statistics	test/getchar.c	/^typedef struct statistics{$/;"	s	file:
 str	include/ORCerrormap.h	/^   const char *str;$/;"	m	struct:__anon1
 testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
 testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f
