@@ -2,8 +2,8 @@
 int
 ORCdelcharofstring (char * str,
       int  c) {
-   int i = 0;
-   int j = 0;
+   int i     = 0;
+   int j     = 0;
    int error = 0;
 
    /*    assert (str != NULL); */
@@ -25,7 +25,7 @@ TERMINATE:
 int
 ORCstrlen (const char *str,
       size_t     *len) {
-   int i = 0;
+   int i     = 0;
    int error = 0;
 
    if ( str == NULL ) {
@@ -41,17 +41,17 @@ TERMINATE:
    return error;
 } /* End of ORCstrlen */
 
-int 
+int
 ORCstrtrim (char *str) {
    int error = 0;
-   size_t n;
-   int i = 0;
+   size_t n  = 0;
+   int i     = 0;
 
    error = ORCstrlen(str, &n);
    if ( error )  goto TERMINATE;
 
    if ( n > 0 ) {
-      for (i = n-1; (i >= 0) && (str[i] == ' ' || str[i] == '\t'); --i); 
+      for (i = n-1; (i >= 0) && (str[i] == ' ' || str[i] == '\t'); --i);
       if ( i >= -1 ) {
          ++i;
          str[i] = '\0';
@@ -65,10 +65,11 @@ TERMINATE:
 int
 ORCstreverse (char *str) {
    int error = 0;
-   size_t n;
-   int i = 0;
-   int j = 0;
-   int temp = 0;
+   int i     = 0;
+   int j     = 0;
+   int temp  = 0;
+
+   size_t n  = 0;
 
    error = ORCstrlen (str, &n);
    if ( error )  goto TERMINATE;
@@ -88,3 +89,40 @@ ORCstreverse (char *str) {
 TERMINATE:
    return error;
 }
+
+/*
+   ORCstrncpy copy src to des, with length n.
+   */
+int
+ORCstrncpy (char       *des,
+      const char *src,
+      int n){
+   int error  = 0;
+   int i      = 0;
+   size_t len = 0;
+
+
+   if ( des == NULL ||
+         src == NULL   ) {
+      error = ORCERRNULLPOINTER;
+   }
+   else {
+      error = ORCstrlen (src, &len);
+      if ( error )  goto TERMINATE;
+
+      if ( len <= n ) {
+         while ((*des++ = *src++) != '\0'){}
+      }
+      else {
+         while (i < n) {
+            des[i] = src[i];
+            ++i;
+         }
+         des[i] = '\0';
+      }
+   }
+
+TERMINATE:
+   return error;
+} /* End of ORCstrncpy*/
+

@@ -33,23 +33,23 @@ int main (void)
    error = ORCstrlen (str1, &len);
    if ( error )  goto TERMINATE;
    printf ("str1 = %s, len = %d\n", str1,len);
-   
+
    error = ORCstrlen (str2, &len);
    if ( error )  goto TERMINATE;
    printf ("str2 = %s, len = %d\n", str2,len);
 
    error = ORCstrtrim (str1);
    if ( error )  goto TERMINATE;
-   
+
    error = ORCstrtrim (str2);
    if ( error )  goto TERMINATE;
-   
+
    error = ORCstrtrim (str3);
    if ( error )  goto TERMINATE;
 
    error = ORCstrtrim (str4);
    if ( error )  goto TERMINATE;
-    
+
    error = ORCstrlen (str1, &len);
    if ( error )  goto TERMINATE;
    printf ("str1 = %s, %d\n", str1, len);
@@ -67,16 +67,17 @@ int main (void)
    printf ("str4 = %s, %d\n", str4, len);
 
    // test ORCstreverse
-   strcpy(str, "This is a string");
+   ORCstrncpy(str, "Thisisastring", sizeof(str));
+   /*    strncpy(str, "Thisisastring", sizeof(str)); */
    printf ("str = %s\n", str);
    error = ORCstreverse (str);
    if ( error )  goto TERMINATE;
    printf ("str = %s\n", str);
-   
+
    error = ORCstreverse (str);
    if ( error )  goto TERMINATE;
    printf ("str = %s\n", str);
-   
+
    // test ORCstrdelcharofstring and ORCstrlen
    /*    strncat(str, "This is a string", 10); */
    /* strncpy(str, "This is a string", 10); */
@@ -93,11 +94,11 @@ int main (void)
    if ( error )  goto TERMINATE;
    printf (str);
    printf ("\n");
-   
+
    error = ORCstrlen (str, &len);
    if ( error )  goto TERMINATE;
    printf ("str = %s, len = %d\n", str,len);
-   
+
    error = ORCdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
    printf (str);
