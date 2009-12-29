@@ -8,11 +8,11 @@ help:
 	;echo "" \
 	;echo "make [help]      -- print this help screen" \
 	;echo "make [test_readfile.exe]   -- build test_init_and_free.exe" \
-	;echo "make [fulltest]  -- build all tests" \
+	;echo "make [orctest]  -- build all tests" \
 	;echo "make [splint]    -- use splint to check all C files" \
 	;echo "make [clean]     -- delete all *.exe and *.log files"\
 	;echo "make [testclean] -- delete all *.log files"\
-	;echo "make [exe]"      -- compile all c/c++ programs\
+	;echo "make [orc]"      -- compile all c/c++ programs\
 	;echo "make [tags]"     -- generate ctags\
 	)
 
@@ -27,9 +27,9 @@ tags:
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                   
-exe: $(EXE) tags
+orc: $(EXE) tags
 
-fulltest: $(LOGFILES)
+orctest: $(LOGFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
 	  echo "";\
 	  echo "ORC Errors found! try  grep 'ORC Error' *.log"; \

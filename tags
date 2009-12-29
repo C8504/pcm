@@ -84,6 +84,7 @@ ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
 ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
 ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str) {$/;"	f
 ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
+ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f
 ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str) {$/;"	f
 ORCswapint	src/ORC.c	/^ORCswapint (int *i, $/;"	f
 OUT	test/getchar.c	7;"	d	file:

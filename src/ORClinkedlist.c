@@ -27,7 +27,11 @@ ORCnodeallocandinit (ORClinkednode **node,
    }
 
    if ( elem != NULL ) {
-      size_t ssize = strlen (elem) + 1;
+      size_t ssize = 0;
+      error = ORCstrlen (elem, &ssize);
+      if ( error ) goto TERMINATE;
+      ++ssize;
+
       (*node)->elem = malloc (ssize);
       //memset ((*node)->elem, '\0', ssize);
       if (NULL == (*node)->elem) {
@@ -40,7 +44,8 @@ ORCnodeallocandinit (ORClinkednode **node,
       }
       else {
          //strncat ((*node)->elem, elem, strlen(elem));
-         memcpy ((*node)->elem, elem, ssize);
+         //memcpy ((*node)->elem, elem, ssize);
+         ORCstrncpy ((*node)->elem, elem, ssize);
       }
    }
    else {
