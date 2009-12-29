@@ -27,7 +27,7 @@ tags:
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                   
-exe: $(EXE)
+exe: $(EXE) tags
 
 fulltest: $(LOGFILES)
 	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \

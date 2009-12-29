@@ -34,7 +34,7 @@ LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
 ORCALGORIGINFIND	include/ORCconstant.h	/^enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
 ORCALGSORTBUBBLE	include/ORCconstant.h	/^                 ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
-ORCALGSORTSELECT	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001, $/;"	e	enum:ORCSORTALG
+ORCALGSORTSELECT	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	e	enum:ORCSORTALG
 ORCERRELEMENTNOTFOUND	include/ORCconstant.h	14;"	d
 ORCERREMPTYLIST	include/ORCconstant.h	15;"	d
 ORCERRNOMEMORY	include/ORCconstant.h	11;"	d
@@ -46,10 +46,10 @@ ORCLISTINITSIZE	include/ORCconstant.h	7;"	d
 ORCQUEUE	include/ORCconstant.h	5;"	d
 ORCSEARCHALG	include/ORCconstant.h	/^enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	g
 ORCSList	include/ORCseqlist.h	/^typedef ORCseqlist* ORCSList;$/;"	t
-ORCSORTALG	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001, $/;"	g
+ORCSORTALG	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	g
 ORCSTACK	include/ORCconstant.h	4;"	d
 ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f
-ORCcheckerror	src/ORC.c	/^void ORCcheckerror (int error) {$/;"	f
+ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f
 ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
 ORClinkedlist	include/ORClinkedlist.h	/^typedef struct ORClinkedlist{$/;"	s
 ORClinkedlist	include/ORClinkedlist.h	/^} ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
@@ -82,7 +82,10 @@ ORCseqlistinsert	src/ORCseqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
 ORCseqlistmerge	src/ORCseqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
 ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
 ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
+ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str) {$/;"	f
 ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
+ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str) {$/;"	f
+ORCswapint	src/ORC.c	/^ORCswapint (int *i, $/;"	f
 OUT	test/getchar.c	7;"	d	file:
 STATISTICS	test/getchar.c	/^} STATISTICS;$/;"	t	typeref:struct:statistics	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m

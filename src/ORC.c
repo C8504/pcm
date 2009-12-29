@@ -1,5 +1,6 @@
 #include "ORC.h"
-void ORCcheckerror (int error) {
+void 
+ORCcheckerror (int error) {
    int i = 0;
 
    if ( error ) {
@@ -14,3 +15,12 @@ void ORCcheckerror (int error) {
 
 } /* End of ORCcheckerror*/
 
+void 
+ORCswapint (int *i, 
+            int *j){
+   int temp;
+
+   temp = *i;
+   *i = *j;
+   *j = temp;
+}

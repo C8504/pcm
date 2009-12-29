@@ -40,3 +40,51 @@ ORCstrlen (const char *str,
 TERMINATE:
    return error;
 } /* End of ORCstrlen */
+
+int 
+ORCstrtrim (char *str) {
+   int error = 0;
+   size_t n;
+   int i = 0;
+
+   error = ORCstrlen(str, &n);
+   if ( error )  goto TERMINATE;
+
+   if ( n > 0 ) {
+      for (i = n-1; (i >= 0) && (str[i] == ' ' || str[i] == '\t'); --i); 
+      if ( i >= -1 ) {
+         ++i;
+         str[i] = '\0';
+      }
+   }
+
+TERMINATE:
+   return error;
+} /* End of ORCstrtrim*/
+
+int
+ORCstreverse (char *str) {
+   int error = 0;
+   size_t n;
+   int i = 0;
+   int j = 0;
+   int temp = 0;
+
+   error = ORCstrlen (str, &n);
+   if ( error )  goto TERMINATE;
+
+   if ( n > 0 ) {
+      j = n - 1;
+      /* Can not use ORCswapint here */
+      while (i < j) {
+         temp   = str[i];
+         str[i] = str[j];
+         str[j] = temp;
+         ++i;
+         --j;
+      }
+   }
+
+TERMINATE:
+   return error;
+}
