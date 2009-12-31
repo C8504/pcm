@@ -3,7 +3,8 @@ void
 ORCcheckerror (int error) {
    int i = 0;
 
-   if ( error > ORCERRSTART) {
+   if ( error > ORCERRSTART && 
+        error < ORCERREND     ) {
       int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
 
       for (i = 0; i < nErrors; ++i) {
@@ -12,7 +13,7 @@ ORCcheckerror (int error) {
          }
       }
    }
-   else if (error != 0 && error < ORCERRSTART) {
+   else if ( error != 0 ) {
       printf ("errno = %d, ORC Error(by system function calling): %s\n", 
             error, strerror (error));
    }
