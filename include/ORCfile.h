@@ -16,7 +16,10 @@ int ORCfilefree(ORCfile **fp);
 
 int ORCfileopen(ORCfile *fp, const char *name);
 int ORCfilestatistics(ORCfile *fp);
-/* int ORCfilegetline(ORCfile *fp, char *line); */
+int ORCfilegetline(/*in*/ ORCfile *fp,
+                   /*in*/ int     max, 
+                   /*out*/char    *line, 
+                   /*out*/int     *length);
 /* int ORCfilegetmaxline(ORCfile *fp); */
 
 #endif

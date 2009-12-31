@@ -1,8 +1,8 @@
 #include "ORCsort.h"
 
-   void
+void
 ORCselectsort(int *a,
-      int len)
+              int len)
 {
    printf ("CALL ORCselectsort\n");
    int i, j, min;
@@ -24,9 +24,9 @@ ORCselectsort(int *a,
    }
 } /* End of ORCselectsort*/
 
-   void
+void
 ORCbubblesort(int *a,
-      int len)
+              int len)
 {
    printf ("CALL ORCbubblesort\n");
    int i, j;

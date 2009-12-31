@@ -8,7 +8,7 @@ ORCcheckerror (int error) {
 
       for (i = 0; i < nErrors; ++i) {
          if ( errorMap[i].error == error ) {
-            printf ("ORC Error: %s\n", errorMap[i].str);
+            fprintf (stderr, "ORC Error: %s\n", errorMap[i].str);
          }
       }
    }

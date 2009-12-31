@@ -53,9 +53,10 @@ ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
 ORCfile	include/ORCfile.h	/^} ORCfile;$/;"	t	typeref:struct:__anon2
 ORCfilecreate	src/ORCfile.c	/^ORCfilecreate (ORCfile **fp) {$/;"	f
 ORCfilefree	src/ORCfile.c	/^ORCfilefree (ORCfile **fp){$/;"	f
+ORCfilegetline	src/ORCfile.c	/^ORCfilegetline (ORCfile *fp, $/;"	f
 ORCfileopen	src/ORCfile.c	/^ORCfileopen (ORCfile *fp, const char *name){$/;"	f
 ORCfilepgetinfo	src/ORCfile.c	/^ORCfilepgetinfo (ORCfile *fp){$/;"	f	file:
-ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp){$/;"	f
+ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp)$/;"	f
 ORClinkedlist	include/ORClinkedlist.h	/^typedef struct ORClinkedlist{$/;"	s
 ORClinkedlist	include/ORClinkedlist.h	/^} ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
 ORClinkedlistappend	src/ORClinkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
@@ -87,10 +88,10 @@ ORCseqlistinsert	src/ORCseqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
 ORCseqlistmerge	src/ORCseqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
 ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
 ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
-ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str) {$/;"	f
+ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str) $/;"	f
 ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
 ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f
-ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str) {$/;"	f
+ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str) $/;"	f
 ORCswapint	src/ORC.c	/^ORCswapint (int *i, $/;"	f
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 capacity	include/ORCseqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon3
@@ -110,7 +111,7 @@ m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
 main	test/cast.cpp	/^int main()$/;"	f
 main	test/check_bounds.c	/^int main(void)$/;"	f
 main	test/enum.c	/^int main(void)$/;"	f
-main	test/test_ORCfile.c	/^main ()$/;"	f
+main	test/test_ORCfile.c	/^main(int argc, char **argv)$/;"	f
 main	test/test_ORCmath.c	/^int main (void)$/;"	f
 main	test/test_ORCstring.c	/^int main (void)$/;"	f
 main	test/test_link_init_and_free.c	/^int main(void)$/;"	f

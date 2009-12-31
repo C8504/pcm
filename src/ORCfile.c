@@ -69,8 +69,9 @@ TERMINATE:
    return error;
 } /* End of ORCfileopen */
 
-int
-ORCfilestatistics (ORCfile *fp){
+   int
+ORCfilestatistics (ORCfile *fp)
+{
    int error = 0;
 
    if ( fp == NULL) {
@@ -89,7 +90,6 @@ TERMINATE:
 
 static int
 ORCfilepgetinfo (ORCfile *fp){
-   printf ("ORCfilepgetinfo start\n");
    int error = 0;
    int state = 0;
    int c;
@@ -116,10 +116,38 @@ ORCfilepgetinfo (ORCfile *fp){
       }
    }
 
-   printf ("ORCfilepgetinfo end\n");
+   rewind (fp->p);
+
 TERMINATE:
    return error;
 } /* ORCfilepgetinfo*/
 
+   int
+ORCfilegetline (ORCfile *fp, 
+      int     max, 
+      char    *line, 
+      int     *length)
+{
+   int error = 0;
+   int c     = 0;
+   int i     = 0;
 
+   while ((i < max-1              ) && 
+         ((c = getc(fp->p)) != EOF) &&
+         (c != '\n'               )   ) {
+      line[i] = c;
+      ++i;
+   }
+
+   if ( c == '\n' ) {
+      line[i] = '\n';
+      ++i;
+   }
+
+   line[i] = '\0';
+   *length = i;
+
+TERMINATE:
+   return error;
+} /* End of ORCfilegetline */
 
