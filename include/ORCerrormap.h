@@ -13,6 +13,5 @@ ErrorMap errorMap[] = {
    {ORCERRELEMENTNOTFOUND,        "Element not found"},
    {ORCERREMPTYLIST,               "Empty list"},
    {ORCERRNOTSTACKANDQUEUE,      "Can not use pop in stack and queue"},
-   {ORCERROPENFILE,              "Can not open file"},
 };
 #endif

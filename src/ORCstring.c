@@ -82,9 +82,7 @@ ORCstreverse (char *str)
       j = n - 1;
       /* Can not use ORCswapint here */
       while (i < j) {
-         temp   = str[i];
-         str[i] = str[j];
-         str[j] = temp;
+         ORCswapchar (str, i, j);
          ++i;
          --j;
       }

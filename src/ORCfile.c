@@ -54,7 +54,7 @@ ORCfileopen (ORCfile *fp, const char *name){
    }
    else {
       if ((fp->p = fopen(name, "r")) == NULL) {
-         error = ORCERROPENFILE;
+         error = errno;
          goto TERMINATE;
       }
       else {

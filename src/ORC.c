@@ -3,7 +3,7 @@ void
 ORCcheckerror (int error) {
    int i = 0;
 
-   if ( error ) {
+   if ( error > ORCERRSTART) {
       int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
 
       for (i = 0; i < nErrors; ++i) {
@@ -12,15 +12,20 @@ ORCcheckerror (int error) {
          }
       }
    }
+   else if (error != 0 && error < ORCERRSTART) {
+      fprintf (stderr, "errno = %d, ORC Error(by system function calling): %s\n", 
+               error, strerror (error));
+   }
 
 } /* End of ORCcheckerror*/
 
 void 
-ORCswapint (int *i, 
-            int *j){
+ORCswapchar (char* arr,
+         int i, 
+         int j){
    int temp;
 
-   temp = *i;
-   *i = *j;
-   *j = temp;
+   temp = arr[i];
+   arr[i] = arr[j];
+   arr[j] = temp;
 }
