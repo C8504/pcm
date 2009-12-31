@@ -1,6 +1,7 @@
 #ifndef H_LINKEDLIST
 #define H_LINKEDLIST
 #include "ORC.h"
+
 typedef struct ORClinkednode {
     char               *elem;
     struct ORClinkednode *next;
@@ -26,7 +27,7 @@ int  ORClinkedlistfree   (ORClinkedlist **list);
 
 int  ORClinkedlistappend (ORClinkedlist *list, const char* elem);
 int  ORClinkedlistinsert (ORClinkedlist *list, int pos, const char* elem);
-int  ORClinkedlistpop    (ORClinkedlist *list, int flag);
+int  ORClinkedlistpop    (ORClinkedlist *list, enum ORCPOPTYPE type);
 
 int  ORClinkedlistlength (ORClinkedlist *list);
 

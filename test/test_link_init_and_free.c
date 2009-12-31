@@ -5,15 +5,18 @@ int main(void)
    int i = 0;
    int error = 0;
 
-   ORClinkedlist *mylist = NULL;
-
-   error = ORClinkedlistinit (&mylist);
+/*    ORClinkedlist *mylist = NULL; */
+/*    ORClinkedlist mylist; */
+/*    mylist = &l; */
+/*    ORClinkedlist *p = &mylist; */
+   ORClinkedlist *p = NULL;
+   error = ORClinkedlistinit (&p);
    if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistoutput (mylist, ":");
+   error = ORClinkedlistoutput (p, ":");
    if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistfree (&mylist);
+   error = ORClinkedlistfree (&p);
    if ( error )  goto TERMINATE;
 
 TERMINATE:

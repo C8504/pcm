@@ -221,7 +221,7 @@ ORClinkedlistclear (ORClinkedlist *list)
    int error = 0;
 
    while (0 != ORClinkedlistlength (list)) {
-      error = ORClinkedlistpop (list, ORCSTACK);
+      error = ORClinkedlistpop (list, ORCPOPSTACK);
       if ( error )  goto TERMINATE;
    }
 
@@ -230,15 +230,15 @@ TERMINATE:
    return error;
 } /* End of ORClinkedlistclear */
 
-// Pop is a method used in both stack and queue with flag
+// Pop is a method used in both stack and queue with type 
    int
 ORClinkedlistpop (ORClinkedlist *list,
-      int flag)
+      enum ORCPOPTYPE type)
 {
    int error = 0;
    ORClinkednode *p = NULL;
 
-   if ( flag == ORCSTACK ) {
+   if ( type == ORCPOPQUEUE) {
       if ( list->first != NULL ) {
          p = list->first;
 
@@ -258,7 +258,7 @@ ORClinkedlistpop (ORClinkedlist *list,
          goto TERMINATE;
       }
    }
-   else if ( flag == ORCQUEUE ) {
+   else if ( type == ORCPOPSTACK ) {
       if ( list->last != NULL ) {
          p = list->last;
 

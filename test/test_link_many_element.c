@@ -3,6 +3,7 @@ int testmanyelements()
 {
    int i;
    int error = 0;
+   enum ORCPOPTYPE type;
    ORClinkedlist* mylist = NULL;
 
    error = ORClinkedlistinit (&mylist);
@@ -46,16 +47,18 @@ int testmanyelements()
    if ( error )  goto TERMINATE;
 
    // pop like stack
+   type = ORCPOPSTACK;
    for (i = 0; i < 5; ++i) {
-      error  = ORClinkedlistpop (mylist, ORCSTACK);
+      error  = ORClinkedlistpop (mylist, type);
       if ( error )  goto TERMINATE;
    }
    error = ORClinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // pop like queue
+   type = ORCPOPQUEUE;
    for (i = 0; i < 5; ++i) {
-      error  = ORClinkedlistpop (mylist, ORCQUEUE);
+      error  = ORClinkedlistpop (mylist, type);
       if ( error )  goto TERMINATE;
 
    }
@@ -63,8 +66,9 @@ int testmanyelements()
    if ( error )  goto TERMINATE;
 
    // pop like stack
+   type = ORCPOPQUEUE;
    for (i = 0; i < 10; ++i) {
-      error  = ORClinkedlistpop (mylist, ORCSTACK);
+      error  = ORClinkedlistpop (mylist, type);
       if ( error )  goto TERMINATE;
    }
    error = ORClinkedlistoutput (mylist, ":");

@@ -28,7 +28,8 @@ EXE=test_link_init_and_free$(E)\
          test_sq_merge$(E)\
          test_sq_sort_and_find$(E)\
          test_ORCstring$(E)\
-         test_ORCmath$(E)
+         test_ORCmath$(E)\
+         test_ORCfile$(E)
 CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\

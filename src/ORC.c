@@ -8,12 +8,12 @@ ORCcheckerror (int error) {
 
       for (i = 0; i < nErrors; ++i) {
          if ( errorMap[i].error == error ) {
-            fprintf (stderr, "ORC Error: %s\n", errorMap[i].str);
+            printf ("ORC Error: %s\n", errorMap[i].str);
          }
       }
    }
    else if (error != 0 && error < ORCERRSTART) {
-      fprintf (stderr, "errno = %d, ORC Error(by system function calling): %s\n", 
+      printf ("errno = %d, ORC Error(by system function calling): %s\n", 
             error, strerror (error));
    }
 

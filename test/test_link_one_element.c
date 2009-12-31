@@ -3,6 +3,7 @@ int testoneelement(void)
 {
    int i;
    int error = 0;
+   enum ORCPOPTYPE type;
 
    // Use pointer of list object use the init function and free function to
    // manage memory
@@ -13,28 +14,32 @@ int testoneelement(void)
    printf ("mylist = %p, mylist->first = %p, mylist->last = %p\n",
          mylist, mylist->first, mylist->last);
 
-   // append 1 elements
+   // append 2 elements
    error = ORClinkedlistappend (mylist, "a");
    if ( error )  goto TERMINATE;
+   error = ORClinkedlistappend (mylist, "A");
+   if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistoutput (mylist, ":");
+   error = ORClinkedlistoutput (mylist, "<append>");
 
    // pop like stack
-   error  = ORClinkedlistpop (mylist, ORCSTACK);
+   type = ORCPOPSTACK;
+   error  = ORClinkedlistpop (mylist, type);
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistoutput (mylist, ":");
+   error = ORClinkedlistoutput (mylist, "<pop in stack>");
    if ( error )  goto TERMINATE;
 
    // append 1 elements
    error = ORClinkedlistappend (mylist, "b");
    if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistoutput (mylist, ":");
+   error = ORClinkedlistoutput (mylist, "<append>");
 
    // pop like queue
-   error  = ORClinkedlistpop (mylist, ORCQUEUE);
+   type = ORCPOPQUEUE;
+   error  = ORClinkedlistpop (mylist, type);
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistoutput (mylist, ":");
+   error = ORClinkedlistoutput (mylist, "<pop in queue>");
    if ( error )  goto TERMINATE;
 
    error = ORClinkedlistclear (mylist);
@@ -47,7 +52,7 @@ int testoneelement(void)
       if ( error )  goto TERMINATE;
    }
 
-   error = ORClinkedlistoutput (mylist, ":");
+   error = ORClinkedlistoutput (mylist, "<append>");
    if ( error )  goto TERMINATE;
 
    error = ORClinkedlistfree (&mylist);
