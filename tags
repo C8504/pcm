@@ -33,13 +33,13 @@ LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
 ORCALGORIGINFIND	include/ORCconstant.h	/^enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
 ORCALGSORTBUBBLE	include/ORCconstant.h	/^                 ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
 ORCALGSORTSELECT	include/ORCconstant.h	/^enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	e	enum:ORCSORTALG
-ORCERRELEMENTNOTFOUND	include/ORCconstant.h	14;"	d
-ORCERREMPTYLIST	include/ORCconstant.h	15;"	d
-ORCERRNOMEMORY	include/ORCconstant.h	11;"	d
-ORCERRNOTSTACKANDQUEUE	include/ORCconstant.h	16;"	d
-ORCERRNOTVALIDINDEX	include/ORCconstant.h	12;"	d
-ORCERRNULLPOINTER	include/ORCconstant.h	13;"	d
-ORCERROPENFILE	include/ORCconstant.h	17;"	d
+ORCERRELEMENTNOTFOUND	include/ORCconstant.h	15;"	d
+ORCERREMPTYLIST	include/ORCconstant.h	16;"	d
+ORCERRNOMEMORY	include/ORCconstant.h	12;"	d
+ORCERRNOTSTACKANDQUEUE	include/ORCconstant.h	17;"	d
+ORCERRNOTVALIDINDEX	include/ORCconstant.h	13;"	d
+ORCERRNULLPOINTER	include/ORCconstant.h	14;"	d
+ORCERRSTART	include/ORCconstant.h	11;"	d
 ORCLISTINCREMENT	include/ORCconstant.h	8;"	d
 ORCLISTINITSIZE	include/ORCconstant.h	7;"	d
 ORCQUEUE	include/ORCconstant.h	5;"	d
@@ -92,7 +92,7 @@ ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str) $/;"	f
 ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
 ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f
 ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str) $/;"	f
-ORCswapint	src/ORC.c	/^ORCswapint (int *i, $/;"	f
+ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 capacity	include/ORCseqlist.h	/^   int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon3
 computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:

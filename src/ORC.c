@@ -14,15 +14,15 @@ ORCcheckerror (int error) {
    }
    else if (error != 0 && error < ORCERRSTART) {
       fprintf (stderr, "errno = %d, ORC Error(by system function calling): %s\n", 
-               error, strerror (error));
+            error, strerror (error));
    }
 
 } /* End of ORCcheckerror*/
 
 void 
 ORCswapchar (char* arr,
-         int i, 
-         int j){
+      int i, 
+      int j){
    int temp;
 
    temp = arr[i];

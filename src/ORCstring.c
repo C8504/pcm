@@ -1,7 +1,7 @@
 #include "ORCstring.h"
-int
+   int
 ORCdelcharofstring (char * str,
-                    int  c) 
+      int  c) 
 {
    int i     = 0;
    int j     = 0;
@@ -23,9 +23,9 @@ TERMINATE:
    return error;
 } /* End of ORCdelcharofstring */
 
-int
+   int
 ORCstrlen (const char *str,
-           size_t     *len) 
+      size_t     *len) 
 {
    int i     = 0;
    int error = 0;
@@ -43,7 +43,7 @@ TERMINATE:
    return error;
 } /* End of ORCstrlen */
 
-int
+   int
 ORCstrtrim (char *str) 
 {
    int error = 0;
@@ -65,7 +65,7 @@ TERMINATE:
    return error;
 } /* End of ORCstrtrim*/
 
-int
+   int
 ORCstreverse (char *str) 
 {
    int error = 0;
@@ -93,12 +93,12 @@ TERMINATE:
 }
 
 /*
-ORCstrncpy copy src to des, with length n.
-*/
-int
+   ORCstrncpy copy src to des, with length n.
+   */
+   int
 ORCstrncpy (char       *des,
-            const char *src,
-            int n)
+      const char *src,
+      int n)
 {
    int error  = 0;
    int i      = 0;
@@ -106,8 +106,8 @@ ORCstrncpy (char       *des,
 
 
    if ( des == NULL ||
-      src == NULL   ) {
-         error = ORCERRNULLPOINTER;
+         src == NULL   ) {
+      error = ORCERRNULLPOINTER;
    }
    else {
       error = ORCstrlen (src, &len);

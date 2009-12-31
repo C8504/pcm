@@ -1,9 +1,9 @@
 #include "ORCfind.h"
-void
+   void
 ORCoriginfind(int *a,
-              int length,
-              const int elem,
-              int* index)
+      int length,
+      const int elem,
+      int* index)
 {
    printf ("CALL ORCoriginfind\n");
    int i;

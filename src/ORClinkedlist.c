@@ -1,7 +1,7 @@
 /* linked list by John Cui*/
 #include "ORClinkedlist.h"
 
-void
+   void
 ORCnodefree (ORClinkednode **node)
 {
    if ( *node != NULL) {
@@ -14,9 +14,9 @@ ORCnodefree (ORClinkednode **node)
    }
 } /* End of ORCnodefree */
 
-int
+   int
 ORCnodeallocandinit (ORClinkednode **node,
-                     const char* elem)
+      const char* elem)
 {
    int error = 0;
 
@@ -59,7 +59,7 @@ TERMINATE:
 
    return error;
 }
-int
+   int
 ORClinkedlistinit (ORClinkedlist **list)
 {
    int error = 0;
@@ -80,7 +80,7 @@ TERMINATE:
 
 
 /* free the list*/
-int
+   int
 ORClinkedlistfree (ORClinkedlist **list)
 {
    int error = 0;
@@ -98,9 +98,9 @@ ORClinkedlistfree (ORClinkedlist **list)
    return error;
 } /* End of ORClinkedlistfree */
 
-int
+   int
 ORClinkedlistappend (ORClinkedlist *list,
-                     const char* elem)
+      const char* elem)
 {
    ORClinkednode *newnode = NULL;
 
@@ -108,8 +108,8 @@ ORClinkedlistappend (ORClinkedlist *list,
    if ( error )  goto TERMINATE;
 
    if ( list->first == NULL &&
-      list->last  == NULL    ) {
-         list->last = list->first = newnode;
+         list->last  == NULL    ) {
+      list->last = list->first = newnode;
    }
    else {
       newnode->prev = list->last;
@@ -123,10 +123,10 @@ TERMINATE:
 } /* END of ORClinkedlistappend */
 
 //insert the newnode after "p"
-int
+   int
 ORClinkedlistinsert (ORClinkedlist *list,
-                     int         pos,
-                     const char* elem)
+      int         pos,
+      const char* elem)
 {
    int error;
    int j = 0;
@@ -151,9 +151,9 @@ ORClinkedlistinsert (ORClinkedlist *list,
       else {
          // check pos
          if ( pos < 1  ||
-            pos > len  ) {
-               error = ORCERRNOTVALIDINDEX;
-               goto TERMINATE;
+               pos > len  ) {
+            error = ORCERRNOTVALIDINDEX;
+            goto TERMINATE;
          }
 
          // find the node at pos "p"
@@ -178,9 +178,9 @@ TERMINATE:
 
    return error;
 }
-int
+   int
 ORClinkedlistoutput (ORClinkedlist *list,
-                     const char* sp)
+      const char* sp)
 {
    int error = 0;
 
@@ -192,19 +192,19 @@ ORClinkedlistoutput (ORClinkedlist *list,
    }
 
    if ( list->first != NULL &&
-      list->last  != NULL   ) {
-         p = list->first;
-         while ( p != NULL) {
-            if ( sp != NULL ) {
-               printf ("%s%s", p->elem, sp);
-            }
-            else {
-               printf ("%s", p->elem);
-            }
-            p = p->next;
+         list->last  != NULL   ) {
+      p = list->first;
+      while ( p != NULL) {
+         if ( sp != NULL ) {
+            printf ("%s%s", p->elem, sp);
          }
-         printf ("\n");
-         printf ("Have %d elements in this list\n\n", ORClinkedlistlength (list));
+         else {
+            printf ("%s", p->elem);
+         }
+         p = p->next;
+      }
+      printf ("\n");
+      printf ("Have %d elements in this list\n\n", ORClinkedlistlength (list));
    }
    else {
       printf ("This is an empty list now\n\n");
@@ -215,7 +215,7 @@ TERMINATE:
    return error;
 } /* End of ORClinkedlistoutput */
 
-int
+   int
 ORClinkedlistclear (ORClinkedlist *list)
 {
    int error = 0;
@@ -231,9 +231,9 @@ TERMINATE:
 } /* End of ORClinkedlistclear */
 
 // Pop is a method used in both stack and queue with flag
-int
+   int
 ORClinkedlistpop (ORClinkedlist *list,
-                  int flag)
+      int flag)
 {
    int error = 0;
    ORClinkednode *p = NULL;
@@ -288,7 +288,7 @@ TERMINATE:
 
    return error;
 } /* End of ORClinkedlistpop */
-int
+   int
 ORClinkedlistlength(ORClinkedlist *list)
 {
    int length = 0;

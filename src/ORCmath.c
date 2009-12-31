@@ -1,8 +1,8 @@
 #include "ORCmath.h"
-int 
+   int 
 ORCpower(int base,
-         int  n,
-         long long *result)
+      int  n,
+      long long *result)
 {
    int error = 0;
    long long p = 1LL;
