@@ -13,18 +13,26 @@ main ()
    error = ORCfilecreate(&fp);
    if ( error )  goto TERMINATE;
 
-   error = ORCfileopen(fp, "c:\\orc\\data\\git.txt");
+   /*    error = ORCfileopen(fp, "c:\\orc\\data\\git.txt"); */
    /*    error = ORCfileopen(fp, "c:\\orc\\data\\01.mps"); */
+   error = ORCfileopen(fp, "makefile");
    /*    error = ORCfileopen(fp, argv[1]); */
    if ( error )  goto TERMINATE;
 
 
-   char str[1000] = {0};
+   char str[ORCMAXLINE] = {0};
    int len = 0;
+
+   error = ORCfilegetmaxline (fp, str, &len);
+   if ( error )  goto TERMINATE;
+   printf ("The longest line is: %s, length = %d\n", str, len);
+
+   printf ("cat %s\n", fp->name);
+
    do{
-      error = ORCfilegetline(fp, 1000, str, &len);
+      error = ORCfilegetline(fp, ORCMAXLINE, str, &len);
       if ( error )  goto TERMINATE;
-      printf ("%s which length = %d\n", str, len);
+      printf ("%s", str);
    }
    while (len > 0);
 

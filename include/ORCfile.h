@@ -20,6 +20,6 @@ int ORCfilegetline(/*in*/ ORCfile *fp,
                    /*in*/ int     max, 
                    /*out*/char    *line, 
                    /*out*/int     *length);
-/* int ORCfilegetmaxline(ORCfile *fp); */
+int ORCfilegetmaxline(ORCfile *fp, char *maxline, int *max);
 
 #endif

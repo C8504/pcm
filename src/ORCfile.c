@@ -123,16 +123,16 @@ TERMINATE:
 } /* ORCfilepgetinfo*/
 
    int
-ORCfilegetline (ORCfile *fp, 
-      int     max, 
-      char    *line, 
+ORCfilegetline (ORCfile *fp,
+      int     max,
+      char    *line,
       int     *length)
 {
    int error = 0;
    int c     = 0;
    int i     = 0;
 
-   while ((i < max-1              ) && 
+   while ((i < max-1              ) &&
          ((c = getc(fp->p)) != EOF) &&
          (c != '\n'               )   ) {
       line[i] = c;
@@ -150,4 +150,30 @@ ORCfilegetline (ORCfile *fp,
 TERMINATE:
    return error;
 } /* End of ORCfilegetline */
+
+int
+ORCfilegetmaxline (ORCfile *fp,
+      char     *maxline,
+      int      *max) {
+   int error = 0;
+   int len   = 0;
+   char line[ORCMAXLINE] = {0};
+
+   *max = len;
+   do {
+      error = ORCfilegetline (fp, ORCMAXLINE, line, &len);
+      if ( error )  goto TERMINATE;
+      if ( len > *max ) {
+         *max = len;
+         error = ORCstrncpy (maxline, line, ORCMAXLINE);
+         if ( error )  goto TERMINATE;
+      }
+   }
+   while ( len != 0 );
+
+   rewind (fp->p);
+
+TERMINATE:
+   return error;
+} /* End of ORCfilegetmaxline*/
 

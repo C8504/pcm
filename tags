@@ -44,6 +44,7 @@ ORCERRNULLPOINTER	include/ORCconstant.h	/^   ORCERRNULLPOINTER,$/;"	e	enum:ORCER
 ORCERRSTART	include/ORCconstant.h	/^   ORCERRSTART = 10000,$/;"	e	enum:ORCERR
 ORCLISTINCREMENT	include/ORCconstant.h	8;"	d
 ORCLISTINITSIZE	include/ORCconstant.h	7;"	d
+ORCMAXLINE	include/ORCconstant.h	9;"	d
 ORCPOPQUEUE	include/ORCconstant.h	/^enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	e	enum:ORCPOPTYPE
 ORCPOPSTACK	include/ORCconstant.h	/^enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	e	enum:ORCPOPTYPE
 ORCPOPTYPE	include/ORCconstant.h	/^enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	g
@@ -57,6 +58,7 @@ ORCfile	include/ORCfile.h	/^} ORCfile;$/;"	t	typeref:struct:__anon2
 ORCfilecreate	src/ORCfile.c	/^ORCfilecreate (ORCfile **fp) {$/;"	f
 ORCfilefree	src/ORCfile.c	/^ORCfilefree (ORCfile **fp){$/;"	f
 ORCfilegetline	src/ORCfile.c	/^ORCfilegetline (ORCfile *fp, $/;"	f
+ORCfilegetmaxline	src/ORCfile.c	/^ORCfilegetmaxline (ORCfile *fp, $/;"	f
 ORCfileopen	src/ORCfile.c	/^ORCfileopen (ORCfile *fp, const char *name){$/;"	f
 ORCfilepgetinfo	src/ORCfile.c	/^ORCfilepgetinfo (ORCfile *fp){$/;"	f	file:
 ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp)$/;"	f
