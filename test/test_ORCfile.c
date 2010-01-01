@@ -20,7 +20,7 @@ main ()
    if ( error )  goto TERMINATE;
 
 
-   char str[ORCMAXLINE] = {0};
+   char str[ORCFILEMAXLINE] = {0};
    int len = 0;
 
    error = ORCfilegetmaxline (fp, str, &len);
@@ -30,7 +30,7 @@ main ()
    printf ("cat %s\n", fp->name);
 
    do{
-      error = ORCfilegetline(fp, ORCMAXLINE, str, &len);
+      error = ORCfilegetline(fp, ORCFILEMAXLINE, str, &len);
       if ( error )  goto TERMINATE;
       printf ("%s", str);
    }

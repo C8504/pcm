@@ -4,7 +4,7 @@
 
 typedef struct {
    FILE *p;
-   char name[20];
+   char name[ORCFILENAME];
    long long nlines;
    long long nwords;
    long long nchars;
@@ -17,9 +17,9 @@ int ORCfilefree(ORCfile **fp);
 int ORCfileopen(ORCfile *fp, const char *name);
 int ORCfilestatistics(ORCfile *fp);
 int ORCfilegetline(/*in*/ ORCfile *fp,
-                   /*in*/ int     max, 
-                   /*out*/char    *line, 
+                   /*in*/ int     max,
+                   /*out*/char    *line,
                    /*out*/int     *length);
 int ORCfilegetmaxline(ORCfile *fp, char *maxline, int *max);
-
+int ORCfilegetinfo(ORCfile *fp);
 #endif

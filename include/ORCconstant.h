@@ -4,10 +4,11 @@
 // POP type
 enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};
 
-#define ORCLISTINITSIZE    5 
+#define ORCLISTINITSIZE    5
 #define ORCLISTINCREMENT   5
-#define ORCMAXLINE         1000
 
+#define ORCFILEMAXLINE         1000
+#define ORCFILENAME            20
 
 // ERROR CODE
 enum ORCERR {

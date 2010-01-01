@@ -1,5 +1,4 @@
 #include "ORCfile.h"
-static int ORCfilepgetinfo(ORCfile *fp);
 
 int
 ORCfilecreate (ORCfile **fp) {
@@ -61,7 +60,7 @@ ORCfileopen (ORCfile *fp, const char *name){
          error = ORCstrncpy(fp->name, name, sizeof fp->name - 1);
          if ( error )  goto TERMINATE;
 
-         error = ORCfilepgetinfo(fp);
+         error = ORCfilegetinfo(fp);
          if ( error )  goto TERMINATE;
       }
    }
@@ -88,8 +87,8 @@ TERMINATE:
    return error;
 } /* End of ORCfilestatistics*/
 
-static int
-ORCfilepgetinfo (ORCfile *fp){
+int
+ORCfilegetinfo (ORCfile *fp){
    int error = 0;
    int state = 0;
    int c;
@@ -157,15 +156,15 @@ ORCfilegetmaxline (ORCfile *fp,
       int      *max) {
    int error = 0;
    int len   = 0;
-   char line[ORCMAXLINE] = {0};
+   char line[ORCFILEMAXLINE] = {0};
 
    *max = len;
    do {
-      error = ORCfilegetline (fp, ORCMAXLINE, line, &len);
+      error = ORCfilegetline (fp, ORCFILEMAXLINE, line, &len);
       if ( error )  goto TERMINATE;
       if ( len > *max ) {
          *max = len;
-         error = ORCstrncpy (maxline, line, ORCMAXLINE);
+         error = ORCstrncpy (maxline, line, ORCFILEMAXLINE);
          if ( error )  goto TERMINATE;
       }
    }
