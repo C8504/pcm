@@ -23,7 +23,7 @@ test =                                                        \
          $(1)$(E) > $(1)$(LOG);                               \
          #cat $(1)$(LOG)
 tags:
-	@cd ../;ctags -R
+	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                   

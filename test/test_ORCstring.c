@@ -99,6 +99,19 @@ int main (void)
    if ( error )  goto TERMINATE;
    printf ("str = %s, len = %d\n", str,len);
 
+
+   // test ORCstrncat function
+   char tail[] = "test_ORCstrncat";
+   /*    error = ORCstrncat (str, tail, sizeof tail); */
+   error = ORCstrncat (str, tail, -1);
+   if( error )
+   {
+      goto TERMINATE;
+   }
+   error = ORCstrlen (str, &len);
+   if ( error )  goto TERMINATE;
+   printf ("str = %s, len = %d\n", str,len);
+
    error = ORCdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
    printf (str);
