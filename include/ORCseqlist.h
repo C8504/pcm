@@ -4,7 +4,7 @@
 #include "ORCsort.h"
 #include "ORCfind.h"
 
-typedef  struct {
+typedef struct {
    int *elemp;     /* The basic address of list */
    int  length;        /* The length of list */
    int  capacity;      /* The capacity of list*/
@@ -14,8 +14,8 @@ typedef ORCseqlist* ORCSList;
 
 int ORCseqlistinit(ORCseqlist **list);
 int ORCseqlistfree(ORCseqlist **list);
-int ORCseqlistcopy (ORCseqlist *list, const int *arr, int count);
-int ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src);
+int ORCseqlistcopy(ORCseqlist *list, const int *arr, int count);
+int ORCseqlistmerge(ORCseqlist *des, const ORCseqlist* src);
 int ORCseqlistclear(ORCseqlist *list);
 int ORCseqlistinsert(ORCseqlist *list, int index, const int elem);
 int ORCseqlistdelete(ORCseqlist *list, int index, int* e);

@@ -11,14 +11,14 @@ ORCselectsort(int *a,
    for (i = 0; i < len; ++i) {
       min = i;
       for (j = i + 1; j < len; ++j) {
-         if (a[j] < a[min]) {
+         if ( a[j] < a[min] ) {
             min = j;
          }
       }
 
       if ( i != min ) {
-         t = a[i];
-         a[i] = a[min];
+         t      = a[i];
+         a[i]   = a[min];
          a[min] = t;
       }
    }
@@ -34,8 +34,8 @@ ORCbubblesort(int *a,
 
    for (i = 0; i < len; ++i) {
       for (j = i + 1; j < len; ++j) {
-         if (a[j] < a[i]) {
-            t = a[i];
+         if ( a[j] < a[i] ) {
+            t    = a[i];
             a[i] = a[j];
             a[j] = t;
          }

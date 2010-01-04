@@ -50,7 +50,7 @@ ORCstrtrim (char *str)
    size_t n  = 0;
    int i     = 0;
 
-   error = ORCstrlen(str, &n);
+   error = ORCstrlen (str, &n);
    if ( error )  goto TERMINATE;
 
    if ( n > 0 ) {
@@ -90,7 +90,7 @@ ORCstreverse (char *str)
 
 TERMINATE:
    return error;
-}
+} /* End of ORcstreverse */
 
 /*
    ORCstrncpy copy src to des, with length n.

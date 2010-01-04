@@ -23,7 +23,6 @@ ORCseqlistinit (ORCseqlist **list)
    (*list)->capacity = ORCLISTINITSIZE;
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistinit */
 
@@ -53,7 +52,6 @@ ORCseqlistfree (ORCseqlist **list)
    *list = NULL;
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistfree */
 
@@ -75,7 +73,6 @@ ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)
    }
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistcopy*/
 
@@ -101,7 +98,6 @@ ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)
    if ( error )  goto TERMINATE;
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistmerge*/
 
@@ -118,7 +114,6 @@ ORCseqlistclear (ORCseqlist *list)
    }
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistclear*/
 
@@ -164,7 +159,6 @@ ORCseqlistinsert (ORCseqlist *list,
    ++list->length;
 
 TERMINATE:
-
    return error;
 } /* END of ORCseqlistinsert */
 
@@ -197,7 +191,6 @@ ORCseqlistdelete (ORCseqlist *list,
    --list->length;
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistdelete */
 
@@ -219,9 +212,7 @@ ORCseqlistdeleteR(ORCseqlist *list)
    }
 
 TERMINATE:
-
    return error;
-
 } /* End of ORCseqlistdeleteR */
 
 /* Output the list */
@@ -251,7 +242,6 @@ ORCseqlistoutput (ORCseqlist *list)
    printf ("\n\n");
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistoutput */
 
@@ -284,9 +274,8 @@ ORCseqlistsort (ORCseqlist *list,
    }
 
 TERMINATE:
-
    return error;
-}
+} /* End of ORCsqlistsort */
 
 /* Find element in list by customize algorithm, Origin Find by default */
    int
@@ -320,6 +309,6 @@ ORCseqlistfind (ORCseqlist *list,
    }
 
 TERMINATE:
-
    return error;
 } /* End of ORCseqlistfind */
+

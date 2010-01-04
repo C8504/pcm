@@ -4,14 +4,14 @@ int
 ORCfilecreate (ORCfile **fp) {
    int error = 0;
 
-   *fp = malloc(sizeof **fp);
+   *fp = malloc (sizeof **fp);
    if ( *fp == NULL ) {
       error = ORCERRNOMEMORY;
       goto TERMINATE;
    }
 
    (*fp)->p       = NULL;
-   error = ORCstrncpy((*fp)->name, "", sizeof (*fp)->name + 1);
+   error = ORCstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
    if ( error )  goto TERMINATE;
    (*fp)->nlines  = 0L;
    (*fp)->nchars  = 0L;
@@ -64,6 +64,7 @@ ORCfileopen (ORCfile *fp, const char *name){
          if ( error )  goto TERMINATE;
       }
    }
+
 TERMINATE:
    return error;
 } /* End of ORCfileopen */
@@ -119,7 +120,7 @@ ORCfilegetinfo (ORCfile *fp){
 
 TERMINATE:
    return error;
-} /* ORCfilepgetinfo*/
+} /* End of ORCfilepgetinfo*/
 
    int
 ORCfilegetline (ORCfile *fp,

@@ -17,7 +17,7 @@ int main(void)
    error = ORCseqlistinit (&mylist);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistoutput(&mylist);
+   error = ORCseqlistoutput(mylist);
    if ( error )  goto TERMINATE;
 
    printf ("free my list\n");

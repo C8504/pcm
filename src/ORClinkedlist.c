@@ -4,8 +4,8 @@
    void
 ORCnodefree (ORClinkednode **node)
 {
-   if ( *node != NULL) {
-      if ( (*node)->elem != NULL) {
+   if ( *node != NULL ) {
+      if ( (*node)->elem != NULL ) {
          free ((*node)->elem);
          (*node)->elem = NULL;
       }
@@ -29,12 +29,12 @@ ORCnodeallocandinit (ORClinkednode **node,
    if ( elem != NULL ) {
       size_t ssize = 0;
       error = ORCstrlen (elem, &ssize);
-      if ( error ) goto TERMINATE;
+      if ( error )  goto TERMINATE;
       ++ssize;
 
       (*node)->elem = malloc (ssize);
       //memset ((*node)->elem, '\0', ssize);
-      if (NULL == (*node)->elem) {
+      if ( NULL == (*node)->elem ) {
          // free *node if alloc elem failed.
          free (*node);
          *node = NULL;
@@ -56,9 +56,9 @@ ORCnodeallocandinit (ORClinkednode **node,
    (*node)->prev = NULL;
 
 TERMINATE:
-
    return error;
-}
+} /* End of ORCnodeallocandinit */
+
    int
 ORClinkedlistinit (ORClinkedlist **list)
 {
@@ -86,7 +86,7 @@ ORClinkedlistfree (ORClinkedlist **list)
    int error = 0;
    ORClinkednode *oldp = NULL;
 
-   while ( (*list)->first != NULL ) {
+   while ((*list)->first != NULL) {
       oldp = (*list)->first;
       (*list)->first = (*list)->first->next;
       ORCnodefree (&oldp);
@@ -108,7 +108,7 @@ ORClinkedlistappend (ORClinkedlist *list,
    if ( error )  goto TERMINATE;
 
    if ( list->first == NULL &&
-         list->last  == NULL    ) {
+         list->last  == NULL  ) {
       list->last = list->first = newnode;
    }
    else {
@@ -173,11 +173,10 @@ ORClinkedlistinsert (ORClinkedlist *list,
       }
    }
 
-
 TERMINATE:
-
    return error;
-}
+} /* End of ORClinkedlistinsert */
+
    int
 ORClinkedlistoutput (ORClinkedlist *list,
       const char* sp)
@@ -211,7 +210,6 @@ ORClinkedlistoutput (ORClinkedlist *list,
    }
 
 TERMINATE:
-
    return error;
 } /* End of ORClinkedlistoutput */
 
@@ -226,7 +224,6 @@ ORClinkedlistclear (ORClinkedlist *list)
    }
 
 TERMINATE:
-
    return error;
 } /* End of ORClinkedlistclear */
 
@@ -238,7 +235,7 @@ ORClinkedlistpop (ORClinkedlist *list,
    int error = 0;
    ORClinkednode *p = NULL;
 
-   if ( type == ORCPOPQUEUE) {
+   if ( type == ORCPOPQUEUE ) {
       if ( list->first != NULL ) {
          p = list->first;
 
@@ -285,19 +282,20 @@ ORClinkedlistpop (ORClinkedlist *list,
    free (p);
 
 TERMINATE:
-
    return error;
 } /* End of ORClinkedlistpop */
+
    int
 ORClinkedlistlength(ORClinkedlist *list)
 {
    int length = 0;
    ORClinkednode *p = list->first;
 
-   while ( p != NULL) {
+   while (p != NULL) {
       ++length;
       p = p->next;
    }
 
    return length;
 } /* END of ORClinkedlistlength */
+

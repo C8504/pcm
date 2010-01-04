@@ -15,7 +15,8 @@ main ()
 
    /*    error = ORCfileopen(fp, "c:\\orc\\data\\git.txt"); */
    /*    error = ORCfileopen(fp, "c:\\orc\\data\\01.mps"); */
-   error = ORCfileopen(fp, "makefile");
+   /*    error = ORCfileopen(fp, "makefile"); */
+   error = ORCfileopen(fp, "c:\\orc\\data\\questions.txt");
    /*    error = ORCfileopen(fp, argv[1]); */
    if ( error )  goto TERMINATE;
 

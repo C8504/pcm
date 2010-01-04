@@ -10,8 +10,8 @@ ErrorMap errorMap[] = {
    {ORCERRNOMEMORY,                "Out of memory "},
    {ORCERRNULLPOINTER,             "Null pointer for required data "},
    {ORCERRNOTVALIDINDEX,           "Not valid index"},
-   {ORCERRELEMENTNOTFOUND,        "Element not found"},
+   {ORCERRELEMENTNOTFOUND,         "Element not found"},
    {ORCERREMPTYLIST,               "Empty list"},
-   {ORCERRNOTSTACKANDQUEUE,      "Can not use pop in stack and queue"},
+   {ORCERRNOTSTACKANDQUEUE,        "Can not use pop in stack and queue"},
 };
 #endif
