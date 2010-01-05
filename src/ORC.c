@@ -14,8 +14,9 @@ ORCcheckerror (int error) {
       }
    }
    else if ( error != 0 ) {
-      printf ("errno = %d, ORC Error(by system function calling): %s\n", 
-            error, strerror (error));
+/*       printf ("errno = %d, ORC Error(by system function calling): %s\n",  */
+/*             error, strerror (error)); */
+      perror("ORC Error(by system function calling) ");
    }
 
 } /* End of ORCcheckerror*/
