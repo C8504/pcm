@@ -56,6 +56,10 @@ ORCbubblesort	include/ORCsort.h	/^void ORCbubblesort(int *a, int len);$/;"	p	sig
 ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f	signature:(int *a, int len)
 ORCcheckerror	include/ORC.h	/^void ORCcheckerror (int error);$/;"	p	signature:(int error)
 ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f	signature:(int error)
+ORCdarrayfree	include/ORC.h	/^void   ORCdarrayfree (void **arr);$/;"	p	signature:(void **arr)
+ORCdarrayfree	src/ORC.c	/^ORCdarrayfree (void **arr)$/;"	f	signature:(void **arr)
+ORCdarraynew	include/ORC.h	/^void** ORCdarraynew (int row, int col, int size);$/;"	p	signature:(int row, int col, int size)
+ORCdarraynew	src/ORC.c	/^ORCdarraynew (int row, int col, int size)$/;"	f	signature:(int row, int col, int size)
 ORCdelcharofstring	include/ORCstring.h	/^int ORCdelcharofstring(char * str, int c);$/;"	p	signature:(char * str, int c)
 ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f	signature:(char * str, int c)
 ORCfile	include/ORCfile.h	/^} ORCfile;$/;"	t	typeref:struct:__anon2
@@ -148,9 +152,11 @@ elemp	include/ORCseqlist.h	/^   int *elemp;     \/* The basic address of list *\
 error	include/ORCerrormap.h	/^   int        error;$/;"	m	struct:__anon1
 errorMap	include/ORCerrormap.h	/^ErrorMap errorMap[] = {$/;"	v
 first	include/ORClinkedlist.h	/^    struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
+floatval	test/union.c	/^      float floatval;$/;"	m	struct:u::__anon6	file:
 fun	test/cast.cpp	/^void fun(Base* base)$/;"	f	signature:(Base* base)
 inout	include/inout.h	/^int inout(); $/;"	p	signature:()
 inout	src/inout.c	/^int inout()$/;"	f
+intval	test/union.c	/^      int intval;$/;"	m	struct:u::__anon5	file:
 keyboard	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 last	include/ORClinkedlist.h	/^    struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 length	include/ORCseqlist.h	/^   int  length;        \/* The length of list *\/$/;"	m	struct:__anon3
@@ -159,6 +165,8 @@ m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived	signature:()
 main	test/cast.cpp	/^int main()$/;"	f	signature:()
 main	test/check_bounds.c	/^int main(void)$/;"	f	signature:(void)
 main	test/enum.c	/^int main(void)$/;"	f	signature:(void)
+main	test/macro.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_ORC.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_ORCfile.c	/^main ()$/;"	f
 main	test/test_ORCmath.c	/^int main (void)$/;"	f	signature:(void)
 main	test/test_ORCstring.c	/^int main (void)$/;"	f	signature:(void)
@@ -172,6 +180,8 @@ main	test/test_sq_inout.c	/^main (void)$/;"	f	signature:(void)
 main	test/test_sq_insert.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_sq_merge.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f	signature:(void)
+main	test/union.c	/^int main(void)$/;"	f	signature:(void)
+main	test/void.c	/^int main(void)$/;"	f	signature:(void)
 mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 name	include/ORCfile.h	/^   char name[ORCFILENAME];$/;"	m	struct:__anon2
 nchars	include/ORCfile.h	/^   long long nchars;$/;"	m	struct:__anon2
@@ -182,7 +192,14 @@ nwords	include/ORCfile.h	/^   long long nwords;$/;"	m	struct:__anon2
 p	include/ORCfile.h	/^   FILE *p;$/;"	m	struct:__anon2
 prev	include/ORClinkedlist.h	/^    struct ORClinkednode *prev;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
 printer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
+s	test/union.c	/^   } s;$/;"	m	union:u	typeref:struct:u::__anon4	file:
 screen	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
+sf	test/union.c	/^   } sf;$/;"	m	union:u	typeref:struct:u::__anon6	file:
+si	test/union.c	/^   } si;$/;"	m	union:u	typeref:struct:u::__anon5	file:
 str	include/ORCerrormap.h	/^   const char *str;$/;"	m	struct:__anon1
 testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
 testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f	signature:(void)
+type	test/union.c	/^      int type;$/;"	m	struct:u::__anon4	file:
+type	test/union.c	/^      int type;$/;"	m	struct:u::__anon5	file:
+type	test/union.c	/^      int type;$/;"	m	struct:u::__anon6	file:
+u	test/union.c	/^union u{$/;"	u	file:

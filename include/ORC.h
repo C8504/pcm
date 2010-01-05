@@ -9,4 +9,6 @@
 #include "ORCerrormap.h"
 void ORCcheckerror (int error);
 void ORCswapchar (char *arr, int i, int j);
+void** ORCdarraynew (int row, int col, int size);
+void   ORCdarrayfree (void **arr);
 #endif

@@ -29,7 +29,8 @@ EXE=test_link_init_and_free$(E)\
          test_sq_sort_and_find$(E)\
          test_ORCstring$(E)\
          test_ORCmath$(E)\
-         test_ORCfile$(E)
+         test_ORCfile$(E)\
+         test_ORC$(E)
 CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\
@@ -43,7 +44,8 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_sq_sort_and_find$(C)\
           $(TESTDIR)test_ORCstring$(C)\
           $(TESTDIR)test_ORCmath$(C)\
-          $(TESTDIR)test_ORCfile$(C)
+          $(TESTDIR)test_ORCfile$(C)\
+          $(TESTDIR)test_ORC$(C)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
@@ -58,6 +60,7 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_sq_sort_and_find$(LOG)\
          test_ORCstring$(LOG)\
          test_ORCmath$(LOG)\
-         test_ORCfile$(LOG)
+         test_ORCfile$(LOG)\
+         test_ORC$(LOG)
 
 include makefile.common
