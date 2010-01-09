@@ -17,10 +17,10 @@ help:
 	)
 
 compile =                                                    \
-         $(CCOMPILE) -g -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
+         $(CCOMPILE) -pg -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
          -o $(1)$(E);
 test =                                                        \
-         $(1)$(E) > $(1)$(LOG);                               \
+         ./$(1)$(E) > $(1)$(LOG);                               \
          #cat $(1)$(LOG)
 tags:
 	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
@@ -43,7 +43,7 @@ splint: $(CSRC) $(CTEST)
 testclean:
 	@rm -f  *$(LOG)
 clean: testclean
-	@rm -f *$(E) splint *.stackdump
+	@rm -f test_* splint *.stackdump
 # C files
 test_link_init_and_free$(E): $(CSRC) $(TESTDIR)test_link_init_and_free$(C)
 	$(call compile,test_link_init_and_free)
@@ -65,10 +65,10 @@ test_link_readfile$(E): $(CSRC) $(TESTDIR)test_link_readfile$(C)
 test_link_readfile$(LOG): test_link_readfile$(E)
 	$(call test,test_link_readfile)
 
-check_bounds$(E): $(CSRC) $(TESTDIR)check_bounds$(C)
-	$(call compile,check_bounds)
-check_bounds$(LOG): check_bounds$(E)
-	$(call test,check_bounds)
+test_check_bounds$(E): $(CSRC) $(TESTDIR)test_check_bounds$(C)
+	$(call compile,test_check_bounds)
+test_check_bounds$(LOG): test_check_bounds$(E)
+	$(call test,test_check_bounds)
 
 test_sq_inout$(E): $(CSRC) $(TESTDIR)test_sq_inout$(C)
 	$(call compile,test_sq_inout)

@@ -5,8 +5,8 @@ int main(void)
    int **p;
    int i = 0;
    int j = 0;
-   int nrows = 10;
-   int ncols = 10;
+   size_t nrows = 10;
+   size_t ncols = 10;
 
    p = (int **)ORCdarraynew(nrows, ncols, sizeof(int));
   

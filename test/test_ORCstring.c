@@ -87,12 +87,12 @@ int main (void)
    if ( error )  goto TERMINATE;
    error = ORCdelcharofstring(str, 'p');
    if ( error )  goto TERMINATE;
-   printf (str);
+   printf ("%s",str);
    printf ("\n");
 
    error = ORCdelcharofstring(str, 't');
    if ( error )  goto TERMINATE;
-   printf (str);
+   printf ("%s", str);
    printf ("\n");
 
    error = ORCstrlen (str, &len);
@@ -114,7 +114,7 @@ int main (void)
 
    error = ORCdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
-   printf (str);
+   printf ("%s",str);
    printf ("\n");
 
 TERMINATE:

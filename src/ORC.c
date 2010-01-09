@@ -33,16 +33,18 @@ ORCswapchar (char* arr,
 }
 
 void**
-ORCdarraynew (int row, int col, int size)
+ORCdarraynew (size_t row, size_t col, size_t size)
 {
    void **arr;
 
-   arr = (void **) malloc (sizeof(void *) * row + size * row * col);
+   arr = malloc (sizeof(*arr) * row + size * row * col);
+
    if ( arr != NULL ) {
       void *head;
 
-      head = (void *) arr + sizeof(void *) * row;
-      memset (arr, 0, sizeof(void *) * row + size * row * col);
+      head = (void *) arr + sizeof(*arr) * row;
+      memset (arr, 0, sizeof(*arr) * row + size * row * col);
+
       while (row--) {
          arr[row] = head + size * row * col;
       }
@@ -54,8 +56,6 @@ ORCdarraynew (int row, int col, int size)
 void
 ORCdarrayfree (void **arr)
 {
-   if ( arr != NULL ) {
-      free (arr);
-   }
+   free (arr);
 } /* End of ORCdarrayfree*/
 

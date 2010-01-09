@@ -79,10 +79,10 @@ ORCfilestatistics (ORCfile *fp)
       goto TERMINATE;
    }
    printf ("File name: %s\n", fp->name);
-   printf ("There are %ld lines\n", fp->nlines);
-   printf ("There are %ld words\n", fp->nwords);
-   printf ("There are %ld chars\n", fp->nchars);
-   printf ("There are %ld digits\n", fp->ndigits);
+   printf ("There are %lld lines\n", fp->nlines);
+   printf ("There are %lld words\n", fp->nwords);
+   printf ("There are %lld chars\n", fp->nchars);
+   printf ("There are %lld digits\n", fp->ndigits);
 
 TERMINATE:
    return error;

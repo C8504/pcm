@@ -1,6 +1,6 @@
 CCOMPILE=gcc
 CPPCOMPILE=g++
-E=.exe
+E=
 C=.c
 CPP=.cpp
 INCLUDE=../include/
@@ -20,7 +20,7 @@ EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
          test_link_readfile$(E)\
-         check_bounds$(E)\
+         test_check_bounds$(E)\
          test_sq_inout$(E)\
          test_sq_init_and_free$(E)\
          test_sq_delete$(E)\
@@ -35,7 +35,7 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\
           $(TESTDIR)test_link_readfile$(C)\
-          $(TESTDIR)check_bounds$(C)\
+          $(TESTDIR)test_check_bounds$(C)\
           $(TESTDIR)test_sq_inout$(C)\
           $(TESTDIR)test_sq_init_and_free$(C)\
           $(TESTDIR)test_sq_delete$(C)\
@@ -51,7 +51,7 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
          test_link_many_element$(LOG)\
          test_link_readfile$(LOG)\
-         check_bounds$(LOG)\
+         test_check_bounds$(LOG)\
          test_sq_inout$(LOG)\
          test_sq_init_and_free$(LOG)\
          test_sq_delete$(LOG)\
