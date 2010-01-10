@@ -9,7 +9,7 @@ int main(void)
    ORClinkedlist *mylist1 = NULL;
    ORClinkedlist *mylist2 = NULL;
 
-   fp = fopen ("..\\README", "r");
+   fp = fopen ("../data/git.txt", "r");
    if ( fp == NULL)  {
       printf ("ORC Error: fopen error!\n");
       goto TERMINATE;

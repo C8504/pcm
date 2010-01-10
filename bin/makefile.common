@@ -20,7 +20,9 @@ compile =                                                    \
          $(CCOMPILE) -pg -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
          -o $(1)$(E);
 test =                                                        \
-         ./$(1)$(E) > $(1)$(LOG);                               \
+         if test -e gmon.out; then rm gmon.out; fi; \
+         ./$(1)$(E) > $(1)$(LOG);                \
+			gprof $(1)$(E) gmon.out > $(1).profile; 
          #cat $(1)$(LOG)
 tags:
 	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
@@ -43,7 +45,7 @@ splint: $(CSRC) $(CTEST)
 testclean:
 	@rm -f  *$(LOG)
 clean: testclean
-	@rm -f test_* splint *.stackdump
+	@rm -f error gmon.out test_* splint *.stackdump
 # C files
 test_link_init_and_free$(E): $(CSRC) $(TESTDIR)test_link_init_and_free$(C)
 	$(call compile,test_link_init_and_free)
