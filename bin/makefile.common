@@ -122,6 +122,11 @@ test_ORC$(E): $(CSRC) $(TESTDIR)test_ORC$(C)
 test_ORC$(LOG): test_ORC$(E)
 	$(call test,test_ORC)
 
+test_ORCstack$(E): $(CSRC) $(TESTDIR)test_ORCstack$(C)
+	$(call compile,test_ORCstack)
+test_ORCstack$(LOG): test_ORCstack$(E)
+	$(call test, test_ORCstack)
+
 # C++ files
 cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)
 	$(call cppcompile,cast)

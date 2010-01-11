@@ -24,6 +24,7 @@ H_LINKEDLIST	include/ORClinkedlist.h	2;"	d
 H_ORC	include/ORC.h	2;"	d
 H_ORCFILE	include/ORCfile.h	2;"	d
 H_ORCMATH	include/ORCmath.h	2;"	d
+H_ORCSTACK	include/ORCstack.h	2;"	d
 H_ORCSTRING	include/ORCstring.h	2;"	d
 H_SEQLIST	include/ORCseqlist.h	2;"	d
 H_SORT	include/ORCsort.h	2;"	d
@@ -133,6 +134,17 @@ ORCseqlistoutput	include/ORCseqlist.h	/^   int ORCseqlistoutput(ORCseqlist *list
 ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f	signature:(ORCseqlist *list)
 ORCseqlistsort	include/ORCseqlist.h	/^   int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);$/;"	p	signature:(ORCseqlist *list, int length, enum ORCSORTALG alg)
 ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f	signature:(ORCseqlist *list, int length, enum ORCSORTALG alg)
+ORCstack	include/ORCstack.h	/^   } ORCstack;$/;"	t	typeref:struct:__anon7
+ORCstackcreate	include/ORCstack.h	/^   int   ORCstackcreate  (ORCstack **sp, size_t size);$/;"	p	signature:(ORCstack **sp, size_t size)
+ORCstackcreate	src/ORCstack.c	/^ORCstackcreate (ORCstack **sp, size_t size){$/;"	f	signature:(ORCstack **sp, size_t size)
+ORCstackfree	include/ORCstack.h	/^   void  ORCstackfree    (ORCstack **sp);$/;"	p	signature:(ORCstack **sp)
+ORCstackfree	src/ORCstack.c	/^ORCstackfree (ORCstack **sp)$/;"	f	signature:(ORCstack **sp)
+ORCstackisempty	include/ORCstack.h	/^   int   ORCstackisempty (ORCstack *s);$/;"	p	signature:(ORCstack *s)
+ORCstackisempty	src/ORCstack.c	/^ORCstackisempty (ORCstack *s)$/;"	f	signature:(ORCstack *s)
+ORCstackpop	include/ORCstack.h	/^   void* ORCstackpop    (ORCstack *s);$/;"	p	signature:(ORCstack *s)
+ORCstackpop	src/ORCstack.c	/^ORCstackpop (ORCstack *s)$/;"	f	signature:(ORCstack *s)
+ORCstackpush	include/ORCstack.h	/^   int   ORCstackpush    (ORCstack *s, void *elem);$/;"	p	signature:(ORCstack *s, void *elem)
+ORCstackpush	src/ORCstack.c	/^ORCstackpush (ORCstack *s, void *elem)$/;"	f	signature:(ORCstack *s, void *elem)
 ORCstrblkstoblk	include/ORCstring.h	/^   int ORCstrblkstoblk(char *str);$/;"	p	signature:(char *str)
 ORCstrblkstoblk	src/ORCstring.c	/^ORCstrblkstoblk (char *str) {$/;"	f	signature:(char *str)
 ORCstreverse	include/ORCstring.h	/^   int ORCstreverse(char *str);$/;"	p	signature:(char *str)
@@ -151,6 +163,7 @@ TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 capacity	include/ORCseqlist.h	/^      int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon6
 computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:
 countofchar	include/ORCfile.h	/^      long long countofchar[ORCCHAR];$/;"	m	struct:__anon5
+data	include/ORCstack.h	/^      void   **data;$/;"	m	struct:__anon7
 elem	include/ORClinkedlist.h	/^      char               *elem;$/;"	m	struct:ORClinkednode
 elemp	include/ORCseqlist.h	/^      int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon6
 error	include/ORCerrormap.h	/^      int        error;$/;"	m	struct:__anon4
@@ -174,6 +187,7 @@ main	test/terminate.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_ORC.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_ORCfile.c	/^main ()$/;"	f
 main	test/test_ORCmath.c	/^int main (void)$/;"	f	signature:(void)
+main	test/test_ORCstack.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_ORCstring.c	/^int main (void)$/;"	f	signature:(void)
 main	test/test_check_bounds.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_link_init_and_free.c	/^int main(void)$/;"	f	signature:(void)
@@ -203,9 +217,11 @@ s	test/union.c	/^   } s;$/;"	m	union:u	typeref:struct:u::__anon1	file:
 screen	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 sf	test/union.c	/^   } sf;$/;"	m	union:u	typeref:struct:u::__anon3	file:
 si	test/union.c	/^   } si;$/;"	m	union:u	typeref:struct:u::__anon2	file:
+size	include/ORCstack.h	/^      size_t size;$/;"	m	struct:__anon7
 str	include/ORCerrormap.h	/^      const char *str;$/;"	m	struct:__anon4
 testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
 testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f	signature:(void)
+top	include/ORCstack.h	/^      int    top;$/;"	m	struct:__anon7
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon1	file:
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon2	file:
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon3	file:

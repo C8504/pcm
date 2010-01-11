@@ -14,7 +14,8 @@ CSRC=../src/ORClinkedlist$(C)\
           ../src/ORC$(C)\
           ../src/ORCstring$(C)\
           ../src/ORCmath$(C)\
-          ../src/ORCfile$(C)
+          ../src/ORCfile$(C)\
+			 ../src/ORCstack$(C)
 EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
@@ -29,7 +30,8 @@ EXE=test_link_init_and_free$(E)\
          test_ORCstring$(E)\
          test_ORCmath$(E)\
          test_ORCfile$(E)\
-         test_ORC$(E)
+         test_ORC$(E)\
+			test_ORCstack$(E)
 CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\
@@ -44,7 +46,8 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_ORCstring$(C)\
           $(TESTDIR)test_ORCmath$(C)\
           $(TESTDIR)test_ORCfile$(C)\
-          $(TESTDIR)test_ORC$(C)
+          $(TESTDIR)test_ORC$(C)\
+			 $(TESTDIR)test_ORCstack$(c)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
@@ -60,6 +63,7 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_ORCstring$(LOG)\
          test_ORCmath$(LOG)\
          test_ORCfile$(LOG)\
-         test_ORC$(LOG)
+         test_ORC$(LOG)\
+			test_ORCstack$(LOG)
 
 include makefile.common
