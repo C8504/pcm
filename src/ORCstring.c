@@ -13,8 +13,9 @@ ORCdelcharofstring (char * str,
    }
    else {
       for (i = 0, j = 0; str[i] != '\0'; ++i) {
-         if ( str[i] != c )
+         if ( str[i] != c ) {
             str[j++] = str[i];
+         }
       }
       str[j] = '\0';
    }
@@ -165,4 +166,25 @@ ORCstrncat (char *des,
 TERMINATE:
    return error;
 } /* End of ORCstrncat function*/
+
+int
+ORCstrblkstoblk (char *str) {
+   int error = 0;
+   int lastc = 'a';
+   int i = 0;
+   int j = 0;
+
+   while (str[i] != '\0') {
+      if ( str[i] != ' ' ||
+          lastc != ' '   ) {
+         str[j++] = str[i];
+      }
+      lastc = str[i];
+      ++i;
+   }
+   str[j] = '\0';
+
+TERMINATE:
+   return error;
+} /* End of ORCstrlbkstoblk*/
 

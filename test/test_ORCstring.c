@@ -112,6 +112,17 @@ int main (void)
    if ( error )  goto TERMINATE;
    printf ("str = %s, len = %d\n", str,len);
 
+   // test ORCstrblkstoblk
+   char bstr[] = "  test  ORCstrblkstoblk  !";
+   /*    char bstr[] = "ab      "; */
+   /*    char bstr[] = "        ab      "; */
+   /*    char bstr[] = "        a    b      "; */
+   error = ORCstrblkstoblk (bstr);
+   if ( error )  goto TERMINATE;
+   error = ORCstrlen (bstr, &len);
+   if ( error )  goto TERMINATE;
+   printf ("bstr = %s, len = %d\n", bstr,len);
+
    error = ORCdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
    printf ("%s",str);

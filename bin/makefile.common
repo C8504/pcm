@@ -17,7 +17,7 @@ help:
 	)
 
 compile =                                                    \
-         $(CCOMPILE) -pg -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
+         $(CCOMPILE) -g -pg -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
          -o $(1)$(E);
 test =                                                        \
          if test -e gmon.out; then rm gmon.out; fi; \
