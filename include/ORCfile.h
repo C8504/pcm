@@ -5,7 +5,6 @@
 extern "C" {
 #endif
 #include "ORC.h"
-
    typedef struct {
       FILE *p;
       char name[ORCFILENAME];
@@ -13,6 +12,7 @@ extern "C" {
       long long nwords;
       long long nchars;
       long long ndigits;
+      long long countofchar[ORCCHAR];
    } ORCfile;
 
    int ORCfilecreate(ORCfile **fp);

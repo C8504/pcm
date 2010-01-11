@@ -12,6 +12,7 @@ extern "C" {
 
 #define ORCFILEMAXLINE         1000
 #define ORCFILENAME            20
+#define ORCCHAR                128 
 
    // ERROR CODE
    enum ORCERR {

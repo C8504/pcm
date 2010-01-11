@@ -33,6 +33,7 @@ LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
 ORCALGORIGINFIND	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
 ORCALGSORTBUBBLE	include/ORCconstant.h	/^      ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
 ORCALGSORTSELECT	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	e	enum:ORCSORTALG
+ORCCHAR	include/ORCconstant.h	15;"	d
 ORCERR	include/ORCconstant.h	/^   enum ORCERR {$/;"	g
 ORCERRELEMENTNOTFOUND	include/ORCconstant.h	/^      ORCERRELEMENTNOTFOUND,$/;"	e	enum:ORCERR
 ORCERREMPTYLIST	include/ORCconstant.h	/^      ORCERREMPTYLIST,$/;"	e	enum:ORCERR
@@ -132,6 +133,8 @@ ORCseqlistoutput	include/ORCseqlist.h	/^   int ORCseqlistoutput(ORCseqlist *list
 ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f	signature:(ORCseqlist *list)
 ORCseqlistsort	include/ORCseqlist.h	/^   int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);$/;"	p	signature:(ORCseqlist *list, int length, enum ORCSORTALG alg)
 ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f	signature:(ORCseqlist *list, int length, enum ORCSORTALG alg)
+ORCstrblkstoblk	include/ORCstring.h	/^   int ORCstrblkstoblk(char *str);$/;"	p	signature:(char *str)
+ORCstrblkstoblk	src/ORCstring.c	/^ORCstrblkstoblk (char *str) {$/;"	f	signature:(char *str)
 ORCstreverse	include/ORCstring.h	/^   int ORCstreverse(char *str);$/;"	p	signature:(char *str)
 ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str)$/;"	f	signature:(char *str)
 ORCstrlen	include/ORCstring.h	/^   int ORCstrlen(const char *str, size_t *len);$/;"	p	signature:(const char *str, size_t *len)
@@ -147,6 +150,7 @@ ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f	signature:(char* arr, int 
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 capacity	include/ORCseqlist.h	/^      int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon6
 computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:
+countofchar	include/ORCfile.h	/^      long long countofchar[ORCCHAR];$/;"	m	struct:__anon5
 elem	include/ORClinkedlist.h	/^      char               *elem;$/;"	m	struct:ORClinkednode
 elemp	include/ORCseqlist.h	/^      int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon6
 error	include/ORCerrormap.h	/^      int        error;$/;"	m	struct:__anon4
@@ -182,6 +186,7 @@ main	test/test_sq_inout.c	/^main (void)$/;"	f	signature:(void)
 main	test/test_sq_insert.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_sq_merge.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f	signature:(void)
+main	test/unicode.c	/^int main()$/;"	f
 main	test/union.c	/^int main(void)$/;"	f	signature:(void)
 main	test/void.c	/^int main(void)$/;"	f	signature:(void)
 mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:

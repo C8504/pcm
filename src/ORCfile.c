@@ -2,6 +2,7 @@
 
 int
 ORCfilecreate (ORCfile **fp) {
+   int i     = 0;
    int error = 0;
 
    *fp = malloc (sizeof **fp);
@@ -13,10 +14,14 @@ ORCfilecreate (ORCfile **fp) {
    (*fp)->p       = NULL;
    error = ORCstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
    if ( error )  goto TERMINATE;
-   (*fp)->nlines  = 0L;
-   (*fp)->nchars  = 0L;
-   (*fp)->ndigits = 0L;
-   (*fp)->nwords  = 0L;
+   (*fp)->nlines  = 0LL;
+   (*fp)->nchars  = 0LL;
+   (*fp)->ndigits = 0LL;
+   (*fp)->nwords  = 0LL;
+
+   for (i = 0; i < ORCCHAR; ++i) {
+      (*fp)->countofchar[i] = 0;
+   }
 
 TERMINATE:
    return error;
@@ -73,8 +78,8 @@ TERMINATE:
 ORCfilestatistics (ORCfile *fp)
 {
    int error = 0;
-
-   if ( fp == NULL) {
+   int i     = 0;
+   if ( fp == NULL ) {
       error = ORCERRNULLPOINTER;
       goto TERMINATE;
    }
@@ -83,6 +88,15 @@ ORCfilestatistics (ORCfile *fp)
    printf ("There are %lld words\n", fp->nwords);
    printf ("There are %lld chars\n", fp->nchars);
    printf ("There are %lld digits\n", fp->ndigits);
+
+   for (i = 0; i < ORCCHAR; ++i) {
+      if (isprint(i)) {
+         putchar((char)(i));
+         putchar(':');
+         printf ("%lld", fp->countofchar[i]);
+         putchar('\n');
+      }
+   }
 
 TERMINATE:
    return error;
@@ -96,6 +110,7 @@ ORCfilegetinfo (ORCfile *fp){
 
    while ((c = getc(fp->p)) != EOF) {
       ++fp->nchars;
+      ++fp->countofchar[c];
 
       if ( '\n' == c ) {
          ++fp->nlines;

@@ -6,7 +6,6 @@ CPP=.cpp
 INCLUDE=../include/
 TESTDIR=../test/
 LOG=.log
-
 CSRC=../src/ORClinkedlist$(C)\
           ../src/inout$(C)\
           ../src/ORCfind$(C)\
