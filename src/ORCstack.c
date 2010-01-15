@@ -35,11 +35,22 @@ TERMINATE:
    return error;
 } /* End of ORCstackcreate */
 
+/* freefunc is used to free the dynamic momery which
+ * in (*sp)->data pointers array, if the pointer in (*sp)->data
+ * was allocated dynamicly, otherwise pass NULL to freefunc*/
    void
-ORCstackfree (ORCstack **sp)
+ORCstackfree (ORCstack **sp, FREEFUNC freefunc)
 {
+   int i = 0;
+
    if ( *sp != NULL ) {
       if ( (*sp)->data != NULL ) {
+         if ( freefunc != NULL ) {
+            for (i = 0; i < (*sp)->top; ++i){
+               (*freefunc)(((*sp)->data[i]));
+               (*sp)->data[i] = NULL;
+            }
+         }
          free ((*sp)->data);
          (*sp)->data = NULL;
       }
@@ -97,8 +108,8 @@ ORCstackpop (ORCstack *s)
 ORCstackisempty (ORCstack *s)
 {
    if( s == NULL || s->top == -1 ){
-      return 1;
+      return TRUE;
    }
-   return 0;
+   return FALSE;
 } /* End of ORCstackisempty */
 

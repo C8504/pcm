@@ -4,16 +4,20 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-   // POP type
+   // POP type in ORCseqlist
    enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};
 
-#define ORCLISTINITSIZE    5
-#define ORCLISTINCREMENT   5
+   #define ORCLISTINITSIZE    5
+   #define ORCLISTINCREMENT   5
 
-#define ORCFILEMAXLINE         1000
-#define ORCFILENAME            20
-#define ORCCHAR                128 
+   #define ORCFILEMAXLINE         1000
+   #define ORCFILENAME            20
+   #define ORCCHAR                128 
 
+   enum BOOL {
+      FALSE,
+      TRUE
+   };
    // ERROR CODE
    enum ORCERR {
       ORCERRSTART = 10000,
@@ -28,8 +32,14 @@ extern "C" {
 
    // Alg
    enum ORCSORTALG {ORCALGSORTSELECT = 80001,
-      ORCALGSORTBUBBLE};
+                    ORCALGSORTBUBBLE};
    enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};
+
+   // function handle
+
+   // free momery
+   typedef void (*FREEFUNC) (void* p);
+
 
 #ifdef __cplusplus
 }

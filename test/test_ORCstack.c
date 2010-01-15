@@ -8,6 +8,9 @@ int main(void)
    float b[5] = {1.0, 3.0, 4.0, 5.0, 2.0};
    char c[5] = {'a', 'b', 'c', 'd', '\0'};
    char *strarr[5] = {"ab", "cd", "ef", "g", "h"};
+   char *dynamicstrarr[5] = {0};
+
+   void *p = NULL;
 
    ORCstack *s = NULL;
 
@@ -16,7 +19,7 @@ int main(void)
    if( error ) {
       goto TERMINATE;
    }
-   
+
    //integer
    printf ("integer stack:\n");
    for (i = 0; i < 5; ++i) {
@@ -31,7 +34,7 @@ int main(void)
    for (i = 0; i < 5; ++i) {
       printf ("%d is poped\n", *(int*)(ORCstackpop(s)));
    }
-   
+
    if ( ORCstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
@@ -43,7 +46,7 @@ int main(void)
       error = ORCstackpush (s, &b[i]);
       if ( error )  goto TERMINATE;
    }
-   
+
    for (i = 0; i < 5; ++i) {
       printf ("%5.2f", *(float*)s->data[i]);
    }
@@ -64,7 +67,7 @@ int main(void)
       error = ORCstackpush (s, &c[i]);
       if ( error )  goto TERMINATE;
    }
-   
+
    for (i = 0; i < 5; ++i) {
       printf ("%5c", *(char*)s->data[i]);
    }
@@ -77,7 +80,7 @@ int main(void)
    if ( ORCstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
-   
+
    //strarray
    printf ("str array stack:\n");
    for (i = 0; i < 5; ++i) {
@@ -97,9 +100,33 @@ int main(void)
       printf ("stack is empty now!\n");
    }
 
+   //dynamic string array
+   printf ("dynamic string array:\n");
+   for (i = 0; i < 5; ++i) {
+      dynamicstrarr[i] = malloc (sizeof(char*));
+      strcpy(dynamicstrarr[i], strarr[i]);
+   }
+   for (i = 0; i < 5; ++i) {
+      error = ORCstackpush (s, dynamicstrarr[i]);
+      if ( error )  goto TERMINATE;
+   }
+
+   for (i = 0; i < 5; ++i) {
+      printf ("%5s", (char*)s->data[i]);
+   }
+   putchar('\n');
+
+   /*    for (i = 0; i < 5; ++i) { */
+   /*       p = ORCstackpop(s); */
+   /*       printf ("%s is poped\n", (char*)p); */
+   /*       free (p); */
+   /*    } */
+   if ( ORCstackisempty(s) ) {
+      printf ("stack is empty now!\n");
+   }
 
 TERMINATE:
-   ORCstackfree (&s);
+   ORCstackfree (&s, free);
    ORCcheckerror (error);
    return 0;
 }

@@ -13,8 +13,8 @@ extern "C" {
    } ORCstack;
 
    int   ORCstackcreate  (ORCstack **sp, size_t size);
-   void  ORCstackfree    (ORCstack **sp);
-   void* ORCstackpop    (ORCstack *s);
+   void  ORCstackfree    (ORCstack **sp, FREEFUNC freefunc);
+   void* ORCstackpop     (ORCstack *s);
    int   ORCstackpush    (ORCstack *s, void *elem);
    int   ORCstackisempty (ORCstack *s);
 

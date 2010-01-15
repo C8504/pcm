@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.7	//
+BOOL	include/ORCconstant.h	/^   enum BOOL {$/;"	g
 Base	test/cast.cpp	/^class Base$/;"	c	file:
 C	bin/makefile	/^C=.c$/;"	m
 CCOMPILE	bin/makefile	/^CCOMPILE=gcc$/;"	m
@@ -16,6 +17,7 @@ Derived	test/cast.cpp	/^class Derived:public Base$/;"	c	file:
 E	bin/makefile	/^E=$/;"	m
 EXE	bin/makefile	/^EXE=test_link_init_and_free$(E)\\$/;"	m
 ErrorMap	include/ORCerrormap.h	/^   } ErrorMap;$/;"	t	typeref:struct:__anon4
+FALSE	include/ORCconstant.h	/^      FALSE,$/;"	e	enum:BOOL
 H_CONSTANT	include/ORCconstant.h	2;"	d
 H_ERRORMAP	include/ORCerrormap.h	2;"	d
 H_FIND	include/ORCfind.h	2;"	d
@@ -32,7 +34,7 @@ INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
 ORCALGORIGINFIND	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
-ORCALGSORTBUBBLE	include/ORCconstant.h	/^      ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
+ORCALGSORTBUBBLE	include/ORCconstant.h	/^                    ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
 ORCALGSORTSELECT	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	e	enum:ORCSORTALG
 ORCCHAR	include/ORCconstant.h	15;"	d
 ORCERR	include/ORCconstant.h	/^   enum ORCERR {$/;"	g
@@ -160,6 +162,7 @@ ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str)$/;"	f	signature:(char *str)
 ORCswapchar	include/ORC.h	/^   void ORCswapchar (char *arr, int i, int j);$/;"	p	signature:(char *arr, int i, int j)
 ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f	signature:(char* arr, int i, int j)
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
+TRUE	include/ORCconstant.h	/^      TRUE$/;"	e	enum:BOOL
 capacity	include/ORCseqlist.h	/^      int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon6
 computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:
 countofchar	include/ORCfile.h	/^      long long countofchar[ORCCHAR];$/;"	m	struct:__anon5
