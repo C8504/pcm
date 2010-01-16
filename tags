@@ -18,6 +18,7 @@ E	bin/makefile	/^E=$/;"	m
 EXE	bin/makefile	/^EXE=test_link_init_and_free$(E)\\$/;"	m
 ErrorMap	include/ORCerrormap.h	/^   } ErrorMap;$/;"	t	typeref:struct:__anon4
 FALSE	include/ORCconstant.h	/^      FALSE,$/;"	e	enum:BOOL
+FREEFUNC	include/ORCconstant.h	/^   typedef void (*FREEFUNC) (void* p);$/;"	t
 H_CONSTANT	include/ORCconstant.h	2;"	d
 H_ERRORMAP	include/ORCerrormap.h	2;"	d
 H_FIND	include/ORCfind.h	2;"	d
@@ -139,11 +140,11 @@ ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f	signat
 ORCstack	include/ORCstack.h	/^   } ORCstack;$/;"	t	typeref:struct:__anon7
 ORCstackcreate	include/ORCstack.h	/^   int   ORCstackcreate  (ORCstack **sp, size_t size);$/;"	p	signature:(ORCstack **sp, size_t size)
 ORCstackcreate	src/ORCstack.c	/^ORCstackcreate (ORCstack **sp, size_t size){$/;"	f	signature:(ORCstack **sp, size_t size)
-ORCstackfree	include/ORCstack.h	/^   void  ORCstackfree    (ORCstack **sp);$/;"	p	signature:(ORCstack **sp)
-ORCstackfree	src/ORCstack.c	/^ORCstackfree (ORCstack **sp)$/;"	f	signature:(ORCstack **sp)
+ORCstackfree	include/ORCstack.h	/^   void  ORCstackfree    (ORCstack **sp, FREEFUNC freefunc);$/;"	p	signature:(ORCstack **sp, FREEFUNC freefunc)
+ORCstackfree	src/ORCstack.c	/^ORCstackfree (ORCstack **sp, FREEFUNC freefunc)$/;"	f	signature:(ORCstack **sp, FREEFUNC freefunc)
 ORCstackisempty	include/ORCstack.h	/^   int   ORCstackisempty (ORCstack *s);$/;"	p	signature:(ORCstack *s)
 ORCstackisempty	src/ORCstack.c	/^ORCstackisempty (ORCstack *s)$/;"	f	signature:(ORCstack *s)
-ORCstackpop	include/ORCstack.h	/^   void* ORCstackpop    (ORCstack *s);$/;"	p	signature:(ORCstack *s)
+ORCstackpop	include/ORCstack.h	/^   void* ORCstackpop     (ORCstack *s);$/;"	p	signature:(ORCstack *s)
 ORCstackpop	src/ORCstack.c	/^ORCstackpop (ORCstack *s)$/;"	f	signature:(ORCstack *s)
 ORCstackpush	include/ORCstack.h	/^   int   ORCstackpush    (ORCstack *s, void *elem);$/;"	p	signature:(ORCstack *s, void *elem)
 ORCstackpush	src/ORCstack.c	/^ORCstackpush (ORCstack *s, void *elem)$/;"	f	signature:(ORCstack *s, void *elem)
@@ -151,6 +152,8 @@ ORCstrblkstoblk	include/ORCstring.h	/^   int ORCstrblkstoblk(char *str);$/;"	p	s
 ORCstrblkstoblk	src/ORCstring.c	/^ORCstrblkstoblk (char *str) {$/;"	f	signature:(char *str)
 ORCstreverse	include/ORCstring.h	/^   int ORCstreverse(char *str);$/;"	p	signature:(char *str)
 ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str)$/;"	f	signature:(char *str)
+ORCstrindex	include/ORCstring.h	/^   int ORCstrindex(char *str, char* substr, int *index);$/;"	p	signature:(char *str, char* substr, int *index)
+ORCstrindex	src/ORCstring.c	/^ORCstrindex(char *str, char *substr, int *index)$/;"	f	signature:(char *str, char *substr, int *index)
 ORCstrlen	include/ORCstring.h	/^   int ORCstrlen(const char *str, size_t *len);$/;"	p	signature:(const char *str, size_t *len)
 ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f	signature:(const char *str, size_t *len)
 ORCstrncat	include/ORCstring.h	/^   int ORCstrncat(char *des, const char *src, int n);$/;"	p	signature:(char *des, const char *src, int n)
@@ -182,6 +185,8 @@ last	include/ORClinkedlist.h	/^      struct ORClinkednode *last;$/;"	m	struct:OR
 length	include/ORCseqlist.h	/^      int  length;        \/* The length of list *\/$/;"	m	struct:__anon6
 m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base	signature:()
 m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived	signature:()
+main	test/bits.c	/^int main (void)$/;"	f	signature:(void)
+main	test/bits.s	/^main:$/;"	l
 main	test/cast.cpp	/^int main()$/;"	f	signature:()
 main	test/enum.c	/^int main(void)$/;"	f	signature:(void)
 main	test/macro.c	/^int main(void)$/;"	f	signature:(void)

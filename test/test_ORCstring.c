@@ -123,6 +123,15 @@ int main (void)
    if ( error )  goto TERMINATE;
    printf ("bstr = %s, len = %d\n", bstr,len);
 
+   // test ORCstrindex
+   char bigstr[] = "defefgdefk";
+   char substr[] = "def";
+   int index;
+   error = ORCstrindex (bigstr, substr, &index);
+   if ( error )  goto TERMINATE;
+   
+   printf ("The last %s in %s at %d\n", substr, bigstr, index);
+
    error = ORCdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
    printf ("%s",str);

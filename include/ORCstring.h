@@ -14,6 +14,7 @@ extern "C" {
    int ORCstrncat(char *des, const char *src, int n);
    /* Replace blanks with blank in string*/ 
    int ORCstrblkstoblk(char *str);
+   int ORCstrindex(char *str, char* substr, int *index);
 
 #ifdef __cplusplus
 }

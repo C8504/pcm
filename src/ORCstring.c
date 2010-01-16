@@ -176,7 +176,7 @@ ORCstrblkstoblk (char *str) {
 
    while (str[i] != '\0') {
       if ( str[i] != ' ' ||
-          lastc != ' '   ) {
+            lastc != ' '   ) {
          str[j++] = str[i];
       }
       lastc = str[i];
@@ -187,4 +187,32 @@ ORCstrblkstoblk (char *str) {
 TERMINATE:
    return error;
 } /* End of ORCstrlbkstoblk*/
+
+   int
+ORCstrindex(char *str, char *substr, int *index)
+{
+   int error = 0;
+   int i = 0;
+   int j = 0;
+   int k = 0;
+
+   if ( (str    == NULL) ||
+         (substr == NULL)   ) {
+      error = ORCERRNULLPOINTER;
+      goto TERMINATE;
+   }
+
+   *index = -1;
+   for (i = 0; str[i] != '\0'; ++i) {
+      for ( j = i, k = 0; (substr[k] != '\0') && (substr[k] == str[j]); ++j, ++k);
+
+      if ( k > 0 && substr[k] == '\0' ) {
+         *index = i;
+         printf ("%s in %s at %d\n", substr, str, *index);
+      }
+   }
+
+TERMINATE:
+   return error;
+} /* End of ORCstrindex*/
 
