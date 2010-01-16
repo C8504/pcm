@@ -33,7 +33,7 @@ ORCbinfind(int *a,
    int error = 0;
    int mid = 0;
    int low = 0;
-   int high = length;
+   int high = length-1;
    
    error = ORCcheckpointer (a);
    if ( error )  goto TERMINATE;
