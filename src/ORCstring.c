@@ -10,6 +10,7 @@ ORCdelcharofstring (char * str,
    /*    assert (str != NULL); */
    if ( str == NULL ) {
       error = ORCERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
       for (i = 0, j = 0; str[i] != '\0'; ++i) {
@@ -33,6 +34,7 @@ ORCstrlen (const char *str,
 
    if ( str == NULL ) {
       error = ORCERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
       while ( str[i] != '\0')
@@ -52,8 +54,10 @@ ORCstrtrim (char *str)
    int i     = 0;
 
    error = ORCstrlen (str, &n);
-   if ( error )  goto TERMINATE;
-
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
    if ( n > 0 ) {
       for (i = n-1; (i >= 0) && (str[i] == ' ' || str[i] == '\t'); --i);
       if ( i >= -1 ) {
@@ -77,7 +81,10 @@ ORCstreverse (char *str)
    size_t n  = 0;
 
    error = ORCstrlen (str, &n);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    if ( n > 0 ) {
       j = n - 1;
@@ -108,11 +115,15 @@ ORCstrncpy (char       *des,
 
    if ( des == NULL ||
          src == NULL   ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       error = ORCERRNULLPOINTER;
    }
    else {
       error = ORCstrlen (src, &len);
-      if ( error )  goto TERMINATE;
+      if ( error ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
 
       if ( len <= n ) {
          while ((*des++ = *src++) != '\0'){}
@@ -142,10 +153,14 @@ ORCstrncat (char *des,
    if( des == NULL ||
          src == NULL ) {
       error = ORCERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
       error = ORCstrlen (src, &len);
-      if ( error )  goto TERMINATE;
+      if ( error ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
 
       while (*des != '\0') {
          ++des;
@@ -199,6 +214,7 @@ ORCstrindex(char *str, char *substr, int *index)
    if ( (str    == NULL) ||
          (substr == NULL)   ) {
       error = ORCERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 

@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 #include "ORC.h"
-   void ORCbubblesort(int *a, int len);
-   void ORCselectsort(int *a, int len);
+   int ORCbubblesort(int *a, int len);
+   int ORCselectsort(int *a, int len);
 
 #ifdef __cplusplus
 }

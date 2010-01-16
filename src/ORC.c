@@ -59,3 +59,17 @@ ORCdarrayfree (void **arr)
    free (arr);
 } /* End of ORCdarrayfree*/
 
+int 
+ORCcheckpointer(void *p)
+{
+   int error = 0;
+   
+   if ( p == NULL ) {
+      error = ORCERRNULLPOINTER;
+      goto TERMINATE;
+   }
+
+TERMINATE:
+   return error;
+}/* End of ORCcheckpointer*/
+

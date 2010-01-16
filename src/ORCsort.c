@@ -1,13 +1,17 @@
 #include "ORCsort.h"
 
-   void
+   int
 ORCselectsort(int *a,
       int len)
 {
    printf ("CALL ORCselectsort\n");
+   int error = 0;
    int i, j, min;
    int t;
 
+   error = ORCcheckpointer (a);
+   if ( error )  goto TERMINATE;
+   
    for (i = 0; i < len; ++i) {
       min = i;
       for (j = i + 1; j < len; ++j) {
@@ -22,15 +26,22 @@ ORCselectsort(int *a,
          a[min] = t;
       }
    }
+
+TERMINATE:
+   return error;
 } /* End of ORCselectsort*/
 
-   void
+   int
 ORCbubblesort(int *a,
       int len)
 {
    printf ("CALL ORCbubblesort\n");
+   int error = 0;
    int i, j;
    int t;
+   
+   error = ORCcheckpointer (a);
+   if ( error )  goto TERMINATE;
 
    for (i = 0; i < len; ++i) {
       for (j = i + 1; j < len; ++j) {
@@ -41,5 +52,8 @@ ORCbubblesort(int *a,
          }
       }
    }
+
+TERMINATE:
+   return error;
 } /* End of ORCbubblesort*/
 

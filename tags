@@ -34,7 +34,8 @@ H_SORT	include/ORCsort.h	2;"	d
 INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
-ORCALGORIGINFIND	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	e	enum:ORCSEARCHALG
+ORCALGBINFIND	include/ORCconstant.h	/^                      ORCALGBINFIND};$/;"	e	enum:ORCSEARCHALG
+ORCALGORIGINFIND	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,$/;"	e	enum:ORCSEARCHALG
 ORCALGSORTBUBBLE	include/ORCconstant.h	/^                    ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
 ORCALGSORTSELECT	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	e	enum:ORCSORTALG
 ORCCHAR	include/ORCconstant.h	15;"	d
@@ -54,13 +55,17 @@ ORCLISTINITSIZE	include/ORCconstant.h	10;"	d
 ORCPOPQUEUE	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	e	enum:ORCPOPTYPE
 ORCPOPSTACK	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	e	enum:ORCPOPTYPE
 ORCPOPTYPE	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	g
-ORCSEARCHALG	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};$/;"	g
+ORCSEARCHALG	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,$/;"	g
 ORCSList	include/ORCseqlist.h	/^   typedef ORCseqlist* ORCSList;$/;"	t
 ORCSORTALG	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	g
-ORCbubblesort	include/ORCsort.h	/^   void ORCbubblesort(int *a, int len);$/;"	p	signature:(int *a, int len)
+ORCbinfind	include/ORCfind.h	/^   int ORCbinfind (int *a, int length, const int elem, int *index);$/;"	p	signature:(int *a, int length, const int elem, int *index)
+ORCbinfind	src/ORCfind.c	/^ORCbinfind(int *a, $/;"	f	signature:(int *a, int length, const int elem, int *index)
+ORCbubblesort	include/ORCsort.h	/^   int ORCbubblesort(int *a, int len);$/;"	p	signature:(int *a, int len)
 ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f	signature:(int *a, int len)
 ORCcheckerror	include/ORC.h	/^   void ORCcheckerror (int error);$/;"	p	signature:(int error)
 ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f	signature:(int error)
+ORCcheckpointer	include/ORC.h	/^   int    ORCcheckpointer (void *p);$/;"	p	signature:(void *p)
+ORCcheckpointer	src/ORC.c	/^ORCcheckpointer(void *p)$/;"	f	signature:(void *p)
 ORCdarrayfree	include/ORC.h	/^   void   ORCdarrayfree (void **arr);$/;"	p	signature:(void **arr)
 ORCdarrayfree	src/ORC.c	/^ORCdarrayfree (void **arr)$/;"	f	signature:(void **arr)
 ORCdarraynew	include/ORC.h	/^   void** ORCdarraynew (size_t row, size_t col, size_t size);$/;"	p	signature:(size_t row, size_t col, size_t size)
@@ -108,11 +113,11 @@ ORCnodeallocandinit	include/ORClinkedlist.h	/^   int  ORCnodeallocandinit (ORCli
 ORCnodeallocandinit	src/ORClinkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f	signature:(ORClinkednode **node, const char* elem)
 ORCnodefree	include/ORClinkedlist.h	/^   void ORCnodefree           (ORClinkednode **node);$/;"	p	signature:(ORClinkednode **node)
 ORCnodefree	src/ORClinkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f	signature:(ORClinkednode **node)
-ORCoriginfind	include/ORCfind.h	/^   void ORCoriginfind (int *a, int length, const int elem, int* index);$/;"	p	signature:(int *a, int length, const int elem, int* index)
-ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f	signature:(int *a, int length, const int elem, int* index)
+ORCoriginfind	include/ORCfind.h	/^   int ORCoriginfind (int *a, int length, const int elem, int *index);$/;"	p	signature:(int *a, int length, const int elem, int *index)
+ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f	signature:(int *a, int length, const int elem, int *index)
 ORCpower	include/ORCmath.h	/^   int ORCpower(int base, int  n, long long *result);$/;"	p	signature:(int base, int n, long long *result)
 ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f	signature:(int base, int n, long long *result)
-ORCselectsort	include/ORCsort.h	/^   void ORCselectsort(int *a, int len);$/;"	p	signature:(int *a, int len)
+ORCselectsort	include/ORCsort.h	/^   int ORCselectsort(int *a, int len);$/;"	p	signature:(int *a, int len)
 ORCselectsort	src/ORCsort.c	/^ORCselectsort(int *a,$/;"	f	signature:(int *a, int len)
 ORCseqlist	include/ORCseqlist.h	/^   } ORCseqlist;$/;"	t	typeref:struct:__anon6
 ORCseqlistclear	include/ORCseqlist.h	/^   int ORCseqlistclear(ORCseqlist *list);$/;"	p	signature:(ORCseqlist *list)

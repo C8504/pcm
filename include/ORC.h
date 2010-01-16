@@ -17,6 +17,7 @@ extern "C" {
    void ORCswapchar (char *arr, int i, int j);
    void** ORCdarraynew (size_t row, size_t col, size_t size);
    void   ORCdarrayfree (void **arr);
+   int    ORCcheckpointer (void *p);
 
 #ifdef __cplusplus
 }

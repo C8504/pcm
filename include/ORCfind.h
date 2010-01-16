@@ -6,7 +6,8 @@ extern "C" {
 #endif
 
 #include "ORC.h"
-   void ORCoriginfind (int *a, int length, const int elem, int* index);
+   int ORCoriginfind (int *a, int length, const int elem, int *index);
+   int ORCbinfind (int *a, int length, const int elem, int *index);
 
 #ifdef __cplusplus
 }

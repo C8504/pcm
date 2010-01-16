@@ -9,6 +9,7 @@ ORCpower(int base,
 
    if ( n < 0 ) {
       error = ORCERRNOTVALIDINDEX;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
       if ( base == 0 ) {

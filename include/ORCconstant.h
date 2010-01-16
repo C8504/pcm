@@ -33,7 +33,8 @@ extern "C" {
    // Alg
    enum ORCSORTALG {ORCALGSORTSELECT = 80001,
                     ORCALGSORTBUBBLE};
-   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001};
+   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,
+                      ORCALGBINFIND};
 
    // function handle
 

@@ -40,7 +40,7 @@ ORCseqlistfree (ORCseqlist **list)
 
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
-         error = ORCseqlistdelete(*list, 0, &temp);
+         error = ORCseqlistdelete(*list, (*list)->length - 1, &temp);
          if ( error != 0 )  goto TERMINATE;
       }
       free((*list)->elemp);
@@ -109,8 +109,11 @@ ORCseqlistclear (ORCseqlist *list)
    int temp = 0;
 
    while (list->length != 0) {
-      error = ORCseqlistdelete(list, 0, &temp);
-      if ( error != 0 )  goto TERMINATE;
+      error = ORCseqlistdelete(list, list->length - 1, &temp);
+      if ( error != 0 )  {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
    }
 
 TERMINATE:
@@ -264,13 +267,13 @@ ORCseqlistsort (ORCseqlist *list,
 
    // take ORCbubblesort as default alg
    if ( alg == ORCALGSORTSELECT) {
-      ORCselectsort(list->elemp, length);
+      error = ORCselectsort(list->elemp, length);
    }
    else if ( ORCALGSORTBUBBLE ) {
-      ORCbubblesort(list->elemp, list->length);
+      error = ORCbubblesort(list->elemp, list->length);
    }
    else {
-      ORCbubblesort(list->elemp, list->length);
+      error = ORCbubblesort(list->elemp, list->length);
    }
 
 TERMINATE:
@@ -300,12 +303,13 @@ ORCseqlistfind (ORCseqlist *list,
 
    // take ORCoriginfind as default alg
    if ( ORCALGORIGINFIND == alg ) {
-      ORCoriginfind (list->elemp, length, elem, index);
+      error = ORCoriginfind (list->elemp, length, elem, index);
    }
-   /*else if () {
-     }*/
+   else if ( ORCALGBINFIND == alg) {
+      error = ORCbinfind (list->elemp, length, elem, index);
+   }
    else {
-      ORCoriginfind (list->elemp, length, elem, index);
+      error = ORCoriginfind (list->elemp, length, elem, index);
    }
 
 TERMINATE:
