@@ -2,7 +2,7 @@
 
 int main(void)
 {
-   /*    putchar ('?'); */
+   putchar ('?');
 TERMINATE:
    putchar ('!');
 

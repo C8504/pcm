@@ -32,6 +32,7 @@ H_ORCSTRING	include/ORCstring.h	2;"	d
 H_SEQLIST	include/ORCseqlist.h	2;"	d
 H_SORT	include/ORCsort.h	2;"	d
 INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
+INT	test/typedef.c	/^typedef int INT;$/;"	t	file:
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
 ORCALGBINFIND	include/ORCconstant.h	/^                      ORCALGBINFIND};$/;"	e	enum:ORCSEARCHALG
@@ -169,6 +170,7 @@ ORCstrtrim	include/ORCstring.h	/^   int ORCstrtrim(char *str);$/;"	p	signature:(
 ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str)$/;"	f	signature:(char *str)
 ORCswapchar	include/ORC.h	/^   void ORCswapchar (char *arr, int i, int j);$/;"	p	signature:(char *arr, int i, int j)
 ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f	signature:(char* arr, int i, int j)
+PI	test/typedef.c	2;"	d	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 TRUE	include/ORCconstant.h	/^      TRUE$/;"	e	enum:BOOL
 capacity	include/ORCseqlist.h	/^      int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon6
@@ -213,6 +215,7 @@ main	test/test_sq_inout.c	/^main (void)$/;"	f	signature:(void)
 main	test/test_sq_insert.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_sq_merge.c	/^int main(void)$/;"	f	signature:(void)
 main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f	signature:(void)
+main	test/typedef.c	/^int main(void)$/;"	f	signature:(void)
 main	test/unicode.c	/^int main()$/;"	f
 main	test/union.c	/^int main(void)$/;"	f	signature:(void)
 main	test/void.c	/^int main(void)$/;"	f	signature:(void)

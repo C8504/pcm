@@ -7,7 +7,7 @@ help:
 	;echo "Choose a target:" \
 	;echo "" \
 	;echo "make [help]      -- print this help screen" \
-	;echo "make [test_readfile.exe]   -- build test_init_and_free.exe" \
+	;echo "make [test_readfile.exe]   -- build test_readfile" \
 	;echo "make [orctest]  -- build all tests" \
 	;echo "make [splint]    -- use splint to check all C files" \
 	;echo "make [clean]     -- delete all *.exe and *.log files"\
