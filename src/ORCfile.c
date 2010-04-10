@@ -15,7 +15,7 @@ ORCfilecreate (ORCfile **fp) {
    error = ORCstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
    if ( error )  goto TERMINATE;
    (*fp)->nlines  = 0LL;
-   (*fp)->nchars  = 0LL;
+   (*fp)->nbytes  = 0LL;
    (*fp)->ndigits = 0LL;
    (*fp)->nwords  = 0LL;
 
@@ -60,10 +60,7 @@ ORCfileopen (ORCfile *fp, const char *name){
    else {
       error = ORCstrncpy(fp->name, name, sizeof fp->name - 1);
       if ( error )  goto TERMINATE;
-
-      error = ORCfilegetinfo(fp);
-      if ( error )  goto TERMINATE;
-   }
+    }
 
 TERMINATE:
    return error;
@@ -78,20 +75,24 @@ ORCfilestatistics (ORCfile *fp)
    error = ORCcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
+   error = ORCfilegetinfo(fp);
+   if ( error )  goto TERMINATE;
+
    printf ("File name: %s\n", fp->name);
    printf ("There are %lld lines\n", fp->nlines);
    printf ("There are %lld words\n", fp->nwords);
-   printf ("There are %lld chars\n", fp->nchars);
+   printf ("There are %lld bytes\n", fp->nbytes);
    printf ("There are %lld digits\n", fp->ndigits);
 
-   for (i = 0; i < ORCCHAR; ++i) {
-      if (isprint(i)) {
-         putchar((char)(i));
-         putchar(':');
-         printf ("%lld", fp->countofchar[i]);
-         putchar('\n');
-      }
-   }
+/*   for (i = 0; i < ORCCHAR; ++i) {*/
+/*      if (isprint(i)) {*/
+/*         printf ("Count of char ");*/
+/*         putchar((char)(i));*/
+/*         putchar(':');*/
+/*         printf ("%lld", fp->countofchar[i]);*/
+/*         putchar('\n');*/
+/*      }*/
+/*   }*/
 
 TERMINATE:
    return error;
@@ -107,7 +108,7 @@ ORCfilegetinfo (ORCfile *fp){
    if ( error )  goto TERMINATE;
 
    while ((c = getc(fp->p)) != EOF) {
-      ++fp->nchars;
+      ++fp->nbytes;
       ++fp->countofchar[c];
 
       if ( '\n' == c ) {
@@ -129,6 +130,7 @@ ORCfilegetinfo (ORCfile *fp){
       }
    }
 
+   // rewind to the head of file 
    rewind (fp->p);
 
 TERMINATE:
@@ -148,19 +150,18 @@ ORCfilegetline (ORCfile *fp,
    error = ORCcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
-   while ((i < max-1              ) &&
-         ((c = getc(fp->p)) != EOF) &&
-         (c != '\n'               )   ) {
+   while ((i < max-1               ) &&
+         ((c = getc(fp->p)) != EOF ) &&
+         (c != '\n'                )   ) {
       line[i] = c;
       ++i;
    }
 
    if ( c == '\n' ) {
       line[i] = '\n';
-      ++i;
    }
 
-   line[i] = '\0';
+   line[i+1] = '\0';
    *length = i;
 
 TERMINATE:

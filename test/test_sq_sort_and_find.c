@@ -29,8 +29,8 @@ int main(void)
    printf ("output mylist\n");
    ORCseqlistoutput (mylist);
    printf ("sort mylist\n");
-   enum ORCSORTALG sortalg = ORCALGSORTBUBBLE;
-/*   enum ORCSORTALG sortalg = ORCALGSORTSELECT;*/
+/*   enum ORCSORTALG sortalg = ORCALGSORTBUBBLE;*/
+enum ORCSORTALG sortalg = ORCALGSORTSELECT;
    error = ORCseqlistsort (mylist, mylist->length, sortalg);
    if ( error )  goto TERMINATE;
    printf("output mylist after sort\n");

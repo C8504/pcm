@@ -10,7 +10,7 @@ extern "C" {
       char name[ORCFILENAME];
       long long nlines;
       long long nwords;
-      long long nchars;
+      long long nbytes;
       long long ndigits;
       long long countofchar[ORCCHAR];
    } ORCfile;
