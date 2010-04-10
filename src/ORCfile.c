@@ -31,10 +31,8 @@ int
 ORCfilefree (ORCfile **fp){
    int error = 0;
 
-   if ( fp == NULL ) {
-      error = ORCERRNULLPOINTER;
-      goto TERMINATE;
-   }
+   error = ORCcheckpointer (fp);
+   if ( error )  goto TERMINATE;
 
    if ( (*fp)->p != NULL ){
       fclose((*fp)->p);
@@ -52,22 +50,19 @@ int
 ORCfileopen (ORCfile *fp, const char *name){
    int error = 0;
 
-   if ( fp == NULL ) {
-      error = ORCERRNULLPOINTER;
+   error = ORCcheckpointer (fp);
+   if ( error )  goto TERMINATE;
+
+   if ((fp->p = fopen(name, "r")) == NULL) {
+      error = errno;
       goto TERMINATE;
    }
    else {
-      if ((fp->p = fopen(name, "r")) == NULL) {
-         error = errno;
-         goto TERMINATE;
-      }
-      else {
-         error = ORCstrncpy(fp->name, name, sizeof fp->name - 1);
-         if ( error )  goto TERMINATE;
+      error = ORCstrncpy(fp->name, name, sizeof fp->name - 1);
+      if ( error )  goto TERMINATE;
 
-         error = ORCfilegetinfo(fp);
-         if ( error )  goto TERMINATE;
-      }
+      error = ORCfilegetinfo(fp);
+      if ( error )  goto TERMINATE;
    }
 
 TERMINATE:
@@ -79,10 +74,10 @@ ORCfilestatistics (ORCfile *fp)
 {
    int error = 0;
    int i     = 0;
-   if ( fp == NULL ) {
-      error = ORCERRNULLPOINTER;
-      goto TERMINATE;
-   }
+   
+   error = ORCcheckpointer (fp);
+   if ( error )  goto TERMINATE;
+
    printf ("File name: %s\n", fp->name);
    printf ("There are %lld lines\n", fp->nlines);
    printf ("There are %lld words\n", fp->nwords);
@@ -107,6 +102,9 @@ ORCfilegetinfo (ORCfile *fp){
    int error = 0;
    int state = 0;
    int c;
+
+   error = ORCcheckpointer (fp);
+   if ( error )  goto TERMINATE;
 
    while ((c = getc(fp->p)) != EOF) {
       ++fp->nchars;
@@ -147,6 +145,9 @@ ORCfilegetline (ORCfile *fp,
    int c     = 0;
    int i     = 0;
 
+   error = ORCcheckpointer (fp);
+   if ( error )  goto TERMINATE;
+
    while ((i < max-1              ) &&
          ((c = getc(fp->p)) != EOF) &&
          (c != '\n'               )   ) {
@@ -173,6 +174,9 @@ ORCfilegetmaxline (ORCfile *fp,
    int error = 0;
    int len   = 0;
    char line[ORCFILEMAXLINE] = {0};
+   
+   error = ORCcheckpointer (fp);
+   if ( error )  goto TERMINATE;
 
    *max = len;
    do {

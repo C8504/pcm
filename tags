@@ -59,117 +59,66 @@ ORCPOPTYPE	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPST
 ORCSEARCHALG	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,$/;"	g
 ORCSList	include/ORCseqlist.h	/^   typedef ORCseqlist* ORCSList;$/;"	t
 ORCSORTALG	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	g
-ORCbinfind	include/ORCfind.h	/^   int ORCbinfind (int *a, int length, const int elem, int *index);$/;"	p	signature:(int *a, int length, const int elem, int *index)
-ORCbinfind	src/ORCfind.c	/^ORCbinfind(int *a, $/;"	f	signature:(int *a, int length, const int elem, int *index)
-ORCbubblesort	include/ORCsort.h	/^   int ORCbubblesort(int *a, int len);$/;"	p	signature:(int *a, int len)
-ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f	signature:(int *a, int len)
-ORCcheckerror	include/ORC.h	/^   void ORCcheckerror (int error);$/;"	p	signature:(int error)
-ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f	signature:(int error)
-ORCcheckpointer	include/ORC.h	/^   int    ORCcheckpointer (void *p);$/;"	p	signature:(void *p)
-ORCcheckpointer	src/ORC.c	/^ORCcheckpointer(void *p)$/;"	f	signature:(void *p)
-ORCdarrayfree	include/ORC.h	/^   void   ORCdarrayfree (void **arr);$/;"	p	signature:(void **arr)
-ORCdarrayfree	src/ORC.c	/^ORCdarrayfree (void **arr)$/;"	f	signature:(void **arr)
-ORCdarraynew	include/ORC.h	/^   void** ORCdarraynew (size_t row, size_t col, size_t size);$/;"	p	signature:(size_t row, size_t col, size_t size)
-ORCdarraynew	src/ORC.c	/^ORCdarraynew (size_t row, size_t col, size_t size)$/;"	f	signature:(size_t row, size_t col, size_t size)
-ORCdelcharofstring	include/ORCstring.h	/^   int ORCdelcharofstring(char * str, int c);$/;"	p	signature:(char * str, int c)
-ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f	signature:(char * str, int c)
+ORCbinfind	src/ORCfind.c	/^ORCbinfind(int *a, $/;"	f
+ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f
+ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f
+ORCcheckpointer	src/ORC.c	/^ORCcheckpointer(void *p)$/;"	f
+ORCdarrayfree	src/ORC.c	/^ORCdarrayfree (void **arr)$/;"	f
+ORCdarraynew	src/ORC.c	/^ORCdarraynew (size_t row, size_t col, size_t size)$/;"	f
+ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
 ORCfile	include/ORCfile.h	/^   } ORCfile;$/;"	t	typeref:struct:__anon5
-ORCfilecreate	include/ORCfile.h	/^   int ORCfilecreate(ORCfile **fp);$/;"	p	signature:(ORCfile **fp)
-ORCfilecreate	src/ORCfile.c	/^ORCfilecreate (ORCfile **fp) {$/;"	f	signature:(ORCfile **fp)
-ORCfilefree	include/ORCfile.h	/^   int ORCfilefree(ORCfile **fp);$/;"	p	signature:(ORCfile **fp)
-ORCfilefree	src/ORCfile.c	/^ORCfilefree (ORCfile **fp){$/;"	f	signature:(ORCfile **fp)
-ORCfilegetinfo	include/ORCfile.h	/^   int ORCfilegetinfo(ORCfile *fp);$/;"	p	signature:(ORCfile *fp)
-ORCfilegetinfo	src/ORCfile.c	/^ORCfilegetinfo (ORCfile *fp){$/;"	f	signature:(ORCfile *fp)
-ORCfilegetline	include/ORCfile.h	/^   int ORCfilegetline(\/*in*\/ ORCfile *fp,$/;"	p	signature:( ORCfile *fp, int max, char *line, int *length)
-ORCfilegetline	src/ORCfile.c	/^ORCfilegetline (ORCfile *fp,$/;"	f	signature:(ORCfile *fp, int max, char *line, int *length)
-ORCfilegetmaxline	include/ORCfile.h	/^   int ORCfilegetmaxline(ORCfile *fp, char *maxline, int *max);$/;"	p	signature:(ORCfile *fp, char *maxline, int *max)
-ORCfilegetmaxline	src/ORCfile.c	/^ORCfilegetmaxline (ORCfile *fp,$/;"	f	signature:(ORCfile *fp, char *maxline, int *max)
-ORCfileopen	include/ORCfile.h	/^   int ORCfileopen(ORCfile *fp, const char *name);$/;"	p	signature:(ORCfile *fp, const char *name)
-ORCfileopen	src/ORCfile.c	/^ORCfileopen (ORCfile *fp, const char *name){$/;"	f	signature:(ORCfile *fp, const char *name)
-ORCfilestatistics	include/ORCfile.h	/^   int ORCfilestatistics(ORCfile *fp);$/;"	p	signature:(ORCfile *fp)
-ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp)$/;"	f	signature:(ORCfile *fp)
+ORCfilecreate	src/ORCfile.c	/^ORCfilecreate (ORCfile **fp) {$/;"	f
+ORCfilefree	src/ORCfile.c	/^ORCfilefree (ORCfile **fp){$/;"	f
+ORCfilegetinfo	src/ORCfile.c	/^ORCfilegetinfo (ORCfile *fp){$/;"	f
+ORCfilegetline	src/ORCfile.c	/^ORCfilegetline (ORCfile *fp,$/;"	f
+ORCfilegetmaxline	src/ORCfile.c	/^ORCfilegetmaxline (ORCfile *fp,$/;"	f
+ORCfileopen	src/ORCfile.c	/^ORCfileopen (ORCfile *fp, const char *name){$/;"	f
+ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp)$/;"	f
 ORClinkedlist	include/ORClinkedlist.h	/^   typedef struct ORClinkedlist{$/;"	s
 ORClinkedlist	include/ORClinkedlist.h	/^   } ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
-ORClinkedlistappend	include/ORClinkedlist.h	/^   int  ORClinkedlistappend (ORClinkedlist *list, const char* elem);$/;"	p	signature:(ORClinkedlist *list, const char* elem)
-ORClinkedlistappend	src/ORClinkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f	signature:(ORClinkedlist *list, const char* elem)
-ORClinkedlistclear	include/ORClinkedlist.h	/^   int  ORClinkedlistclear  (ORClinkedlist *list);$/;"	p	signature:(ORClinkedlist *list)
-ORClinkedlistclear	src/ORClinkedlist.c	/^ORClinkedlistclear (ORClinkedlist *list)$/;"	f	signature:(ORClinkedlist *list)
-ORClinkedlistfree	include/ORClinkedlist.h	/^   int  ORClinkedlistfree   (ORClinkedlist **list);$/;"	p	signature:(ORClinkedlist **list)
-ORClinkedlistfree	src/ORClinkedlist.c	/^ORClinkedlistfree (ORClinkedlist **list)$/;"	f	signature:(ORClinkedlist **list)
-ORClinkedlistinit	include/ORClinkedlist.h	/^   int  ORClinkedlistinit   (ORClinkedlist **list);$/;"	p	signature:(ORClinkedlist **list)
-ORClinkedlistinit	src/ORClinkedlist.c	/^ORClinkedlistinit (ORClinkedlist **list)$/;"	f	signature:(ORClinkedlist **list)
-ORClinkedlistinsert	include/ORClinkedlist.h	/^   int  ORClinkedlistinsert (ORClinkedlist *list, int pos, const char* elem);$/;"	p	signature:(ORClinkedlist *list, int pos, const char* elem)
-ORClinkedlistinsert	src/ORClinkedlist.c	/^ORClinkedlistinsert (ORClinkedlist *list,$/;"	f	signature:(ORClinkedlist *list, int pos, const char* elem)
-ORClinkedlistlength	include/ORClinkedlist.h	/^   int  ORClinkedlistlength (ORClinkedlist *list);$/;"	p	signature:(ORClinkedlist *list)
-ORClinkedlistlength	src/ORClinkedlist.c	/^ORClinkedlistlength(ORClinkedlist *list)$/;"	f	signature:(ORClinkedlist *list)
-ORClinkedlistoutput	include/ORClinkedlist.h	/^   int  ORClinkedlistoutput (ORClinkedlist *list, const char* sp);$/;"	p	signature:(ORClinkedlist *list, const char* sp)
-ORClinkedlistoutput	src/ORClinkedlist.c	/^ORClinkedlistoutput (ORClinkedlist *list,$/;"	f	signature:(ORClinkedlist *list, const char* sp)
+ORClinkedlistappend	src/ORClinkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
+ORClinkedlistclear	src/ORClinkedlist.c	/^ORClinkedlistclear (ORClinkedlist *list)$/;"	f
+ORClinkedlistfree	src/ORClinkedlist.c	/^ORClinkedlistfree (ORClinkedlist **list)$/;"	f
+ORClinkedlistinit	src/ORClinkedlist.c	/^ORClinkedlistinit (ORClinkedlist **list)$/;"	f
+ORClinkedlistinsert	src/ORClinkedlist.c	/^ORClinkedlistinsert (ORClinkedlist *list,$/;"	f
+ORClinkedlistlength	src/ORClinkedlist.c	/^ORClinkedlistlength(ORClinkedlist *list)$/;"	f
+ORClinkedlistoutput	src/ORClinkedlist.c	/^ORClinkedlistoutput (ORClinkedlist *list,$/;"	f
 ORClinkedlistp	include/ORClinkedlist.h	/^   typedef ORClinkedlist* ORClinkedlistp;$/;"	t
-ORClinkedlistpop	include/ORClinkedlist.h	/^   int  ORClinkedlistpop    (ORClinkedlist *list, enum ORCPOPTYPE type);$/;"	p	signature:(ORClinkedlist *list, enum ORCPOPTYPE type)
-ORClinkedlistpop	src/ORClinkedlist.c	/^ORClinkedlistpop (ORClinkedlist *list,$/;"	f	signature:(ORClinkedlist *list, enum ORCPOPTYPE type)
+ORClinkedlistpop	src/ORClinkedlist.c	/^ORClinkedlistpop (ORClinkedlist *list,$/;"	f
 ORClinkednode	include/ORClinkedlist.h	/^   typedef struct ORClinkednode {$/;"	s
 ORClinkednode	include/ORClinkedlist.h	/^   } ORClinkednode;$/;"	t	typeref:struct:ORClinkednode
 ORClinkednodep	include/ORClinkedlist.h	/^   typedef ORClinkednode* ORClinkednodep;$/;"	t
-ORCnodeallocandinit	include/ORClinkedlist.h	/^   int  ORCnodeallocandinit (ORClinkednode **node, const char* elem);$/;"	p	signature:(ORClinkednode **node, const char* elem)
-ORCnodeallocandinit	src/ORClinkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f	signature:(ORClinkednode **node, const char* elem)
-ORCnodefree	include/ORClinkedlist.h	/^   void ORCnodefree           (ORClinkednode **node);$/;"	p	signature:(ORClinkednode **node)
-ORCnodefree	src/ORClinkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f	signature:(ORClinkednode **node)
-ORCoriginfind	include/ORCfind.h	/^   int ORCoriginfind (int *a, int length, const int elem, int *index);$/;"	p	signature:(int *a, int length, const int elem, int *index)
-ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f	signature:(int *a, int length, const int elem, int *index)
-ORCpower	include/ORCmath.h	/^   int ORCpower(int base, int  n, long long *result);$/;"	p	signature:(int base, int n, long long *result)
-ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f	signature:(int base, int n, long long *result)
-ORCselectsort	include/ORCsort.h	/^   int ORCselectsort(int *a, int len);$/;"	p	signature:(int *a, int len)
-ORCselectsort	src/ORCsort.c	/^ORCselectsort(int *a,$/;"	f	signature:(int *a, int len)
+ORCnodeallocandinit	src/ORClinkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f
+ORCnodefree	src/ORClinkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f
+ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f
+ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f
+ORCselectsort	src/ORCsort.c	/^ORCselectsort(int *a,$/;"	f
 ORCseqlist	include/ORCseqlist.h	/^   } ORCseqlist;$/;"	t	typeref:struct:__anon6
-ORCseqlistclear	include/ORCseqlist.h	/^   int ORCseqlistclear(ORCseqlist *list);$/;"	p	signature:(ORCseqlist *list)
-ORCseqlistclear	src/ORCseqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f	signature:(ORCseqlist *list)
-ORCseqlistcopy	include/ORCseqlist.h	/^   int ORCseqlistcopy(ORCseqlist *list, const int *arr, int count);$/;"	p	signature:(ORCseqlist *list, const int *arr, int count)
-ORCseqlistcopy	src/ORCseqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f	signature:(ORCseqlist *list, const int *arr, int count)
-ORCseqlistdelete	include/ORCseqlist.h	/^   int ORCseqlistdelete(ORCseqlist *list, int index, int* e);$/;"	p	signature:(ORCseqlist *list, int index, int* e)
-ORCseqlistdelete	src/ORCseqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f	signature:(ORCseqlist *list, int index, int *e)
-ORCseqlistdeleteR	include/ORCseqlist.h	/^   int ORCseqlistdeleteR(ORCseqlist *list);$/;"	p	signature:(ORCseqlist *list)
-ORCseqlistdeleteR	src/ORCseqlist.c	/^ORCseqlistdeleteR(ORCseqlist *list)$/;"	f	signature:(ORCseqlist *list)
-ORCseqlistfind	include/ORCseqlist.h	/^   int ORCseqlistfind(ORCseqlist *list, int length, const int elem,$/;"	p	signature:(ORCseqlist *list, int length, const int elem, int *index, enum ORCSEARCHALG alg)
-ORCseqlistfind	src/ORCseqlist.c	/^ORCseqlistfind (ORCseqlist *list,$/;"	f	signature:(ORCseqlist *list, int length, const int elem, int *index, enum ORCSEARCHALG alg)
-ORCseqlistfree	include/ORCseqlist.h	/^   int ORCseqlistfree(ORCseqlist **list);$/;"	p	signature:(ORCseqlist **list)
-ORCseqlistfree	src/ORCseqlist.c	/^ORCseqlistfree (ORCseqlist **list)$/;"	f	signature:(ORCseqlist **list)
-ORCseqlistinit	include/ORCseqlist.h	/^   int ORCseqlistinit(ORCseqlist **list);$/;"	p	signature:(ORCseqlist **list)
-ORCseqlistinit	src/ORCseqlist.c	/^ORCseqlistinit (ORCseqlist **list)$/;"	f	signature:(ORCseqlist **list)
-ORCseqlistinsert	include/ORCseqlist.h	/^   int ORCseqlistinsert(ORCseqlist *list, int index, const int elem);$/;"	p	signature:(ORCseqlist *list, int index, const int elem)
-ORCseqlistinsert	src/ORCseqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f	signature:(ORCseqlist *list, int index, const int elem)
-ORCseqlistmerge	include/ORCseqlist.h	/^   int ORCseqlistmerge(ORCseqlist *des, const ORCseqlist* src);$/;"	p	signature:(ORCseqlist *des, const ORCseqlist* src)
-ORCseqlistmerge	src/ORCseqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f	signature:(ORCseqlist *des, const ORCseqlist* src)
-ORCseqlistoutput	include/ORCseqlist.h	/^   int ORCseqlistoutput(ORCseqlist *list);$/;"	p	signature:(ORCseqlist *list)
-ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f	signature:(ORCseqlist *list)
-ORCseqlistsort	include/ORCseqlist.h	/^   int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);$/;"	p	signature:(ORCseqlist *list, int length, enum ORCSORTALG alg)
-ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f	signature:(ORCseqlist *list, int length, enum ORCSORTALG alg)
+ORCseqlistclear	src/ORCseqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f
+ORCseqlistcopy	src/ORCseqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f
+ORCseqlistdelete	src/ORCseqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f
+ORCseqlistdeleteR	src/ORCseqlist.c	/^ORCseqlistdeleteR(ORCseqlist *list)$/;"	f
+ORCseqlistfind	src/ORCseqlist.c	/^ORCseqlistfind (ORCseqlist *list,$/;"	f
+ORCseqlistfree	src/ORCseqlist.c	/^ORCseqlistfree (ORCseqlist **list)$/;"	f
+ORCseqlistinit	src/ORCseqlist.c	/^ORCseqlistinit (ORCseqlist **list)$/;"	f
+ORCseqlistinsert	src/ORCseqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
+ORCseqlistmerge	src/ORCseqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
+ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
+ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
 ORCstack	include/ORCstack.h	/^   } ORCstack;$/;"	t	typeref:struct:__anon7
-ORCstackcreate	include/ORCstack.h	/^   int   ORCstackcreate  (ORCstack **sp, size_t size);$/;"	p	signature:(ORCstack **sp, size_t size)
-ORCstackcreate	src/ORCstack.c	/^ORCstackcreate (ORCstack **sp, size_t size){$/;"	f	signature:(ORCstack **sp, size_t size)
-ORCstackfree	include/ORCstack.h	/^   void  ORCstackfree    (ORCstack **sp, FREEFUNC freefunc);$/;"	p	signature:(ORCstack **sp, FREEFUNC freefunc)
-ORCstackfree	src/ORCstack.c	/^ORCstackfree (ORCstack **sp, FREEFUNC freefunc)$/;"	f	signature:(ORCstack **sp, FREEFUNC freefunc)
-ORCstackisempty	include/ORCstack.h	/^   int   ORCstackisempty (ORCstack *s);$/;"	p	signature:(ORCstack *s)
-ORCstackisempty	src/ORCstack.c	/^ORCstackisempty (ORCstack *s)$/;"	f	signature:(ORCstack *s)
-ORCstackpop	include/ORCstack.h	/^   void* ORCstackpop     (ORCstack *s);$/;"	p	signature:(ORCstack *s)
-ORCstackpop	src/ORCstack.c	/^ORCstackpop (ORCstack *s)$/;"	f	signature:(ORCstack *s)
-ORCstackpush	include/ORCstack.h	/^   int   ORCstackpush    (ORCstack *s, void *elem);$/;"	p	signature:(ORCstack *s, void *elem)
-ORCstackpush	src/ORCstack.c	/^ORCstackpush (ORCstack *s, void *elem)$/;"	f	signature:(ORCstack *s, void *elem)
-ORCstrblkstoblk	include/ORCstring.h	/^   int ORCstrblkstoblk(char *str);$/;"	p	signature:(char *str)
-ORCstrblkstoblk	src/ORCstring.c	/^ORCstrblkstoblk (char *str) {$/;"	f	signature:(char *str)
-ORCstreverse	include/ORCstring.h	/^   int ORCstreverse(char *str);$/;"	p	signature:(char *str)
-ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str)$/;"	f	signature:(char *str)
-ORCstrindex	include/ORCstring.h	/^   int ORCstrindex(char *str, char* substr, int *index);$/;"	p	signature:(char *str, char* substr, int *index)
-ORCstrindex	src/ORCstring.c	/^ORCstrindex(char *str, char *substr, int *index)$/;"	f	signature:(char *str, char *substr, int *index)
-ORCstrlen	include/ORCstring.h	/^   int ORCstrlen(const char *str, size_t *len);$/;"	p	signature:(const char *str, size_t *len)
-ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f	signature:(const char *str, size_t *len)
-ORCstrncat	include/ORCstring.h	/^   int ORCstrncat(char *des, const char *src, int n);$/;"	p	signature:(char *des, const char *src, int n)
-ORCstrncat	src/ORCstring.c	/^ORCstrncat (char *des,$/;"	f	signature:(char *des, const char *src, int n)
-ORCstrncpy	include/ORCstring.h	/^   int ORCstrncpy(char *des, const char *src, int n);$/;"	p	signature:(char *des, const char *src, int n)
-ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f	signature:(char *des, const char *src, int n)
-ORCstrtrim	include/ORCstring.h	/^   int ORCstrtrim(char *str);$/;"	p	signature:(char *str)
-ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str)$/;"	f	signature:(char *str)
-ORCswapchar	include/ORC.h	/^   void ORCswapchar (char *arr, int i, int j);$/;"	p	signature:(char *arr, int i, int j)
-ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f	signature:(char* arr, int i, int j)
+ORCstackcreate	src/ORCstack.c	/^ORCstackcreate (ORCstack **sp, size_t size){$/;"	f
+ORCstackfree	src/ORCstack.c	/^ORCstackfree (ORCstack **sp, FREEFUNC freefunc)$/;"	f
+ORCstackisempty	src/ORCstack.c	/^ORCstackisempty (ORCstack *s)$/;"	f
+ORCstackpop	src/ORCstack.c	/^ORCstackpop (ORCstack *s)$/;"	f
+ORCstackpush	src/ORCstack.c	/^ORCstackpush (ORCstack *s, void *elem)$/;"	f
+ORCstrblkstoblk	src/ORCstring.c	/^ORCstrblkstoblk (char *str) {$/;"	f
+ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str)$/;"	f
+ORCstrindex	src/ORCstring.c	/^ORCstrindex(char *str, char *substr, int *index)$/;"	f
+ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
+ORCstrncat	src/ORCstring.c	/^ORCstrncat (char *des,$/;"	f
+ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f
+ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str)$/;"	f
+ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f
 PI	test/typedef.c	2;"	d	file:
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
 TRUE	include/ORCconstant.h	/^      TRUE$/;"	e	enum:BOOL
@@ -183,42 +132,41 @@ error	include/ORCerrormap.h	/^      int        error;$/;"	m	struct:__anon4
 errorMap	include/ORCerrormap.h	/^      ErrorMap errorMap[] = {$/;"	v
 first	include/ORClinkedlist.h	/^      struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 floatval	test/union.c	/^      float floatval;$/;"	m	struct:u::__anon3	file:
-fun	test/cast.cpp	/^void fun(Base* base)$/;"	f	signature:(Base* base)
-inout	include/inout.h	/^   int inout(); $/;"	p	signature:()
+fun	test/cast.cpp	/^void fun(Base* base)$/;"	f
 inout	src/inout.c	/^int inout()$/;"	f
 intval	test/union.c	/^      int intval;$/;"	m	struct:u::__anon2	file:
 keyboard	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 last	include/ORClinkedlist.h	/^      struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
 length	include/ORCseqlist.h	/^      int  length;        \/* The length of list *\/$/;"	m	struct:__anon6
-m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base	signature:()
-m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived	signature:()
-main	test/bits.c	/^int main (void)$/;"	f	signature:(void)
+m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base
+m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
+main	test/bits.c	/^int main (void)$/;"	f
 main	test/bits.s	/^main:$/;"	l
-main	test/cast.cpp	/^int main()$/;"	f	signature:()
-main	test/enum.c	/^int main(void)$/;"	f	signature:(void)
-main	test/macro.c	/^int main(void)$/;"	f	signature:(void)
-main	test/sizeof.c	/^int main(void)$/;"	f	signature:(void)
-main	test/terminate.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_ORC.c	/^int main(void)$/;"	f	signature:(void)
+main	test/cast.cpp	/^int main()$/;"	f
+main	test/enum.c	/^int main(void)$/;"	f
+main	test/macro.c	/^int main(void)$/;"	f
+main	test/sizeof.c	/^int main(void)$/;"	f
+main	test/terminate.c	/^int main(void)$/;"	f
+main	test/test_ORC.c	/^int main(void)$/;"	f
 main	test/test_ORCfile.c	/^main ()$/;"	f
-main	test/test_ORCmath.c	/^int main (void)$/;"	f	signature:(void)
-main	test/test_ORCstack.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_ORCstring.c	/^int main (void)$/;"	f	signature:(void)
-main	test/test_check_bounds.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_link_init_and_free.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_link_many_element.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_link_one_element.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_link_readfile.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_sq_delete.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_sq_init_and_free.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_sq_inout.c	/^main (void)$/;"	f	signature:(void)
-main	test/test_sq_insert.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_sq_merge.c	/^int main(void)$/;"	f	signature:(void)
-main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f	signature:(void)
-main	test/typedef.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_ORCmath.c	/^int main (void)$/;"	f
+main	test/test_ORCstack.c	/^int main(void)$/;"	f
+main	test/test_ORCstring.c	/^int main (void)$/;"	f
+main	test/test_check_bounds.c	/^int main(void)$/;"	f
+main	test/test_link_init_and_free.c	/^int main(void)$/;"	f
+main	test/test_link_many_element.c	/^int main(void)$/;"	f
+main	test/test_link_one_element.c	/^int main(void)$/;"	f
+main	test/test_link_readfile.c	/^int main(void)$/;"	f
+main	test/test_sq_delete.c	/^int main(void)$/;"	f
+main	test/test_sq_init_and_free.c	/^int main(void)$/;"	f
+main	test/test_sq_inout.c	/^main (void)$/;"	f
+main	test/test_sq_insert.c	/^int main(void)$/;"	f
+main	test/test_sq_merge.c	/^int main(void)$/;"	f
+main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f
+main	test/typedef.c	/^int main(void)$/;"	f
 main	test/unicode.c	/^int main()$/;"	f
-main	test/union.c	/^int main(void)$/;"	f	signature:(void)
-main	test/void.c	/^int main(void)$/;"	f	signature:(void)
+main	test/union.c	/^int main(void)$/;"	f
+main	test/void.c	/^int main(void)$/;"	f
 mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 name	include/ORCfile.h	/^      char name[ORCFILENAME];$/;"	m	struct:__anon5
 nchars	include/ORCfile.h	/^      long long nchars;$/;"	m	struct:__anon5
@@ -236,7 +184,7 @@ si	test/union.c	/^   } si;$/;"	m	union:u	typeref:struct:u::__anon2	file:
 size	include/ORCstack.h	/^      size_t size;$/;"	m	struct:__anon7
 str	include/ORCerrormap.h	/^      const char *str;$/;"	m	struct:__anon4
 testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
-testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f	signature:(void)
+testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f
 top	include/ORCstack.h	/^      int    top;$/;"	m	struct:__anon7
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon1	file:
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon2	file:
