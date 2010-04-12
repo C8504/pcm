@@ -6,7 +6,6 @@ ORCoriginfind(int *a,
       const int elem,
       int *index)
 {
-   printf ("CALL ORCoriginfind\n");
    int error = 0;
    int i;
    
@@ -29,7 +28,6 @@ ORCbinfind(int *a,
       const int elem, 
       int *index)
 {
-   printf ("CALL ORCbinfind\n");
    int error = 0;
    int mid = 0;
    int low = 0;

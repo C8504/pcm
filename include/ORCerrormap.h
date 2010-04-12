@@ -18,6 +18,7 @@ extern "C" {
          {ORCERRELEMENTNOTFOUND,         "Element not found"},
          {ORCERREMPTYLIST,               "Empty list"},
          {ORCERRNOTSTACKANDQUEUE,        "Can not use pop in stack and queue"},
+         {ORCERRWRONGSORTALG,            "Not this kind sort algorithm"},
       };
 
 #ifdef __cplusplus

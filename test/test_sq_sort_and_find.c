@@ -21,35 +21,42 @@ int main(void)
    if ( error )  goto TERMINATE;
    error = ORCseqlistinsert (mylist, 3, 5);
    if ( error )  goto TERMINATE;
-   for (i = 0; i < 100000; ++i) {
+    
+   for (i = 0; i < 30000; ++i) {
+      error = ORCseqlistinsert (mylist,i,i*2);
+      if ( error )  goto TERMINATE;
+   }
+
+   for (i = 0; i < 30000; ++i) {
       error = ORCseqlistinsert (mylist,i,i);
       if ( error )  goto TERMINATE;
    }
    
    printf ("output mylist\n");
-   ORCseqlistoutput (mylist);
+/*   ORCseqlistoutput (mylist);*/
    printf ("sort mylist\n");
-/*   enum ORCSORTALG sortalg = ORCALGSORTBUBBLE;*/
-enum ORCSORTALG sortalg = ORCALGSORTSELECT;
+/*enum ORCSORTALG sortalg = ORCALGSORTBUBBLE;*/
+/*enum ORCSORTALG sortalg = ORCALGSORTSELECT;*/
+enum ORCSORTALG sortalg = ORCALGSORTQUICK; // use qsort
    error = ORCseqlistsort (mylist, mylist->length, sortalg);
    if ( error )  goto TERMINATE;
    printf("output mylist after sort\n");
-   ORCseqlistoutput (mylist);
+/*   ORCseqlistoutput (mylist);*/
 
    printf ("find the index of element '5'\n");
    enum ORCSEARCHALG findalg = ORCALGORIGINFIND;
    for (i = 0; i < 1000; ++i) {
-      error = ORCseqlistfind (mylist, mylist->length, 5000, &ind, findalg);
+      error = ORCseqlistfind (mylist, mylist->length, 5, &ind, findalg);
       if ( error )  goto TERMINATE;
    }
-   printf ("Index of 5000 is %d\n", ind);
+   printf ("Index of 5 is %d\n", ind);
    printf ("find the index of element '5'\n");
    findalg = ORCALGBINFIND;
    for (i = 0; i < 1000; ++i) {
-      error = ORCseqlistfind (mylist, mylist->length, 5000, &ind, findalg);
+      error = ORCseqlistfind (mylist, mylist->length, 5, &ind, findalg);
       if ( error )  goto TERMINATE;
    }
-   printf ("Index of 5000 is %d\n", ind);
+   printf ("Index of 5 is %d\n", ind);
 
 
 

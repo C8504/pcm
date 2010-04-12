@@ -265,15 +265,18 @@ ORCseqlistsort (ORCseqlist *list,
       length = list->length;
    }
 
-   // take ORCbubblesort as default alg
+   // take qsort as default alg
    if ( alg == ORCALGSORTSELECT) {
       error = ORCselectsort(list->elemp, length);
    }
-   else if ( ORCALGSORTBUBBLE ) {
+   else if ( alg == ORCALGSORTBUBBLE ) {
       error = ORCbubblesort(list->elemp, list->length);
    }
+   else if ( alg == ORCALGSORTQUICK ) {
+      qsort(list->elemp, list->length, sizeof (int), ORCcompare);
+   }
    else {
-      error = ORCbubblesort(list->elemp, list->length);
+      error = ORCERRWRONGSORTALG;
    }
 
 TERMINATE:

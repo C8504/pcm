@@ -18,6 +18,7 @@ extern "C" {
    void** ORCdarraynew (size_t row, size_t col, size_t size);
    void   ORCdarrayfree (void **arr);
    int    ORCcheckpointer (void *p);
+   int    ORCcompare (const void *x, const void *y);
 
 #ifdef __cplusplus
 }

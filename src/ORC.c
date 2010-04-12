@@ -32,6 +32,20 @@ ORCswapchar (char* arr,
    arr[j] = temp;
 }
 
+int
+ORCcompare (const void *x,
+            const void *y) {
+   const int *a = (const int*)x;
+   const int *b = (const int*)y;
+
+   if (*a > *b)
+      return 1;
+   else if (*a < *b)
+      return -1;
+   else
+      return 0;
+}
+
 void**
 ORCdarraynew (size_t row, size_t col, size_t size)
 {

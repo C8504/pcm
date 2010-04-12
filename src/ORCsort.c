@@ -4,7 +4,6 @@
 ORCselectsort(int *a,
       int len)
 {
-   printf ("CALL ORCselectsort\n");
    int error = 0;
    int i, j, min;
    int t;
@@ -35,7 +34,6 @@ TERMINATE:
 ORCbubblesort(int *a,
       int len)
 {
-   printf ("CALL ORCbubblesort\n");
    int error = 0;
    int i, j;
    int t;
@@ -57,3 +55,21 @@ TERMINATE:
    return error;
 } /* End of ORCbubblesort*/
 
+/*int*/
+/*ORCshellsort(int *a,*/
+/*             int len)*/
+/*{*/
+/*   printf ("CALL ORCbubblesort\n");*/
+/*   int error = 0;*/
+/*   int i, j;*/
+/*   int t;*/
+/*   */
+/*   error = ORCcheckpointer (a);*/
+/*   if ( error )  goto TERMINATE;*/
+/**/
+/*«¤«shell sort here»¤»*/
+/**/
+/**/
+/*TERMINATE:*/
+/*   return error;*/
+/*} «¤«End of ORCshellsort»¤»*/

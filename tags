@@ -62,6 +62,7 @@ ORCbinfind	src/ORCfind.c	/^ORCbinfind(int *a, $/;"	f
 ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f
 ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f
 ORCcheckpointer	src/ORC.c	/^ORCcheckpointer(void *p)$/;"	f
+ORCcompare	src/ORC.c	/^ORCcompare (const void *x,$/;"	f
 ORCdarrayfree	src/ORC.c	/^ORCdarrayfree (void **arr)$/;"	f
 ORCdarraynew	src/ORC.c	/^ORCdarraynew (size_t row, size_t col, size_t size)$/;"	f
 ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
@@ -144,7 +145,7 @@ main	test/macro.c	/^int main(void)$/;"	f
 main	test/sizeof.c	/^int main(void)$/;"	f
 main	test/terminate.c	/^int main(void)$/;"	f
 main	test/test_ORC.c	/^int main(void)$/;"	f
-main	test/test_ORCfile.c	/^main ()$/;"	f
+main	test/test_ORCfile.c	/^main(int argc, char **argv)$/;"	f
 main	test/test_ORCmath.c	/^int main (void)$/;"	f
 main	test/test_ORCstack.c	/^int main(void)$/;"	f
 main	test/test_ORCstring.c	/^int main (void)$/;"	f
@@ -164,7 +165,7 @@ main	test/union.c	/^int main(void)$/;"	f
 main	test/void.c	/^int main(void)$/;"	f
 mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 name	include/ORCfile.h	/^      char name[ORCFILENAME];$/;"	m	struct:__anon5
-nchars	include/ORCfile.h	/^      long long nchars;$/;"	m	struct:__anon5
+nbytes	include/ORCfile.h	/^      long long nbytes;$/;"	m	struct:__anon5
 ndigits	include/ORCfile.h	/^      long long ndigits;$/;"	m	struct:__anon5
 next	include/ORClinkedlist.h	/^      struct ORClinkednode *next;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
 nlines	include/ORCfile.h	/^      long long nlines;$/;"	m	struct:__anon5
