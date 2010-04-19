@@ -34,7 +34,7 @@ ORCswapchar (char* arr,
 
 int
 ORCcompare (const void *x,
-            const void *y) {
+      const void *y) {
    const int *a = (const int*)x;
    const int *b = (const int*)y;
 
@@ -46,7 +46,7 @@ ORCcompare (const void *x,
       return 0;
 }
 
-void**
+   void**
 ORCdarraynew (size_t row, size_t col, size_t size)
 {
    void **arr;
@@ -67,17 +67,17 @@ ORCdarraynew (size_t row, size_t col, size_t size)
    return arr;
 } /* End of ORCdarraynew*/
 
-void
+   void
 ORCdarrayfree (void **arr)
 {
    free (arr);
 } /* End of ORCdarrayfree*/
 
-int 
+   int 
 ORCcheckpointer(void *p)
 {
    int error = 0;
-   
+
    if ( p == NULL ) {
       error = ORCERRNULLPOINTER;
       goto TERMINATE;

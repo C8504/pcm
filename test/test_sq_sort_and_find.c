@@ -37,7 +37,8 @@ int main(void)
    printf ("sort mylist\n");
 /*enum ORCSORTALG sortalg = ORCALGSORTBUBBLE;*/
 /*enum ORCSORTALG sortalg = ORCALGSORTSELECT;*/
-enum ORCSORTALG sortalg = ORCALGSORTQUICK; // use qsort
+/*enum ORCSORTALG sortalg = ORCALGSORTQUICK; // use qsort*/
+   enum ORCSORTALG sortalg = ORCALGSORTSHELL;
    error = ORCseqlistsort (mylist, mylist->length, sortalg);
    if ( error )  goto TERMINATE;
    printf("output mylist after sort\n");

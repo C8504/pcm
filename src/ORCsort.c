@@ -10,7 +10,7 @@ ORCselectsort(int *a,
 
    error = ORCcheckpointer (a);
    if ( error )  goto TERMINATE;
-   
+
    for (i = 0; i < len; ++i) {
       min = i;
       for (j = i + 1; j < len; ++j) {
@@ -37,7 +37,7 @@ ORCbubblesort(int *a,
    int error = 0;
    int i, j;
    int t;
-   
+
    error = ORCcheckpointer (a);
    if ( error )  goto TERMINATE;
 
@@ -55,21 +55,34 @@ TERMINATE:
    return error;
 } /* End of ORCbubblesort*/
 
-/*int*/
-/*ORCshellsort(int *a,*/
-/*             int len)*/
-/*{*/
-/*   printf ("CALL ORCbubblesort\n");*/
-/*   int error = 0;*/
-/*   int i, j;*/
-/*   int t;*/
-/*   */
-/*   error = ORCcheckpointer (a);*/
-/*   if ( error )  goto TERMINATE;*/
-/**/
-/*«¤«shell sort here»¤»*/
-/**/
-/**/
-/*TERMINATE:*/
-/*   return error;*/
-/*} «¤«End of ORCshellsort»¤»*/
+   int
+ORCshellsort(int *a,
+      int len)
+{
+   int error = 0;
+   int i, j, gap;
+   int temp;
+
+   error = ORCcheckpointer (a);
+   if ( error )  goto TERMINATE;
+
+   while (gap * 3 + 1 <= len) {
+      gap=gap * 3 + 1;
+   } 
+   while (gap > 0) {
+      for ( i = gap; i < len; i++ ) {
+         j = i - gap;
+         temp = a[i];             
+         while (( j >= 0 ) && ( a[j] > temp )) {
+            a[j + gap] = a[j];
+            j = j - gap;
+         }
+         a[j + gap] = temp;
+      }
+      gap = ( gap - 1 ) /3;
+   }
+
+TERMINATE:
+   return error;
+} /* End of ORCshellsort */
+

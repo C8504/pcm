@@ -275,6 +275,9 @@ ORCseqlistsort (ORCseqlist *list,
    else if ( alg == ORCALGSORTQUICK ) {
       qsort(list->elemp, list->length, sizeof (int), ORCcompare);
    }
+   else if ( alg == ORCALGSORTSHELL) {
+      error = ORCshellsort (list->elemp, list->length);
+   }
    else {
       error = ORCERRWRONGSORTALG;
    }
