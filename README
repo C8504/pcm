@@ -1,1 +1,50 @@
-This is a lib to learn every thing!
+我一直在思考以下问题，
+•在日常工作中，怎么沉淀我们的编程技术（包括算法，框架，工具）,让我们每天都进步一点点？
+
+•怎么让大家方便的和我们一起研究基础的编程技术，集合大家集体的智慧，最好能写代码，比如用C写几个排序算法，
+那个排序算法比较快等等，怎么使用C语言中的函数指针，怎么让测试自动化，怎么profile C程序, 怎么使用git，vim,make 等等？
+•
+怎么向新手传授基本的编程技术，最好是代码级别的？
+•
+看到非常有趣的算法或者谜题，也想自己实现试试看，但是缺少一个方便的平台来写代码和共享以及讨论。
+
+所以我就写了这个orc：
+
+目录结构
+orc {
+    README
+    bin ---------makefile
+    data---------测试数据
+    include------头文件
+    src-----------源文件
+    tags----------tags vim用来代码跳转
+    test----------测试文件
+}
+
+现在已经实现了的功能（不全）：
+
+   1. 文件统计
+   2. 排序算法
+   3. 查找算法
+   4. 顺序表
+   5. 链表
+   6. 栈
+   7. 数学
+   8. 字符串
+   9. 自动化build
+  10. 自动化测试
+  11. 自动化performance profiling
+
+如何biuld？
+
+   1. goto bin
+   2. Choose a target:
+
+      make [help]      -- print this help screen
+      make [test_readfile.exe]   -- build test_readfile
+      make [orctest]  -- build all tests
+      make [splint]    -- use splint to check all C files
+      make [clean]     -- delete all *.exe and *.log files
+      make [testclean] -- delete all *.log files
+      make [orc] -- compile all c/c++ programs
+      make [tags] -- generate ctags

@@ -1,0 +1,128 @@
+*ORCfile
+{
+   #include "ORC.h"
+   typedef struct {
+      FILE *p;
+      char name[ORCFILENAME];
+      long long nlines;
+      long long nwords;
+      long long nbytes;
+      long long ndigits;
+      long long countofchar[ORCCHAR];
+   } ORCfile;
+
+   int ORCfilecreate(ORCfile **fp);
+   int ORCfilefree(ORCfile **fp);
+
+   int ORCfileopen(ORCfile *fp, const char *name);
+   int ORCfilestatistics(ORCfile *fp);
+   int ORCfilegetline(/*in*/ ORCfile *fp,
+         /*in*/ int     max,
+         /*out*/char    *line,
+         /*out*/int     *length);
+   int ORCfilegetmaxline(ORCfile *fp, char *maxline, int *max);
+   int ORCfilegetinfo(ORCfile *fp);
+    
+}
+
+ORCsort + ORCfind 在ORCseqlist里面被使用
+*ORCsort // 默认为qsort
+{
+   #include "ORC.h"
+   int ORCbubblesort(int *a, int len);
+   int ORCselectsort(int *a, int len);
+   int ORCshellsort (int *a, int len);
+}
+
+＊ORCfind // 默认为ORCoriginfind
+{
+   #include "ORC.h"
+   int ORCoriginfind (int *a, int length, const int elem, int *index);
+   int ORCbinfind (int *a, int length, const int elem, int *index);
+}
+
+*ORCmath
+{
+   #include "ORC.h"
+   int ORCpower(int base, int  n, long long *result);
+}
+
+*ORCseqlist
+{
+   #include "ORC.h"
+   #include "ORCsort.h"
+   #include "ORCfind.h"
+
+   typedef struct {
+      int *elemp;     /* The basic address of list */
+      int  length;        /* The length of list */
+      int  capacity;      /* The capacity of list*/
+   } ORCseqlist;
+
+   typedef ORCseqlist* ORCSList;
+
+   int ORCseqlistinit(ORCseqlist **list);
+   int ORCseqlistfree(ORCseqlist **list);
+   int ORCseqlistcopy(ORCseqlist *list, const int *arr, int count);
+   int ORCseqlistmerge(ORCseqlist *des, const ORCseqlist* src);
+   int ORCseqlistclear(ORCseqlist *list);
+   int ORCseqlistinsert(ORCseqlist *list, int index, const int elem);
+   int ORCseqlistdelete(ORCseqlist *list, int index, int* e);
+   int ORCseqlistdeleteR(ORCseqlist *list);
+   int ORCseqlistoutput(ORCseqlist *list);
+   int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);
+   int ORCseqlistfind(ORCseqlist *list, int length, const int elem,
+         int *index, enum ORCSEARCHALG alg);
+}
+
+*ORClinkedlist
+{
+   #include "ORC.h"
+
+   typedef struct ORClinkednode {
+      char               *elem;
+      struct ORClinkednode *next;
+      struct ORClinkednode *prev;
+   } ORClinkednode;
+
+   typedef struct ORClinkedlist{
+      struct ORClinkednode *first;
+      struct ORClinkednode *last;
+   } ORClinkedlist;
+
+   typedef ORClinkednode* ORClinkednodep;
+   typedef ORClinkedlist* ORClinkedlistp;
+
+   /* ORClinkednode functions */
+   void ORCnodefree           (ORClinkednode **node);
+   int  ORCnodeallocandinit (ORClinkednode **node, const char* elem);
+
+   /* ORClinkedlist functions */
+   int  ORClinkedlistinit   (ORClinkedlist **list);
+   int  ORClinkedlistclear  (ORClinkedlist *list);
+   int  ORClinkedlistfree   (ORClinkedlist **list);
+
+   int  ORClinkedlistappend (ORClinkedlist *list, const char* elem);
+   int  ORClinkedlistinsert (ORClinkedlist *list, int pos, const char* elem);
+   int  ORClinkedlistpop    (ORClinkedlist *list, enum ORCPOPTYPE type);
+
+   int  ORClinkedlistlength (ORClinkedlist *list);
+
+   int  ORClinkedlistoutput (ORClinkedlist *list, const char* sp);
+}
+
+*ORCstack
+{
+   #include "ORC.h"
+   typedef struct {
+      int    top;
+      void   **data;
+      size_t size;
+   } ORCstack;
+
+   int   ORCstackcreate  (ORCstack **sp, size_t size);
+   void  ORCstackfree    (ORCstack **sp, FREEFUNC freefunc);
+   void* ORCstackpop     (ORCstack *s);
+   int   ORCstackpush    (ORCstack *s, void *elem);
+   int   ORCstackisempty (ORCstack *s);
+}
