@@ -10,7 +10,7 @@ ORCstackcreate (ORCstack **sp, size_t size){
    }
 
    if ( *sp == NULL ) {
-      *sp = malloc (sizeof (ORCstack*));
+      *sp = malloc (sizeof (**sp));
       if ( *sp == NULL ) {
          error = ORCERRNOMEMORY;
          goto TERMINATE;
