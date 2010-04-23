@@ -1,96 +1,96 @@
-#include "ORClinkedlist.h"
+#include "PCMlinkedlist.h"
 int testmanyelements()
 {
    int i;
    int error = 0;
-   enum ORCPOPTYPE type;
-   ORClinkedlist* mylist = NULL;
+   enum PCMPOPTYPE type;
+   PCMlinkedlist* mylist = NULL;
 
-   error = ORClinkedlistinit (&mylist);
+   error = PCMlinkedlistinit (&mylist);
    if ( error )  goto TERMINATE;
 
    // insert  elements here
-   error = ORClinkedlistinsert (mylist, 0, "1");
+   error = PCMlinkedlistinsert (mylist, 0, "1");
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistinsert (mylist, 1, "2");
+   error = PCMlinkedlistinsert (mylist, 1, "2");
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistinsert (mylist, ORClinkedlistlength(mylist), "end");
+   error = PCMlinkedlistinsert (mylist, PCMlinkedlistlength(mylist), "end");
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // append 10 elements
    for (i = 0; i < 10; ++i) {
-      error = ORClinkedlistappend (mylist, "a");
+      error = PCMlinkedlistappend (mylist, "a");
       if ( error )  goto TERMINATE;
    }
 
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // append 10 elements too
    for (i = 0; i < 10; ++i) {
-      error = ORClinkedlistappend (mylist, "b");
+      error = PCMlinkedlistappend (mylist, "b");
       if ( error )  goto TERMINATE;
    }
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // insert  elements here
-   error = ORClinkedlistinsert (mylist, 1, "3");
+   error = PCMlinkedlistinsert (mylist, 1, "3");
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistinsert (mylist, 2, "4");
+   error = PCMlinkedlistinsert (mylist, 2, "4");
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistinsert (mylist, ORClinkedlistlength(mylist), "end");
+   error = PCMlinkedlistinsert (mylist, PCMlinkedlistlength(mylist), "end");
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // pop like stack
-   type = ORCPOPSTACK;
+   type = PCMPOPSTACK;
    for (i = 0; i < 5; ++i) {
-      error  = ORClinkedlistpop (mylist, type);
+      error  = PCMlinkedlistpop (mylist, type);
       if ( error )  goto TERMINATE;
    }
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // pop like queue
-   type = ORCPOPQUEUE;
+   type = PCMPOPQUEUE;
    for (i = 0; i < 5; ++i) {
-      error  = ORClinkedlistpop (mylist, type);
+      error  = PCMlinkedlistpop (mylist, type);
       if ( error )  goto TERMINATE;
 
    }
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // pop like stack
-   type = ORCPOPQUEUE;
+   type = PCMPOPQUEUE;
    for (i = 0; i < 10; ++i) {
-      error  = ORClinkedlistpop (mylist, type);
+      error  = PCMlinkedlistpop (mylist, type);
       if ( error )  goto TERMINATE;
    }
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
    // insert 10 elements again
    for (i = 0; i < 10; ++i) {
-      error = ORClinkedlistappend (mylist, "a");
+      error = PCMlinkedlistappend (mylist, "a");
       if ( error )  goto TERMINATE;
    }
 
-   error = ORClinkedlistoutput (mylist, ":");
+   error = PCMlinkedlistoutput (mylist, ":");
    if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistfree (&mylist);
+   error = PCMlinkedlistfree (&mylist);
    if ( error )  goto TERMINATE;
 
    if ( NULL == mylist )  printf ("free list successfully!\n\n");
 
 TERMINATE:
 
-   if ( mylist )  ORClinkedlistfree (&mylist);
+   if ( mylist )  PCMlinkedlistfree (&mylist);
    return error;
 }
 
@@ -103,6 +103,6 @@ int main(void)
    if ( error )  goto TERMINATE;
 
 TERMINATE:
-   ORCcheckerror (error); 
+   PCMcheckerror (error); 
    return 0;
 }

@@ -6,16 +6,16 @@ CPP=.cpp
 INCLUDE=../include/
 TESTDIR=../test/
 LOG=.log
-CSRC=../src/ORClinkedlist$(C)\
+CSRC=../src/PCMlinkedlist$(C)\
           ../src/inout$(C)\
-          ../src/ORCfind$(C)\
-          ../src/ORCsort$(C)\
-          ../src/ORCseqlist$(C)\
-          ../src/ORC$(C)\
-          ../src/ORCstring$(C)\
-          ../src/ORCmath$(C)\
-          ../src/ORCfile$(C)\
-			 ../src/ORCstack$(C)
+          ../src/PCMfind$(C)\
+          ../src/PCMsort$(C)\
+          ../src/PCMseqlist$(C)\
+          ../src/PCM$(C)\
+          ../src/PCMstring$(C)\
+          ../src/PCMmath$(C)\
+          ../src/PCMfile$(C)\
+			 ../src/PCMstack$(C)
 EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
@@ -27,11 +27,11 @@ EXE=test_link_init_and_free$(E)\
          test_sq_insert$(E)\
          test_sq_merge$(E)\
          test_sq_sort_and_find$(E)\
-         test_ORCstring$(E)\
-         test_ORCmath$(E)\
-         test_ORCfile$(E)\
-         test_ORC$(E)\
-			test_ORCstack$(E)
+         test_PCMstring$(E)\
+         test_PCMmath$(E)\
+         test_PCMfile$(E)\
+         test_PCM$(E)\
+			test_PCMstack$(E)
 CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_link_one_element$(C)\
           $(TESTDIR)test_link_many_element$(C)\
@@ -43,11 +43,11 @@ CTEST=$(TESTDIR)test_link_init_and_free$(C)\
           $(TESTDIR)test_sq_insert$(C)\
           $(TESTDIR)test_sq_merge$(C)\
           $(TESTDIR)test_sq_sort_and_find$(C)\
-          $(TESTDIR)test_ORCstring$(C)\
-          $(TESTDIR)test_ORCmath$(C)\
-          $(TESTDIR)test_ORCfile$(C)\
-          $(TESTDIR)test_ORC$(C)\
-			 $(TESTDIR)test_ORCstack$(c)
+          $(TESTDIR)test_PCMstring$(C)\
+          $(TESTDIR)test_PCMmath$(C)\
+          $(TESTDIR)test_PCMfile$(C)\
+          $(TESTDIR)test_PCM$(C)\
+			 $(TESTDIR)test_PCMstack$(c)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
@@ -60,10 +60,10 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_sq_insert$(LOG)\
          test_sq_merge$(LOG)\
          test_sq_sort_and_find$(LOG)\
-         test_ORCstring$(LOG)\
-         test_ORCmath$(LOG)\
-         test_ORCfile$(LOG)\
-         test_ORC$(LOG)\
-			test_ORCstack$(LOG)
+         test_PCMstring$(LOG)\
+         test_PCMmath$(LOG)\
+         test_PCMfile$(LOG)\
+         test_PCM$(LOG)\
+			test_PCMstack$(LOG)
 
 include makefile.common

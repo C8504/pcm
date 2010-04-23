@@ -1,33 +1,33 @@
-#include "ORCseqlist.h"
+#include "PCMseqlist.h"
 
 int main(void)
 {
    int i;
    int error = 0;
    /*    int arr[10];  */
-   /*    ORCseqlist mylist; */
+   /*    PCMseqlist mylist; */
    /*    mylist.elemp = arr; */
    /*    mylist.length = 1; */
    /*    mylist.capacity = 10; */
-   /*    error = ORCseqlistinsert (&mylist, 0, 19); */
+   /*    error = PCMseqlistinsert (&mylist, 0, 19); */
    /*    if ( error )  goto TERMINATE; */
-   ORCseqlist* mylist = NULL;
+   PCMseqlist* mylist = NULL;
 
    printf ("init my list\n");
-   error = ORCseqlistinit (&mylist);
+   error = PCMseqlistinit (&mylist);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistoutput(mylist);
+   error = PCMseqlistoutput(mylist);
    if ( error )  goto TERMINATE;
 
    printf ("free my list\n");
-   error = ORCseqlistfree (&mylist);
+   error = PCMseqlistfree (&mylist);
    if ( error )  goto TERMINATE;
 
    if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:
-   ORCcheckerror (error);
-   if ( NULL != mylist )  ORCseqlistfree (&mylist);
+   PCMcheckerror (error);
+   if ( NULL != mylist )  PCMseqlistfree (&mylist);
 
    return 0;
 }

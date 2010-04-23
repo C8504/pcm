@@ -1,8 +1,8 @@
 /* linked list by John Cui*/
-#include "ORClinkedlist.h"
+#include "PCMlinkedlist.h"
 
    void
-ORCnodefree (ORClinkednode **node)
+PCMnodefree (PCMlinkednode **node)
 {
    if ( *node != NULL ) {
       if ( (*node)->elem != NULL ) {
@@ -12,23 +12,23 @@ ORCnodefree (ORClinkednode **node)
       free (*node);
       *node = NULL;
    }
-} /* End of ORCnodefree */
+} /* End of PCMnodefree */
 
    int
-ORCnodeallocandinit (ORClinkednode **node,
+PCMnodeallocandinit (PCMlinkednode **node,
       const char* elem)
 {
    int error = 0;
 
    *node = malloc (sizeof **node);
    if ( NULL == *node ) {
-      error = ORCERRNOMEMORY;
+      error = PCMERRNOMEMORY;
       goto TERMINATE;
    }
 
    if ( elem != NULL ) {
       size_t ssize = 0;
-      error = ORCstrlen (elem, &ssize);
+      error = PCMstrlen (elem, &ssize);
       if ( error )  goto TERMINATE;
       ++ssize;
 
@@ -39,13 +39,13 @@ ORCnodeallocandinit (ORClinkednode **node,
          free (*node);
          *node = NULL;
 
-         error = ORCERRNOMEMORY;
+         error = PCMERRNOMEMORY;
          goto TERMINATE;
       }
       else {
          //strncat ((*node)->elem, elem, strlen(elem));
          //memcpy ((*node)->elem, elem, ssize);
-         ORCstrncpy ((*node)->elem, elem, ssize);
+         PCMstrncpy ((*node)->elem, elem, ssize);
       }
    }
    else {
@@ -57,16 +57,16 @@ ORCnodeallocandinit (ORClinkednode **node,
 
 TERMINATE:
    return error;
-} /* End of ORCnodeallocandinit */
+} /* End of PCMnodeallocandinit */
 
    int
-ORClinkedlistinit (ORClinkedlist **list)
+PCMlinkedlistinit (PCMlinkedlist **list)
 {
    int error = 0;
 
    *list = malloc (sizeof **list);
    if ( NULL == *list ) {
-      error = ORCERRNOMEMORY;
+      error = PCMERRNOMEMORY;
       goto TERMINATE;
    }
 
@@ -76,35 +76,35 @@ ORClinkedlistinit (ORClinkedlist **list)
 TERMINATE:
 
    return error;
-} /* End of ORClinkedlistinit */
+} /* End of PCMlinkedlistinit */
 
 
 /* free the list*/
    int
-ORClinkedlistfree (ORClinkedlist **list)
+PCMlinkedlistfree (PCMlinkedlist **list)
 {
    int error = 0;
-   ORClinkednode *oldp = NULL;
+   PCMlinkednode *oldp = NULL;
 
    while ((*list)->first != NULL) {
       oldp = (*list)->first;
       (*list)->first = (*list)->first->next;
-      ORCnodefree (&oldp);
+      PCMnodefree (&oldp);
    }
    (*list)->first = (*list)->last = NULL;
    free (*list);
    *list = NULL;
 
    return error;
-} /* End of ORClinkedlistfree */
+} /* End of PCMlinkedlistfree */
 
    int
-ORClinkedlistappend (ORClinkedlist *list,
+PCMlinkedlistappend (PCMlinkedlist *list,
       const char* elem)
 {
-   ORClinkednode *newnode = NULL;
+   PCMlinkednode *newnode = NULL;
 
-   int error = ORCnodeallocandinit (&newnode, elem);
+   int error = PCMnodeallocandinit (&newnode, elem);
    if ( error )  goto TERMINATE;
 
    if ( list->first == NULL &&
@@ -120,31 +120,31 @@ ORClinkedlistappend (ORClinkedlist *list,
 TERMINATE:
 
    return error;
-} /* END of ORClinkedlistappend */
+} /* END of PCMlinkedlistappend */
 
 //insert the newnode after "p"
    int
-ORClinkedlistinsert (ORClinkedlist *list,
+PCMlinkedlistinsert (PCMlinkedlist *list,
       int         pos,
       const char* elem)
 {
    int error;
    int j = 0;
-   int len = ORClinkedlistlength(list);
-   ORClinkednode *p = list->first;
-   ORClinkednode *newnode = NULL;
+   int len = PCMlinkedlistlength(list);
+   PCMlinkednode *p = list->first;
+   PCMlinkednode *newnode = NULL;
 
    // If list is an empty list, then ignore pos
    // and the newnode is the list->first and list->last
    if ( len == 0 ) {
-      error = ORCnodeallocandinit (&newnode, elem);
+      error = PCMnodeallocandinit (&newnode, elem);
       if ( error )  goto TERMINATE;
       list->first = list->last = newnode;
    }
    else {
       // if pos == len, then just append it
       if ( pos == len ) {
-         error = ORClinkedlistappend (list, elem);
+         error = PCMlinkedlistappend (list, elem);
          if ( error )  goto TERMINATE;
       }
       // if pos in the middle of list
@@ -152,7 +152,7 @@ ORClinkedlistinsert (ORClinkedlist *list,
          // check pos
          if ( pos < 1  ||
                pos > len  ) {
-            error = ORCERRNOTVALIDINDEX;
+            error = PCMERRNOTVALIDINDEX;
             goto TERMINATE;
          }
 
@@ -163,7 +163,7 @@ ORClinkedlistinsert (ORClinkedlist *list,
          }
 
          // creat newnode
-         error = ORCnodeallocandinit (&newnode, elem);
+         error = PCMnodeallocandinit (&newnode, elem);
          if ( error )  goto TERMINATE;
 
          // insert the newnode after "p"
@@ -175,18 +175,18 @@ ORClinkedlistinsert (ORClinkedlist *list,
 
 TERMINATE:
    return error;
-} /* End of ORClinkedlistinsert */
+} /* End of PCMlinkedlistinsert */
 
    int
-ORClinkedlistoutput (ORClinkedlist *list,
+PCMlinkedlistoutput (PCMlinkedlist *list,
       const char* sp)
 {
    int error = 0;
 
-   ORClinkednode *p;
+   PCMlinkednode *p;
 
    if ( list == NULL ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -203,7 +203,7 @@ ORClinkedlistoutput (ORClinkedlist *list,
          p = p->next;
       }
       printf ("\n");
-      printf ("Have %d elements in this list\n\n", ORClinkedlistlength (list));
+      printf ("Have %d elements in this list\n\n", PCMlinkedlistlength (list));
    }
    else {
       printf ("This is an empty list now\n\n");
@@ -211,31 +211,31 @@ ORClinkedlistoutput (ORClinkedlist *list,
 
 TERMINATE:
    return error;
-} /* End of ORClinkedlistoutput */
+} /* End of PCMlinkedlistoutput */
 
    int
-ORClinkedlistclear (ORClinkedlist *list)
+PCMlinkedlistclear (PCMlinkedlist *list)
 {
    int error = 0;
 
-   while (0 != ORClinkedlistlength (list)) {
-      error = ORClinkedlistpop (list, ORCPOPSTACK);
+   while (0 != PCMlinkedlistlength (list)) {
+      error = PCMlinkedlistpop (list, PCMPOPSTACK);
       if ( error )  goto TERMINATE;
    }
 
 TERMINATE:
    return error;
-} /* End of ORClinkedlistclear */
+} /* End of PCMlinkedlistclear */
 
 // Pop is a method used in both stack and queue with type 
    int
-ORClinkedlistpop (ORClinkedlist *list,
-      enum ORCPOPTYPE type)
+PCMlinkedlistpop (PCMlinkedlist *list,
+      enum PCMPOPTYPE type)
 {
    int error = 0;
-   ORClinkednode *p = NULL;
+   PCMlinkednode *p = NULL;
 
-   if ( type == ORCPOPQUEUE ) {
+   if ( type == PCMPOPQUEUE ) {
       if ( list->first != NULL ) {
          p = list->first;
 
@@ -251,11 +251,11 @@ ORClinkedlistpop (ORClinkedlist *list,
          }
       }
       else {
-         error = ORCERREMPTYLIST;
+         error = PCMERREMPTYLIST;
          goto TERMINATE;
       }
    }
-   else if ( type == ORCPOPSTACK ) {
+   else if ( type == PCMPOPSTACK ) {
       if ( list->last != NULL ) {
          p = list->last;
 
@@ -269,12 +269,12 @@ ORClinkedlistpop (ORClinkedlist *list,
          }
       }
       else {
-         error = ORCERREMPTYLIST;
+         error = PCMERREMPTYLIST;
          goto TERMINATE;
       }
    }
    else {
-      error = ORCERRNOTSTACKANDQUEUE;
+      error = PCMERRNOTSTACKANDQUEUE;
       goto TERMINATE;
    }
 
@@ -283,13 +283,13 @@ ORClinkedlistpop (ORClinkedlist *list,
 
 TERMINATE:
    return error;
-} /* End of ORClinkedlistpop */
+} /* End of PCMlinkedlistpop */
 
    int
-ORClinkedlistlength(ORClinkedlist *list)
+PCMlinkedlistlength(PCMlinkedlist *list)
 {
    int length = 0;
-   ORClinkednode *p = list->first;
+   PCMlinkednode *p = list->first;
 
    while (p != NULL) {
       ++length;
@@ -297,5 +297,5 @@ ORClinkedlistlength(ORClinkedlist *list)
    }
 
    return length;
-} /* END of ORClinkedlistlength */
+} /* END of PCMlinkedlistlength */
 

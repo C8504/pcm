@@ -1,46 +1,46 @@
 /* sequence list by John Cui*/
-#include "ORC.h"
-#include "ORCsort.h"
-#include "ORCfind.h"
-#include "ORCseqlist.h"
+#include "PCM.h"
+#include "PCMsort.h"
+#include "PCMfind.h"
+#include "PCMseqlist.h"
 
    int
-ORCseqlistinit (ORCseqlist **list)
+PCMseqlistinit (PCMseqlist **list)
 {
    int error = 0;
 
    *list = malloc(sizeof **list);
    if ( *list == NULL ) {
-      error = ORCERRNOMEMORY;
+      error = PCMERRNOMEMORY;
       goto TERMINATE;
    }
-   (*list)->elemp = malloc(ORCLISTINITSIZE * sizeof(int));
+   (*list)->elemp = malloc(PCMLISTINITSIZE * sizeof(int));
    if ( (*list)->elemp == NULL ) {
-      error = ORCERRNOMEMORY;
+      error = PCMERRNOMEMORY;
       goto TERMINATE;
    }
    (*list)->length = 0;
-   (*list)->capacity = ORCLISTINITSIZE;
+   (*list)->capacity = PCMLISTINITSIZE;
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistinit */
+} /* End of PCMseqlistinit */
 
 /* Free the list*/
    int
-ORCseqlistfree (ORCseqlist **list)
+PCMseqlistfree (PCMseqlist **list)
 {
    int error = 0;
    int temp = 0;
 
    if ( NULL == list ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
-         error = ORCseqlistdelete(*list, (*list)->length - 1, &temp);
+         error = PCMseqlistdelete(*list, (*list)->length - 1, &temp);
          if ( error != 0 )  goto TERMINATE;
       }
       free((*list)->elemp);
@@ -53,63 +53,63 @@ ORCseqlistfree (ORCseqlist **list)
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistfree */
+} /* End of PCMseqlistfree */
 
 /* Copy an array to the list with count */
    int
-ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)
+PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)
 {
    int i;
    int error = 0;
 
    if ( NULL == list || NULL == arr) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
    for (i = 0; i < count; ++i) {
-      error = ORCseqlistinsert(list, list->length, arr[i]);
+      error = PCMseqlistinsert(list, list->length, arr[i]);
       if ( error != 0 )  goto TERMINATE;
    }
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistcopy*/
+} /* End of PCMseqlistcopy*/
 
 /* Merge two lists */
    int
-ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)
+PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)
 {
    int i;
    int error = 0;
    int index = -1;
 
    if ( NULL == des || NULL == src) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
    for (i = 0; i < src->length ; ++i) {
-      error = ORCseqlistinsert(des, des->length, src->elemp[i]);
+      error = PCMseqlistinsert(des, des->length, src->elemp[i]);
       if ( error != 0 )  goto TERMINATE;
    }
 
-   error = ORCseqlistsort (des, des->length, 0);
+   error = PCMseqlistsort (des, des->length, 0);
    if ( error )  goto TERMINATE;
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistmerge*/
+} /* End of PCMseqlistmerge*/
 
 /* Clear the whole list*/
    int
-ORCseqlistclear (ORCseqlist *list)
+PCMseqlistclear (PCMseqlist *list)
 {
    int error = 0;
    int temp = 0;
 
    while (list->length != 0) {
-      error = ORCseqlistdelete(list, list->length - 1, &temp);
+      error = PCMseqlistdelete(list, list->length - 1, &temp);
       if ( error != 0 )  {
          printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
@@ -118,11 +118,11 @@ ORCseqlistclear (ORCseqlist *list)
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistclear*/
+} /* End of PCMseqlistclear*/
 
 /* Insert an elem to the list with index*/
    int
-ORCseqlistinsert (ORCseqlist *list,
+PCMseqlistinsert (PCMseqlist *list,
       int index,
       const int elem)
 {
@@ -134,7 +134,7 @@ ORCseqlistinsert (ORCseqlist *list,
    //check index
    if ( index < 0            ||
          index > list->length   ) {
-      error = ORCERRNOTVALIDINDEX;
+      error = PCMERRNOTVALIDINDEX;
       goto TERMINATE;
    }
 
@@ -143,12 +143,12 @@ ORCseqlistinsert (ORCseqlist *list,
    if ( list-> length == list->capacity) {
       list->elemp =
          (int*) realloc (list->elemp,
-               sizeof (int) * (list->capacity + ORCLISTINCREMENT));
+               sizeof (int) * (list->capacity + PCMLISTINCREMENT));
       if ( list->elemp == NULL ) {
-         error = ORCERRNOMEMORY;
+         error = PCMERRNOMEMORY;
          goto TERMINATE;
       }
-      list->capacity += ORCLISTINCREMENT;
+      list->capacity += PCMLISTINCREMENT;
    }
 
    //move elements which is after list[index] to next
@@ -163,11 +163,11 @@ ORCseqlistinsert (ORCseqlist *list,
 
 TERMINATE:
    return error;
-} /* END of ORCseqlistinsert */
+} /* END of PCMseqlistinsert */
 
 /* Delete an element in index, and save the deleted element to *e*/
    int
-ORCseqlistdelete (ORCseqlist *list,
+PCMseqlistdelete (PCMseqlist *list,
       int index,
       int *e)
 {
@@ -179,7 +179,7 @@ ORCseqlistdelete (ORCseqlist *list,
    //check index
    if ( index < 0              ||
          index > list->length - 1   ) {
-      error = ORCERRNOTVALIDINDEX;
+      error = PCMERRNOTVALIDINDEX;
       goto TERMINATE;
    }
 
@@ -195,38 +195,38 @@ ORCseqlistdelete (ORCseqlist *list,
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistdelete */
+} /* End of PCMseqlistdelete */
 
 /* Delete the repeat element in list */
    int
-ORCseqlistdeleteR(ORCseqlist *list)
+PCMseqlistdeleteR(PCMseqlist *list)
 {
    int error = 0;
    int i, index, e;
 
    for (i = list->length; i > 0; --i) {
-      error = ORCseqlistfind(list, i-1, list->elemp[i-1], &index, 0);
+      error = PCMseqlistfind(list, i-1, list->elemp[i-1], &index, 0);
       if ( error != 0 )  goto TERMINATE;
 
       if ( index != -1 ) {
-         error = ORCseqlistdelete (list, index, &e);
+         error = PCMseqlistdelete (list, index, &e);
          if ( error != 0 )  goto TERMINATE;
       }
    }
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistdeleteR */
+} /* End of PCMseqlistdeleteR */
 
 /* Output the list */
    int
-ORCseqlistoutput (ORCseqlist *list)
+PCMseqlistoutput (PCMseqlist *list)
 {
    int i;
    int error = 0;
 
    if ( NULL == list ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -246,18 +246,18 @@ ORCseqlistoutput (ORCseqlist *list)
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistoutput */
+} /* End of PCMseqlistoutput */
 
 /* Sort list by customize algorithm, bubble sort by default */
    int
-ORCseqlistsort (ORCseqlist *list,
+PCMseqlistsort (PCMseqlist *list,
       int length,
-      enum ORCSORTALG alg)
+      enum PCMSORTALG alg)
 {
    int error = 0;
 
    if ( NULL == list ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -266,38 +266,38 @@ ORCseqlistsort (ORCseqlist *list,
    }
 
    // take qsort as default alg
-   if ( alg == ORCALGSORTSELECT) {
-      error = ORCselectsort(list->elemp, length);
+   if ( alg == PCMALGSORTSELECT) {
+      error = PCMselectsort(list->elemp, length);
    }
-   else if ( alg == ORCALGSORTBUBBLE ) {
-      error = ORCbubblesort(list->elemp, list->length);
+   else if ( alg == PCMALGSORTBUBBLE ) {
+      error = PCMbubblesort(list->elemp, list->length);
    }
-   else if ( alg == ORCALGSORTQUICK ) {
-      qsort(list->elemp, list->length, sizeof (int), ORCcompare);
+   else if ( alg == PCMALGSORTQUICK ) {
+      qsort(list->elemp, list->length, sizeof (int), PCMcompare);
    }
-   else if ( alg == ORCALGSORTSHELL) {
-      error = ORCshellsort (list->elemp, list->length);
+   else if ( alg == PCMALGSORTSHELL) {
+      error = PCMshellsort (list->elemp, list->length);
    }
    else {
-      error = ORCERRWRONGSORTALG;
+      error = PCMERRWRONGSORTALG;
    }
 
 TERMINATE:
    return error;
-} /* End of ORCsqlistsort */
+} /* End of PCMsqlistsort */
 
 /* Find element in list by customize algorithm, Origin Find by default */
    int
-ORCseqlistfind (ORCseqlist *list,
+PCMseqlistfind (PCMseqlist *list,
       int length,
       const int elem,
       int *index,
-      enum ORCSEARCHALG alg)
+      enum PCMSEARCHALG alg)
 {
    int error = 0;
 
    if ( NULL == list ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
@@ -307,18 +307,18 @@ ORCseqlistfind (ORCseqlist *list,
       length = list->length;
    }
 
-   // take ORCoriginfind as default alg
-   if ( ORCALGORIGINFIND == alg ) {
-      error = ORCoriginfind (list->elemp, length, elem, index);
+   // take PCMoriginfind as default alg
+   if ( PCMALGORIGINFIND == alg ) {
+      error = PCMoriginfind (list->elemp, length, elem, index);
    }
-   else if ( ORCALGBINFIND == alg) {
-      error = ORCbinfind (list->elemp, length, elem, index);
+   else if ( PCMALGBINFIND == alg) {
+      error = PCMbinfind (list->elemp, length, elem, index);
    }
    else {
-      error = ORCoriginfind (list->elemp, length, elem, index);
+      error = PCMoriginfind (list->elemp, length, elem, index);
    }
 
 TERMINATE:
    return error;
-} /* End of ORCseqlistfind */
+} /* End of PCMseqlistfind */
 

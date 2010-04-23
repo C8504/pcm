@@ -1,6 +1,6 @@
-#include "ORCstring.h"
+#include "PCMstring.h"
    int
-ORCdelcharofstring (char * str,
+PCMdelcharofstring (char * str,
       int  c)
 {
    int i     = 0;
@@ -9,7 +9,7 @@ ORCdelcharofstring (char * str,
 
    /*    assert (str != NULL); */
    if ( str == NULL ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
@@ -23,17 +23,17 @@ ORCdelcharofstring (char * str,
 
 TERMINATE:
    return error;
-} /* End of ORCdelcharofstring */
+} /* End of PCMdelcharofstring */
 
    int
-ORCstrlen (const char *str,
+PCMstrlen (const char *str,
       size_t     *len)
 {
    int i     = 0;
    int error = 0;
 
    if ( str == NULL ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
@@ -44,16 +44,16 @@ ORCstrlen (const char *str,
 
 TERMINATE:
    return error;
-} /* End of ORCstrlen */
+} /* End of PCMstrlen */
 
    int
-ORCstrtrim (char *str)
+PCMstrtrim (char *str)
 {
    int error = 0;
    size_t n  = 0;
    int i     = 0;
 
-   error = ORCstrlen (str, &n);
+   error = PCMstrlen (str, &n);
    if ( error ) {
       printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
@@ -68,10 +68,10 @@ ORCstrtrim (char *str)
 
 TERMINATE:
    return error;
-} /* End of ORCstrtrim*/
+} /* End of PCMstrtrim*/
 
    int
-ORCstreverse (char *str)
+PCMstreverse (char *str)
 {
    int error = 0;
    int i     = 0;
@@ -80,7 +80,7 @@ ORCstreverse (char *str)
 
    size_t n  = 0;
 
-   error = ORCstrlen (str, &n);
+   error = PCMstrlen (str, &n);
    if ( error ) {
       printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
@@ -88,9 +88,9 @@ ORCstreverse (char *str)
 
    if ( n > 0 ) {
       j = n - 1;
-      /* Can not use ORCswapint here */
+      /* Can not use PCMswapint here */
       while (i < j) {
-         ORCswapchar (str, i, j);
+         PCMswapchar (str, i, j);
          ++i;
          --j;
       }
@@ -101,10 +101,10 @@ TERMINATE:
 } /* End of ORcstreverse */
 
 /*
-   ORCstrncpy copy src to des, with length n.
+   PCMstrncpy copy src to des, with length n.
    */
    int
-ORCstrncpy (char       *des,
+PCMstrncpy (char       *des,
       const char *src,
       int n)
 {
@@ -116,10 +116,10 @@ ORCstrncpy (char       *des,
    if ( des == NULL ||
          src == NULL   ) {
       printf ("In %s, line %d ;",__FILE__, __LINE__);
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
    }
    else {
-      error = ORCstrlen (src, &len);
+      error = PCMstrlen (src, &len);
       if ( error ) {
          printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
@@ -139,10 +139,10 @@ ORCstrncpy (char       *des,
 
 TERMINATE:
    return error;
-} /* End of ORCstrncpy*/
+} /* End of PCMstrncpy*/
 
    int
-ORCstrncat (char *des,
+PCMstrncat (char *des,
       const char *src,
       int n)
 {
@@ -152,11 +152,11 @@ ORCstrncat (char *des,
 
    if( des == NULL ||
          src == NULL ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
-      error = ORCstrlen (src, &len);
+      error = PCMstrlen (src, &len);
       if ( error ) {
          printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
@@ -180,10 +180,10 @@ ORCstrncat (char *des,
 
 TERMINATE:
    return error;
-} /* End of ORCstrncat function*/
+} /* End of PCMstrncat function*/
 
 int
-ORCstrblkstoblk (char *str) {
+PCMstrblkstoblk (char *str) {
    int error = 0;
    int lastc = 'a';
    int i = 0;
@@ -201,10 +201,10 @@ ORCstrblkstoblk (char *str) {
 
 TERMINATE:
    return error;
-} /* End of ORCstrlbkstoblk*/
+} /* End of PCMstrlbkstoblk*/
 
    int
-ORCstrindex(char *str, char *substr, int *index)
+PCMstrindex(char *str, char *substr, int *index)
 {
    int error = 0;
    int i = 0;
@@ -213,7 +213,7 @@ ORCstrindex(char *str, char *substr, int *index)
 
    if ( (str    == NULL) ||
          (substr == NULL)   ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
@@ -230,5 +230,5 @@ ORCstrindex(char *str, char *substr, int *index)
 
 TERMINATE:
    return error;
-} /* End of ORCstrindex*/
+} /* End of PCMstrindex*/
 

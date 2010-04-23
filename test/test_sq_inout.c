@@ -12,7 +12,7 @@ main (void)
 
 TERMINATE:
 
-   ORCcheckerror (error);
+   PCMcheckerror (error);
    return 0;
 }
 

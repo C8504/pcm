@@ -6,7 +6,7 @@
    如果遇到错误或遇到end of file，返回值为EOF。
    */
 #include "inout.h"
-#include "ORCseqlist.h"
+#include "PCMseqlist.h"
 
 int inout()
 {
@@ -17,14 +17,14 @@ int inout()
    int count = 0;
    int sum = 0;
 
-   ORCseqlist *list = NULL;
-   error = ORCseqlistinit(&list);
+   PCMseqlist *list = NULL;
+   error = PCMseqlistinit(&list);
    if ( error )  goto TERMINATE;
 
    printf("Please input intergers:\n");
 
    while (1 == scanf ("%d", &num)) {
-      error = ORCseqlistinsert(list, count, num);
+      error = PCMseqlistinsert(list, count, num);
       if ( error )  goto TERMINATE;
       sum += num;
 
@@ -39,19 +39,19 @@ int inout()
       count++;
    }
 
-   error = ORCseqlistsort (list, list->length, ORCALGSORTSELECT);
+   error = PCMseqlistsort (list, list->length, PCMALGSORTSELECT);
    if ( error )  goto TERMINATE;
 
-   //error = ORCseqlistsort (list, list->length, ORCALGSORTBUBBLE);
+   //error = PCMseqlistsort (list, list->length, PCMALGSORTBUBBLE);
    //if ( error )  goto TERMINATE;
 
-   // error = ORCseqlistsort (list, list->length, 0);
+   // error = PCMseqlistsort (list, list->length, 0);
    //if ( error )  goto TERMINATE;
 
-   error = ORCseqlistoutput (list);
+   error = PCMseqlistoutput (list);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistfree (&list);
+   error = PCMseqlistfree (&list);
    if ( error )  goto TERMINATE;
 
    printf ("You have input %d integers\n", count);

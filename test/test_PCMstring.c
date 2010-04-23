@@ -11,7 +11,7 @@
  */
 
 #include<stdio.h>
-#include "ORCstring.h"
+#include "PCMstring.h"
 
 int main (void)
 {
@@ -24,120 +24,120 @@ int main (void)
    /*    char *str = "Thip"; */
    /*    str[1] = 'o'; */
 
-   // test ORCstrlen and ORCstrtrim
+   // test PCMstrlen and PCMstrtrim
    char str1[] = "";
    char str2[] = " ";
    char str3[] = "a b ";
    char str4[] = "ab   ";
 
-   error = ORCstrlen (str1, &len);
+   error = PCMstrlen (str1, &len);
    if ( error )  goto TERMINATE;
    printf ("str1 = %s, len = %d\n", str1,len);
 
-   error = ORCstrlen (str2, &len);
+   error = PCMstrlen (str2, &len);
    if ( error )  goto TERMINATE;
    printf ("str2 = %s, len = %d\n", str2,len);
 
-   error = ORCstrtrim (str1);
+   error = PCMstrtrim (str1);
    if ( error )  goto TERMINATE;
 
-   error = ORCstrtrim (str2);
+   error = PCMstrtrim (str2);
    if ( error )  goto TERMINATE;
 
-   error = ORCstrtrim (str3);
+   error = PCMstrtrim (str3);
    if ( error )  goto TERMINATE;
 
-   error = ORCstrtrim (str4);
+   error = PCMstrtrim (str4);
    if ( error )  goto TERMINATE;
 
-   error = ORCstrlen (str1, &len);
+   error = PCMstrlen (str1, &len);
    if ( error )  goto TERMINATE;
    printf ("str1 = %s, %d\n", str1, len);
 
-   error = ORCstrlen (str2, &len);
+   error = PCMstrlen (str2, &len);
    if ( error )  goto TERMINATE;
    printf ("str2 = %s, %d\n", str2, len);
 
-   error = ORCstrlen (str3, &len);
+   error = PCMstrlen (str3, &len);
    if ( error )  goto TERMINATE;
    printf ("str3 = %s, %d\n", str3, len);
 
-   error = ORCstrlen (str4, &len);
+   error = PCMstrlen (str4, &len);
    if ( error )  goto TERMINATE;
    printf ("str4 = %s, %d\n", str4, len);
 
-   // test ORCstreverse
-   ORCstrncpy(str, "Thisisastring", sizeof(str));
+   // test PCMstreverse
+   PCMstrncpy(str, "Thisisastring", sizeof(str));
    /*    strncpy(str, "Thisisastring", sizeof(str)); */
    printf ("str = %s\n", str);
-   error = ORCstreverse (str);
+   error = PCMstreverse (str);
    if ( error )  goto TERMINATE;
    printf ("str = %s\n", str);
 
-   error = ORCstreverse (str);
+   error = PCMstreverse (str);
    if ( error )  goto TERMINATE;
    printf ("str = %s\n", str);
 
-   // test ORCstrdelcharofstring and ORCstrlen
+   // test PCMstrdelcharofstring and PCMstrlen
    /*    strncat(str, "This is a string", 10); */
    /* strncpy(str, "This is a string", 10); */
-   error = ORCstrlen (str, &len);
+   error = PCMstrlen (str, &len);
    if ( error )  goto TERMINATE;
    printf ("str = %s, len = %d\n", str,len);
    if ( error )  goto TERMINATE;
-   error = ORCdelcharofstring(str, 'p');
+   error = PCMdelcharofstring(str, 'p');
    if ( error )  goto TERMINATE;
    printf ("%s",str);
    printf ("\n");
 
-   error = ORCdelcharofstring(str, 't');
+   error = PCMdelcharofstring(str, 't');
    if ( error )  goto TERMINATE;
    printf ("%s", str);
    printf ("\n");
 
-   error = ORCstrlen (str, &len);
+   error = PCMstrlen (str, &len);
    if ( error )  goto TERMINATE;
    printf ("str = %s, len = %d\n", str,len);
 
 
-   // test ORCstrncat function
-   char tail[] = "test_ORCstrncat";
-   /*    error = ORCstrncat (str, tail, sizeof tail); */
-   error = ORCstrncat (str, tail, -1);
+   // test PCMstrncat function
+   char tail[] = "test_PCMstrncat";
+   /*    error = PCMstrncat (str, tail, sizeof tail); */
+   error = PCMstrncat (str, tail, -1);
    if( error )
    {
       goto TERMINATE;
    }
-   error = ORCstrlen (str, &len);
+   error = PCMstrlen (str, &len);
    if ( error )  goto TERMINATE;
    printf ("str = %s, len = %d\n", str,len);
 
-   // test ORCstrblkstoblk
-   char bstr[] = "  test  ORCstrblkstoblk  !";
+   // test PCMstrblkstoblk
+   char bstr[] = "  test  PCMstrblkstoblk  !";
    /*    char bstr[] = "ab      "; */
    /*    char bstr[] = "        ab      "; */
    /*    char bstr[] = "        a    b      "; */
-   error = ORCstrblkstoblk (bstr);
+   error = PCMstrblkstoblk (bstr);
    if ( error )  goto TERMINATE;
-   error = ORCstrlen (bstr, &len);
+   error = PCMstrlen (bstr, &len);
    if ( error )  goto TERMINATE;
    printf ("bstr = %s, len = %d\n", bstr,len);
 
-   // test ORCstrindex
+   // test PCMstrindex
    char bigstr[] = "defefgdefk";
    char substr[] = "def";
    int index;
-   error = ORCstrindex (bigstr, substr, &index);
+   error = PCMstrindex (bigstr, substr, &index);
    if ( error )  goto TERMINATE;
    
    printf ("The last %s in %s at %d\n", substr, bigstr, index);
 
-   error = ORCdelcharofstring(NULL, 't');
+   error = PCMdelcharofstring(NULL, 't');
    if ( error )  goto TERMINATE;
    printf ("%s",str);
    printf ("\n");
 
 TERMINATE:
-   ORCcheckerror (error); 
+   PCMcheckerror (error); 
    return 0;
 }

@@ -4,40 +4,40 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-   // POP type in ORCseqlist
-   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};
+   // POP type in PCMseqlist
+   enum PCMPOPTYPE {PCMPOPQUEUE = 0, PCMPOPSTACK};
 
-   #define ORCLISTINITSIZE    5
-   #define ORCLISTINCREMENT   5
+   #define PCMLISTINITSIZE    5
+   #define PCMLISTINCREMENT   5
 
-   #define ORCFILEMAXLINE         1000
-   #define ORCFILENAME            20
-   #define ORCCHAR                128 
+   #define PCMFILEMAXLINE         1000
+   #define PCMFILENAME            20
+   #define PCMCHAR                128 
 
    enum BOOL {
       FALSE,
       TRUE
    };
    // ERROR CODE
-   enum ORCERR {
-      ORCERRSTART = 10000,
-      ORCERRNOMEMORY,
-      ORCERRNOTVALIDINDEX,
-      ORCERRNULLPOINTER,
-      ORCERRELEMENTNOTFOUND,
-      ORCERREMPTYLIST,
-      ORCERRNOTSTACKANDQUEUE,
-      ORCERRWRONGSORTALG,
-      ORCERREND   = 20000
+   enum PCMERR {
+      PCMERRSTART = 10000,
+      PCMERRNOMEMORY,
+      PCMERRNOTVALIDINDEX,
+      PCMERRNULLPOINTER,
+      PCMERRELEMENTNOTFOUND,
+      PCMERREMPTYLIST,
+      PCMERRNOTSTACKANDQUEUE,
+      PCMERRWRONGSORTALG,
+      PCMERREND   = 20000
    };
 
    // Alg
-   enum ORCSORTALG {ORCALGSORTSELECT = 80001,
-                    ORCALGSORTBUBBLE,
-                    ORCALGSORTQUICK,
-                    ORCALGSORTSHELL};
-   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,
-                      ORCALGBINFIND};
+   enum PCMSORTALG {PCMALGSORTSELECT = 80001,
+                    PCMALGSORTBUBBLE,
+                    PCMALGSORTQUICK,
+                    PCMALGSORTSHELL};
+   enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
+                      PCMALGBINFIND};
 
    // function handle
 

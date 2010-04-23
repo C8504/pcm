@@ -12,13 +12,13 @@ extern "C" {
 
    static
       ErrorMap errorMap[] = {
-         {ORCERRNOMEMORY,                "Out of memory "},
-         {ORCERRNULLPOINTER,             "Null pointer for required data "},
-         {ORCERRNOTVALIDINDEX,           "Not valid index"},
-         {ORCERRELEMENTNOTFOUND,         "Element not found"},
-         {ORCERREMPTYLIST,               "Empty list"},
-         {ORCERRNOTSTACKANDQUEUE,        "Can not use pop in stack and queue"},
-         {ORCERRWRONGSORTALG,            "Not this kind sort algorithm"},
+         {PCMERRNOMEMORY,                "Out of memory "},
+         {PCMERRNULLPOINTER,             "Null pointer for required data "},
+         {PCMERRNOTVALIDINDEX,           "Not valid index"},
+         {PCMERRELEMENTNOTFOUND,         "Element not found"},
+         {PCMERREMPTYLIST,               "Empty list"},
+         {PCMERRNOTSTACKANDQUEUE,        "Can not use pop in stack and queue"},
+         {PCMERRWRONGSORTALG,            "Not this kind sort algorithm"},
       };
 
 #ifdef __cplusplus

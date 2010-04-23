@@ -5,30 +5,30 @@
 extern "C" {
 #endif
 
-#include "ORC.h"
-#include "ORCsort.h"
-#include "ORCfind.h"
+#include "PCM.h"
+#include "PCMsort.h"
+#include "PCMfind.h"
 
    typedef struct {
       int *elemp;     /* The basic address of list */
       int  length;        /* The length of list */
       int  capacity;      /* The capacity of list*/
-   } ORCseqlist;
+   } PCMseqlist;
 
-   typedef ORCseqlist* ORCSList;
+   typedef PCMseqlist* PCMSList;
 
-   int ORCseqlistinit(ORCseqlist **list);
-   int ORCseqlistfree(ORCseqlist **list);
-   int ORCseqlistcopy(ORCseqlist *list, const int *arr, int count);
-   int ORCseqlistmerge(ORCseqlist *des, const ORCseqlist* src);
-   int ORCseqlistclear(ORCseqlist *list);
-   int ORCseqlistinsert(ORCseqlist *list, int index, const int elem);
-   int ORCseqlistdelete(ORCseqlist *list, int index, int* e);
-   int ORCseqlistdeleteR(ORCseqlist *list);
-   int ORCseqlistoutput(ORCseqlist *list);
-   int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);
-   int ORCseqlistfind(ORCseqlist *list, int length, const int elem,
-         int *index, enum ORCSEARCHALG alg);
+   int PCMseqlistinit(PCMseqlist **list);
+   int PCMseqlistfree(PCMseqlist **list);
+   int PCMseqlistcopy(PCMseqlist *list, const int *arr, int count);
+   int PCMseqlistmerge(PCMseqlist *des, const PCMseqlist* src);
+   int PCMseqlistclear(PCMseqlist *list);
+   int PCMseqlistinsert(PCMseqlist *list, int index, const int elem);
+   int PCMseqlistdelete(PCMseqlist *list, int index, int* e);
+   int PCMseqlistdeleteR(PCMseqlist *list);
+   int PCMseqlistoutput(PCMseqlist *list);
+   int PCMseqlistsort(PCMseqlist *list, int length, enum PCMSORTALG alg);
+   int PCMseqlistfind(PCMseqlist *list, int length, const int elem,
+         int *index, enum PCMSEARCHALG alg);
 #ifdef __cplusplus
 }
 #endif

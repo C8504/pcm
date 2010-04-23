@@ -1,22 +1,22 @@
-#ifndef H_ORCSTACK
-#define H_ORCSTACK
+#ifndef H_PCMSTACK
+#define H_PCMSTACK
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-   #include "ORC.h"
+   #include "PCM.h"
    typedef struct {
       int    top;
       void   **data;
       size_t size;
-   } ORCstack;
+   } PCMstack;
 
-   int   ORCstackcreate  (ORCstack **sp, size_t size);
-   void  ORCstackfree    (ORCstack **sp, FREEFUNC freefunc);
-   void* ORCstackpop     (ORCstack *s);
-   int   ORCstackpush    (ORCstack *s, void *elem);
-   int   ORCstackisempty (ORCstack *s);
+   int   PCMstackcreate  (PCMstack **sp, size_t size);
+   void  PCMstackfree    (PCMstack **sp, FREEFUNC freefunc);
+   void* PCMstackpop     (PCMstack *s);
+   int   PCMstackpush    (PCMstack *s, void *elem);
+   int   PCMstackisempty (PCMstack *s);
 
 #ifdef __cplusplus   
 }

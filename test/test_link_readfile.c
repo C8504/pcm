@@ -1,4 +1,4 @@
-#include "ORClinkedlist.h"
+#include "PCMlinkedlist.h"
 
 int main(void)
 {
@@ -6,36 +6,36 @@ int main(void)
    int error = 0;
    FILE *fp;
    char line[256];
-   ORClinkedlist *mylist1 = NULL;
-   ORClinkedlist *mylist2 = NULL;
+   PCMlinkedlist *mylist1 = NULL;
+   PCMlinkedlist *mylist2 = NULL;
 
    fp = fopen ("../data/git.txt", "r");
    if ( fp == NULL)  {
-      printf ("ORC Error: fopen error!\n");
+      printf ("PCM Error: fopen error!\n");
       goto TERMINATE;
    }
-   error = ORClinkedlistinit (&mylist1);
+   error = PCMlinkedlistinit (&mylist1);
    if ( error )  goto TERMINATE;
-   error = ORClinkedlistinit (&mylist2);
+   error = PCMlinkedlistinit (&mylist2);
    if ( error )  goto TERMINATE;
 
 
    while (fgets (line, 256, fp) != NULL) {
-      error = ORClinkedlistappend (mylist1, line);
+      error = PCMlinkedlistappend (mylist1, line);
       if ( error )  goto TERMINATE;
       if ( strstr (line, "malloc") != NULL) {
-         error = ORClinkedlistappend (mylist2, line);
+         error = PCMlinkedlistappend (mylist2, line);
          if ( error )  goto TERMINATE;
       }
    }
 
-   ORClinkedlistoutput (mylist1, NULL);
-   ORClinkedlistoutput (mylist2, NULL);
-   ORClinkedlistfree (&mylist1);
-   ORClinkedlistfree (&mylist2);
+   PCMlinkedlistoutput (mylist1, NULL);
+   PCMlinkedlistoutput (mylist2, NULL);
+   PCMlinkedlistfree (&mylist1);
+   PCMlinkedlistfree (&mylist2);
    fclose (fp);
 
 TERMINATE:
-   ORCcheckerror (error); 
+   PCMcheckerror (error); 
    return 0;
 }

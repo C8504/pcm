@@ -1,20 +1,20 @@
-#ifndef H_ORCSTRING
-#define H_ORCSTRING
+#ifndef H_PCMSTRING
+#define H_PCMSTRING
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "ORC.h"
-   int ORCdelcharofstring(char * str, int c);
-   int ORCstrlen(const char *str, size_t *len);
-   int ORCstrtrim(char *str);
-   int ORCstreverse(char *str);
-   int ORCstrncpy(char *des, const char *src, int n);
-   int ORCstrncat(char *des, const char *src, int n);
+#include "PCM.h"
+   int PCMdelcharofstring(char * str, int c);
+   int PCMstrlen(const char *str, size_t *len);
+   int PCMstrtrim(char *str);
+   int PCMstreverse(char *str);
+   int PCMstrncpy(char *des, const char *src, int n);
+   int PCMstrncat(char *des, const char *src, int n);
    /* Replace blanks with blank in string*/ 
-   int ORCstrblkstoblk(char *str);
-   int ORCstrindex(char *str, char* substr, int *index);
+   int PCMstrblkstoblk(char *str);
+   int PCMstrindex(char *str, char* substr, int *index);
 
 #ifdef __cplusplus
 }

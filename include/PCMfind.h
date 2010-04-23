@@ -5,9 +5,9 @@
 extern "C" {
 #endif
 
-#include "ORC.h"
-   int ORCoriginfind (int *a, int length, const int elem, int *index);
-   int ORCbinfind (int *a, int length, const int elem, int *index);
+#include "PCM.h"
+   int PCMoriginfind (int *a, int length, const int elem, int *index);
+   int PCMbinfind (int *a, int length, const int elem, int *index);
 
 #ifdef __cplusplus
 }

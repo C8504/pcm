@@ -1,6 +1,6 @@
-#include "ORCmath.h"
+#include "PCMmath.h"
    int 
-ORCpower(int base,
+PCMpower(int base,
       int  n,
       long long *result)
 {
@@ -8,7 +8,7 @@ ORCpower(int base,
    long long p = 1LL;
 
    if ( n < 0 ) {
-      error = ORCERRNOTVALIDINDEX;
+      error = PCMERRNOTVALIDINDEX;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
    }
    else {
@@ -25,5 +25,5 @@ ORCpower(int base,
 
 TERMINATE:
    return error;
-} /* End of ORCpower*/
+} /* End of PCMpower*/
 

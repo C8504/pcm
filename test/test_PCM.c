@@ -1,4 +1,4 @@
-#include "ORC.h" 
+#include "PCM.h" 
 
 int main(void)
 {
@@ -8,7 +8,7 @@ int main(void)
    size_t nrows = 10;
    size_t ncols = 10;
 
-   p = (int **)ORCdarraynew(nrows, ncols, sizeof(int));
+   p = (int **)PCMdarraynew(nrows, ncols, sizeof(int));
   
    for (i = 0; i < nrows; ++i) {
       for (j = 0; j < ncols; ++j){
@@ -23,7 +23,7 @@ int main(void)
       }
    }
 
-   ORCdarrayfree (p);
+   PCMdarrayfree (p);
    
    return 0;
 }

@@ -1,28 +1,28 @@
-#include "ORC.h"
+#include "PCM.h"
 void
-ORCcheckerror (int error) {
+PCMcheckerror (int error) {
    int i = 0;
 
-   if ( error > ORCERRSTART &&
-         error < ORCERREND     ) {
+   if ( error > PCMERRSTART &&
+         error < PCMERREND     ) {
       int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
 
       for (i = 0; i < nErrors; ++i) {
          if ( errorMap[i].error == error ) {
-            printf ("ORC Error: %s\n", errorMap[i].str);
+            printf ("PCM Error: %s\n", errorMap[i].str);
          }
       }
    }
    else if ( error != 0 ) {
-      /*       printf ("errno = %d, ORC Error(by system function calling): %s\n",  */
+      /*       printf ("errno = %d, PCM Error(by system function calling): %s\n",  */
       /*             error, strerror (error)); */
-      perror("ORC Error(by system function calling) ");
+      perror("PCM Error(by system function calling) ");
    }
 
-} /* End of ORCcheckerror*/
+} /* End of PCMcheckerror*/
 
 void
-ORCswapchar (char* arr,
+PCMswapchar (char* arr,
       int i,
       int j){
    int temp;
@@ -33,7 +33,7 @@ ORCswapchar (char* arr,
 }
 
 int
-ORCcompare (const void *x,
+PCMcompare (const void *x,
       const void *y) {
    const int *a = (const int*)x;
    const int *b = (const int*)y;
@@ -47,7 +47,7 @@ ORCcompare (const void *x,
 }
 
    void**
-ORCdarraynew (size_t row, size_t col, size_t size)
+PCMdarraynew (size_t row, size_t col, size_t size)
 {
    void **arr;
 
@@ -65,26 +65,26 @@ ORCdarraynew (size_t row, size_t col, size_t size)
    }
 
    return arr;
-} /* End of ORCdarraynew*/
+} /* End of PCMdarraynew*/
 
    void
-ORCdarrayfree (void **arr)
+PCMdarrayfree (void **arr)
 {
    free (arr);
-} /* End of ORCdarrayfree*/
+} /* End of PCMdarrayfree*/
 
    int 
-ORCcheckpointer(void *p)
+PCMcheckpointer(void *p)
 {
    int error = 0;
 
    if ( p == NULL ) {
-      error = ORCERRNULLPOINTER;
+      error = PCMERRNULLPOINTER;
       goto TERMINATE;
    }
 
 TERMINATE:
    return error;
-}/* End of ORCcheckpointer*/
+}/* End of PCMcheckpointer*/
 
 

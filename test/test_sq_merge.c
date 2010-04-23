@@ -1,4 +1,4 @@
-#include "ORCseqlist.h"
+#include "PCMseqlist.h"
 
 int main(void)
 {
@@ -8,45 +8,45 @@ int main(void)
    int a[5] = {1, 3, 3, 7, 7};
    int b[5] = {1, 3, 6, 6, 10};
 
-   ORCSList odd = NULL;
-   ORCSList even = NULL;
+   PCMSList odd = NULL;
+   PCMSList even = NULL;
 
-   error = ORCseqlistinit (&odd);
+   error = PCMseqlistinit (&odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistinit (&even);
+   error = PCMseqlistinit (&even);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistcopy (odd, a, 5);
+   error = PCMseqlistcopy (odd, a, 5);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistcopy (even, b, 5);
+   error = PCMseqlistcopy (even, b, 5);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistmerge (odd, even);
+   error = PCMseqlistmerge (odd, even);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistdeleteR (odd);
+   error = PCMseqlistdeleteR (odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistoutput (odd);
+   error = PCMseqlistoutput (odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistoutput (even);
+   error = PCMseqlistoutput (even);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistfree (&odd);
+   error = PCMseqlistfree (&odd);
    if ( error )  goto TERMINATE;
 
-   error = ORCseqlistfree (&even);
+   error = PCMseqlistfree (&even);
    if ( error )  goto TERMINATE;
 
    if ( even == NULL )  printf ("free even successfully!\n");
    if ( odd == NULL  )  printf ("free odd successfully!\n");
 TERMINATE:
-   ORCcheckerror (error);
-   if ( NULL != odd  )  ORCseqlistfree (&odd);
-   if ( NULL != even )  ORCseqlistfree (&even);
+   PCMcheckerror (error);
+   if ( NULL != odd  )  PCMseqlistfree (&odd);
+   if ( NULL != even )  PCMseqlistfree (&even);
 
    return 0;
 }

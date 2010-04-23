@@ -1,14 +1,14 @@
-#include "ORCsort.h"
+#include "PCMsort.h"
 
    int
-ORCselectsort(int *a,
+PCMselectsort(int *a,
       int len)
 {
    int error = 0;
    int i, j, min;
    int t;
 
-   error = ORCcheckpointer (a);
+   error = PCMcheckpointer (a);
    if ( error )  goto TERMINATE;
 
    for (i = 0; i < len; ++i) {
@@ -28,17 +28,17 @@ ORCselectsort(int *a,
 
 TERMINATE:
    return error;
-} /* End of ORCselectsort*/
+} /* End of PCMselectsort*/
 
    int
-ORCbubblesort(int *a,
+PCMbubblesort(int *a,
       int len)
 {
    int error = 0;
    int i, j;
    int t;
 
-   error = ORCcheckpointer (a);
+   error = PCMcheckpointer (a);
    if ( error )  goto TERMINATE;
 
    for (i = 0; i < len; ++i) {
@@ -53,17 +53,17 @@ ORCbubblesort(int *a,
 
 TERMINATE:
    return error;
-} /* End of ORCbubblesort*/
+} /* End of PCMbubblesort*/
 
    int
-ORCshellsort(int *a,
+PCMshellsort(int *a,
       int len)
 {
    int error = 0;
    int i, j, gap;
    int temp;
 
-   error = ORCcheckpointer (a);
+   error = PCMcheckpointer (a);
    if ( error )  goto TERMINATE;
 
    while (gap * 3 + 1 <= len) {
@@ -84,5 +84,5 @@ ORCshellsort(int *a,
 
 TERMINATE:
    return error;
-} /* End of ORCshellsort */
+} /* End of PCMshellsort */
 

@@ -31,10 +31,10 @@
 extern "C" {
 #endif
 
-#include "ORC.h"
-   int ORCbubblesort(int *a, int len);
-   int ORCselectsort(int *a, int len);
-   int ORCshellsort (int *a, int len);
+#include "PCM.h"
+   int PCMbubblesort(int *a, int len);
+   int PCMselectsort(int *a, int len);
+   int PCMshellsort (int *a, int len);
 
 #ifdef __cplusplus
 }

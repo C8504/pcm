@@ -1,31 +1,31 @@
-#ifndef H_ORCFILE
-#define H_ORCFILE
+#ifndef H_PCMFILE
+#define H_PCMFILE
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "ORC.h"
+#include "PCM.h"
    typedef struct {
       FILE *p;
-      char name[ORCFILENAME];
+      char name[PCMFILENAME];
       long long nlines;
       long long nwords;
       long long nbytes;
       long long ndigits;
-      long long countofchar[ORCCHAR];
-   } ORCfile;
+      long long countofchar[PCMCHAR];
+   } PCMfile;
 
-   int ORCfilecreate(ORCfile **fp);
-   int ORCfilefree(ORCfile **fp);
+   int PCMfilecreate(PCMfile **fp);
+   int PCMfilefree(PCMfile **fp);
 
-   int ORCfileopen(ORCfile *fp, const char *name);
-   int ORCfilestatistics(ORCfile *fp);
-   int ORCfilegetline(/*in*/ ORCfile *fp,
+   int PCMfileopen(PCMfile *fp, const char *name);
+   int PCMfilestatistics(PCMfile *fp);
+   int PCMfilegetline(/*in*/ PCMfile *fp,
          /*in*/ int     max,
          /*out*/char    *line,
          /*out*/int     *length);
-   int ORCfilegetmaxline(ORCfile *fp, char *maxline, int *max);
-   int ORCfilegetinfo(ORCfile *fp);
+   int PCMfilegetmaxline(PCMfile *fp, char *maxline, int *max);
+   int PCMfilegetinfo(PCMfile *fp);
 
 #ifdef __cplusplus
 }

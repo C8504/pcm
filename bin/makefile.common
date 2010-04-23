@@ -8,11 +8,11 @@ help:
 	;echo "" \
 	;echo "make [help]      -- print this help screen" \
 	;echo "make [test_readfile.exe]   -- build test_readfile" \
-	;echo "make [orctest]  -- build all tests" \
+	;echo "make [pcmtest]  -- build all tests" \
 	;echo "make [splint]    -- use splint to check all C files" \
 	;echo "make [clean]     -- delete all *.exe and *.log files"\
 	;echo "make [testclean] -- delete all *.log files"\
-	;echo "make [orc]"      -- compile all c/c++ programs\
+	;echo "make [pcm]"      -- compile all c/c++ programs\
 	;echo "make [tags]"     -- generate ctags\
 	)
 
@@ -29,14 +29,14 @@ tags:
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                   
-orc: $(EXE) tags
+pcm: $(EXE) tags
 
-orctest: $(LOGFILES)
-	@if test `cat $(LOGFILES) | grep 'ORC Error' | wc -l` -gt 0; then \
+pcmtest: $(LOGFILES)
+	@if test `cat $(LOGFILES) | grep 'PCM Error' | wc -l` -gt 0; then \
 	  echo "";\
-	  echo "ORC Errors found!"; \
+	  echo "PCM Errors found!"; \
 	  echo "";\
-     grep 'ORC Error' *.log > error;cat error;\
+     grep 'PCM Error' *.log > error;cat error;\
 	else \
 	  echo "All tests completed successfully"; \
 	fi
@@ -102,30 +102,30 @@ test_sq_sort_and_find$(E): $(CSRC) $(TESTDIR)test_sq_sort_and_find$(C)
 test_sq_sort_and_find$(LOG): test_sq_sort_and_find$(E)
 	$(call test,test_sq_sort_and_find)
 
-test_ORCstring$(E): $(CSRC) $(TESTDIR)test_ORCstring$(C)
-	$(call compile,test_ORCstring)
-test_ORCstring$(LOG): test_ORCstring$(E)
-	$(call test,test_ORCstring)
+test_PCMstring$(E): $(CSRC) $(TESTDIR)test_PCMstring$(C)
+	$(call compile,test_PCMstring)
+test_PCMstring$(LOG): test_PCMstring$(E)
+	$(call test,test_PCMstring)
 
-test_ORCmath$(E): $(CSRC) $(TESTDIR)test_ORCmath$(C)
-	$(call compile,test_ORCmath)
-test_ORCmath$(LOG): test_ORCmath$(E)
-	$(call test,test_ORCmath)
+test_PCMmath$(E): $(CSRC) $(TESTDIR)test_PCMmath$(C)
+	$(call compile,test_PCMmath)
+test_PCMmath$(LOG): test_PCMmath$(E)
+	$(call test,test_PCMmath)
 
-test_ORCfile$(E): $(CSRC) $(TESTDIR)test_ORCfile$(C)
-	$(call compile,test_ORCfile)
-test_ORCfile$(LOG): test_ORCfile$(E)
-	$(call test,test_ORCfile)
+test_PCMfile$(E): $(CSRC) $(TESTDIR)test_PCMfile$(C)
+	$(call compile,test_PCMfile)
+test_PCMfile$(LOG): test_PCMfile$(E)
+	$(call test,test_PCMfile)
 
-test_ORC$(E): $(CSRC) $(TESTDIR)test_ORC$(C)
-	$(call compile,test_ORC)
-test_ORC$(LOG): test_ORC$(E)
-	$(call test,test_ORC)
+test_PCM$(E): $(CSRC) $(TESTDIR)test_PCM$(C)
+	$(call compile,test_PCM)
+test_PCM$(LOG): test_PCM$(E)
+	$(call test,test_PCM)
 
-test_ORCstack$(E): $(CSRC) $(TESTDIR)test_ORCstack$(C)
-	$(call compile,test_ORCstack)
-test_ORCstack$(LOG): test_ORCstack$(E)
-	$(call test,test_ORCstack)
+test_PCMstack$(E): $(CSRC) $(TESTDIR)test_PCMstack$(C)
+	$(call compile,test_PCMstack)
+test_PCMstack$(LOG): test_PCMstack$(E)
+	$(call test,test_PCMstack)
 
 # C++ files
 cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)

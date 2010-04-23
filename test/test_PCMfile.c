@@ -1,6 +1,6 @@
 // using splint to check bounds
 // splint test.c +bounds
-#include "ORCfile.h"
+#include "PCMfile.h"
 
    int
 main(int argc, char **argv)
@@ -8,42 +8,42 @@ main(int argc, char **argv)
 {
    int error = 0;
 
-   ORCfile *fp = NULL;
+   PCMfile *fp = NULL;
 
-   error = ORCfilecreate(&fp);
+   error = PCMfilecreate(&fp);
    if ( error )  goto TERMINATE;
 
-   /* error = ORCfileopen(fp, "../data/git.txt"); */
-   /* error = ORCfileopen(fp,"../data/01.mps");*/
-   /* error = ORCfileopen(fp, "makefile");*/
-   /* error = ORCfileopen(fp, "../data/questions.txt"); */
-   error = ORCfileopen(fp, argv[1]);
+   /* error = PCMfileopen(fp, "../data/git.txt"); */
+   /* error = PCMfileopen(fp,"../data/01.mps");*/
+   /* error = PCMfileopen(fp, "makefile");*/
+   /* error = PCMfileopen(fp, "../data/questions.txt"); */
+   error = PCMfileopen(fp, argv[1]);
    if ( error )  goto TERMINATE;
 
-   error = ORCfilestatistics(fp);
+   error = PCMfilestatistics(fp);
    if ( error )  goto TERMINATE;
 
-   char str[ORCFILEMAXLINE] = {0};
+   char str[PCMFILEMAXLINE] = {0};
    int len = 0;
 
-   error = ORCfilegetmaxline (fp, str, &len);
+   error = PCMfilegetmaxline (fp, str, &len);
    if ( error )  goto TERMINATE;
    printf ("+The longest line is: %s, length = %d\n", str, len);
 
    /* printf ("cat %s\n", fp->name);*/
 
    /*do{*/
-   /*error = ORCfilegetline(fp, ORCFILEMAXLINE, str, &len);*/
+   /*error = PCMfilegetline(fp, PCMFILEMAXLINE, str, &len);*/
    /*if ( error )  goto TERMINATE;*/
    /*printf ("%s", str);*/
    /*}*/
    /*while (len > 0);*/
 
 
-   error = ORCfilefree(&fp);
+   error = PCMfilefree(&fp);
    if ( error )  goto TERMINATE;
 
 TERMINATE:
-   ORCcheckerror(error);
+   PCMcheckerror(error);
    return 0;
 }

@@ -1,7 +1,7 @@
-#include "ORCfind.h"
+#include "PCMfind.h"
 
    int
-ORCoriginfind(int *a,
+PCMoriginfind(int *a,
       int length,
       const int elem,
       int *index)
@@ -9,7 +9,7 @@ ORCoriginfind(int *a,
    int error = 0;
    int i;
    
-   error = ORCcheckpointer (a);
+   error = PCMcheckpointer (a);
    if ( error )  goto TERMINATE;
 
    for (i = 0; i < length; ++i) {
@@ -20,10 +20,10 @@ ORCoriginfind(int *a,
 
 TERMINATE:
    return error;
-} /* End of ORCoriginfind*/
+} /* End of PCMoriginfind*/
 
    int
-ORCbinfind(int *a, 
+PCMbinfind(int *a, 
       int length, 
       const int elem, 
       int *index)
@@ -33,7 +33,7 @@ ORCbinfind(int *a,
    int low = 0;
    int high = length-1;
    
-   error = ORCcheckpointer (a);
+   error = PCMcheckpointer (a);
    if ( error )  goto TERMINATE;
 
    *index = -1;
@@ -53,5 +53,5 @@ ORCbinfind(int *a,
 
 TERMINATE:
    return error;
-} /* End of ORCbinfind*/
+} /* End of PCMbinfind*/
 

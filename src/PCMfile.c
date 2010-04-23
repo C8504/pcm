@@ -1,37 +1,37 @@
-#include "ORCfile.h"
+#include "PCMfile.h"
 
 int
-ORCfilecreate (ORCfile **fp) {
+PCMfilecreate (PCMfile **fp) {
    int i     = 0;
    int error = 0;
 
    *fp = malloc (sizeof **fp);
    if ( *fp == NULL ) {
-      error = ORCERRNOMEMORY;
+      error = PCMERRNOMEMORY;
       goto TERMINATE;
    }
 
    (*fp)->p       = NULL;
-   error = ORCstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
+   error = PCMstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
    if ( error )  goto TERMINATE;
    (*fp)->nlines  = 0LL;
    (*fp)->nbytes  = 0LL;
    (*fp)->ndigits = 0LL;
    (*fp)->nwords  = 0LL;
 
-   for (i = 0; i < ORCCHAR; ++i) {
+   for (i = 0; i < PCMCHAR; ++i) {
       (*fp)->countofchar[i] = 0;
    }
 
 TERMINATE:
    return error;
-} /* End of ORCfilecreate*/
+} /* End of PCMfilecreate*/
 
 int
-ORCfilefree (ORCfile **fp){
+PCMfilefree (PCMfile **fp){
    int error = 0;
 
-   error = ORCcheckpointer (fp);
+   error = PCMcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
    if ( (*fp)->p != NULL ){
@@ -44,13 +44,13 @@ ORCfilefree (ORCfile **fp){
 
 TERMINATE:
    return error;
-} /* End of ORCfilefree*/
+} /* End of PCMfilefree*/
 
 int
-ORCfileopen (ORCfile *fp, const char *name){
+PCMfileopen (PCMfile *fp, const char *name){
    int error = 0;
 
-   error = ORCcheckpointer (fp);
+   error = PCMcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
    if ((fp->p = fopen(name, "r")) == NULL) {
@@ -58,24 +58,24 @@ ORCfileopen (ORCfile *fp, const char *name){
       goto TERMINATE;
    }
    else {
-      error = ORCstrncpy(fp->name, name, sizeof fp->name - 1);
+      error = PCMstrncpy(fp->name, name, sizeof fp->name - 1);
       if ( error )  goto TERMINATE;
     }
 
 TERMINATE:
    return error;
-} /* End of ORCfileopen */
+} /* End of PCMfileopen */
 
    int
-ORCfilestatistics (ORCfile *fp)
+PCMfilestatistics (PCMfile *fp)
 {
    int error = 0;
    int i     = 0;
    
-   error = ORCcheckpointer (fp);
+   error = PCMcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
-   error = ORCfilegetinfo(fp);
+   error = PCMfilegetinfo(fp);
    if ( error )  goto TERMINATE;
 
    printf ("File name: %s\n", fp->name);
@@ -84,7 +84,7 @@ ORCfilestatistics (ORCfile *fp)
    printf ("There are %lld bytes\n", fp->nbytes);
    printf ("There are %lld digits\n", fp->ndigits);
 
-/*   for (i = 0; i < ORCCHAR; ++i) {*/
+/*   for (i = 0; i < PCMCHAR; ++i) {*/
 /*      if (isprint(i)) {*/
 /*         printf ("Count of char ");*/
 /*         putchar((char)(i));*/
@@ -96,15 +96,15 @@ ORCfilestatistics (ORCfile *fp)
 
 TERMINATE:
    return error;
-} /* End of ORCfilestatistics*/
+} /* End of PCMfilestatistics*/
 
 int
-ORCfilegetinfo (ORCfile *fp){
+PCMfilegetinfo (PCMfile *fp){
    int error = 0;
    int state = 0;
    int c;
 
-   error = ORCcheckpointer (fp);
+   error = PCMcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
    while ((c = getc(fp->p)) != EOF) {
@@ -135,10 +135,10 @@ ORCfilegetinfo (ORCfile *fp){
 
 TERMINATE:
    return error;
-} /* End of ORCfilepgetinfo*/
+} /* End of PCMfilepgetinfo*/
 
    int
-ORCfilegetline (ORCfile *fp,
+PCMfilegetline (PCMfile *fp,
       int     max,
       char    *line,
       int     *length)
@@ -147,7 +147,7 @@ ORCfilegetline (ORCfile *fp,
    int c     = 0;
    int i     = 0;
 
-   error = ORCcheckpointer (fp);
+   error = PCMcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
    while ((i < max-1               ) &&
@@ -166,26 +166,26 @@ ORCfilegetline (ORCfile *fp,
 
 TERMINATE:
    return error;
-} /* End of ORCfilegetline */
+} /* End of PCMfilegetline */
 
 int
-ORCfilegetmaxline (ORCfile *fp,
+PCMfilegetmaxline (PCMfile *fp,
       char     *maxline,
       int      *max) {
    int error = 0;
    int len   = 0;
-   char line[ORCFILEMAXLINE] = {0};
+   char line[PCMFILEMAXLINE] = {0};
    
-   error = ORCcheckpointer (fp);
+   error = PCMcheckpointer (fp);
    if ( error )  goto TERMINATE;
 
    *max = len;
    do {
-      error = ORCfilegetline (fp, ORCFILEMAXLINE, line, &len);
+      error = PCMfilegetline (fp, PCMFILEMAXLINE, line, &len);
       if ( error )  goto TERMINATE;
       if ( len > *max ) {
          *max = len;
-         error = ORCstrncpy (maxline, line, ORCFILEMAXLINE);
+         error = PCMstrncpy (maxline, line, PCMFILEMAXLINE);
          if ( error )  goto TERMINATE;
       }
    }
@@ -195,5 +195,5 @@ ORCfilegetmaxline (ORCfile *fp,
 
 TERMINATE:
    return error;
-} /* End of ORCfilegetmaxline*/
+} /* End of PCMfilegetmaxline*/
 

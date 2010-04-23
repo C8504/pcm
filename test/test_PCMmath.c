@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<limits.h>
-#include "ORCmath.h"
+#include "PCMmath.h"
 
 int main (void)
 {
@@ -11,18 +11,18 @@ int main (void)
    int base = 2;
    int index = 62;
 
-   error = ORCpower (base, index, &r);
+   error = PCMpower (base, index, &r);
    if ( error )  goto TERMINATE;
 
-   printf ("ORCpower(%d,%d) == %lld\n", base, index, r);
+   printf ("PCMpower(%d,%d) == %lld\n", base, index, r);
 
    base = 100;
    index = -1;
-   error = ORCpower (base, index, &r);
+   error = PCMpower (base, index, &r);
    if ( error )  goto TERMINATE;
 
-   printf ("ORCpower(%d,%d) == %lld\n", base, index, r);
+   printf ("PCMpower(%d,%d) == %lld\n", base, index, r);
 TERMINATE:
-   ORCcheckerror (error); 
+   PCMcheckerror (error); 
    return 0;
 }

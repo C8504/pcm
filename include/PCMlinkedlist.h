@@ -5,38 +5,38 @@
 extern "C" {
 #endif
 
-#include "ORC.h"
+#include "PCM.h"
 
-   typedef struct ORClinkednode {
+   typedef struct PCMlinkednode {
       char               *elem;
-      struct ORClinkednode *next;
-      struct ORClinkednode *prev;
-   } ORClinkednode;
+      struct PCMlinkednode *next;
+      struct PCMlinkednode *prev;
+   } PCMlinkednode;
 
-   typedef struct ORClinkedlist{
-      struct ORClinkednode *first;
-      struct ORClinkednode *last;
-   } ORClinkedlist;
+   typedef struct PCMlinkedlist{
+      struct PCMlinkednode *first;
+      struct PCMlinkednode *last;
+   } PCMlinkedlist;
 
-   typedef ORClinkednode* ORClinkednodep;
-   typedef ORClinkedlist* ORClinkedlistp;
+   typedef PCMlinkednode* PCMlinkednodep;
+   typedef PCMlinkedlist* PCMlinkedlistp;
 
-   /* ORClinkednode functions */
-   void ORCnodefree           (ORClinkednode **node);
-   int  ORCnodeallocandinit (ORClinkednode **node, const char* elem);
+   /* PCMlinkednode functions */
+   void PCMnodefree           (PCMlinkednode **node);
+   int  PCMnodeallocandinit (PCMlinkednode **node, const char* elem);
 
-   /* ORClinkedlist functions */
-   int  ORClinkedlistinit   (ORClinkedlist **list);
-   int  ORClinkedlistclear  (ORClinkedlist *list);
-   int  ORClinkedlistfree   (ORClinkedlist **list);
+   /* PCMlinkedlist functions */
+   int  PCMlinkedlistinit   (PCMlinkedlist **list);
+   int  PCMlinkedlistclear  (PCMlinkedlist *list);
+   int  PCMlinkedlistfree   (PCMlinkedlist **list);
 
-   int  ORClinkedlistappend (ORClinkedlist *list, const char* elem);
-   int  ORClinkedlistinsert (ORClinkedlist *list, int pos, const char* elem);
-   int  ORClinkedlistpop    (ORClinkedlist *list, enum ORCPOPTYPE type);
+   int  PCMlinkedlistappend (PCMlinkedlist *list, const char* elem);
+   int  PCMlinkedlistinsert (PCMlinkedlist *list, int pos, const char* elem);
+   int  PCMlinkedlistpop    (PCMlinkedlist *list, enum PCMPOPTYPE type);
 
-   int  ORClinkedlistlength (ORClinkedlist *list);
+   int  PCMlinkedlistlength (PCMlinkedlist *list);
 
-   int  ORClinkedlistoutput (ORClinkedlist *list, const char* sp);
+   int  PCMlinkedlistoutput (PCMlinkedlist *list, const char* sp);
 
 #ifdef __cplusplus
 }

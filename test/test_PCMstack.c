@@ -1,4 +1,4 @@
-#include "ORCstack.h"
+#include "PCMstack.h"
 
 int main(void)
 {
@@ -12,9 +12,9 @@ int main(void)
 
    void *p = NULL;
 
-   ORCstack *s = NULL;
+   PCMstack *s = NULL;
 
-   error = ORCstackcreate (&s, 3);
+   error = PCMstackcreate (&s, 3);
 
    if( error ) {
       goto TERMINATE;
@@ -23,7 +23,7 @@ int main(void)
    //integer
    printf ("integer stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = ORCstackpush (s, &a[i]);
+      error = PCMstackpush (s, &a[i]);
       if ( error )  goto TERMINATE;
    }
    for (i = 0; i < 5; ++i) {
@@ -32,10 +32,10 @@ int main(void)
    putchar('\n');
 
    for (i = 0; i < 5; ++i) {
-      printf ("%d is poped\n", *(int*)(ORCstackpop(s)));
+      printf ("%d is poped\n", *(int*)(PCMstackpop(s)));
    }
 
-   if ( ORCstackisempty(s) ) {
+   if ( PCMstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
 
@@ -43,7 +43,7 @@ int main(void)
    //float
    printf ("float stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = ORCstackpush (s, &b[i]);
+      error = PCMstackpush (s, &b[i]);
       if ( error )  goto TERMINATE;
    }
 
@@ -53,10 +53,10 @@ int main(void)
    putchar('\n');
 
    for (i = 0; i < 5; ++i) {
-      printf ("%.2f is poped\n", *(float*)(ORCstackpop(s)));
+      printf ("%.2f is poped\n", *(float*)(PCMstackpop(s)));
    }
 
-   if ( ORCstackisempty(s) ) {
+   if ( PCMstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
 
@@ -64,7 +64,7 @@ int main(void)
    //char
    printf ("char stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = ORCstackpush (s, &c[i]);
+      error = PCMstackpush (s, &c[i]);
       if ( error )  goto TERMINATE;
    }
 
@@ -74,17 +74,17 @@ int main(void)
    putchar('\n');
 
    for (i = 0; i < 5; ++i) {
-      printf ("%c is poped\n", *(char*)(ORCstackpop(s)));
+      printf ("%c is poped\n", *(char*)(PCMstackpop(s)));
    }
 
-   if ( ORCstackisempty(s) ) {
+   if ( PCMstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
 
    //strarray
    printf ("str array stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = ORCstackpush (s, strarr[i]);
+      error = PCMstackpush (s, strarr[i]);
       if ( error )  goto TERMINATE;
    }
 
@@ -94,9 +94,9 @@ int main(void)
    putchar('\n');
 
    for (i = 0; i < 5; ++i) {
-      printf ("%s is poped\n", (char*)(ORCstackpop(s)));
+      printf ("%s is poped\n", (char*)(PCMstackpop(s)));
    }
-   if ( ORCstackisempty(s) ) {
+   if ( PCMstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
 
@@ -107,7 +107,7 @@ int main(void)
       strcpy(dynamicstrarr[i], strarr[i]);
    }
    for (i = 0; i < 5; ++i) {
-      error = ORCstackpush (s, dynamicstrarr[i]);
+      error = PCMstackpush (s, dynamicstrarr[i]);
       if ( error )  goto TERMINATE;
    }
 
@@ -117,16 +117,16 @@ int main(void)
    putchar('\n');
 
    /*    for (i = 0; i < 5; ++i) { */
-   /*       p = ORCstackpop(s); */
+   /*       p = PCMstackpop(s); */
    /*       printf ("%s is poped\n", (char*)p); */
    /*       free (p); */
    /*    } */
-   if ( ORCstackisempty(s) ) {
+   if ( PCMstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
 
 TERMINATE:
-   ORCstackfree (&s, free);
-   ORCcheckerror (error);
+   PCMstackfree (&s, free);
+   PCMcheckerror (error);
    return 0;
 }

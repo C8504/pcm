@@ -1,25 +1,25 @@
-#include "ORClinkedlist.h"
+#include "PCMlinkedlist.h"
 
 int main(void)
 {
    int i = 0;
    int error = 0;
 
-/*    ORClinkedlist *mylist = NULL; */
-/*    ORClinkedlist mylist; */
+/*    PCMlinkedlist *mylist = NULL; */
+/*    PCMlinkedlist mylist; */
 /*    mylist = &l; */
-/*    ORClinkedlist *p = &mylist; */
-   ORClinkedlist *p = NULL;
-   error = ORClinkedlistinit (&p);
+/*    PCMlinkedlist *p = &mylist; */
+   PCMlinkedlist *p = NULL;
+   error = PCMlinkedlistinit (&p);
    if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistoutput (p, ":");
+   error = PCMlinkedlistoutput (p, ":");
    if ( error )  goto TERMINATE;
 
-   error = ORClinkedlistfree (&p);
+   error = PCMlinkedlistfree (&p);
    if ( error )  goto TERMINATE;
 
 TERMINATE:
-   ORCcheckerror (error); 
+   PCMcheckerror (error); 
    return 0;
 }

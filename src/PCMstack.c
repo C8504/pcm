@@ -1,7 +1,7 @@
-#include "ORCstack.h"
+#include "PCMstack.h"
 
 int
-ORCstackcreate (ORCstack **sp, size_t size){
+PCMstackcreate (PCMstack **sp, size_t size){
    int error = 0;
 
    if ( 0 == size ) {
@@ -12,13 +12,13 @@ ORCstackcreate (ORCstack **sp, size_t size){
    if ( *sp == NULL ) {
       *sp = malloc (sizeof (**sp));
       if ( *sp == NULL ) {
-         error = ORCERRNOMEMORY;
+         error = PCMERRNOMEMORY;
          goto TERMINATE;
       }
       else {
          (*sp)->data = malloc (size * sizeof (void*));
          if ( (*sp)->data == NULL ) {
-            error = ORCERRNOMEMORY;
+            error = PCMERRNOMEMORY;
             free (*sp);
             *sp = NULL;
             goto TERMINATE;
@@ -33,13 +33,13 @@ ORCstackcreate (ORCstack **sp, size_t size){
 
 TERMINATE:
    return error;
-} /* End of ORCstackcreate */
+} /* End of PCMstackcreate */
 
 /* freefunc is used to free the dynamic momery which
  * in (*sp)->data pointers array, if the pointer in (*sp)->data
  * was allocated dynamicly, otherwise pass NULL to freefunc*/
    void
-ORCstackfree (ORCstack **sp, FREEFUNC freefunc)
+PCMstackfree (PCMstack **sp, FREEFUNC freefunc)
 {
    int i = 0;
 
@@ -59,10 +59,10 @@ ORCstackfree (ORCstack **sp, FREEFUNC freefunc)
          *sp = NULL;
       }
    }
-} /* End of ORCstackfree */
+} /* End of PCMstackfree */
 
    int 
-ORCstackpush (ORCstack *s, void *elem)
+PCMstackpush (PCMstack *s, void *elem)
 {
    int error = 0;
 
@@ -73,7 +73,7 @@ ORCstackpush (ORCstack *s, void *elem)
       if ( s->top >= s->size ) {
          s->data = realloc (s->data, 2 * (s->size) * sizeof(void *));
          if ( s == NULL ) {
-            error = ORCERRNOMEMORY;
+            error = PCMERRNOMEMORY;
             goto TERMINATE;
          }
          else {
@@ -86,10 +86,10 @@ ORCstackpush (ORCstack *s, void *elem)
 
 TERMINATE:
    return error;
-} /* End of ORCstackpush */
+} /* End of PCMstackpush */
 
    void*
-ORCstackpop (ORCstack *s)
+PCMstackpop (PCMstack *s)
 {
    void *elem;
 
@@ -102,14 +102,14 @@ ORCstackpop (ORCstack *s)
    }
 
    return elem;
-} /* End of ORCstackpop */
+} /* End of PCMstackpop */
 
    int
-ORCstackisempty (ORCstack *s)
+PCMstackisempty (PCMstack *s)
 {
    if( s == NULL || s->top == -1 ){
       return TRUE;
    }
    return FALSE;
-} /* End of ORCstackisempty */
+} /* End of PCMstackisempty */
 
