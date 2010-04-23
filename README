@@ -8,10 +8,10 @@
 •
 看到非常有趣的算法或者谜题，也想自己实现试试看，但是缺少一个方便的平台来写代码和共享以及讨论。
 
-所以我就写了这个orc：
+所以我就写了这个pcm：
 
 目录结构
-orc {
+pcm {
     README
     bin ---------makefile
     data---------测试数据
@@ -42,9 +42,9 @@ orc {
 
       make [help]      -- print this help screen
       make [test_readfile.exe]   -- build test_readfile
-      make [orctest]  -- build all tests
+      make [pcmtest]  -- build all tests
       make [splint]    -- use splint to check all C files
       make [clean]     -- delete all *.exe and *.log files
       make [testclean] -- delete all *.log files
-      make [orc] -- compile all c/c++ programs
+      make [pcm] -- compile all c/c++ programs
       make [tags] -- generate ctags

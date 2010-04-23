@@ -4,184 +4,242 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.7	//
-BOOL	include/ORCconstant.h	/^   enum BOOL {$/;"	g
+BOOL	include/PCMconstant.h	/^   enum BOOL {$/;"	g
 Base	test/cast.cpp	/^class Base$/;"	c	file:
 C	bin/makefile	/^C=.c$/;"	m
 CCOMPILE	bin/makefile	/^CCOMPILE=gcc$/;"	m
 CPP	bin/makefile	/^CPP=.cpp$/;"	m
 CPPCOMPILE	bin/makefile	/^CPPCOMPILE=g++$/;"	m
 CPU	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
-CSRC	bin/makefile	/^CSRC=..\/src\/ORClinkedlist$(C)\\$/;"	m
+CSRC	bin/makefile	/^CSRC=..\/src\/PCMlinkedlist$(C)\\$/;"	m
 CTEST	bin/makefile	/^CTEST=$(TESTDIR)test_link_init_and_free$(C)\\$/;"	m
 Derived	test/cast.cpp	/^class Derived:public Base$/;"	c	file:
 E	bin/makefile	/^E=$/;"	m
 EXE	bin/makefile	/^EXE=test_link_init_and_free$(E)\\$/;"	m
-ErrorMap	include/ORCerrormap.h	/^   } ErrorMap;$/;"	t	typeref:struct:__anon4
-FALSE	include/ORCconstant.h	/^      FALSE,$/;"	e	enum:BOOL
-FREEFUNC	include/ORCconstant.h	/^   typedef void (*FREEFUNC) (void* p);$/;"	t
-H_CONSTANT	include/ORCconstant.h	2;"	d
-H_ERRORMAP	include/ORCerrormap.h	2;"	d
-H_FIND	include/ORCfind.h	2;"	d
+ErrorMap	include/PCMerrormap.h	/^   } ErrorMap;$/;"	t	typeref:struct:__anon7
+FALSE	include/PCMconstant.h	/^      FALSE,$/;"	e	enum:BOOL
+FREEFUNC	include/PCMconstant.h	/^   typedef void (*FREEFUNC) (void* p);$/;"	t
+H_CONSTANT	include/PCMconstant.h	2;"	d
+H_ERRORMAP	include/PCMerrormap.h	2;"	d
+H_FIND	include/PCMfind.h	2;"	d
 H_INOUT	include/inout.h	2;"	d
-H_LINKEDLIST	include/ORClinkedlist.h	2;"	d
-H_ORC	include/ORC.h	2;"	d
-H_ORCFILE	include/ORCfile.h	2;"	d
-H_ORCMATH	include/ORCmath.h	2;"	d
-H_ORCSTACK	include/ORCstack.h	2;"	d
-H_ORCSTRING	include/ORCstring.h	2;"	d
-H_SEQLIST	include/ORCseqlist.h	2;"	d
-H_SORT	include/ORCsort.h	2;"	d
+H_LINKEDLIST	include/PCMlinkedlist.h	2;"	d
+H_PCM	include/PCM.h	2;"	d
+H_PCMFILE	include/PCMfile.h	2;"	d
+H_PCMMATH	include/PCMmath.h	2;"	d
+H_PCMSTACK	include/PCMstack.h	2;"	d
+H_PCMSTRING	include/PCMstring.h	2;"	d
+H_SEQLIST	include/PCMseqlist.h	2;"	d
+H_SORT	include/PCMsort.h	28;"	d
 INCLUDE	bin/makefile	/^INCLUDE=..\/include\/$/;"	m
 LOG	bin/makefile	/^LOG=.log$/;"	m
 LOGFILES	bin/makefile	/^LOGFILES=test_link_init_and_free$(LOG)\\$/;"	m
-ORCALGBINFIND	include/ORCconstant.h	/^                      ORCALGBINFIND};$/;"	e	enum:ORCSEARCHALG
-ORCALGORIGINFIND	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,$/;"	e	enum:ORCSEARCHALG
-ORCALGSORTBUBBLE	include/ORCconstant.h	/^                    ORCALGSORTBUBBLE};$/;"	e	enum:ORCSORTALG
-ORCALGSORTSELECT	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	e	enum:ORCSORTALG
-ORCCHAR	include/ORCconstant.h	15;"	d
-ORCERR	include/ORCconstant.h	/^   enum ORCERR {$/;"	g
-ORCERRELEMENTNOTFOUND	include/ORCconstant.h	/^      ORCERRELEMENTNOTFOUND,$/;"	e	enum:ORCERR
-ORCERREMPTYLIST	include/ORCconstant.h	/^      ORCERREMPTYLIST,$/;"	e	enum:ORCERR
-ORCERREND	include/ORCconstant.h	/^      ORCERREND   = 20000$/;"	e	enum:ORCERR
-ORCERRNOMEMORY	include/ORCconstant.h	/^      ORCERRNOMEMORY,$/;"	e	enum:ORCERR
-ORCERRNOTSTACKANDQUEUE	include/ORCconstant.h	/^      ORCERRNOTSTACKANDQUEUE,$/;"	e	enum:ORCERR
-ORCERRNOTVALIDINDEX	include/ORCconstant.h	/^      ORCERRNOTVALIDINDEX,$/;"	e	enum:ORCERR
-ORCERRNULLPOINTER	include/ORCconstant.h	/^      ORCERRNULLPOINTER,$/;"	e	enum:ORCERR
-ORCERRSTART	include/ORCconstant.h	/^      ORCERRSTART = 10000,$/;"	e	enum:ORCERR
-ORCFILEMAXLINE	include/ORCconstant.h	13;"	d
-ORCFILENAME	include/ORCconstant.h	14;"	d
-ORCLISTINCREMENT	include/ORCconstant.h	11;"	d
-ORCLISTINITSIZE	include/ORCconstant.h	10;"	d
-ORCPOPQUEUE	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	e	enum:ORCPOPTYPE
-ORCPOPSTACK	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	e	enum:ORCPOPTYPE
-ORCPOPTYPE	include/ORCconstant.h	/^   enum ORCPOPTYPE {ORCPOPQUEUE = 0, ORCPOPSTACK};$/;"	g
-ORCSEARCHALG	include/ORCconstant.h	/^   enum ORCSEARCHALG {ORCALGORIGINFIND = 90001,$/;"	g
-ORCSList	include/ORCseqlist.h	/^   typedef ORCseqlist* ORCSList;$/;"	t
-ORCSORTALG	include/ORCconstant.h	/^   enum ORCSORTALG {ORCALGSORTSELECT = 80001,$/;"	g
-ORCbinfind	src/ORCfind.c	/^ORCbinfind(int *a, $/;"	f
-ORCbubblesort	src/ORCsort.c	/^ORCbubblesort(int *a,$/;"	f
-ORCcheckerror	src/ORC.c	/^ORCcheckerror (int error) {$/;"	f
-ORCcheckpointer	src/ORC.c	/^ORCcheckpointer(void *p)$/;"	f
-ORCcompare	src/ORC.c	/^ORCcompare (const void *x,$/;"	f
-ORCdarrayfree	src/ORC.c	/^ORCdarrayfree (void **arr)$/;"	f
-ORCdarraynew	src/ORC.c	/^ORCdarraynew (size_t row, size_t col, size_t size)$/;"	f
-ORCdelcharofstring	src/ORCstring.c	/^ORCdelcharofstring (char * str,$/;"	f
-ORCfile	include/ORCfile.h	/^   } ORCfile;$/;"	t	typeref:struct:__anon5
-ORCfilecreate	src/ORCfile.c	/^ORCfilecreate (ORCfile **fp) {$/;"	f
-ORCfilefree	src/ORCfile.c	/^ORCfilefree (ORCfile **fp){$/;"	f
-ORCfilegetinfo	src/ORCfile.c	/^ORCfilegetinfo (ORCfile *fp){$/;"	f
-ORCfilegetline	src/ORCfile.c	/^ORCfilegetline (ORCfile *fp,$/;"	f
-ORCfilegetmaxline	src/ORCfile.c	/^ORCfilegetmaxline (ORCfile *fp,$/;"	f
-ORCfileopen	src/ORCfile.c	/^ORCfileopen (ORCfile *fp, const char *name){$/;"	f
-ORCfilestatistics	src/ORCfile.c	/^ORCfilestatistics (ORCfile *fp)$/;"	f
-ORClinkedlist	include/ORClinkedlist.h	/^   typedef struct ORClinkedlist{$/;"	s
-ORClinkedlist	include/ORClinkedlist.h	/^   } ORClinkedlist;$/;"	t	typeref:struct:ORClinkedlist
-ORClinkedlistappend	src/ORClinkedlist.c	/^ORClinkedlistappend (ORClinkedlist *list,$/;"	f
-ORClinkedlistclear	src/ORClinkedlist.c	/^ORClinkedlistclear (ORClinkedlist *list)$/;"	f
-ORClinkedlistfree	src/ORClinkedlist.c	/^ORClinkedlistfree (ORClinkedlist **list)$/;"	f
-ORClinkedlistinit	src/ORClinkedlist.c	/^ORClinkedlistinit (ORClinkedlist **list)$/;"	f
-ORClinkedlistinsert	src/ORClinkedlist.c	/^ORClinkedlistinsert (ORClinkedlist *list,$/;"	f
-ORClinkedlistlength	src/ORClinkedlist.c	/^ORClinkedlistlength(ORClinkedlist *list)$/;"	f
-ORClinkedlistoutput	src/ORClinkedlist.c	/^ORClinkedlistoutput (ORClinkedlist *list,$/;"	f
-ORClinkedlistp	include/ORClinkedlist.h	/^   typedef ORClinkedlist* ORClinkedlistp;$/;"	t
-ORClinkedlistpop	src/ORClinkedlist.c	/^ORClinkedlistpop (ORClinkedlist *list,$/;"	f
-ORClinkednode	include/ORClinkedlist.h	/^   typedef struct ORClinkednode {$/;"	s
-ORClinkednode	include/ORClinkedlist.h	/^   } ORClinkednode;$/;"	t	typeref:struct:ORClinkednode
-ORClinkednodep	include/ORClinkedlist.h	/^   typedef ORClinkednode* ORClinkednodep;$/;"	t
-ORCnodeallocandinit	src/ORClinkedlist.c	/^ORCnodeallocandinit (ORClinkednode **node,$/;"	f
-ORCnodefree	src/ORClinkedlist.c	/^ORCnodefree (ORClinkednode **node)$/;"	f
-ORCoriginfind	src/ORCfind.c	/^ORCoriginfind(int *a,$/;"	f
-ORCpower	src/ORCmath.c	/^ORCpower(int base,$/;"	f
-ORCselectsort	src/ORCsort.c	/^ORCselectsort(int *a,$/;"	f
-ORCseqlist	include/ORCseqlist.h	/^   } ORCseqlist;$/;"	t	typeref:struct:__anon6
-ORCseqlistclear	src/ORCseqlist.c	/^ORCseqlistclear (ORCseqlist *list)$/;"	f
-ORCseqlistcopy	src/ORCseqlist.c	/^ORCseqlistcopy (ORCseqlist *list, const int *arr, int count)$/;"	f
-ORCseqlistdelete	src/ORCseqlist.c	/^ORCseqlistdelete (ORCseqlist *list,$/;"	f
-ORCseqlistdeleteR	src/ORCseqlist.c	/^ORCseqlistdeleteR(ORCseqlist *list)$/;"	f
-ORCseqlistfind	src/ORCseqlist.c	/^ORCseqlistfind (ORCseqlist *list,$/;"	f
-ORCseqlistfree	src/ORCseqlist.c	/^ORCseqlistfree (ORCseqlist **list)$/;"	f
-ORCseqlistinit	src/ORCseqlist.c	/^ORCseqlistinit (ORCseqlist **list)$/;"	f
-ORCseqlistinsert	src/ORCseqlist.c	/^ORCseqlistinsert (ORCseqlist *list,$/;"	f
-ORCseqlistmerge	src/ORCseqlist.c	/^ORCseqlistmerge (ORCseqlist *des, const ORCseqlist* src)$/;"	f
-ORCseqlistoutput	src/ORCseqlist.c	/^ORCseqlistoutput (ORCseqlist *list)$/;"	f
-ORCseqlistsort	src/ORCseqlist.c	/^ORCseqlistsort (ORCseqlist *list,$/;"	f
-ORCstack	include/ORCstack.h	/^   } ORCstack;$/;"	t	typeref:struct:__anon7
-ORCstackcreate	src/ORCstack.c	/^ORCstackcreate (ORCstack **sp, size_t size){$/;"	f
-ORCstackfree	src/ORCstack.c	/^ORCstackfree (ORCstack **sp, FREEFUNC freefunc)$/;"	f
-ORCstackisempty	src/ORCstack.c	/^ORCstackisempty (ORCstack *s)$/;"	f
-ORCstackpop	src/ORCstack.c	/^ORCstackpop (ORCstack *s)$/;"	f
-ORCstackpush	src/ORCstack.c	/^ORCstackpush (ORCstack *s, void *elem)$/;"	f
-ORCstrblkstoblk	src/ORCstring.c	/^ORCstrblkstoblk (char *str) {$/;"	f
-ORCstreverse	src/ORCstring.c	/^ORCstreverse (char *str)$/;"	f
-ORCstrindex	src/ORCstring.c	/^ORCstrindex(char *str, char *substr, int *index)$/;"	f
-ORCstrlen	src/ORCstring.c	/^ORCstrlen (const char *str,$/;"	f
-ORCstrncat	src/ORCstring.c	/^ORCstrncat (char *des,$/;"	f
-ORCstrncpy	src/ORCstring.c	/^ORCstrncpy (char       *des,$/;"	f
-ORCstrtrim	src/ORCstring.c	/^ORCstrtrim (char *str)$/;"	f
-ORCswapchar	src/ORC.c	/^ORCswapchar (char* arr,$/;"	f
+PCMALGBINFIND	include/PCMconstant.h	/^                      PCMALGBINFIND};$/;"	e	enum:PCMSEARCHALG
+PCMALGORIGINFIND	include/PCMconstant.h	/^   enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,$/;"	e	enum:PCMSEARCHALG
+PCMALGSORTBUBBLE	include/PCMconstant.h	/^                    PCMALGSORTBUBBLE,$/;"	e	enum:PCMSORTALG
+PCMALGSORTQUICK	include/PCMconstant.h	/^                    PCMALGSORTQUICK,$/;"	e	enum:PCMSORTALG
+PCMALGSORTSELECT	include/PCMconstant.h	/^   enum PCMSORTALG {PCMALGSORTSELECT = 80001,$/;"	e	enum:PCMSORTALG
+PCMALGSORTSHELL	include/PCMconstant.h	/^                    PCMALGSORTSHELL};$/;"	e	enum:PCMSORTALG
+PCMCHAR	include/PCMconstant.h	15;"	d
+PCMERR	include/PCMconstant.h	/^   enum PCMERR {$/;"	g
+PCMERRELEMENTNOTFOUND	include/PCMconstant.h	/^      PCMERRELEMENTNOTFOUND,$/;"	e	enum:PCMERR
+PCMERREMPTYLIST	include/PCMconstant.h	/^      PCMERREMPTYLIST,$/;"	e	enum:PCMERR
+PCMERREND	include/PCMconstant.h	/^      PCMERREND   = 20000$/;"	e	enum:PCMERR
+PCMERRNOMEMORY	include/PCMconstant.h	/^      PCMERRNOMEMORY,$/;"	e	enum:PCMERR
+PCMERRNOTSTACKANDQUEUE	include/PCMconstant.h	/^      PCMERRNOTSTACKANDQUEUE,$/;"	e	enum:PCMERR
+PCMERRNOTVALIDINDEX	include/PCMconstant.h	/^      PCMERRNOTVALIDINDEX,$/;"	e	enum:PCMERR
+PCMERRNULLPOINTER	include/PCMconstant.h	/^      PCMERRNULLPOINTER,$/;"	e	enum:PCMERR
+PCMERRSTART	include/PCMconstant.h	/^      PCMERRSTART = 10000,$/;"	e	enum:PCMERR
+PCMERRWRONGSORTALG	include/PCMconstant.h	/^      PCMERRWRONGSORTALG,$/;"	e	enum:PCMERR
+PCMFILEMAXLINE	include/PCMconstant.h	13;"	d
+PCMFILENAME	include/PCMconstant.h	14;"	d
+PCMLISTINCREMENT	include/PCMconstant.h	11;"	d
+PCMLISTINITSIZE	include/PCMconstant.h	10;"	d
+PCMPOPQUEUE	include/PCMconstant.h	/^   enum PCMPOPTYPE {PCMPOPQUEUE = 0, PCMPOPSTACK};$/;"	e	enum:PCMPOPTYPE
+PCMPOPSTACK	include/PCMconstant.h	/^   enum PCMPOPTYPE {PCMPOPQUEUE = 0, PCMPOPSTACK};$/;"	e	enum:PCMPOPTYPE
+PCMPOPTYPE	include/PCMconstant.h	/^   enum PCMPOPTYPE {PCMPOPQUEUE = 0, PCMPOPSTACK};$/;"	g
+PCMSEARCHALG	include/PCMconstant.h	/^   enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,$/;"	g
+PCMSList	include/PCMseqlist.h	/^   typedef PCMseqlist* PCMSList;$/;"	t
+PCMSORTALG	include/PCMconstant.h	/^   enum PCMSORTALG {PCMALGSORTSELECT = 80001,$/;"	g
+PCMbinfind	include/PCMfind.h	/^   int PCMbinfind (int *a, int length, const int elem, int *index);$/;"	p	signature:(int *a, int length, const int elem, int *index)
+PCMbinfind	src/PCMfind.c	/^PCMbinfind(int *a, $/;"	f	signature:(int *a, int length, const int elem, int *index)
+PCMbubblesort	include/PCMsort.h	/^   int PCMbubblesort(int *a, int len);$/;"	p	signature:(int *a, int len)
+PCMbubblesort	src/PCMsort.c	/^PCMbubblesort(int *a,$/;"	f	signature:(int *a, int len)
+PCMcheckerror	include/PCM.h	/^   void PCMcheckerror (int error);$/;"	p	signature:(int error)
+PCMcheckerror	src/PCM.c	/^PCMcheckerror (int error) {$/;"	f	signature:(int error)
+PCMcheckpointer	include/PCM.h	/^   int    PCMcheckpointer (void *p);$/;"	p	signature:(void *p)
+PCMcheckpointer	src/PCM.c	/^PCMcheckpointer(void *p)$/;"	f	signature:(void *p)
+PCMcompare	include/PCM.h	/^   int    PCMcompare (const void *x, const void *y);$/;"	p	signature:(const void *x, const void *y)
+PCMcompare	src/PCM.c	/^PCMcompare (const void *x,$/;"	f	signature:(const void *x, const void *y)
+PCMdarrayfree	include/PCM.h	/^   void   PCMdarrayfree (void **arr);$/;"	p	signature:(void **arr)
+PCMdarrayfree	src/PCM.c	/^PCMdarrayfree (void **arr)$/;"	f	signature:(void **arr)
+PCMdarraynew	include/PCM.h	/^   void** PCMdarraynew (size_t row, size_t col, size_t size);$/;"	p	signature:(size_t row, size_t col, size_t size)
+PCMdarraynew	src/PCM.c	/^PCMdarraynew (size_t row, size_t col, size_t size)$/;"	f	signature:(size_t row, size_t col, size_t size)
+PCMdelcharofstring	include/PCMstring.h	/^   int PCMdelcharofstring(char * str, int c);$/;"	p	signature:(char * str, int c)
+PCMdelcharofstring	src/PCMstring.c	/^PCMdelcharofstring (char * str,$/;"	f	signature:(char * str, int c)
+PCMfile	include/PCMfile.h	/^   } PCMfile;$/;"	t	typeref:struct:__anon4
+PCMfilecreate	include/PCMfile.h	/^   int PCMfilecreate(PCMfile **fp);$/;"	p	signature:(PCMfile **fp)
+PCMfilecreate	src/PCMfile.c	/^PCMfilecreate (PCMfile **fp) {$/;"	f	signature:(PCMfile **fp)
+PCMfilefree	include/PCMfile.h	/^   int PCMfilefree(PCMfile **fp);$/;"	p	signature:(PCMfile **fp)
+PCMfilefree	src/PCMfile.c	/^PCMfilefree (PCMfile **fp){$/;"	f	signature:(PCMfile **fp)
+PCMfilegetinfo	include/PCMfile.h	/^   int PCMfilegetinfo(PCMfile *fp);$/;"	p	signature:(PCMfile *fp)
+PCMfilegetinfo	src/PCMfile.c	/^PCMfilegetinfo (PCMfile *fp){$/;"	f	signature:(PCMfile *fp)
+PCMfilegetline	include/PCMfile.h	/^   int PCMfilegetline(\/*in*\/ PCMfile *fp,$/;"	p	signature:( PCMfile *fp, int max, char *line, int *length)
+PCMfilegetline	src/PCMfile.c	/^PCMfilegetline (PCMfile *fp,$/;"	f	signature:(PCMfile *fp, int max, char *line, int *length)
+PCMfilegetmaxline	include/PCMfile.h	/^   int PCMfilegetmaxline(PCMfile *fp, char *maxline, int *max);$/;"	p	signature:(PCMfile *fp, char *maxline, int *max)
+PCMfilegetmaxline	src/PCMfile.c	/^PCMfilegetmaxline (PCMfile *fp,$/;"	f	signature:(PCMfile *fp, char *maxline, int *max)
+PCMfileopen	include/PCMfile.h	/^   int PCMfileopen(PCMfile *fp, const char *name);$/;"	p	signature:(PCMfile *fp, const char *name)
+PCMfileopen	src/PCMfile.c	/^PCMfileopen (PCMfile *fp, const char *name){$/;"	f	signature:(PCMfile *fp, const char *name)
+PCMfilestatistics	include/PCMfile.h	/^   int PCMfilestatistics(PCMfile *fp);$/;"	p	signature:(PCMfile *fp)
+PCMfilestatistics	src/PCMfile.c	/^PCMfilestatistics (PCMfile *fp)$/;"	f	signature:(PCMfile *fp)
+PCMlinkedlist	include/PCMlinkedlist.h	/^   typedef struct PCMlinkedlist{$/;"	s
+PCMlinkedlist	include/PCMlinkedlist.h	/^   } PCMlinkedlist;$/;"	t	typeref:struct:PCMlinkedlist
+PCMlinkedlistappend	include/PCMlinkedlist.h	/^   int  PCMlinkedlistappend (PCMlinkedlist *list, const char* elem);$/;"	p	signature:(PCMlinkedlist *list, const char* elem)
+PCMlinkedlistappend	src/PCMlinkedlist.c	/^PCMlinkedlistappend (PCMlinkedlist *list,$/;"	f	signature:(PCMlinkedlist *list, const char* elem)
+PCMlinkedlistclear	include/PCMlinkedlist.h	/^   int  PCMlinkedlistclear  (PCMlinkedlist *list);$/;"	p	signature:(PCMlinkedlist *list)
+PCMlinkedlistclear	src/PCMlinkedlist.c	/^PCMlinkedlistclear (PCMlinkedlist *list)$/;"	f	signature:(PCMlinkedlist *list)
+PCMlinkedlistfree	include/PCMlinkedlist.h	/^   int  PCMlinkedlistfree   (PCMlinkedlist **list);$/;"	p	signature:(PCMlinkedlist **list)
+PCMlinkedlistfree	src/PCMlinkedlist.c	/^PCMlinkedlistfree (PCMlinkedlist **list)$/;"	f	signature:(PCMlinkedlist **list)
+PCMlinkedlistinit	include/PCMlinkedlist.h	/^   int  PCMlinkedlistinit   (PCMlinkedlist **list);$/;"	p	signature:(PCMlinkedlist **list)
+PCMlinkedlistinit	src/PCMlinkedlist.c	/^PCMlinkedlistinit (PCMlinkedlist **list)$/;"	f	signature:(PCMlinkedlist **list)
+PCMlinkedlistinsert	include/PCMlinkedlist.h	/^   int  PCMlinkedlistinsert (PCMlinkedlist *list, int pos, const char* elem);$/;"	p	signature:(PCMlinkedlist *list, int pos, const char* elem)
+PCMlinkedlistinsert	src/PCMlinkedlist.c	/^PCMlinkedlistinsert (PCMlinkedlist *list,$/;"	f	signature:(PCMlinkedlist *list, int pos, const char* elem)
+PCMlinkedlistlength	include/PCMlinkedlist.h	/^   int  PCMlinkedlistlength (PCMlinkedlist *list);$/;"	p	signature:(PCMlinkedlist *list)
+PCMlinkedlistlength	src/PCMlinkedlist.c	/^PCMlinkedlistlength(PCMlinkedlist *list)$/;"	f	signature:(PCMlinkedlist *list)
+PCMlinkedlistoutput	include/PCMlinkedlist.h	/^   int  PCMlinkedlistoutput (PCMlinkedlist *list, const char* sp);$/;"	p	signature:(PCMlinkedlist *list, const char* sp)
+PCMlinkedlistoutput	src/PCMlinkedlist.c	/^PCMlinkedlistoutput (PCMlinkedlist *list,$/;"	f	signature:(PCMlinkedlist *list, const char* sp)
+PCMlinkedlistp	include/PCMlinkedlist.h	/^   typedef PCMlinkedlist* PCMlinkedlistp;$/;"	t
+PCMlinkedlistpop	include/PCMlinkedlist.h	/^   int  PCMlinkedlistpop    (PCMlinkedlist *list, enum PCMPOPTYPE type);$/;"	p	signature:(PCMlinkedlist *list, enum PCMPOPTYPE type)
+PCMlinkedlistpop	src/PCMlinkedlist.c	/^PCMlinkedlistpop (PCMlinkedlist *list,$/;"	f	signature:(PCMlinkedlist *list, enum PCMPOPTYPE type)
+PCMlinkednode	include/PCMlinkedlist.h	/^   typedef struct PCMlinkednode {$/;"	s
+PCMlinkednode	include/PCMlinkedlist.h	/^   } PCMlinkednode;$/;"	t	typeref:struct:PCMlinkednode
+PCMlinkednodep	include/PCMlinkedlist.h	/^   typedef PCMlinkednode* PCMlinkednodep;$/;"	t
+PCMnodeallocandinit	include/PCMlinkedlist.h	/^   int  PCMnodeallocandinit (PCMlinkednode **node, const char* elem);$/;"	p	signature:(PCMlinkednode **node, const char* elem)
+PCMnodeallocandinit	src/PCMlinkedlist.c	/^PCMnodeallocandinit (PCMlinkednode **node,$/;"	f	signature:(PCMlinkednode **node, const char* elem)
+PCMnodefree	include/PCMlinkedlist.h	/^   void PCMnodefree           (PCMlinkednode **node);$/;"	p	signature:(PCMlinkednode **node)
+PCMnodefree	src/PCMlinkedlist.c	/^PCMnodefree (PCMlinkednode **node)$/;"	f	signature:(PCMlinkednode **node)
+PCMoriginfind	include/PCMfind.h	/^   int PCMoriginfind (int *a, int length, const int elem, int *index);$/;"	p	signature:(int *a, int length, const int elem, int *index)
+PCMoriginfind	src/PCMfind.c	/^PCMoriginfind(int *a,$/;"	f	signature:(int *a, int length, const int elem, int *index)
+PCMpower	include/PCMmath.h	/^   int PCMpower(int base, int  n, long long *result);$/;"	p	signature:(int base, int n, long long *result)
+PCMpower	src/PCMmath.c	/^PCMpower(int base,$/;"	f	signature:(int base, int n, long long *result)
+PCMselectsort	include/PCMsort.h	/^   int PCMselectsort(int *a, int len);$/;"	p	signature:(int *a, int len)
+PCMselectsort	src/PCMsort.c	/^PCMselectsort(int *a,$/;"	f	signature:(int *a, int len)
+PCMseqlist	include/PCMseqlist.h	/^   } PCMseqlist;$/;"	t	typeref:struct:__anon6
+PCMseqlistclear	include/PCMseqlist.h	/^   int PCMseqlistclear(PCMseqlist *list);$/;"	p	signature:(PCMseqlist *list)
+PCMseqlistclear	src/PCMseqlist.c	/^PCMseqlistclear (PCMseqlist *list)$/;"	f	signature:(PCMseqlist *list)
+PCMseqlistcopy	include/PCMseqlist.h	/^   int PCMseqlistcopy(PCMseqlist *list, const int *arr, int count);$/;"	p	signature:(PCMseqlist *list, const int *arr, int count)
+PCMseqlistcopy	src/PCMseqlist.c	/^PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)$/;"	f	signature:(PCMseqlist *list, const int *arr, int count)
+PCMseqlistdelete	include/PCMseqlist.h	/^   int PCMseqlistdelete(PCMseqlist *list, int index, int* e);$/;"	p	signature:(PCMseqlist *list, int index, int* e)
+PCMseqlistdelete	src/PCMseqlist.c	/^PCMseqlistdelete (PCMseqlist *list,$/;"	f	signature:(PCMseqlist *list, int index, int *e)
+PCMseqlistdeleteR	include/PCMseqlist.h	/^   int PCMseqlistdeleteR(PCMseqlist *list);$/;"	p	signature:(PCMseqlist *list)
+PCMseqlistdeleteR	src/PCMseqlist.c	/^PCMseqlistdeleteR(PCMseqlist *list)$/;"	f	signature:(PCMseqlist *list)
+PCMseqlistfind	include/PCMseqlist.h	/^   int PCMseqlistfind(PCMseqlist *list, int length, const int elem,$/;"	p	signature:(PCMseqlist *list, int length, const int elem, int *index, enum PCMSEARCHALG alg)
+PCMseqlistfind	src/PCMseqlist.c	/^PCMseqlistfind (PCMseqlist *list,$/;"	f	signature:(PCMseqlist *list, int length, const int elem, int *index, enum PCMSEARCHALG alg)
+PCMseqlistfree	include/PCMseqlist.h	/^   int PCMseqlistfree(PCMseqlist **list);$/;"	p	signature:(PCMseqlist **list)
+PCMseqlistfree	src/PCMseqlist.c	/^PCMseqlistfree (PCMseqlist **list)$/;"	f	signature:(PCMseqlist **list)
+PCMseqlistinit	include/PCMseqlist.h	/^   int PCMseqlistinit(PCMseqlist **list);$/;"	p	signature:(PCMseqlist **list)
+PCMseqlistinit	src/PCMseqlist.c	/^PCMseqlistinit (PCMseqlist **list)$/;"	f	signature:(PCMseqlist **list)
+PCMseqlistinsert	include/PCMseqlist.h	/^   int PCMseqlistinsert(PCMseqlist *list, int index, const int elem);$/;"	p	signature:(PCMseqlist *list, int index, const int elem)
+PCMseqlistinsert	src/PCMseqlist.c	/^PCMseqlistinsert (PCMseqlist *list,$/;"	f	signature:(PCMseqlist *list, int index, const int elem)
+PCMseqlistmerge	include/PCMseqlist.h	/^   int PCMseqlistmerge(PCMseqlist *des, const PCMseqlist* src);$/;"	p	signature:(PCMseqlist *des, const PCMseqlist* src)
+PCMseqlistmerge	src/PCMseqlist.c	/^PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)$/;"	f	signature:(PCMseqlist *des, const PCMseqlist* src)
+PCMseqlistoutput	include/PCMseqlist.h	/^   int PCMseqlistoutput(PCMseqlist *list);$/;"	p	signature:(PCMseqlist *list)
+PCMseqlistoutput	src/PCMseqlist.c	/^PCMseqlistoutput (PCMseqlist *list)$/;"	f	signature:(PCMseqlist *list)
+PCMseqlistsort	include/PCMseqlist.h	/^   int PCMseqlistsort(PCMseqlist *list, int length, enum PCMSORTALG alg);$/;"	p	signature:(PCMseqlist *list, int length, enum PCMSORTALG alg)
+PCMseqlistsort	src/PCMseqlist.c	/^PCMseqlistsort (PCMseqlist *list,$/;"	f	signature:(PCMseqlist *list, int length, enum PCMSORTALG alg)
+PCMshellsort	include/PCMsort.h	/^   int PCMshellsort (int *a, int len);$/;"	p	signature:(int *a, int len)
+PCMshellsort	src/PCMsort.c	/^PCMshellsort(int *a,$/;"	f	signature:(int *a, int len)
+PCMstack	include/PCMstack.h	/^   } PCMstack;$/;"	t	typeref:struct:__anon5
+PCMstackcreate	include/PCMstack.h	/^   int   PCMstackcreate  (PCMstack **sp, size_t size);$/;"	p	signature:(PCMstack **sp, size_t size)
+PCMstackcreate	src/PCMstack.c	/^PCMstackcreate (PCMstack **sp, size_t size){$/;"	f	signature:(PCMstack **sp, size_t size)
+PCMstackfree	include/PCMstack.h	/^   void  PCMstackfree    (PCMstack **sp, FREEFUNC freefunc);$/;"	p	signature:(PCMstack **sp, FREEFUNC freefunc)
+PCMstackfree	src/PCMstack.c	/^PCMstackfree (PCMstack **sp, FREEFUNC freefunc)$/;"	f	signature:(PCMstack **sp, FREEFUNC freefunc)
+PCMstackisempty	include/PCMstack.h	/^   int   PCMstackisempty (PCMstack *s);$/;"	p	signature:(PCMstack *s)
+PCMstackisempty	src/PCMstack.c	/^PCMstackisempty (PCMstack *s)$/;"	f	signature:(PCMstack *s)
+PCMstackpop	include/PCMstack.h	/^   void* PCMstackpop     (PCMstack *s);$/;"	p	signature:(PCMstack *s)
+PCMstackpop	src/PCMstack.c	/^PCMstackpop (PCMstack *s)$/;"	f	signature:(PCMstack *s)
+PCMstackpush	include/PCMstack.h	/^   int   PCMstackpush    (PCMstack *s, void *elem);$/;"	p	signature:(PCMstack *s, void *elem)
+PCMstackpush	src/PCMstack.c	/^PCMstackpush (PCMstack *s, void *elem)$/;"	f	signature:(PCMstack *s, void *elem)
+PCMstrblkstoblk	include/PCMstring.h	/^   int PCMstrblkstoblk(char *str);$/;"	p	signature:(char *str)
+PCMstrblkstoblk	src/PCMstring.c	/^PCMstrblkstoblk (char *str) {$/;"	f	signature:(char *str)
+PCMstreverse	include/PCMstring.h	/^   int PCMstreverse(char *str);$/;"	p	signature:(char *str)
+PCMstreverse	src/PCMstring.c	/^PCMstreverse (char *str)$/;"	f	signature:(char *str)
+PCMstrindex	include/PCMstring.h	/^   int PCMstrindex(char *str, char* substr, int *index);$/;"	p	signature:(char *str, char* substr, int *index)
+PCMstrindex	src/PCMstring.c	/^PCMstrindex(char *str, char *substr, int *index)$/;"	f	signature:(char *str, char *substr, int *index)
+PCMstrlen	include/PCMstring.h	/^   int PCMstrlen(const char *str, size_t *len);$/;"	p	signature:(const char *str, size_t *len)
+PCMstrlen	src/PCMstring.c	/^PCMstrlen (const char *str,$/;"	f	signature:(const char *str, size_t *len)
+PCMstrncat	include/PCMstring.h	/^   int PCMstrncat(char *des, const char *src, int n);$/;"	p	signature:(char *des, const char *src, int n)
+PCMstrncat	src/PCMstring.c	/^PCMstrncat (char *des,$/;"	f	signature:(char *des, const char *src, int n)
+PCMstrncpy	include/PCMstring.h	/^   int PCMstrncpy(char *des, const char *src, int n);$/;"	p	signature:(char *des, const char *src, int n)
+PCMstrncpy	src/PCMstring.c	/^PCMstrncpy (char       *des,$/;"	f	signature:(char *des, const char *src, int n)
+PCMstrtrim	include/PCMstring.h	/^   int PCMstrtrim(char *str);$/;"	p	signature:(char *str)
+PCMstrtrim	src/PCMstring.c	/^PCMstrtrim (char *str)$/;"	f	signature:(char *str)
+PCMswapchar	include/PCM.h	/^   void PCMswapchar (char *arr, int i, int j);$/;"	p	signature:(char *arr, int i, int j)
+PCMswapchar	src/PCM.c	/^PCMswapchar (char* arr,$/;"	f	signature:(char* arr, int i, int j)
 TESTDIR	bin/makefile	/^TESTDIR=..\/test\/$/;"	m
-TRUE	include/ORCconstant.h	/^      TRUE$/;"	e	enum:BOOL
-capacity	include/ORCseqlist.h	/^      int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon6
+TRUE	include/PCMconstant.h	/^      TRUE$/;"	e	enum:BOOL
+capacity	include/PCMseqlist.h	/^      int  capacity;      \/* The capacity of list*\/$/;"	m	struct:__anon6
 computer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	g	file:
-countofchar	include/ORCfile.h	/^      long long countofchar[ORCCHAR];$/;"	m	struct:__anon5
-data	include/ORCstack.h	/^      void   **data;$/;"	m	struct:__anon7
-elem	include/ORClinkedlist.h	/^      char               *elem;$/;"	m	struct:ORClinkednode
-elemp	include/ORCseqlist.h	/^      int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon6
-error	include/ORCerrormap.h	/^      int        error;$/;"	m	struct:__anon4
-errorMap	include/ORCerrormap.h	/^      ErrorMap errorMap[] = {$/;"	v
-first	include/ORClinkedlist.h	/^      struct ORClinkednode *first;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
+countofchar	include/PCMfile.h	/^      long long countofchar[PCMCHAR];$/;"	m	struct:__anon4
+data	include/PCMstack.h	/^      void   **data;$/;"	m	struct:__anon5
+elem	include/PCMlinkedlist.h	/^      char               *elem;$/;"	m	struct:PCMlinkednode
+elemp	include/PCMseqlist.h	/^      int *elemp;     \/* The basic address of list *\/$/;"	m	struct:__anon6
+error	include/PCMerrormap.h	/^      int        error;$/;"	m	struct:__anon7
+errorMap	include/PCMerrormap.h	/^      ErrorMap errorMap[] = {$/;"	v
+first	include/PCMlinkedlist.h	/^      struct PCMlinkednode *first;$/;"	m	struct:PCMlinkedlist	typeref:struct:PCMlinkedlist::PCMlinkednode
 floatval	test/union.c	/^      float floatval;$/;"	m	struct:u::__anon3	file:
-fun	test/cast.cpp	/^void fun(Base* base)$/;"	f
+fun	test/cast.cpp	/^void fun(Base* base)$/;"	f	signature:(Base* base)
+inout	include/inout.h	/^   int inout(); $/;"	p	signature:()
 inout	src/inout.c	/^int inout()$/;"	f
 intval	test/union.c	/^      int intval;$/;"	m	struct:u::__anon2	file:
 keyboard	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
-last	include/ORClinkedlist.h	/^      struct ORClinkednode *last;$/;"	m	struct:ORClinkedlist	typeref:struct:ORClinkedlist::ORClinkednode
-length	include/ORCseqlist.h	/^      int  length;        \/* The length of list *\/$/;"	m	struct:__anon6
-m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base
-m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived
-main	test/cast.cpp	/^int main()$/;"	f
-main	test/enum.c	/^int main(void)$/;"	f
-main	test/macro.c	/^int main(void)$/;"	f
-main	test/sizeof.c	/^int main(void)$/;"	f
-main	test/terminate.c	/^int main(void)$/;"	f
-main	test/test_ORC.c	/^int main(void)$/;"	f
-main	test/test_ORCfile.c	/^main(int argc, char **argv)$/;"	f
-main	test/test_ORCmath.c	/^int main (void)$/;"	f
-main	test/test_ORCstack.c	/^int main(void)$/;"	f
-main	test/test_ORCstring.c	/^int main (void)$/;"	f
-main	test/test_check_bounds.c	/^int main(void)$/;"	f
-main	test/test_link_init_and_free.c	/^int main(void)$/;"	f
-main	test/test_link_many_element.c	/^int main(void)$/;"	f
-main	test/test_link_one_element.c	/^int main(void)$/;"	f
-main	test/test_link_readfile.c	/^int main(void)$/;"	f
-main	test/test_sq_delete.c	/^int main(void)$/;"	f
-main	test/test_sq_init_and_free.c	/^int main(void)$/;"	f
-main	test/test_sq_inout.c	/^main (void)$/;"	f
-main	test/test_sq_insert.c	/^int main(void)$/;"	f
-main	test/test_sq_merge.c	/^int main(void)$/;"	f
-main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f
+last	include/PCMlinkedlist.h	/^      struct PCMlinkednode *last;$/;"	m	struct:PCMlinkedlist	typeref:struct:PCMlinkedlist::PCMlinkednode
+length	include/PCMseqlist.h	/^      int  length;        \/* The length of list *\/$/;"	m	struct:__anon6
+m1	test/cast.cpp	/^      void m1()$/;"	f	class:Base	signature:()
+m2	test/cast.cpp	/^      void m2()$/;"	f	class:Derived	signature:()
+main	test/cast.cpp	/^int main()$/;"	f	signature:()
+main	test/enum.c	/^int main(void)$/;"	f	signature:(void)
+main	test/macro.c	/^int main(void)$/;"	f	signature:(void)
+main	test/sizeof.c	/^int main(void)$/;"	f	signature:(void)
+main	test/terminate.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_PCM.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_PCMfile.c	/^main(int argc, char **argv)$/;"	f	signature:(int argc, char **argv)
+main	test/test_PCMmath.c	/^int main (void)$/;"	f	signature:(void)
+main	test/test_PCMstack.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_PCMstring.c	/^int main (void)$/;"	f	signature:(void)
+main	test/test_check_bounds.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_link_init_and_free.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_link_many_element.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_link_one_element.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_link_readfile.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_sq_delete.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_sq_init_and_free.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_sq_inout.c	/^main (void)$/;"	f	signature:(void)
+main	test/test_sq_insert.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_sq_merge.c	/^int main(void)$/;"	f	signature:(void)
+main	test/test_sq_sort_and_find.c	/^int main(void)$/;"	f	signature:(void)
 main	test/unicode.c	/^int main()$/;"	f
-main	test/union.c	/^int main(void)$/;"	f
-main	test/void.c	/^int main(void)$/;"	f
+main	test/union.c	/^int main(void)$/;"	f	signature:(void)
+main	test/void.c	/^int main(void)$/;"	f	signature:(void)
 mouse	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
-name	include/ORCfile.h	/^      char name[ORCFILENAME];$/;"	m	struct:__anon5
-nbytes	include/ORCfile.h	/^      long long nbytes;$/;"	m	struct:__anon5
-ndigits	include/ORCfile.h	/^      long long ndigits;$/;"	m	struct:__anon5
-next	include/ORClinkedlist.h	/^      struct ORClinkednode *next;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
-nlines	include/ORCfile.h	/^      long long nlines;$/;"	m	struct:__anon5
-nwords	include/ORCfile.h	/^      long long nwords;$/;"	m	struct:__anon5
-p	include/ORCfile.h	/^      FILE *p;$/;"	m	struct:__anon5
-prev	include/ORClinkedlist.h	/^      struct ORClinkednode *prev;$/;"	m	struct:ORClinkednode	typeref:struct:ORClinkednode::ORClinkednode
+name	include/PCMfile.h	/^      char name[PCMFILENAME];$/;"	m	struct:__anon4
+nbytes	include/PCMfile.h	/^      long long nbytes;$/;"	m	struct:__anon4
+ndigits	include/PCMfile.h	/^      long long ndigits;$/;"	m	struct:__anon4
+next	include/PCMlinkedlist.h	/^      struct PCMlinkednode *next;$/;"	m	struct:PCMlinkednode	typeref:struct:PCMlinkednode::PCMlinkednode
+nlines	include/PCMfile.h	/^      long long nlines;$/;"	m	struct:__anon4
+nwords	include/PCMfile.h	/^      long long nwords;$/;"	m	struct:__anon4
+p	include/PCMfile.h	/^      FILE *p;$/;"	m	struct:__anon4
+prev	include/PCMlinkedlist.h	/^      struct PCMlinkednode *prev;$/;"	m	struct:PCMlinkednode	typeref:struct:PCMlinkednode::PCMlinkednode
 printer	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 s	test/union.c	/^   } s;$/;"	m	union:u	typeref:struct:u::__anon1	file:
 screen	test/enum.c	/^enum computer {keyboard, CPU, screen, printer, mouse};$/;"	e	enum:computer	file:
 sf	test/union.c	/^   } sf;$/;"	m	union:u	typeref:struct:u::__anon3	file:
 si	test/union.c	/^   } si;$/;"	m	union:u	typeref:struct:u::__anon2	file:
-size	include/ORCstack.h	/^      size_t size;$/;"	m	struct:__anon7
-str	include/ORCerrormap.h	/^      const char *str;$/;"	m	struct:__anon4
+size	include/PCMstack.h	/^      size_t size;$/;"	m	struct:__anon5
+str	include/PCMerrormap.h	/^      const char *str;$/;"	m	struct:__anon7
 testmanyelements	test/test_link_many_element.c	/^int testmanyelements()$/;"	f
-testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f
-top	include/ORCstack.h	/^      int    top;$/;"	m	struct:__anon7
+testoneelement	test/test_link_one_element.c	/^int testoneelement(void)$/;"	f	signature:(void)
+top	include/PCMstack.h	/^      int    top;$/;"	m	struct:__anon5
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon1	file:
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon2	file:
 type	test/union.c	/^      int type;$/;"	m	struct:u::__anon3	file:
