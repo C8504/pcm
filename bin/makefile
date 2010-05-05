@@ -6,16 +6,17 @@ CPP=.cpp
 INCLUDE=../include/
 TESTDIR=../test/
 LOG=.log
-CSRC=../src/PCMlinkedlist$(C)\
-          ../src/inout$(C)\
-          ../src/PCMfind$(C)\
-          ../src/PCMsort$(C)\
-          ../src/PCMseqlist$(C)\
-          ../src/PCM$(C)\
-          ../src/PCMstring$(C)\
-          ../src/PCMmath$(C)\
-          ../src/PCMfile$(C)\
-			 ../src/PCMstack$(C)
+EXEDIR=exe/
+CSRC=../src/c/PCMlinkedlist$(C)\
+          ../src/c/inout$(C)\
+          ../src/c/PCMfind$(C)\
+          ../src/c/PCMsort$(C)\
+          ../src/c/PCMseqlist$(C)\
+          ../src/c/PCM$(C)\
+          ../src/c/PCMstring$(C)\
+          ../src/c/PCMmath$(C)\
+          ../src/c/PCMfile$(C)\
+			 ../src/c/PCMstack$(C)
 EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
