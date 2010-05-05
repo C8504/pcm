@@ -34,17 +34,3 @@ pcm {
    9. 自动化build
   10. 自动化测试
   11. 自动化performance profiling
-
-如何biuld？
-
-   1. goto bin
-   2. Choose a target:
-
-      make [help]      -- print this help screen
-      make [test_readfile.exe]   -- build test_readfile
-      make [pcmtest]  -- build all tests
-      make [splint]    -- use splint to check all C files
-      make [clean]     -- delete all *.exe and *.log files
-      make [testclean] -- delete all *.log files
-      make [pcm] -- compile all c/c++ programs
-      make [tags] -- generate ctags
