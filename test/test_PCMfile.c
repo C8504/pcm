@@ -4,19 +4,18 @@
 
    int
 main(int argc, char **argv)
-   /*main ()*/
 {
    int error = 0;
+
+   if ( null == argv[1] ) {
+      goto TERMINATE;
+   }
 
    PCMfile *fp = NULL;
 
    error = PCMfilecreate(&fp);
    if ( error )  goto TERMINATE;
 
-   /* error = PCMfileopen(fp, "../data/git.txt"); */
-   /* error = PCMfileopen(fp,"../data/01.mps");*/
-   /* error = PCMfileopen(fp, "makefile");*/
-   /* error = PCMfileopen(fp, "../data/questions.txt"); */
    error = PCMfileopen(fp, argv[1]);
    if ( error )  goto TERMINATE;
 
