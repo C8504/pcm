@@ -44,10 +44,10 @@ public class Transfer {
          return result.toString();
       }
 
+      result.append(CHN_DOT);
+
       char[] fractionPart = String.valueOf(
             n - integerPart).substring(2).toCharArray();
-
-      result.append(CHN_DOT);
       for(int i = 0; i < fractionPart.length; i++) {
          result.append(CHN_DIGITS[fractionPart[i] - '0']);
       }
