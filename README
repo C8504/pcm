@@ -1,3 +1,40 @@
+I have been thinking about the following questions
+• In their daily work, how our programming precipitation (including algorithms, frameworks, tools), let us advance a little every day?
+
+• how convenient for everyone to join us in research-based programming techniques, to pool our collective wisdom, it is best to write code, such as using C to write a few sorting algorithms,
+Sorting algorithm that is faster and so on, how to use C language function pointers, how to test automation, how profile C program, how to use git, vim, make, etc.?
+•
+How to teach beginners the basic programming skills, preferably the code level?
+•
+See a very interesting algorithm or puzzle, and I want to achieve their own try, but the lack of a convenient platform to write code and share and discuss.
+
+So I wrote this pcm:
+
+Directory structure
+pcm (
+    README
+    bin --------- makefile
+    data --------- test data
+    include ------ header files
+    src ----------- Source
+    tags ---------- tags vim jump to code
+    test ---------- test file
+)
+
+Has now achieved the function (incomplete):
+
+   1. File Statistics
+   2. Sorting Algorithm
+   3. Search algorithm
+   4. Seqlist
+   5. Linkedlist
+   6. Stack
+   7. Mathematics
+   8. String
+   9. Automated build
+  10. Automated testing
+  11. Automated performance profiling
+
 我一直在思考以下问题，
 •在日常工作中，怎么沉淀我们的编程技术（包括算法，框架，工具）,让我们每天都进步一点点？
 
