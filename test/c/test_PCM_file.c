@@ -7,7 +7,7 @@ main(int argc, char **argv)
 {
    int error = 0;
 
-   if ( null == argv[1] ) {
+   if ( NULL == argv[1] ) {
       goto TERMINATE;
    }
 
