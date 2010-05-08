@@ -1,128 +1,128 @@
-*ORCfile
+*PCMfile
 {
-   #include "ORC.h"
+   #include "PCM.h"
    typedef struct {
       FILE *p;
-      char name[ORCFILENAME];
+      char name[PCMFILENAME];
       long long nlines;
       long long nwords;
       long long nbytes;
       long long ndigits;
-      long long countofchar[ORCCHAR];
-   } ORCfile;
+      long long countofchar[PCMCHAR];
+   } PCMfile;
 
-   int ORCfilecreate(ORCfile **fp);
-   int ORCfilefree(ORCfile **fp);
+   int PCMfilecreate(PCMfile **fp);
+   int PCMfilefree(PCMfile **fp);
 
-   int ORCfileopen(ORCfile *fp, const char *name);
-   int ORCfilestatistics(ORCfile *fp);
-   int ORCfilegetline(/*in*/ ORCfile *fp,
+   int PCMfileopen(PCMfile *fp, const char *name);
+   int PCMfilestatistics(PCMfile *fp);
+   int PCMfilegetline(/*in*/ PCMfile *fp,
          /*in*/ int     max,
          /*out*/char    *line,
          /*out*/int     *length);
-   int ORCfilegetmaxline(ORCfile *fp, char *maxline, int *max);
-   int ORCfilegetinfo(ORCfile *fp);
+   int PCMfilegetmaxline(PCMfile *fp, char *maxline, int *max);
+   int PCMfilegetinfo(PCMfile *fp);
     
 }
 
-ORCsort + ORCfind 在ORCseqlist里面被使用
-*ORCsort // 默认为qsort
+PCMsort + PCMfind 在PCMseqlist里面被使用
+*PCMsort // 默认为qsort
 {
-   #include "ORC.h"
-   int ORCbubblesort(int *a, int len);
-   int ORCselectsort(int *a, int len);
-   int ORCshellsort (int *a, int len);
+   #include "PCM.h"
+   int PCMbubblesort(int *a, int len);
+   int PCMselectsort(int *a, int len);
+   int PCMshellsort (int *a, int len);
 }
 
-＊ORCfind // 默认为ORCoriginfind
+＊PCMfind // 默认为PCMoriginfind
 {
-   #include "ORC.h"
-   int ORCoriginfind (int *a, int length, const int elem, int *index);
-   int ORCbinfind (int *a, int length, const int elem, int *index);
+   #include "PCM.h"
+   int PCMoriginfind (int *a, int length, const int elem, int *index);
+   int PCMbinfind (int *a, int length, const int elem, int *index);
 }
 
-*ORCmath
+*PCMmath
 {
-   #include "ORC.h"
-   int ORCpower(int base, int  n, long long *result);
+   #include "PCM.h"
+   int PCMpower(int base, int  n, long long *result);
 }
 
-*ORCseqlist
+*PCMseqlist
 {
-   #include "ORC.h"
-   #include "ORCsort.h"
-   #include "ORCfind.h"
+   #include "PCM.h"
+   #include "PCMsort.h"
+   #include "PCMfind.h"
 
    typedef struct {
       int *elemp;     /* The basic address of list */
       int  length;        /* The length of list */
       int  capacity;      /* The capacity of list*/
-   } ORCseqlist;
+   } PCMseqlist;
 
-   typedef ORCseqlist* ORCSList;
+   typedef PCMseqlist* PCMSList;
 
-   int ORCseqlistinit(ORCseqlist **list);
-   int ORCseqlistfree(ORCseqlist **list);
-   int ORCseqlistcopy(ORCseqlist *list, const int *arr, int count);
-   int ORCseqlistmerge(ORCseqlist *des, const ORCseqlist* src);
-   int ORCseqlistclear(ORCseqlist *list);
-   int ORCseqlistinsert(ORCseqlist *list, int index, const int elem);
-   int ORCseqlistdelete(ORCseqlist *list, int index, int* e);
-   int ORCseqlistdeleteR(ORCseqlist *list);
-   int ORCseqlistoutput(ORCseqlist *list);
-   int ORCseqlistsort(ORCseqlist *list, int length, enum ORCSORTALG alg);
-   int ORCseqlistfind(ORCseqlist *list, int length, const int elem,
-         int *index, enum ORCSEARCHALG alg);
+   int PCMseqlistinit(PCMseqlist **list);
+   int PCMseqlistfree(PCMseqlist **list);
+   int PCMseqlistcopy(PCMseqlist *list, const int *arr, int count);
+   int PCMseqlistmerge(PCMseqlist *des, const PCMseqlist* src);
+   int PCMseqlistclear(PCMseqlist *list);
+   int PCMseqlistinsert(PCMseqlist *list, int index, const int elem);
+   int PCMseqlistdelete(PCMseqlist *list, int index, int* e);
+   int PCMseqlistdeleteR(PCMseqlist *list);
+   int PCMseqlistoutput(PCMseqlist *list);
+   int PCMseqlistsort(PCMseqlist *list, int length, enum PCMSORTALG alg);
+   int PCMseqlistfind(PCMseqlist *list, int length, const int elem,
+         int *index, enum PCMSEARCHALG alg);
 }
 
-*ORClinkedlist
+*PCMlinkedlist
 {
-   #include "ORC.h"
+   #include "PCM.h"
 
-   typedef struct ORClinkednode {
+   typedef struct PCMlinkednode {
       char               *elem;
-      struct ORClinkednode *next;
-      struct ORClinkednode *prev;
-   } ORClinkednode;
+      struct PCMlinkednode *next;
+      struct PCMlinkednode *prev;
+   } PCMlinkednode;
 
-   typedef struct ORClinkedlist{
-      struct ORClinkednode *first;
-      struct ORClinkednode *last;
-   } ORClinkedlist;
+   typedef struct PCMlinkedlist{
+      struct PCMlinkednode *first;
+      struct PCMlinkednode *last;
+   } PCMlinkedlist;
 
-   typedef ORClinkednode* ORClinkednodep;
-   typedef ORClinkedlist* ORClinkedlistp;
+   typedef PCMlinkednode* PCMlinkednodep;
+   typedef PCMlinkedlist* PCMlinkedlistp;
 
-   /* ORClinkednode functions */
-   void ORCnodefree           (ORClinkednode **node);
-   int  ORCnodeallocandinit (ORClinkednode **node, const char* elem);
+   /* PCMlinkednode functions */
+   void PCMnodefree           (PCMlinkednode **node);
+   int  PCMnodeallocandinit (PCMlinkednode **node, const char* elem);
 
-   /* ORClinkedlist functions */
-   int  ORClinkedlistinit   (ORClinkedlist **list);
-   int  ORClinkedlistclear  (ORClinkedlist *list);
-   int  ORClinkedlistfree   (ORClinkedlist **list);
+   /* PCMlinkedlist functions */
+   int  PCMlinkedlistinit   (PCMlinkedlist **list);
+   int  PCMlinkedlistclear  (PCMlinkedlist *list);
+   int  PCMlinkedlistfree   (PCMlinkedlist **list);
 
-   int  ORClinkedlistappend (ORClinkedlist *list, const char* elem);
-   int  ORClinkedlistinsert (ORClinkedlist *list, int pos, const char* elem);
-   int  ORClinkedlistpop    (ORClinkedlist *list, enum ORCPOPTYPE type);
+   int  PCMlinkedlistappend (PCMlinkedlist *list, const char* elem);
+   int  PCMlinkedlistinsert (PCMlinkedlist *list, int pos, const char* elem);
+   int  PCMlinkedlistpop    (PCMlinkedlist *list, enum PCMPOPTYPE type);
 
-   int  ORClinkedlistlength (ORClinkedlist *list);
+   int  PCMlinkedlistlength (PCMlinkedlist *list);
 
-   int  ORClinkedlistoutput (ORClinkedlist *list, const char* sp);
+   int  PCMlinkedlistoutput (PCMlinkedlist *list, const char* sp);
 }
 
-*ORCstack
+*PCMstack
 {
-   #include "ORC.h"
+   #include "PCM.h"
    typedef struct {
       int    top;
       void   **data;
       size_t size;
-   } ORCstack;
+   } PCMstack;
 
-   int   ORCstackcreate  (ORCstack **sp, size_t size);
-   void  ORCstackfree    (ORCstack **sp, FREEFUNC freefunc);
-   void* ORCstackpop     (ORCstack *s);
-   int   ORCstackpush    (ORCstack *s, void *elem);
-   int   ORCstackisempty (ORCstack *s);
+   int   PCMstackcreate  (PCMstack **sp, size_t size);
+   void  PCMstackfree    (PCMstack **sp, FREEFUNC freefunc);
+   void* PCMstackpop     (PCMstack *s);
+   int   PCMstackpush    (PCMstack *s, void *elem);
+   int   PCMstackisempty (PCMstack *s);
 }
