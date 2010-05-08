@@ -17,7 +17,7 @@ CSRC=../src/c/PCMlinkedlist$(C)\
           ../src/c/PCMstring$(C)\
           ../src/c/PCMmath$(C)\
           ../src/c/PCMfile$(C)\
-			 ../src/c/PCMstack$(C)
+          ../src/c/PCMstack$(C)
 EXE=test_link_init_and_free$(E)\
          test_link_one_element$(E)\
          test_link_many_element$(E)\
@@ -33,7 +33,7 @@ EXE=test_link_init_and_free$(E)\
          test_PCMmath$(E)\
          test_PCMfile$(E)\
          test_PCM$(E)\
-			test_PCMstack$(E)
+         test_PCMstack$(E)
 CTEST=$(CTESTDIR)test_link_init_and_free$(C)\
           $(CTESTDIR)test_link_one_element$(C)\
           $(CTESTDIR)test_link_many_element$(C)\
@@ -49,7 +49,7 @@ CTEST=$(CTESTDIR)test_link_init_and_free$(C)\
           $(CTESTDIR)test_PCMmath$(C)\
           $(CTESTDIR)test_PCMfile$(C)\
           $(CTESTDIR)test_PCM$(C)\
-			 $(CTESTDIR)test_PCMstack$(c)
+          $(CTESTDIR)test_PCMstack$(c)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\
@@ -66,6 +66,6 @@ LOGFILES=test_link_init_and_free$(LOG)\
          test_PCMmath$(LOG)\
          test_PCMfile$(LOG)\
          test_PCM$(LOG)\
-			test_PCMstack$(LOG)
+         test_PCMstack$(LOG)
 
 include makefile.common

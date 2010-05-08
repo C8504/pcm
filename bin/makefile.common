@@ -28,7 +28,7 @@ tags:
 	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
-			-o $(1)$(E);                                                   
+         -o $(1)$(E);                                                   
 pcm: $(EXE) tags
 
 pcmtest: $(LOGFILES)
@@ -36,7 +36,7 @@ pcmtest: $(LOGFILES)
 	  echo "";\
 	  echo "PCM Errors found!"; \
 	  echo "";\
-     grep 'PCM Error' *.log > error;cat error;\
+	  grep 'PCM Error' *.log > error;cat error;\
 	else \
 	  echo "All tests completed successfully"; \
 	fi
