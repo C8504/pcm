@@ -9,7 +9,6 @@ JAVATESTDIR=../test/java/
 LOG=.log
 EXEDIR=exe/
 CSRC=../src/c/PCMlinkedlist$(C)\
-          ../src/c/inout$(C)\
           ../src/c/PCMfind$(C)\
           ../src/c/PCMsort$(C)\
           ../src/c/PCMseqlist$(C)\
