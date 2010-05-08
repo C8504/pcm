@@ -23,7 +23,6 @@ pcm (
     data --------- test data
     include ------ header files
     src ----------- Source
-    tags ---------- tags vim jump to code
     test ---------- test file
 )
 
@@ -62,7 +61,6 @@ pcm {
     data---------测试数据
     include------头文件
     src-----------源文件
-    tags----------tags vim用来代码跳转
     test----------测试文件
 }
 
