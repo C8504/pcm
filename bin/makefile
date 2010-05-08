@@ -17,54 +17,51 @@ CSRC=../src/c/PCMlinkedlist$(C)\
           ../src/c/PCMmath$(C)\
           ../src/c/PCMfile$(C)\
           ../src/c/PCMstack$(C)
-EXE=test_link_init_and_free$(E)\
-         test_link_one_element$(E)\
-         test_link_many_element$(E)\
-         test_link_readfile$(E)\
-         test_check_bounds$(E)\
-         test_sq_inout$(E)\
-         test_sq_init_and_free$(E)\
-         test_sq_delete$(E)\
-         test_sq_insert$(E)\
-         test_sq_merge$(E)\
-         test_sq_sort_and_find$(E)\
-         test_PCMstring$(E)\
-         test_PCMmath$(E)\
-         test_PCMfile$(E)\
+EXE=test_PCM_link_init_and_free$(E)\
+         test_PCM_link_one_element$(E)\
+         test_PCM_link_many_element$(E)\
+         test_PCM_link_readfile$(E)\
+         test_PCM_sq_inout$(E)\
+         test_PCM_sq_init_and_free$(E)\
+         test_PCM_sq_delete$(E)\
+         test_PCM_sq_insert$(E)\
+         test_PCM_sq_merge$(E)\
+         test_PCM_sq_sort_and_find$(E)\
+         test_PCM_string$(E)\
+         test_PCM_math$(E)\
+         test_PCM_file$(E)\
          test_PCM$(E)\
-         test_PCMstack$(E)
-CTEST=$(CTESTDIR)test_link_init_and_free$(C)\
-          $(CTESTDIR)test_link_one_element$(C)\
-          $(CTESTDIR)test_link_many_element$(C)\
-          $(CTESTDIR)test_link_readfile$(C)\
-          $(CTESTDIR)test_check_bounds$(C)\
-          $(CTESTDIR)test_sq_inout$(C)\
-          $(CTESTDIR)test_sq_init_and_free$(C)\
-          $(CTESTDIR)test_sq_delete$(C)\
-          $(CTESTDIR)test_sq_insert$(C)\
-          $(CTESTDIR)test_sq_merge$(C)\
-          $(CTESTDIR)test_sq_sort_and_find$(C)\
-          $(CTESTDIR)test_PCMstring$(C)\
-          $(CTESTDIR)test_PCMmath$(C)\
-          $(CTESTDIR)test_PCMfile$(C)\
+         test_PCM_stack$(E)
+CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
+          $(CTESTDIR)test_PCM_link_one_element$(C)\
+          $(CTESTDIR)test_PCM_link_many_element$(C)\
+          $(CTESTDIR)test_PCM_link_readfile$(C)\
+          $(CTESTDIR)test_PCM_sq_inout$(C)\
+          $(CTESTDIR)test_PCM_sq_init_and_free$(C)\
+          $(CTESTDIR)test_PCM_sq_delete$(C)\
+          $(CTESTDIR)test_PCM_sq_insert$(C)\
+          $(CTESTDIR)test_PCM_sq_merge$(C)\
+          $(CTESTDIR)test_PCM_sq_sort_and_find$(C)\
+          $(CTESTDIR)test_PCM_string$(C)\
+          $(CTESTDIR)test_PCM_math$(C)\
+          $(CTESTDIR)test_PCM_file$(C)\
           $(CTESTDIR)test_PCM$(C)\
-          $(CTESTDIR)test_PCMstack$(c)
+          $(CTESTDIR)test_PCM_stack$(c)
 
-LOGFILES=test_link_init_and_free$(LOG)\
-         test_link_one_element$(LOG)\
-         test_link_many_element$(LOG)\
-         test_link_readfile$(LOG)\
-         test_check_bounds$(LOG)\
-         test_sq_inout$(LOG)\
-         test_sq_init_and_free$(LOG)\
-         test_sq_delete$(LOG)\
-         test_sq_insert$(LOG)\
-         test_sq_merge$(LOG)\
-         test_sq_sort_and_find$(LOG)\
-         test_PCMstring$(LOG)\
-         test_PCMmath$(LOG)\
-         test_PCMfile$(LOG)\
+LOGFILES=test_PCM_link_init_and_free$(LOG)\
+         test_PCM_link_one_element$(LOG)\
+         test_PCM_link_many_element$(LOG)\
+         test_PCM_link_readfile$(LOG)\
+         test_PCM_sq_inout$(LOG)\
+         test_PCM_sq_init_and_free$(LOG)\
+         test_PCM_sq_delete$(LOG)\
+         test_PCM_sq_insert$(LOG)\
+         test_PCM_sq_merge$(LOG)\
+         test_PCM_sq_sort_and_find$(LOG)\
+         test_PCM_string$(LOG)\
+         test_PCM_math$(LOG)\
+         test_PCM_file$(LOG)\
          test_PCM$(LOG)\
-         test_PCMstack$(LOG)
+         test_PCM_stack$(LOG)
 
 include makefile.common
