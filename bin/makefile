@@ -4,7 +4,8 @@ E=
 C=.c
 CPP=.cpp
 INCLUDE=../include/
-TESTDIR=../test/
+CTESTDIR=../test/c/
+JAVATESTDIR=../test/java/
 LOG=.log
 EXEDIR=exe/
 CSRC=../src/c/PCMlinkedlist$(C)\
@@ -33,22 +34,22 @@ EXE=test_link_init_and_free$(E)\
          test_PCMfile$(E)\
          test_PCM$(E)\
 			test_PCMstack$(E)
-CTEST=$(TESTDIR)test_link_init_and_free$(C)\
-          $(TESTDIR)test_link_one_element$(C)\
-          $(TESTDIR)test_link_many_element$(C)\
-          $(TESTDIR)test_link_readfile$(C)\
-          $(TESTDIR)test_check_bounds$(C)\
-          $(TESTDIR)test_sq_inout$(C)\
-          $(TESTDIR)test_sq_init_and_free$(C)\
-          $(TESTDIR)test_sq_delete$(C)\
-          $(TESTDIR)test_sq_insert$(C)\
-          $(TESTDIR)test_sq_merge$(C)\
-          $(TESTDIR)test_sq_sort_and_find$(C)\
-          $(TESTDIR)test_PCMstring$(C)\
-          $(TESTDIR)test_PCMmath$(C)\
-          $(TESTDIR)test_PCMfile$(C)\
-          $(TESTDIR)test_PCM$(C)\
-			 $(TESTDIR)test_PCMstack$(c)
+CTEST=$(CTESTDIR)test_link_init_and_free$(C)\
+          $(CTESTDIR)test_link_one_element$(C)\
+          $(CTESTDIR)test_link_many_element$(C)\
+          $(CTESTDIR)test_link_readfile$(C)\
+          $(CTESTDIR)test_check_bounds$(C)\
+          $(CTESTDIR)test_sq_inout$(C)\
+          $(CTESTDIR)test_sq_init_and_free$(C)\
+          $(CTESTDIR)test_sq_delete$(C)\
+          $(CTESTDIR)test_sq_insert$(C)\
+          $(CTESTDIR)test_sq_merge$(C)\
+          $(CTESTDIR)test_sq_sort_and_find$(C)\
+          $(CTESTDIR)test_PCMstring$(C)\
+          $(CTESTDIR)test_PCMmath$(C)\
+          $(CTESTDIR)test_PCMfile$(C)\
+          $(CTESTDIR)test_PCM$(C)\
+			 $(CTESTDIR)test_PCMstack$(c)
 
 LOGFILES=test_link_init_and_free$(LOG)\
          test_link_one_element$(LOG)\

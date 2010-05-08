@@ -17,7 +17,7 @@ help:
 	)
 
 compile =                                                    \
-         $(CCOMPILE) -g -pg -I $(INCLUDE) $(TESTDIR)$(1)$(C) $(CSRC) \
+         $(CCOMPILE) -g -pg -I $(INCLUDE) $(CTESTDIR)$(1)$(C) $(CSRC) \
          -o $(1)$(E);
 test =                                                        \
          if test -e gmon.out; then rm gmon.out; fi; \
@@ -27,7 +27,7 @@ test =                                                        \
 tags:
 	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
 cppcompile =                                                  \
-         $(CPPCOMPILE) -I $(INCLUDE) $(TESTDIR)$(1)$(CPP) $(CPPSRC) \
+         $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
 			-o $(1)$(E);                                                   
 pcm: $(EXE) tags
 
@@ -47,88 +47,88 @@ testclean:
 clean: testclean
 	@rm -f error gmon.out test_* splint *.stackdump
 # C files
-test_link_init_and_free$(E): $(CSRC) $(TESTDIR)test_link_init_and_free$(C)
+test_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_link_init_and_free$(C)
 	$(call compile,test_link_init_and_free)
 test_link_init_and_free$(LOG): test_link_init_and_free$(E)
 	$(call test,test_link_init_and_free)
 
-test_link_one_element$(E): $(CSRC) $(TESTDIR)test_link_one_element$(C)
+test_link_one_element$(E): $(CSRC) $(CTESTDIR)test_link_one_element$(C)
 	$(call compile,test_link_one_element)
 test_link_one_element$(LOG): test_link_one_element$(E)
 	$(call test,test_link_one_element)
 
-test_link_many_element$(E): $(CSRC) $(TESTDIR)test_link_many_element$(C)
+test_link_many_element$(E): $(CSRC) $(CTESTDIR)test_link_many_element$(C)
 	$(call compile,test_link_many_element)
 test_link_many_element$(LOG): test_link_many_element$(E)
 	$(call test,test_link_many_element)
 
-test_link_readfile$(E): $(CSRC) $(TESTDIR)test_link_readfile$(C)
+test_link_readfile$(E): $(CSRC) $(CTESTDIR)test_link_readfile$(C)
 	$(call compile,test_link_readfile)
 test_link_readfile$(LOG): test_link_readfile$(E)
 	$(call test,test_link_readfile)
 
-test_check_bounds$(E): $(CSRC) $(TESTDIR)test_check_bounds$(C)
+test_check_bounds$(E): $(CSRC) $(CTESTDIR)test_check_bounds$(C)
 	$(call compile,test_check_bounds)
 test_check_bounds$(LOG): test_check_bounds$(E)
 	$(call test,test_check_bounds)
 
-test_sq_inout$(E): $(CSRC) $(TESTDIR)test_sq_inout$(C)
+test_sq_inout$(E): $(CSRC) $(CTESTDIR)test_sq_inout$(C)
 	$(call compile,test_sq_inout)
 test_sq_inout$(LOG): test_sq_inout$(E)
 	$(call test,test_sq_inout)
 
-test_sq_init_and_free$(E):$(CSRC) $(TESTDIR)test_sq_init_and_free$(C)
+test_sq_init_and_free$(E):$(CSRC) $(CTESTDIR)test_sq_init_and_free$(C)
 	$(call compile,test_sq_init_and_free)
 test_sq_init_and_free$(LOG): test_sq_init_and_free$(E)
 	$(call test,test_sq_init_and_free)
 
-test_sq_delete$(E): $(CSRC) $(TESTDIR)test_sq_delete$(C)
+test_sq_delete$(E): $(CSRC) $(CTESTDIR)test_sq_delete$(C)
 	$(call compile,test_sq_delete)
 test_sq_delete$(LOG): test_sq_delete$(E)
 	$(call test,test_sq_delete)
 
-test_sq_insert$(E): $(CSRC) $(TESTDIR)test_sq_insert$(C)
+test_sq_insert$(E): $(CSRC) $(CTESTDIR)test_sq_insert$(C)
 	$(call compile,test_sq_insert)
 test_sq_insert$(LOG): test_sq_insert$(E)
 	$(call test,test_sq_insert)
 
-test_sq_merge$(E): $(CSRC) $(TESTDIR)test_sq_merge$(C)
+test_sq_merge$(E): $(CSRC) $(CTESTDIR)test_sq_merge$(C)
 	$(call compile,test_sq_merge)
 test_sq_merge$(LOG): test_sq_merge$(E)
 	$(call test,test_sq_merge)
 
-test_sq_sort_and_find$(E): $(CSRC) $(TESTDIR)test_sq_sort_and_find$(C)
+test_sq_sort_and_find$(E): $(CSRC) $(CTESTDIR)test_sq_sort_and_find$(C)
 	$(call compile,test_sq_sort_and_find)
 test_sq_sort_and_find$(LOG): test_sq_sort_and_find$(E)
 	$(call test,test_sq_sort_and_find)
 
-test_PCMstring$(E): $(CSRC) $(TESTDIR)test_PCMstring$(C)
+test_PCMstring$(E): $(CSRC) $(CTESTDIR)test_PCMstring$(C)
 	$(call compile,test_PCMstring)
 test_PCMstring$(LOG): test_PCMstring$(E)
 	$(call test,test_PCMstring)
 
-test_PCMmath$(E): $(CSRC) $(TESTDIR)test_PCMmath$(C)
+test_PCMmath$(E): $(CSRC) $(CTESTDIR)test_PCMmath$(C)
 	$(call compile,test_PCMmath)
 test_PCMmath$(LOG): test_PCMmath$(E)
 	$(call test,test_PCMmath)
 
-test_PCMfile$(E): $(CSRC) $(TESTDIR)test_PCMfile$(C)
+test_PCMfile$(E): $(CSRC) $(CTESTDIR)test_PCMfile$(C)
 	$(call compile,test_PCMfile)
 test_PCMfile$(LOG): test_PCMfile$(E)
 	$(call test,test_PCMfile)
 
-test_PCM$(E): $(CSRC) $(TESTDIR)test_PCM$(C)
+test_PCM$(E): $(CSRC) $(CTESTDIR)test_PCM$(C)
 	$(call compile,test_PCM)
 test_PCM$(LOG): test_PCM$(E)
 	$(call test,test_PCM)
 
-test_PCMstack$(E): $(CSRC) $(TESTDIR)test_PCMstack$(C)
+test_PCMstack$(E): $(CSRC) $(CTESTDIR)test_PCMstack$(C)
 	$(call compile,test_PCMstack)
 test_PCMstack$(LOG): test_PCMstack$(E)
 	$(call test,test_PCMstack)
 
 # C++ files
-cast$(E): $(CPPSRC) $(TESTDIR)cast$(CPP)
+cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)
 	$(call cppcompile,cast)
 cast$(LOG): cast$(E)
 	$(call test,cast)
