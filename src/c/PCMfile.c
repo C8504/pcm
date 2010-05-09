@@ -78,12 +78,15 @@ PCMfilestatistics (PCMfile *fp)
    error = PCMfilegetinfo(fp);
    if ( error )  goto TERMINATE;
 
+   printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
+   
    printf ("File name: %s\n", fp->name);
    printf ("There are %lld lines\n", fp->nlines);
    printf ("There are %lld words\n", fp->nwords);
    printf ("There are %lld bytes\n", fp->nbytes);
    printf ("There are %lld digits\n", fp->ndigits);
 
+   printf ("\n++++++++++++++++END++++++++++++++++++++++++++++++++++++\n");
 /*   for (i = 0; i < PCMCHAR; ++i) {*/
 /*      if (isprint(i)) {*/
 /*         printf ("Count of char ");*/

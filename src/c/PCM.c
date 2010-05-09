@@ -46,7 +46,7 @@ PCMcompare (const void *x,
       return 0;
 }
 
-   void**
+void**
 PCMdarraynew (size_t row, size_t col, size_t size)
 {
    void **arr;
@@ -67,7 +67,7 @@ PCMdarraynew (size_t row, size_t col, size_t size)
    return arr;
 } /* End of PCMdarraynew*/
 
-   void
+void
 PCMdarrayfree (void **arr)
 {
    free (arr);

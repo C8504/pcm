@@ -230,6 +230,7 @@ PCMseqlistoutput (PCMseqlist *list)
       goto TERMINATE;
    }
 
+   printf ("\n++++++++++++++++PCM_sq_list+++++++++++++++++++++\n");
    printf ("list->length = %d\n", list->length);
    printf ("list->capacity = %d\n", list->capacity);
 
@@ -242,7 +243,7 @@ PCMseqlistoutput (PCMseqlist *list)
    else {
       printf("This is a NULL list!");
    }
-   printf ("\n\n");
+   printf ("\n++++++++++++++++END+++++++++++++++++++++++++++++\n");
 
 TERMINATE:
    return error;
