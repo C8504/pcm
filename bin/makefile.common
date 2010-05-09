@@ -16,19 +16,24 @@ help:
 	;echo "make [tags]                    -- generate ctags" \
 	)
 
-compile =                                                    \
+compile =                                                 \
+         if !(test -d exe); then mkdir exe; fi; \
+         if !(test -d log); then mkdir log; fi; \
+         if !(test -d profile); then mkdir profile; fi; \
+         if !(test -d splint); then mkdir splint; fi; \
          $(CCOMPILE) $(OTHER) $(INCLUDE) $(CTESTDIR)$(1)$(C) $(CSRC) \
          -o $(EXEDIR)$(1)$(E);
 test =                                                        \
          if test -e gmon.out; then rm gmon.out; fi; \
          ./$(EXEDIR)$(1)$(E) > $(LOGDIR)$(1)$(LOG);                \
 			gprof $(EXEDIR)$(1)$(E) gmon.out > $(PROFDIR)$(1).profile; 
-         #cat $(1)$(LOG)
-tags:
-	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
+
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
          -o $(EXEDIR)$(1)$(E);                                                   
+tags:
+	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
+
 pcm: $(EXE) tags
 
 pcmtest: $(LOGFILES)
@@ -40,12 +45,17 @@ pcmtest: $(LOGFILES)
 	else \
 	  echo "All tests completed successfully"; \
 	fi
+
 splint: $(CSRC)
-	@splint -I $(INCLUDE) $(CSRC) > $(SPLINT)/PCM.splint
+	@splint -I $(INCLUDE) $(CSRC) > $(SPLINTDIR)/PCM.splint
+
 testclean:
-	@rm -f  $(LOGDIR)* $(PROFDIR)* $(EXEDIR)*
+	@rm -f  $(LOGDIR)* $(PROFDIR)* $(EXEDIR)* $(SPLINTDIR)/*
+	@rm -f -r $(LOGDIR) $(PROFDIR) $(EXEDIR) $(SPLINTDIR)
+
 clean: testclean
-	@rm -f error $(SPLINT)/* */*.stackdump gmon.out
+	@rm -f error  */*.stackdump gmon.out
+
 # C files
 $(EXEDIR)test_PCM_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_PCM_link_init_and_free$(C)
 	$(call compile,test_PCM_link_init_and_free)

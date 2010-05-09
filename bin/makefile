@@ -16,7 +16,7 @@ JAVATESTDIR=../test/java/
 EXEDIR=exe/
 LOGDIR=log/
 PROFDIR=profile/
-SPLINT=splint/
+SPLINTDIR=splint/
 
 CSRC=$(CSRCDIR)PCMlinkedlist$(C)\
      $(CSRCDIR)PCMfind$(C)\
@@ -32,7 +32,6 @@ EXE=$(EXEDIR)test_PCM_link_init_and_free$(E)\
     $(EXEDIR)test_PCM_link_one_element$(E)\
     $(EXEDIR)test_PCM_link_many_element$(E)\
     $(EXEDIR)test_PCM_link_readfile$(E)\
-    $(EXEDIR)test_PCM_sq_inout$(E)\
     $(EXEDIR)test_PCM_sq_delete$(E)\
     $(EXEDIR)test_PCM_sq_insert$(E)\
     $(EXEDIR)test_PCM_sq_merge$(E)\
@@ -47,7 +46,6 @@ CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
       $(CTESTDIR)test_PCM_link_one_element$(C)\
       $(CTESTDIR)test_PCM_link_many_element$(C)\
       $(CTESTDIR)test_PCM_link_readfile$(C)\
-      $(CTESTDIR)test_PCM_sq_inout$(C)\
       $(CTESTDIR)test_PCM_sq_init_and_free$(C)\
       $(CTESTDIR)test_PCM_sq_delete$(C)\
       $(CTESTDIR)test_PCM_sq_insert$(C)\
@@ -63,7 +61,6 @@ LOGFILES=$(LOGDIR)test_PCM_link_init_and_free$(LOG)\
          $(LOGDIR)test_PCM_link_one_element$(LOG)\
          $(LOGDIR)test_PCM_link_many_element$(LOG)\
          $(LOGDIR)test_PCM_link_readfile$(LOG)\
-         $(LOGDIR)test_PCM_sq_inout$(LOG)\
          $(LOGDIR)test_PCM_sq_init_and_free$(LOG)\
          $(LOGDIR)test_PCM_sq_delete$(LOG)\
          $(LOGDIR)test_PCM_sq_insert$(LOG)\
