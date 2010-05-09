@@ -16,16 +16,16 @@ extern "C" {
    } PCMfile;
 
    int PCMfilecreate(PCMfile **fp);
-   int PCMfilefree(PCMfile **fp);
+   int PCMfilefree  (PCMfile **fp);
 
-   int PCMfileopen(PCMfile *fp, const char *name);
+   int PCMfileopen      (PCMfile *fp, const char *name);
    int PCMfilestatistics(PCMfile *fp);
-   int PCMfilegetline(/*in*/ PCMfile *fp,
-         /*in*/ int     max,
-         /*out*/char    *line,
-         /*out*/int     *length);
+   int PCMfilegetline   (/*in*/ PCMfile *fp,
+                         /*in*/ int     max,
+                         /*out*/char    *line,
+                         /*out*/int     *length);
    int PCMfilegetmaxline(PCMfile *fp, char *maxline, int *max);
-   int PCMfilegetinfo(PCMfile *fp);
+   int PCMfilegetinfo   (PCMfile *fp);
 
 #ifdef __cplusplus
 }

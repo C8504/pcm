@@ -1,5 +1,5 @@
 #include "PCMmath.h"
-   int 
+int 
 PCMpower(int base,
       int  n,
       long long *result)

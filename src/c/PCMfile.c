@@ -140,7 +140,7 @@ TERMINATE:
    return error;
 } /* End of PCMfilepgetinfo*/
 
-   int
+int
 PCMfilegetline (PCMfile *fp,
       int     max,
       char    *line,

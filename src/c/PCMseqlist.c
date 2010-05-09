@@ -4,7 +4,7 @@
 #include "PCMfind.h"
 #include "PCMseqlist.h"
 
-   int
+int
 PCMseqlistinit (PCMseqlist **list)
 {
    int error = 0;
@@ -27,7 +27,7 @@ TERMINATE:
 } /* End of PCMseqlistinit */
 
 /* Free the list*/
-   int
+int
 PCMseqlistfree (PCMseqlist **list)
 {
    int error = 0;
@@ -56,7 +56,7 @@ TERMINATE:
 } /* End of PCMseqlistfree */
 
 /* Copy an array to the list with count */
-   int
+int
 PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)
 {
    int i;
@@ -77,7 +77,7 @@ TERMINATE:
 } /* End of PCMseqlistcopy*/
 
 /* Merge two lists */
-   int
+int
 PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)
 {
    int i;
@@ -102,7 +102,7 @@ TERMINATE:
 } /* End of PCMseqlistmerge*/
 
 /* Clear the whole list*/
-   int
+int
 PCMseqlistclear (PCMseqlist *list)
 {
    int error = 0;
@@ -121,7 +121,7 @@ TERMINATE:
 } /* End of PCMseqlistclear*/
 
 /* Insert an elem to the list with index*/
-   int
+int
 PCMseqlistinsert (PCMseqlist *list,
       int index,
       const int elem)
@@ -166,7 +166,7 @@ TERMINATE:
 } /* END of PCMseqlistinsert */
 
 /* Delete an element in index, and save the deleted element to *e*/
-   int
+int
 PCMseqlistdelete (PCMseqlist *list,
       int index,
       int *e)
@@ -198,7 +198,7 @@ TERMINATE:
 } /* End of PCMseqlistdelete */
 
 /* Delete the repeat element in list */
-   int
+int
 PCMseqlistdeleteR(PCMseqlist *list)
 {
    int error = 0;
@@ -219,7 +219,7 @@ TERMINATE:
 } /* End of PCMseqlistdeleteR */
 
 /* Output the list */
-   int
+int
 PCMseqlistoutput (PCMseqlist *list)
 {
    int i;
@@ -250,7 +250,7 @@ TERMINATE:
 } /* End of PCMseqlistoutput */
 
 /* Sort list by customize algorithm, bubble sort by default */
-   int
+int
 PCMseqlistsort (PCMseqlist *list,
       int length,
       enum PCMSORTALG alg)
@@ -288,7 +288,7 @@ TERMINATE:
 } /* End of PCMsqlistsort */
 
 /* Find element in list by customize algorithm, Origin Find by default */
-   int
+int
 PCMseqlistfind (PCMseqlist *list,
       int length,
       const int elem,

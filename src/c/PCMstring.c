@@ -1,5 +1,5 @@
 #include "PCMstring.h"
-   int
+int
 PCMdelcharofstring (char * str,
       int  c)
 {
@@ -25,7 +25,7 @@ TERMINATE:
    return error;
 } /* End of PCMdelcharofstring */
 
-   int
+int
 PCMstrlen (const char *str,
       size_t     *len)
 {
@@ -46,7 +46,7 @@ TERMINATE:
    return error;
 } /* End of PCMstrlen */
 
-   int
+int
 PCMstrtrim (char *str)
 {
    int error = 0;
@@ -70,7 +70,7 @@ TERMINATE:
    return error;
 } /* End of PCMstrtrim*/
 
-   int
+int
 PCMstreverse (char *str)
 {
    int error = 0;
@@ -103,7 +103,7 @@ TERMINATE:
 /*
    PCMstrncpy copy src to des, with length n.
    */
-   int
+int
 PCMstrncpy (char       *des,
       const char *src,
       int n)
@@ -141,7 +141,7 @@ TERMINATE:
    return error;
 } /* End of PCMstrncpy*/
 
-   int
+int
 PCMstrncat (char *des,
       const char *src,
       int n)
@@ -203,7 +203,7 @@ TERMINATE:
    return error;
 } /* End of PCMstrlbkstoblk*/
 
-   int
+int
 PCMstrindex(char *str, char *substr, int *index)
 {
    int error = 0;

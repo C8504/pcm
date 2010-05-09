@@ -1,7 +1,7 @@
 /* linked list by John Cui*/
 #include "PCMlinkedlist.h"
 
-   void
+void
 PCMnodefree (PCMlinkednode **node)
 {
    if ( *node != NULL ) {
@@ -14,7 +14,7 @@ PCMnodefree (PCMlinkednode **node)
    }
 } /* End of PCMnodefree */
 
-   int
+int
 PCMnodeallocandinit (PCMlinkednode **node,
       const char* elem)
 {
@@ -59,7 +59,7 @@ TERMINATE:
    return error;
 } /* End of PCMnodeallocandinit */
 
-   int
+int
 PCMlinkedlistinit (PCMlinkedlist **list)
 {
    int error = 0;
@@ -80,7 +80,7 @@ TERMINATE:
 
 
 /* free the list*/
-   int
+int
 PCMlinkedlistfree (PCMlinkedlist **list)
 {
    int error = 0;
@@ -98,7 +98,7 @@ PCMlinkedlistfree (PCMlinkedlist **list)
    return error;
 } /* End of PCMlinkedlistfree */
 
-   int
+int
 PCMlinkedlistappend (PCMlinkedlist *list,
       const char* elem)
 {
@@ -123,7 +123,7 @@ TERMINATE:
 } /* END of PCMlinkedlistappend */
 
 //insert the newnode after "p"
-   int
+int
 PCMlinkedlistinsert (PCMlinkedlist *list,
       int         pos,
       const char* elem)
@@ -177,7 +177,7 @@ TERMINATE:
    return error;
 } /* End of PCMlinkedlistinsert */
 
-   int
+int
 PCMlinkedlistoutput (PCMlinkedlist *list,
       const char* sp)
 {
@@ -213,7 +213,7 @@ TERMINATE:
    return error;
 } /* End of PCMlinkedlistoutput */
 
-   int
+int
 PCMlinkedlistclear (PCMlinkedlist *list)
 {
    int error = 0;
@@ -228,7 +228,7 @@ TERMINATE:
 } /* End of PCMlinkedlistclear */
 
 // Pop is a method used in both stack and queue with type 
-   int
+int
 PCMlinkedlistpop (PCMlinkedlist *list,
       enum PCMPOPTYPE type)
 {
@@ -285,7 +285,7 @@ TERMINATE:
    return error;
 } /* End of PCMlinkedlistpop */
 
-   int
+int
 PCMlinkedlistlength(PCMlinkedlist *list)
 {
    int length = 0;

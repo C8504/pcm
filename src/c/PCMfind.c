@@ -1,6 +1,6 @@
 #include "PCMfind.h"
 
-   int
+int
 PCMoriginfind(int *a,
       int length,
       const int elem,
@@ -22,7 +22,7 @@ TERMINATE:
    return error;
 } /* End of PCMoriginfind*/
 
-   int
+int
 PCMbinfind(int *a, 
       int length, 
       const int elem, 

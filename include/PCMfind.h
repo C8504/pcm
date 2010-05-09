@@ -7,7 +7,7 @@ extern "C" {
 
 #include "PCM.h"
    int PCMoriginfind (int *a, int length, const int elem, int *index);
-   int PCMbinfind (int *a, int length, const int elem, int *index);
+   int PCMbinfind    (int *a, int length, const int elem, int *index);
 
 #ifdef __cplusplus
 }

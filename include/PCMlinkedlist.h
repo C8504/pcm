@@ -22,7 +22,7 @@ extern "C" {
    typedef PCMlinkedlist* PCMlinkedlistp;
 
    /* PCMlinkednode functions */
-   void PCMnodefree           (PCMlinkednode **node);
+   void PCMnodefree         (PCMlinkednode **node);
    int  PCMnodeallocandinit (PCMlinkednode **node, const char* elem);
 
    /* PCMlinkedlist functions */

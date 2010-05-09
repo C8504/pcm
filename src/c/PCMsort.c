@@ -1,6 +1,6 @@
 #include "PCMsort.h"
 
-   int
+int
 PCMselectsort(int *a,
       int len)
 {
@@ -30,7 +30,7 @@ TERMINATE:
    return error;
 } /* End of PCMselectsort*/
 
-   int
+int
 PCMbubblesort(int *a,
       int len)
 {
@@ -55,7 +55,7 @@ TERMINATE:
    return error;
 } /* End of PCMbubblesort*/
 
-   int
+int
 PCMshellsort(int *a,
       int len)
 {

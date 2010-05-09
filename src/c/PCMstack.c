@@ -38,7 +38,7 @@ TERMINATE:
 /* freefunc is used to free the dynamic momery which
  * in (*sp)->data pointers array, if the pointer in (*sp)->data
  * was allocated dynamicly, otherwise pass NULL to freefunc*/
-   void
+void
 PCMstackfree (PCMstack **sp, FREEFUNC freefunc)
 {
    int i = 0;
@@ -61,7 +61,7 @@ PCMstackfree (PCMstack **sp, FREEFUNC freefunc)
    }
 } /* End of PCMstackfree */
 
-   int 
+int 
 PCMstackpush (PCMstack *s, void *elem)
 {
    int error = 0;
@@ -88,7 +88,7 @@ TERMINATE:
    return error;
 } /* End of PCMstackpush */
 
-   void*
+void*
 PCMstackpop (PCMstack *s)
 {
    void *elem;
@@ -104,7 +104,7 @@ PCMstackpop (PCMstack *s)
    return elem;
 } /* End of PCMstackpop */
 
-   int
+int
 PCMstackisempty (PCMstack *s)
 {
    if( s == NULL || s->top == -1 ){
