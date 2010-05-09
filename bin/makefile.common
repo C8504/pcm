@@ -40,8 +40,8 @@ pcmtest: $(LOGFILES)
 	else \
 	  echo "All tests completed successfully"; \
 	fi
-splint: $(CSRC) $(CTEST)
-	@splint -I $(INCLUDE) $(CSRC) $(CTEST) > $(SPLINT)/splint
+splint: $(CSRC)
+	@splint -I $(INCLUDE) $(CSRC) > $(SPLINT)/PCM.splint
 testclean:
 	@rm -f  $(LOGDIR)* $(PROFDIR)* $(EXEDIR)*
 clean: testclean
