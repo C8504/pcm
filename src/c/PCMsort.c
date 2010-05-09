@@ -9,7 +9,10 @@ PCMselectsort(int *a,
    int t;
 
    error = PCMcheckpointer (a);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    for (i = 0; i < len; ++i) {
       min = i;
@@ -39,7 +42,10 @@ PCMbubblesort(int *a,
    int t;
 
    error = PCMcheckpointer (a);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    for (i = 0; i < len; ++i) {
       for (j = i + 1; j < len; ++j) {
@@ -64,7 +70,10 @@ PCMshellsort(int *a,
    int temp;
 
    error = PCMcheckpointer (a);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    while (gap * 3 + 1 <= len) {
       gap=gap * 3 + 1;

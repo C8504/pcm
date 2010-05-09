@@ -10,7 +10,10 @@ PCMoriginfind(int *a,
    int i;
    
    error = PCMcheckpointer (a);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    for (i = 0; i < length; ++i) {
       if ( a[i] == elem ) {
@@ -34,7 +37,10 @@ PCMbinfind(int *a,
    int high = length-1;
    
    error = PCMcheckpointer (a);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    *index = -1;
    while (low <= high) {

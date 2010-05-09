@@ -8,6 +8,7 @@ PCMfilecreate (PCMfile **fp) {
    *fp = malloc (sizeof **fp);
    if ( *fp == NULL ) {
       error = PCMERRNOMEMORY;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -55,11 +56,15 @@ PCMfileopen (PCMfile *fp, const char *name){
 
    if ((fp->p = fopen(name, "r")) == NULL) {
       error = errno;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
    else {
       error = PCMstrncpy(fp->name, name, sizeof fp->name - 1);
-      if ( error )  goto TERMINATE;
+      if ( error ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
     }
 
 TERMINATE:
@@ -73,10 +78,16 @@ PCMfilestatistics (PCMfile *fp)
    int i     = 0;
    
    error = PCMcheckpointer (fp);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    error = PCMfilegetinfo(fp);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
    
@@ -108,7 +119,10 @@ PCMfilegetinfo (PCMfile *fp){
    int c;
 
    error = PCMcheckpointer (fp);
-   if ( error )  goto TERMINATE;
+   if ( error ){
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    while ((c = getc(fp->p)) != EOF) {
       ++fp->nbytes;
@@ -151,7 +165,10 @@ PCMfilegetline (PCMfile *fp,
    int i     = 0;
 
    error = PCMcheckpointer (fp);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    while ((i < max-1               ) &&
          ((c = getc(fp->p)) != EOF ) &&
@@ -180,16 +197,25 @@ PCMfilegetmaxline (PCMfile *fp,
    char line[PCMFILEMAXLINE] = {0};
    
    error = PCMcheckpointer (fp);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    *max = len;
    do {
       error = PCMfilegetline (fp, PCMFILEMAXLINE, line, &len);
-      if ( error )  goto TERMINATE;
+      if ( error ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
       if ( len > *max ) {
          *max = len;
          error = PCMstrncpy (maxline, line, PCMFILEMAXLINE);
-         if ( error )  goto TERMINATE;
+         if ( error )  {
+            printf ("In %s, line %d ;",__FILE__, __LINE__);
+            goto TERMINATE;
+         }
       }
    }
    while ( len != 0 );

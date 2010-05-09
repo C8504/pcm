@@ -11,6 +11,7 @@ PCMdelcharofstring (char * str,
    if ( str == NULL ) {
       error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
    }
    else {
       for (i = 0, j = 0; str[i] != '\0'; ++i) {
@@ -35,6 +36,7 @@ PCMstrlen (const char *str,
    if ( str == NULL ) {
       error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
    }
    else {
       while ( str[i] != '\0')
@@ -117,6 +119,7 @@ PCMstrncpy (char       *des,
          src == NULL   ) {
       printf ("In %s, line %d ;",__FILE__, __LINE__);
       error = PCMERRNULLPOINTER;
+      goto TERMINATE;
    }
    else {
       error = PCMstrlen (src, &len);
@@ -154,6 +157,7 @@ PCMstrncat (char *des,
          src == NULL ) {
       error = PCMERRNULLPOINTER;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
    }
    else {
       error = PCMstrlen (src, &len);

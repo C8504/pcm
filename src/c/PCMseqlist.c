@@ -12,11 +12,13 @@ PCMseqlistinit (PCMseqlist **list)
    *list = malloc(sizeof **list);
    if ( *list == NULL ) {
       error = PCMERRNOMEMORY;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
    (*list)->elemp = malloc(PCMLISTINITSIZE * sizeof(int));
    if ( (*list)->elemp == NULL ) {
       error = PCMERRNOMEMORY;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
    (*list)->length = 0;
@@ -35,6 +37,7 @@ PCMseqlistfree (PCMseqlist **list)
 
    if ( NULL == list ) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -64,12 +67,16 @@ PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)
 
    if ( NULL == list || NULL == arr) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
    for (i = 0; i < count; ++i) {
       error = PCMseqlistinsert(list, list->length, arr[i]);
-      if ( error != 0 )  goto TERMINATE;
+      if ( error != 0 ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
    }
 
 TERMINATE:
@@ -86,16 +93,23 @@ PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)
 
    if ( NULL == des || NULL == src) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
    for (i = 0; i < src->length ; ++i) {
       error = PCMseqlistinsert(des, des->length, src->elemp[i]);
-      if ( error != 0 )  goto TERMINATE;
+      if ( error != 0 ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
    }
 
    error = PCMseqlistsort (des, des->length, 0);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
 TERMINATE:
    return error;
@@ -135,6 +149,7 @@ PCMseqlistinsert (PCMseqlist *list,
    if ( index < 0            ||
          index > list->length   ) {
       error = PCMERRNOTVALIDINDEX;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -146,6 +161,7 @@ PCMseqlistinsert (PCMseqlist *list,
                sizeof (int) * (list->capacity + PCMLISTINCREMENT));
       if ( list->elemp == NULL ) {
          error = PCMERRNOMEMORY;
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
       }
       list->capacity += PCMLISTINCREMENT;
@@ -180,6 +196,7 @@ PCMseqlistdelete (PCMseqlist *list,
    if ( index < 0              ||
          index > list->length - 1   ) {
       error = PCMERRNOTVALIDINDEX;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -206,11 +223,17 @@ PCMseqlistdeleteR(PCMseqlist *list)
 
    for (i = list->length; i > 0; --i) {
       error = PCMseqlistfind(list, i-1, list->elemp[i-1], &index, 0);
-      if ( error != 0 )  goto TERMINATE;
+      if ( error != 0 )  {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
 
       if ( index != -1 ) {
          error = PCMseqlistdelete (list, index, &e);
-         if ( error != 0 )  goto TERMINATE;
+         if ( error != 0 ) {
+            printf ("In %s, line %d ;",__FILE__, __LINE__);
+            goto TERMINATE;
+         }
       }
    }
 
@@ -227,6 +250,7 @@ PCMseqlistoutput (PCMseqlist *list)
 
    if ( NULL == list ) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -259,6 +283,7 @@ PCMseqlistsort (PCMseqlist *list,
 
    if ( NULL == list ) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -299,6 +324,7 @@ PCMseqlistfind (PCMseqlist *list,
 
    if ( NULL == list ) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 

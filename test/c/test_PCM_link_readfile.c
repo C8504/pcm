@@ -9,7 +9,7 @@ int main(void)
    PCMlinkedlist *mylist1 = NULL;
    PCMlinkedlist *mylist2 = NULL;
 
-   fp = fopen ("../data/git.txt", "r");
+   fp = fopen ("../data/PCM.c", "r");
    if ( fp == NULL)  {
       printf ("PCM Error: fopen error!\n");
       goto TERMINATE;

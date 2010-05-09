@@ -23,13 +23,17 @@ PCMnodeallocandinit (PCMlinkednode **node,
    *node = malloc (sizeof **node);
    if ( NULL == *node ) {
       error = PCMERRNOMEMORY;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
    if ( elem != NULL ) {
       size_t ssize = 0;
       error = PCMstrlen (elem, &ssize);
-      if ( error )  goto TERMINATE;
+      if ( error ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
       ++ssize;
 
       (*node)->elem = malloc (ssize);
@@ -40,6 +44,7 @@ PCMnodeallocandinit (PCMlinkednode **node,
          *node = NULL;
 
          error = PCMERRNOMEMORY;
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
       }
       else {
@@ -67,6 +72,7 @@ PCMlinkedlistinit (PCMlinkedlist **list)
    *list = malloc (sizeof **list);
    if ( NULL == *list ) {
       error = PCMERRNOMEMORY;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
@@ -105,7 +111,10 @@ PCMlinkedlistappend (PCMlinkedlist *list,
    PCMlinkednode *newnode = NULL;
 
    int error = PCMnodeallocandinit (&newnode, elem);
-   if ( error )  goto TERMINATE;
+   if ( error ) {
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
+   }
 
    if ( list->first == NULL &&
          list->last  == NULL  ) {
@@ -138,14 +147,20 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
    // and the newnode is the list->first and list->last
    if ( len == 0 ) {
       error = PCMnodeallocandinit (&newnode, elem);
-      if ( error )  goto TERMINATE;
+      if ( error ) {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
       list->first = list->last = newnode;
    }
    else {
       // if pos == len, then just append it
       if ( pos == len ) {
          error = PCMlinkedlistappend (list, elem);
-         if ( error )  goto TERMINATE;
+         if ( error )  {
+            printf ("In %s, line %d ;",__FILE__, __LINE__);
+            goto TERMINATE;
+         }
       }
       // if pos in the middle of list
       else {
@@ -153,6 +168,7 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
          if ( pos < 1  ||
                pos > len  ) {
             error = PCMERRNOTVALIDINDEX;
+            printf ("In %s, line %d ;",__FILE__, __LINE__);
             goto TERMINATE;
          }
 
@@ -164,7 +180,10 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
 
          // creat newnode
          error = PCMnodeallocandinit (&newnode, elem);
-         if ( error )  goto TERMINATE;
+         if ( error ) {
+            printf ("In %s, line %d ;",__FILE__, __LINE__);
+            goto TERMINATE;
+         }
 
          // insert the newnode after "p"
          newnode->next = p->next;
@@ -187,9 +206,12 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
 
    if ( list == NULL ) {
       error = PCMERRNULLPOINTER;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
-
+   
+   printf ("\n++++++++++++++PCM_linked_list++++++++++++++++++++++++++++\n");
+   
    if ( list->first != NULL &&
          list->last  != NULL   ) {
       p = list->first;
@@ -209,6 +231,8 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
       printf ("This is an empty list now\n\n");
    }
 
+   printf ("\n+++++++++++++++++++END+++++++++++++++++++++++++++++++++++\n");
+
 TERMINATE:
    return error;
 } /* End of PCMlinkedlistoutput */
@@ -220,7 +244,10 @@ PCMlinkedlistclear (PCMlinkedlist *list)
 
    while (0 != PCMlinkedlistlength (list)) {
       error = PCMlinkedlistpop (list, PCMPOPSTACK);
-      if ( error )  goto TERMINATE;
+      if ( error )  {
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
+         goto TERMINATE;
+      }
    }
 
 TERMINATE:
@@ -252,6 +279,7 @@ PCMlinkedlistpop (PCMlinkedlist *list,
       }
       else {
          error = PCMERREMPTYLIST;
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
       }
    }
@@ -270,11 +298,13 @@ PCMlinkedlistpop (PCMlinkedlist *list,
       }
       else {
          error = PCMERREMPTYLIST;
+         printf ("In %s, line %d ;",__FILE__, __LINE__);
          goto TERMINATE;
       }
    }
    else {
       error = PCMERRNOTSTACKANDQUEUE;
+      printf ("In %s, line %d ;",__FILE__, __LINE__);
       goto TERMINATE;
    }
 
