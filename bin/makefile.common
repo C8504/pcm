@@ -6,14 +6,16 @@ help:
 	@(echo "" \
 	;echo "Choose a target:" \
 	;echo "" \
-	;echo "make [help]                    -- print this help screen" \
-	;echo "make [test_PCM_sq_insert]      -- build test_PCM_sq_insert" \
-	;echo "make [pcmtest]                 -- build all tests" \
-	;echo "make [splint]                  -- use splint to check all C files" \
-	;echo "make [clean]                   -- delete all *.exe and *.log files" \
-	;echo "make [testclean]               -- delete all *.log files" \
-	;echo "make [pcm]                     -- compile all c/c++ programs" \
-	;echo "make [tags]                    -- generate ctags" \
+	;echo "make [help]                               -- print this help screen" \
+	;echo "make [exe/test_PCM_sq_insert]             -- build test_PCM_sq_insert" \
+	;echo "make [log/test_PCM_sq_insert.log]         -- run test_PCM_sq_insert" \
+	;echo "make [profile/test_PCM_sq_insert.profile] -- profile test_PCM_sq_insert" \
+	;echo "make [pcmtest]                            -- build all tests" \
+	;echo "make [splint]                             -- use splint to check all C files" \
+	;echo "make [clean]                              -- delete all *.exe and *.log files" \
+	;echo "make [testclean]                          -- delete all *.log files" \
+	;echo "make [pcm]                                -- compile all c/c++ programs" \
+	;echo "make [tags]                               -- generate ctags" \
 	)
 
 compile =                                                 \
