@@ -17,18 +17,18 @@ help:
 	)
 
 compile =                                                    \
-         $(CCOMPILE) -g -pg -I $(INCLUDE) $(CTESTDIR)$(1)$(C) $(CSRC) \
-         -o $(1)$(E);
+         $(CCOMPILE) $(OTHER) $(INCLUDE) $(CTESTDIR)$(1)$(C) $(CSRC) \
+         -o $(EXEDIR)$(1)$(E);
 test =                                                        \
          if test -e gmon.out; then rm gmon.out; fi; \
-         ./$(1)$(E) > $(1)$(LOG);                \
-			gprof $(1)$(E) gmon.out > $(1).profile; 
+         ./$(EXEDIR)$(1)$(E) > $(LOGDIR)$(1)$(LOG);                \
+			gprof $(EXEDIR)$(1)$(E) gmon.out > $(PROFDIR)$(1).profile; 
          #cat $(1)$(LOG)
 tags:
 	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
-         -o $(1)$(E);                                                   
+         -o $(EXEDIR)$(1)$(E);                                                   
 pcm: $(EXE) tags
 
 pcmtest: $(LOGFILES)
@@ -36,96 +36,97 @@ pcmtest: $(LOGFILES)
 	  echo "";\
 	  echo "PCM Errors found!"; \
 	  echo "";\
-	  grep 'PCM Error' *.log > error;cat error;\
+	  grep 'PCM Error' */*.log > error;cat error;\
 	else \
 	  echo "All tests completed successfully"; \
 	fi
 splint: $(CSRC) $(CTEST)
-	@splint -I $(INCLUDE) $(CSRC) $(CTEST) > splint
+	@splint -I $(INCLUDE) $(CSRC) $(CTEST) > $(SPLINT)/splint
 testclean:
-	@rm -f  *$(LOG)
+	@rm -f  $(LOGDIR)* $(PROFDIR)* $(EXEDIR)*
 clean: testclean
-	@rm -f error gmon.out test_* splint *.stackdump
+	@rm -f error $(SPLINT)/* */*.stackdump gmon.out
 # C files
-test_PCM_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_PCM_link_init_and_free$(C)
+$(EXEDIR)test_PCM_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_PCM_link_init_and_free$(C)
 	$(call compile,test_PCM_link_init_and_free)
-test_PCM_link_init_and_free$(LOG): test_PCM_link_init_and_free$(E)
+$(LOGDIR)test_PCM_link_init_and_free$(LOG): $(EXEDIR)test_PCM_link_init_and_free$(E)
+	echo "here"
 	$(call test,test_PCM_link_init_and_free)
 
-test_PCM_link_one_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_one_element$(C)
+$(EXEDIR)test_PCM_link_one_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_one_element$(C)
 	$(call compile,test_PCM_link_one_element)
-test_PCM_link_one_element$(LOG): test_PCM_link_one_element$(E)
+$(LOGDIR)test_PCM_link_one_element$(LOG): $(EXEDIR)test_PCM_link_one_element$(E)
 	$(call test,test_PCM_link_one_element)
 
-test_PCM_link_many_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_many_element$(C)
+$(EXEDIR)test_PCM_link_many_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_many_element$(C)
 	$(call compile,test_PCM_link_many_element)
-test_PCM_link_many_element$(LOG): test_PCM_link_many_element$(E)
+$(LOGDIR)test_PCM_link_many_element$(LOG): $(EXEDIR)test_PCM_link_many_element$(E)
 	$(call test,test_PCM_link_many_element)
 
-test_PCM_link_readfile$(E): $(CSRC) $(CTESTDIR)test_PCM_link_readfile$(C)
+$(EXEDIR)test_PCM_link_readfile$(E): $(CSRC) $(CTESTDIR)test_PCM_link_readfile$(C)
 	$(call compile,test_PCM_link_readfile)
-test_PCM_link_readfile$(LOG): test_PCM_link_readfile$(E)
+$(LOGDIR)test_PCM_link_readfile$(LOG): $(EXEDIR)test_PCM_link_readfile$(E)
 	$(call test,test_PCM_link_readfile)
 
-test_PCM_sq_inout$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_inout$(C)
+$(EXEDIR)test_PCM_sq_inout$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_inout$(C)
 	$(call compile,test_PCM_sq_inout)
-test_PCM_sq_inout$(LOG): test_PCM_sq_inout$(E)
+$(LOGDIR)test_PCM_sq_inout$(LOG): $(EXEDIR)test_PCM_sq_inout$(E)
 	$(call test,test_PCM_sq_inout)
 
-test_PCM_sq_init_and_free$(E):$(CSRC) $(CTESTDIR)test_PCM_sq_init_and_free$(C)
+$(EXEDIR)test_PCM_sq_init_and_free$(E):$(CSRC) $(CTESTDIR)test_PCM_sq_init_and_free$(C)
 	$(call compile,test_PCM_sq_init_and_free)
-test_PCM_sq_init_and_free$(LOG): test_PCM_sq_init_and_free$(E)
+$(LOGDIR)test_PCM_sq_init_and_free$(LOG): $(EXEDIR)test_PCM_sq_init_and_free$(E)
 	$(call test,test_PCM_sq_init_and_free)
 
-test_PCM_sq_delete$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_delete$(C)
+$(EXEDIR)test_PCM_sq_delete$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_delete$(C)
 	$(call compile,test_PCM_sq_delete)
-test_PCM_sq_delete$(LOG): test_PCM_sq_delete$(E)
+$(LOGDIR)test_PCM_sq_delete$(LOG): $(EXEDIR)test_PCM_sq_delete$(E)
 	$(call test,test_PCM_sq_delete)
 
-test_PCM_sq_insert$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_insert$(C)
+$(EXEDIR)test_PCM_sq_insert$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_insert$(C)
 	$(call compile,test_PCM_sq_insert)
-test_PCM_sq_insert$(LOG): test_PCM_sq_insert$(E)
+$(LOGDIR)test_PCM_sq_insert$(LOG): $(EXEDIR)test_PCM_sq_insert$(E)
 	$(call test,test_PCM_sq_insert)
 
-test_PCM_sq_merge$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_merge$(C)
+$(EXEDIR)test_PCM_sq_merge$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_merge$(C)
 	$(call compile,test_PCM_sq_merge)
-test_PCM_sq_merge$(LOG): test_PCM_sq_merge$(E)
+$(LOGDIR)test_PCM_sq_merge$(LOG): $(EXEDIR)test_PCM_sq_merge$(E)
 	$(call test,test_PCM_sq_merge)
 
-test_PCM_sq_sort_and_find$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_sort_and_find$(C)
+$(EXEDIR)test_PCM_sq_sort_and_find$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_sort_and_find$(C)
 	$(call compile,test_PCM_sq_sort_and_find)
-test_PCM_sq_sort_and_find$(LOG): test_PCM_sq_sort_and_find$(E)
+$(LOGDIR)test_PCM_sq_sort_and_find$(LOG): $(EXEDIR)test_PCM_sq_sort_and_find$(E)
 	$(call test,test_PCM_sq_sort_and_find)
 
-test_PCM_string$(E): $(CSRC) $(CTESTDIR)test_PCM_string$(C)
+$(EXEDIR)test_PCM_string$(E): $(CSRC) $(CTESTDIR)test_PCM_string$(C)
 	$(call compile,test_PCM_string)
-test_PCM_string$(LOG): test_PCM_string$(E)
+$(LOGDIR)test_PCM_string$(LOG): $(EXEDIR)test_PCM_string$(E)
 	$(call test,test_PCM_string)
 
-test_PCM_math$(E): $(CSRC) $(CTESTDIR)test_PCM_math$(C)
+$(EXEDIR)test_PCM_math$(E): $(CSRC) $(CTESTDIR)test_PCM_math$(C)
 	$(call compile,test_PCM_math)
-test_PCM_math$(LOG): test_PCM_math$(E)
+$(LOGDIR)test_PCM_math$(LOG): $(EXEDIR)test_PCM_math$(E)
 	$(call test,test_PCM_math)
 
-test_PCM_file$(E): $(CSRC) $(CTESTDIR)test_PCM_file$(C)
+$(EXEDIR)test_PCM_file$(E): $(CSRC) $(CTESTDIR)test_PCM_file$(C)
 	$(call compile,test_PCM_file)
-test_PCM_file$(LOG): test_PCM_file$(E)
+$(LOGDIR)test_PCM_file$(LOG): $(EXEDIR)test_PCM_file$(E)
 	$(call test,test_PCM_file)
 
-test_PCM$(E): $(CSRC) $(CTESTDIR)test_PCM$(C)
+$(EXEDIR)test_PCM$(E): $(CSRC) $(CTESTDIR)test_PCM$(C)
 	$(call compile,test_PCM)
-test_PCM$(LOG): test_PCM$(E)
+$(LOGDIR)test_PCM$(LOG): $(EXEDIR)test_PCM$(E)
 	$(call test,test_PCM)
 
-test_PCM_stack$(E): $(CSRC) $(CTESTDIR)test_PCM_stack$(C)
+$(EXEDIR)test_PCM_stack$(E): $(CSRC) $(CTESTDIR)test_PCM_stack$(C)
 	$(call compile,test_PCM_stack)
-test_PCM_stack$(LOG): test_PCM_stack$(E)
+$(LOGDIR)test_PCM_stack$(LOG): $(EXEDIR)test_PCM_stack$(E)
 	$(call test,test_PCM_stack)
 
 # C++ files
-cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)
+$(EXEDIR)cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)
 	$(call cppcompile,cast)
-cast$(LOG): cast$(E)
+$(LOGDIR)cast$(LOG): $(EXEDIR)cast$(E)
 	$(call test,cast)
 
 .PHONY: test splint clean
