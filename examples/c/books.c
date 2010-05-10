@@ -46,7 +46,7 @@ int main(void)
     }
 
     puts("Please add new book titles.");
-    puts("Press [enter] at the start of a line to stop.");
+    puts("Press [ctrl+d] at the start of a line to stop.");
     while (count < MAXBKS && fgets(library[count].title, MAXTITL ,stdin) != NULL
                           && library[count].title[0] != '\0')
     {
