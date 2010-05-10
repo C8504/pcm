@@ -21,7 +21,7 @@ int main(void)
     FILE * pbooks;
     int size = sizeof (struct book);
 
-    if ((pbooks = fopen("book.dat", "a+b")) == NULL)
+    if ((pbooks = fopen("books.dat", "a+b")) == NULL)
     {
         fputs("Can't open book.dat file\n",stderr);
         exit(1);
@@ -33,7 +33,7 @@ int main(void)
     {
         if (count == 0)
             puts("Current contents of book.dat:");
-        printf("%s by %s: $%.2f\n",library[count].title,
+        printf("Title: %s by Author: %s Price: $%.2f\n\n",library[index].title,
             library[count].author, library[count].value);
         count++;
     }
@@ -47,11 +47,11 @@ int main(void)
 
     puts("Please add new book titles.");
     puts("Press [enter] at the start of a line to stop.");
-    while (count < MAXBKS && gets(library[count].title) != NULL
+    while (count < MAXBKS && fgets(library[count].title, MAXTITL ,stdin) != NULL
                           && library[count].title[0] != '\0')
     {
         puts("Now enter the author.");
-        gets(library[count].author);
+        fgets(library[count].author, MAXAUTL, stdin);
         puts("Now enter the value.");
         scanf("%f", &library[count++].value);
         while (getchar() != '\n')
@@ -64,7 +64,7 @@ int main(void)
     {
         puts("Here is the list of your books:");
         for (index = 0; index < count; index++)
-            printf("%s by %s: $%.2f\n",library[index].title,
+            printf("Title: %s by Author: %s Price: $%.2f\n\n",library[index].title,
                    library[index].author, library[index].value);
         fwrite(&library[filecount], size, count - filecount,
                 pbooks);
