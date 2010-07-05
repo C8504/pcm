@@ -10,6 +10,7 @@ PCMpower(int base,
    if ( n < 0 ) {
       error = PCMERRNOTVALIDINDEX;
       printf ("In %s, line %d ;",__FILE__, __LINE__);
+      goto TERMINATE;
    }
    else {
       if ( base == 0 ) {
