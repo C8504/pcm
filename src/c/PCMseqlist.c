@@ -38,7 +38,9 @@ PCMseqlistfree (PCMseqlist **list)
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
          error = PCMseqlistdelete(*list, (*list)->length - 1, &temp);
-         if ( error )  THROW(error);
+         if ( error )  {
+            THROW(error);
+         }
       }
       free((*list)->elemp);
       (*list)->elemp = NULL;
@@ -88,7 +90,7 @@ PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)
 
    for (i = 0; i < src->length ; ++i) {
       error = PCMseqlistinsert(des, des->length, src->elemp[i]);
-      if ( error != 0 ) {
+      if ( error ) {
          THROW(error);
       }
    }
@@ -111,7 +113,7 @@ PCMseqlistclear (PCMseqlist *list)
 
    while (list->length != 0) {
       error = PCMseqlistdelete(list, list->length - 1, &temp);
-      if ( error != 0 )  {
+      if ( error )  {
          THROW(error);
       }
    }
@@ -176,7 +178,7 @@ PCMseqlistdelete (PCMseqlist *list,
 
    //check index
    if ( index < 0              ||
-         index > list->length - 1   ) {
+        index > list->length - 1   ) {
       THROW(PCMERRNOTVALIDINDEX);
    }
 
@@ -203,13 +205,13 @@ PCMseqlistdeleteR(PCMseqlist *list)
 
    for (i = list->length; i > 0; --i) {
       error = PCMseqlistfind(list, i-1, list->elemp[i-1], &index, 0);
-      if ( error != 0 )  {
+      if ( error )  {
          THROW(error);
       }
 
       if ( index != -1 ) {
          error = PCMseqlistdelete (list, index, &e);
-         if ( error != 0 ) {
+         if ( error ) {
             THROW(error);
          }
       }

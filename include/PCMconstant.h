@@ -45,7 +45,9 @@ extern "C" {
    typedef void (*FREEFUNC) (void* p);
 
    // macros
-   #define THROW(ERROR)  error = ERROR; printf ("In %s, line %d ;",__FILE__, __LINE__); goto TERMINATE;
+   #define THROW(ERROR)  error = ERROR; \
+                         printf ("In %s, line %d ;",__FILE__, __LINE__); \
+                         goto TERMINATE;
 
 
 #ifdef __cplusplus

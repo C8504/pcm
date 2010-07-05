@@ -62,7 +62,6 @@ clean: testclean
 $(EXEDIR)test_PCM_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_PCM_link_init_and_free$(C)
 	$(call compile,test_PCM_link_init_and_free)
 $(LOGDIR)test_PCM_link_init_and_free$(LOG): $(EXEDIR)test_PCM_link_init_and_free$(E)
-	echo "here"
 	$(call test,test_PCM_link_init_and_free)
 
 $(EXEDIR)test_PCM_link_one_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_one_element$(C)
