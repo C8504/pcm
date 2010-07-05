@@ -8,9 +8,7 @@ PCMpower(int base,
    long long p = 1LL;
 
    if ( n < 0 ) {
-      error = PCMERRNOTVALIDINDEX;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNOTVALIDINDEX);
    }
    else {
       if ( base == 0 ) {
