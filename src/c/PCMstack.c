@@ -12,17 +12,14 @@ PCMstackcreate (PCMstack **sp, size_t size){
    if ( *sp == NULL ) {
       *sp = malloc (sizeof (**sp));
       if ( *sp == NULL ) {
-         error = PCMERRNOMEMORY;
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(PCMERRNOMEMORY);
       }
       else {
          (*sp)->data = malloc (size * sizeof (void*));
          if ( (*sp)->data == NULL ) {
-            error = PCMERRNOMEMORY;
             free (*sp);
             *sp = NULL;
-            goto TERMINATE;
+            THROW(PCMERRNOMEMORY);
          }
          else {
             (*sp)->top  = -1;
@@ -74,9 +71,7 @@ PCMstackpush (PCMstack *s, void *elem)
       if ( s->top >= s->size ) {
          s->data = realloc (s->data, 2 * (s->size) * sizeof(void *));
          if ( s == NULL ) {
-            error = PCMERRNOMEMORY;
-            printf ("In %s, line %d ;",__FILE__, __LINE__);
-            goto TERMINATE;
+            THROW(PCMERRNOMEMORY);
          }
          else {
             s->size *= 2;

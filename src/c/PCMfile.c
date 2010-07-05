@@ -7,9 +7,7 @@ PCMfilecreate (PCMfile **fp) {
 
    *fp = malloc (sizeof **fp);
    if ( *fp == NULL ) {
-      error = PCMERRNOMEMORY;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNOMEMORY);
    }
 
    (*fp)->p       = NULL;
@@ -33,11 +31,12 @@ PCMfilefree (PCMfile **fp){
    int error = 0;
 
    error = PCMcheckpointer (fp);
-   if ( error )  goto TERMINATE;
+   if ( error )  THROW(error);
 
    if ( (*fp)->p != NULL ){
       fclose((*fp)->p);
       (*fp)->p = NULL;
+
    }
 
    free (*fp);
@@ -52,18 +51,15 @@ PCMfileopen (PCMfile *fp, const char *name){
    int error = 0;
 
    error = PCMcheckpointer (fp);
-   if ( error )  goto TERMINATE;
+   if ( error )  THROW(error);
 
    if ((fp->p = fopen(name, "r")) == NULL) {
-      error = errno;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(errno);
    }
    else {
       error = PCMstrncpy(fp->name, name, sizeof fp->name - 1);
       if ( error ) {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
     }
 
@@ -79,14 +75,12 @@ PCMfilestatistics (PCMfile *fp)
    
    error = PCMcheckpointer (fp);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    error = PCMfilegetinfo(fp);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
@@ -120,8 +114,7 @@ PCMfilegetinfo (PCMfile *fp){
 
    error = PCMcheckpointer (fp);
    if ( error ){
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    while ((c = getc(fp->p)) != EOF) {
@@ -166,8 +159,7 @@ PCMfilegetline (PCMfile *fp,
 
    error = PCMcheckpointer (fp);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    while ((i < max-1               ) &&
@@ -198,23 +190,20 @@ PCMfilegetmaxline (PCMfile *fp,
    
    error = PCMcheckpointer (fp);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    *max = len;
    do {
       error = PCMfilegetline (fp, PCMFILEMAXLINE, line, &len);
       if ( error ) {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
       if ( len > *max ) {
          *max = len;
          error = PCMstrncpy (maxline, line, PCMFILEMAXLINE);
          if ( error )  {
-            printf ("In %s, line %d ;",__FILE__, __LINE__);
-            goto TERMINATE;
+            THROW(error);
          }
       }
    }

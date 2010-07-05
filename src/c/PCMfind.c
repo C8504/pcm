@@ -11,8 +11,7 @@ PCMoriginfind(int *a,
    
    error = PCMcheckpointer (a);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    for (i = 0; i < length; ++i) {
@@ -38,8 +37,7 @@ PCMbinfind(int *a,
    
    error = PCMcheckpointer (a);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    *index = -1;

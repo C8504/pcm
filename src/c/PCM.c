@@ -79,8 +79,7 @@ PCMcheckpointer(void *p)
    int error = 0;
 
    if ( p == NULL ) {
-      error = PCMERRNULLPOINTER;
-      goto TERMINATE;
+      THROW(PCMERRNULLPOINTER);
    }
 
 TERMINATE:

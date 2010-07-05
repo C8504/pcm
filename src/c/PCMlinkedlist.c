@@ -22,17 +22,14 @@ PCMnodeallocandinit (PCMlinkednode **node,
 
    *node = malloc (sizeof **node);
    if ( NULL == *node ) {
-      error = PCMERRNOMEMORY;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNOMEMORY);
    }
 
    if ( elem != NULL ) {
       size_t ssize = 0;
       error = PCMstrlen (elem, &ssize);
       if ( error ) {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
       ++ssize;
 
@@ -43,9 +40,7 @@ PCMnodeallocandinit (PCMlinkednode **node,
          free (*node);
          *node = NULL;
 
-         error = PCMERRNOMEMORY;
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(PCMERRNOMEMORY);
       }
       else {
          //strncat ((*node)->elem, elem, strlen(elem));
@@ -71,9 +66,7 @@ PCMlinkedlistinit (PCMlinkedlist **list)
 
    *list = malloc (sizeof **list);
    if ( NULL == *list ) {
-      error = PCMERRNOMEMORY;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNOMEMORY);
    }
 
    (*list)->first = NULL;
@@ -112,8 +105,7 @@ PCMlinkedlistappend (PCMlinkedlist *list,
 
    int error = PCMnodeallocandinit (&newnode, elem);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    if ( list->first == NULL &&
@@ -148,8 +140,7 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
    if ( len == 0 ) {
       error = PCMnodeallocandinit (&newnode, elem);
       if ( error ) {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
       list->first = list->last = newnode;
    }
@@ -158,18 +149,15 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
       if ( pos == len ) {
          error = PCMlinkedlistappend (list, elem);
          if ( error )  {
-            printf ("In %s, line %d ;",__FILE__, __LINE__);
-            goto TERMINATE;
+            THROW(error);
          }
       }
       // if pos in the middle of list
       else {
          // check pos
          if ( pos < 1  ||
-               pos > len  ) {
-            error = PCMERRNOTVALIDINDEX;
-            printf ("In %s, line %d ;",__FILE__, __LINE__);
-            goto TERMINATE;
+              pos > len  ) {
+            THROW(PCMERRNOTVALIDINDEX);
          }
 
          // find the node at pos "p"
@@ -181,8 +169,7 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
          // creat newnode
          error = PCMnodeallocandinit (&newnode, elem);
          if ( error ) {
-            printf ("In %s, line %d ;",__FILE__, __LINE__);
-            goto TERMINATE;
+            THROW(error)
          }
 
          // insert the newnode after "p"
@@ -205,9 +192,7 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
    PCMlinkednode *p;
 
    if ( list == NULL ) {
-      error = PCMERRNULLPOINTER;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNULLPOINTER);
    }
    
    printf ("\n++++++++++++++PCM_linked_list++++++++++++++++++++++++++++\n");
@@ -245,8 +230,7 @@ PCMlinkedlistclear (PCMlinkedlist *list)
    while (0 != PCMlinkedlistlength (list)) {
       error = PCMlinkedlistpop (list, PCMPOPSTACK);
       if ( error )  {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
    }
 
@@ -278,9 +262,7 @@ PCMlinkedlistpop (PCMlinkedlist *list,
          }
       }
       else {
-         error = PCMERREMPTYLIST;
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(PCMERREMPTYLIST);
       }
    }
    else if ( type == PCMPOPSTACK ) {
@@ -297,15 +279,11 @@ PCMlinkedlistpop (PCMlinkedlist *list,
          }
       }
       else {
-         error = PCMERREMPTYLIST;
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(PCMERREMPTYLIST);
       }
    }
    else {
-      error = PCMERRNOTSTACKANDQUEUE;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNOTSTACKANDQUEUE);
    }
 
    free (p->elem);

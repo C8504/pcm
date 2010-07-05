@@ -9,9 +9,7 @@ PCMdelcharofstring (char * str,
 
    /*    assert (str != NULL); */
    if ( str == NULL ) {
-      error = PCMERRNULLPOINTER;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNULLPOINTER);
    }
    else {
       for (i = 0, j = 0; str[i] != '\0'; ++i) {
@@ -34,9 +32,7 @@ PCMstrlen (const char *str,
    int error = 0;
 
    if ( str == NULL ) {
-      error = PCMERRNULLPOINTER;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(PCMERRNULLPOINTER);
    }
    else {
       while ( str[i] != '\0')
@@ -57,8 +53,7 @@ PCMstrtrim (char *str)
 
    error = PCMstrlen (str, &n);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
    if ( n > 0 ) {
       for (i = n-1; (i >= 0) && (str[i] == ' ' || str[i] == '\t'); --i);
@@ -84,8 +79,7 @@ PCMstreverse (char *str)
 
    error = PCMstrlen (str, &n);
    if ( error ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+      THROW(error);
    }
 
    if ( n > 0 ) {
@@ -116,16 +110,13 @@ PCMstrncpy (char       *des,
 
 
    if ( des == NULL ||
-         src == NULL   ) {
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      error = PCMERRNULLPOINTER;
-      goto TERMINATE;
+        src == NULL   ) {
+      THROW(PCMERRNULLPOINTER);
    }
    else {
       error = PCMstrlen (src, &len);
       if ( error ) {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
 
       if ( len <= n ) {
@@ -153,17 +144,14 @@ PCMstrncat (char *des,
    int i      = 0;
    size_t len = 0;
 
-   if( des == NULL ||
-         src == NULL ) {
-      error = PCMERRNULLPOINTER;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+   if ( des == NULL ||
+        src == NULL   ) {
+      THROW(PCMERRNULLPOINTER);
    }
    else {
       error = PCMstrlen (src, &len);
       if ( error ) {
-         printf ("In %s, line %d ;",__FILE__, __LINE__);
-         goto TERMINATE;
+         THROW(error);
       }
 
       while (*des != '\0') {
@@ -216,10 +204,8 @@ PCMstrindex(char *str, char *substr, int *index)
    int k = 0;
 
    if ( (str    == NULL) ||
-         (substr == NULL)   ) {
-      error = PCMERRNULLPOINTER;
-      printf ("In %s, line %d ;",__FILE__, __LINE__);
-      goto TERMINATE;
+        (substr == NULL)   ) {
+      THROW(PCMERRNULLPOINTER);
    }
 
    *index = -1;
