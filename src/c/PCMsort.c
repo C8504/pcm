@@ -1,4 +1,30 @@
 #include "PCMsort.h"
+int PCMinsertsort(int *a,
+      int len)
+{
+   int error = 0;
+   int i, j;
+   int t;
+
+   error = PCMcheckpointer (a);
+   if ( error ) {
+      THROW(error);
+   }
+
+   /* implement insert sort*/
+   for (i = 1; i < len; ++i) {
+      t = a[i];
+      j = i - 1;
+      while (j >= 0 && t < a[j]){
+         a[j+1] = a[j];
+         j--;
+      }
+      a[j+1] = t;
+   }
+
+TERMINATE:
+   return error;
+} /* END of PCMinsertsort*/
 
 int
 PCMselectsort(int *a,

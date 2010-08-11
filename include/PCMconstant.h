@@ -35,7 +35,8 @@ extern "C" {
    enum PCMSORTALG {PCMALGSORTSELECT = 80001,
                     PCMALGSORTBUBBLE,
                     PCMALGSORTQUICK,
-                    PCMALGSORTSHELL};
+                    PCMALGSORTSHELL,
+                    PCMALGSORTINSERT};
    enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
                       PCMALGBINFIND};
 

@@ -280,6 +280,9 @@ PCMseqlistsort (PCMseqlist *list,
    else if ( alg == PCMALGSORTSHELL) {
       error = PCMshellsort (list->elemp, list->length);
    }
+   else if ( alg == PCMALGSORTINSERT) {
+      error = PCMinsertsort (list->elemp, list->length);
+   }
    else {
       THROW(PCMERRWRONGSORTALG);
    }

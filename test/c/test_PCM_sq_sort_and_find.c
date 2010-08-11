@@ -22,27 +22,30 @@ int main(void)
    error = PCMseqlistinsert (mylist, 3, 5);
    if ( error )  goto TERMINATE;
     
-   for (i = 0; i < 30000; ++i) {
+   for (i = 0; i < 3; ++i) {
       error = PCMseqlistinsert (mylist,i,i*2);
       if ( error )  goto TERMINATE;
    }
 
-   for (i = 0; i < 30000; ++i) {
+   for (i = 0; i < 3; ++i) {
       error = PCMseqlistinsert (mylist,i,i);
       if ( error )  goto TERMINATE;
    }
    
    printf ("output mylist\n");
-/*   PCMseqlistoutput (mylist);*/
+   PCMseqlistoutput (mylist);
    printf ("sort mylist\n");
-/*enum PCMSORTALG sortalg = PCMALGSORTBUBBLE;*/
-/*enum PCMSORTALG sortalg = PCMALGSORTSELECT;*/
-/*enum PCMSORTALG sortalg = PCMALGSORTQUICK; // use qsort*/
-   enum PCMSORTALG sortalg = PCMALGSORTSHELL;
+
+   enum PCMSORTALG sortalg = PCMALGSORTBUBBLE;
    error = PCMseqlistsort (mylist, mylist->length, sortalg);
    if ( error )  goto TERMINATE;
-   printf("output mylist after sort\n");
-/*   PCMseqlistoutput (mylist);*/
+   printf("output mylist after bubble sort\n");
+   PCMseqlistoutput (mylist);
+
+   //enum PCMSORTALG sortalg = PCMALGSORTSELECT;
+   //enum PCMSORTALG sortalg = PCMALGSORTQUICK; // use qsort*/
+   //enum PCMSORTALG sortalg = PCMALGSORTSHELL;
+   //enum PCMSORTALG sortalg = PCMALGSORTINSERT;
 
    printf ("find the index of element '5'\n");
    enum PCMSEARCHALG findalg = PCMALGORIGINFIND;
