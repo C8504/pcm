@@ -34,8 +34,7 @@ cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
          -o $(EXEDIR)$(1)$(E);                                                   
 tags:
-	@cd ../;ctags -R --c-kinds=+p --fields=+S . 
-
+	-ctags -o TAGS -R ../src/c/* ../include/*
 pcm: $(EXE) tags
 
 pcmtest: $(LOGFILES)
