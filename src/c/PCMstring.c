@@ -1,5 +1,5 @@
 #include "PCMstring.h"
-int
+   int
 PCMdelcharofstring (char * str,
       int  c)
 {
@@ -7,44 +7,35 @@ PCMdelcharofstring (char * str,
    int j     = 0;
    int error = 0;
 
-   /*    assert (str != NULL); */
-   if ( str == NULL ) {
-      THROW(PCMERRNULLPOINTER);
-   }
-   else {
-      for (i = 0, j = 0; str[i] != '\0'; ++i) {
-         if ( str[i] != c ) {
-            str[j++] = str[i];
-         }
+   assert(str != NULL);
+   for (i = 0, j = 0; str[i] != '\0'; ++i) {
+      if ( str[i] != c ) {
+         str[j++] = str[i];
       }
-      str[j] = '\0';
    }
+   str[j] = '\0';
 
 TERMINATE:
    return error;
 } /* End of PCMdelcharofstring */
 
-int
+   int
 PCMstrlen (const char *str,
       size_t     *len)
 {
    int i     = 0;
    int error = 0;
 
-   if ( str == NULL ) {
-      THROW(PCMERRNULLPOINTER);
-   }
-   else {
-      while ( str[i] != '\0')
-         ++i;
-   }
+   assert(str != NULL);
+   while ( str[i] != '\0')
+      ++i;
    *len = i;
 
 TERMINATE:
    return error;
 } /* End of PCMstrlen */
 
-int
+   int
 PCMstrtrim (char *str)
 {
    int error = 0;
@@ -67,7 +58,7 @@ TERMINATE:
    return error;
 } /* End of PCMstrtrim*/
 
-int
+   int
 PCMstreverse (char *str)
 {
    int error = 0;
@@ -99,7 +90,7 @@ TERMINATE:
 /*
    PCMstrncpy copy src to des, with length n.
    */
-int
+   int
 PCMstrncpy (char       *des,
       const char *src,
       int n)
@@ -109,33 +100,29 @@ PCMstrncpy (char       *des,
    size_t len = 0;
 
 
-   if ( des == NULL ||
-        src == NULL   ) {
-      THROW(PCMERRNULLPOINTER);
+   assert(des != NULL);
+   assert(src != NULL);
+   error = PCMstrlen (src, &len);
+   if ( error ) {
+      THROW(error);
+   }
+
+   if ( len <= n ) {
+      while ((*des++ = *src++) != '\0'){}
    }
    else {
-      error = PCMstrlen (src, &len);
-      if ( error ) {
-         THROW(error);
+      while (i < n) {
+         des[i] = src[i];
+         ++i;
       }
-
-      if ( len <= n ) {
-         while ((*des++ = *src++) != '\0'){}
-      }
-      else {
-         while (i < n) {
-            des[i] = src[i];
-            ++i;
-         }
-         des[i] = '\0';
-      }
+      des[i] = '\0';
    }
 
 TERMINATE:
    return error;
 } /* End of PCMstrncpy*/
 
-int
+   int
 PCMstrncat (char *des,
       const char *src,
       int n)
@@ -144,30 +131,26 @@ PCMstrncat (char *des,
    int i      = 0;
    size_t len = 0;
 
-   if ( des == NULL ||
-        src == NULL   ) {
-      THROW(PCMERRNULLPOINTER);
+   assert(des != NULL);
+   assert(src != NULL);
+   error = PCMstrlen (src, &len);
+   if ( error ) {
+      THROW(error);
+   }
+
+   while (*des != '\0') {
+      ++des;
+   }
+
+   if( len <= n ) {
+      while ((*des++ = *src++) != '\0');
    }
    else {
-      error = PCMstrlen (src, &len);
-      if ( error ) {
-         THROW(error);
+      while (i < n) {
+         des[i] = src[i];
+         ++i;
       }
-
-      while (*des != '\0') {
-         ++des;
-      }
-
-      if( len <= n ) {
-         while ((*des++ = *src++) != '\0');
-      }
-      else {
-         while (i < n) {
-            des[i] = src[i];
-            ++i;
-         }
-         des[i] = '\0';
-      }
+      des[i] = '\0';
    }
 
 TERMINATE:
@@ -195,7 +178,7 @@ TERMINATE:
    return error;
 } /* End of PCMstrlbkstoblk*/
 
-int
+   int
 PCMstrindex(char *str, char *substr, int *index)
 {
    int error = 0;
@@ -203,10 +186,8 @@ PCMstrindex(char *str, char *substr, int *index)
    int j = 0;
    int k = 0;
 
-   if ( (str    == NULL) ||
-        (substr == NULL)   ) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   assert(str != NULL);
+   assert(substr != NULL);
 
    *index = -1;
    for (i = 0; str[i] != '\0'; ++i) {

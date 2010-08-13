@@ -9,10 +9,7 @@ PCMoriginfind(int *a,
    int error = 0;
    int i;
    
-   error = PCMcheckpointer (a);
-   if ( error ) {
-      THROW(error);
-   }
+   assert(a != NULL);
 
    for (i = 0; i < length; ++i) {
       if ( a[i] == elem ) {
@@ -35,10 +32,7 @@ PCMbinfind(int *a,
    int low = 0;
    int high = length-1;
    
-   error = PCMcheckpointer (a);
-   if ( error ) {
-      THROW(error);
-   }
+   assert(a != NULL);
 
    *index = -1;
    while (low <= high) {

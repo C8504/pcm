@@ -73,17 +73,3 @@ PCMdarrayfree (void **arr)
    free (arr);
 } /* End of PCMdarrayfree*/
 
-   int 
-PCMcheckpointer(void *p)
-{
-   int error = 0;
-
-   if ( p == NULL ) {
-      THROW(PCMERRNULLPOINTER);
-   }
-
-TERMINATE:
-   return error;
-}/* End of PCMcheckpointer*/
-
-

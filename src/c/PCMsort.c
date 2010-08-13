@@ -6,10 +6,7 @@ int PCMinsertsort(int *a,
    int i, j;
    int t;
 
-   error = PCMcheckpointer (a);
-   if ( error ) {
-      THROW(error);
-   }
+   assert(a != NULL);
 
    /* implement insert sort*/
    for (i = 1; i < len; ++i) {
@@ -34,10 +31,7 @@ PCMselectsort(int *a,
    int i, j, min;
    int t;
 
-   error = PCMcheckpointer (a);
-   if ( error ) {
-      THROW(error);
-   }
+   assert(a != NULL);
 
    for (i = 0; i < len; ++i) {
       min = i;
@@ -66,10 +60,7 @@ PCMbubblesort(int *a,
    int i, j;
    int t;
 
-   error = PCMcheckpointer (a);
-   if ( error ) {
-      THROW(error);
-   }
+   assert(a != NULL);
 
    for (i = 0; i < len; ++i) {
       for (j = i + 1; j < len; ++j) {
@@ -93,10 +84,7 @@ PCMshellsort(int *a,
    int i, j, gap;
    int temp;
 
-   error = PCMcheckpointer (a);
-   if ( error ) {
-      THROW(error);
-   }
+   assert(a != NULL);
 
    while (gap * 3 + 1 <= len) {
       gap=gap * 3 + 1;

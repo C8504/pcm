@@ -17,7 +17,6 @@ void   PCMcheckerror   (int error);
 void   PCMswapchar     (char *arr, int i, int j);
 void** PCMdarraynew    (size_t row, size_t col, size_t size);
 void   PCMdarrayfree   (void **arr);
-int    PCMcheckpointer (void *p);
 int    PCMcompare      (const void *x, const void *y);
 
 #ifdef __cplusplus

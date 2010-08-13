@@ -10,10 +10,10 @@ PCMarrayinit (PCMarray **list)
    int error = 0;
 
    *list = malloc(sizeof **list);
-   CALL(PCMcheckpointer(*list));
+   assert(*list != NULL);
    
    (*list)->elemp = malloc(PCMLISTINITSIZE * sizeof(int));
-   CALL(PCMcheckpointer((*list)->elemp));
+   assert((*list)->elemp != NULL);
    
    (*list)->length = 0;
    (*list)->capacity = PCMLISTINITSIZE;
@@ -29,7 +29,7 @@ PCMarrayfree (PCMarray **list)
    int error = 0;
    int temp = 0;
 
-   CALL(PCMcheckpointer(list));
+   assert(list != NULL);
 
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
@@ -57,8 +57,8 @@ PCMarraycopy (PCMarray *list, const int *arr, int count)
    int i;
    int error = 0;
 
-   CALL(PCMcheckpointer(list));
-   CALL(PCMcheckpointer(arr));
+   assert(list != NULL);
+   assert(arr  != NULL);
 
    for (i = 0; i < count; ++i) {
       error = PCMarrayinsert(list, list->length, arr[i]);
@@ -79,8 +79,8 @@ PCMarraymerge (PCMarray *des, const PCMarray* src)
    int error = 0;
    int index = -1;
 
-   CALL(PCMcheckpointer(des));
-   CALL(PCMcheckpointer(src));
+   assert(des != NULL);
+   assert(src != NULL);
 
    for (i = 0; i < src->length ; ++i) {
       error = PCMarrayinsert(des, des->length, src->elemp[i]);
@@ -133,7 +133,7 @@ PCMarrayinsert (PCMarray *list,
       THROW(PCMERRNOTVALIDINDEX);
    }
 
-   CALL(PCMcheckpointer(list->elemp));
+   assert(list->elemp != NULL);
    //extend capacity if length >= capacity in realloc
    if ( list-> length == list->capacity) {
       list->elemp =
@@ -222,7 +222,7 @@ PCMarrayoutput (PCMarray *list)
    int i;
    int error = 0;
 
-   CALL(PCMcheckpointer(list));
+   assert(list != NULL);
 
    printf ("\n++++++++++++++++PCM_sq_list+++++++++++++++++++++\n");
    printf ("list->length = %d\n", list->length);
@@ -251,7 +251,7 @@ PCMarraysort (PCMarray *list,
 {
    int error = 0;
 
-   CALL(PCMcheckpointer(list));
+   assert(list != NULL);
 
    if (length > list->length) {
       length = list->length;
@@ -291,7 +291,7 @@ PCMarrayfind (PCMarray *list,
 {
    int error = 0;
 
-   CALL(PCMcheckpointer(list));
+   assert(list != NULL);
 
    *index = -1;
 

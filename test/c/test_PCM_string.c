@@ -103,9 +103,9 @@ int main (void)
    
    printf ("The last %s in %s at %d\n", substr, bigstr, index);
 
-   CALL(PCMdelcharofstring(NULL, 't'));
-   printf ("%s",str);
-   printf ("\n");
+   //CALL(PCMdelcharofstring(NULL, 't'));
+   //printf ("%s",str);
+   //printf ("\n");
 
 TERMINATE:
    PCMcheckerror (error); 
