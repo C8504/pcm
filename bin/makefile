@@ -21,7 +21,7 @@ SPLINTDIR=splint/
 CSRC=$(CSRCDIR)PCMlinkedlist$(C)\
      $(CSRCDIR)PCMfind$(C)\
      $(CSRCDIR)PCMsort$(C)\
-     $(CSRCDIR)PCMseqlist$(C)\
+     $(CSRCDIR)PCMarray$(C)\
      $(CSRCDIR)PCM$(C)\
      $(CSRCDIR)PCMstring$(C)\
      $(CSRCDIR)PCMmath$(C)\
@@ -32,10 +32,10 @@ EXE=$(EXEDIR)test_PCM_link_init_and_free$(E)\
     $(EXEDIR)test_PCM_link_one_element$(E)\
     $(EXEDIR)test_PCM_link_many_element$(E)\
     $(EXEDIR)test_PCM_link_readfile$(E)\
-    $(EXEDIR)test_PCM_sq_delete$(E)\
-    $(EXEDIR)test_PCM_sq_insert$(E)\
-    $(EXEDIR)test_PCM_sq_merge$(E)\
-    $(EXEDIR)test_PCM_sq_sort_and_find$(E)\
+    $(EXEDIR)test_PCM_array_delete$(E)\
+    $(EXEDIR)test_PCM_array_insert$(E)\
+    $(EXEDIR)test_PCM_array_merge$(E)\
+    $(EXEDIR)test_PCM_array_sort_and_find$(E)\
     $(EXEDIR)test_PCM_string$(E)\
     $(EXEDIR)test_PCM_math$(E)\
     $(EXEDIR)test_PCM_file$(E)\
@@ -46,11 +46,11 @@ CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
       $(CTESTDIR)test_PCM_link_one_element$(C)\
       $(CTESTDIR)test_PCM_link_many_element$(C)\
       $(CTESTDIR)test_PCM_link_readfile$(C)\
-      $(CTESTDIR)test_PCM_sq_init_and_free$(C)\
-      $(CTESTDIR)test_PCM_sq_delete$(C)\
-      $(CTESTDIR)test_PCM_sq_insert$(C)\
-      $(CTESTDIR)test_PCM_sq_merge$(C)\
-      $(CTESTDIR)test_PCM_sq_sort_and_find$(C)\
+      $(CTESTDIR)test_PCM_array_init_and_free$(C)\
+      $(CTESTDIR)test_PCM_array_delete$(C)\
+      $(CTESTDIR)test_PCM_array_insert$(C)\
+      $(CTESTDIR)test_PCM_array_merge$(C)\
+      $(CTESTDIR)test_PCM_array_sort_and_find$(C)\
       $(CTESTDIR)test_PCM_string$(C)\
       $(CTESTDIR)test_PCM_math$(C)\
       $(CTESTDIR)test_PCM_file$(C)\
@@ -61,11 +61,11 @@ LOGFILES=$(LOGDIR)test_PCM_link_init_and_free$(LOG)\
          $(LOGDIR)test_PCM_link_one_element$(LOG)\
          $(LOGDIR)test_PCM_link_many_element$(LOG)\
          $(LOGDIR)test_PCM_link_readfile$(LOG)\
-         $(LOGDIR)test_PCM_sq_init_and_free$(LOG)\
-         $(LOGDIR)test_PCM_sq_delete$(LOG)\
-         $(LOGDIR)test_PCM_sq_insert$(LOG)\
-         $(LOGDIR)test_PCM_sq_merge$(LOG)\
-         $(LOGDIR)test_PCM_sq_sort_and_find$(LOG)\
+         $(LOGDIR)test_PCM_array_init_and_free$(LOG)\
+         $(LOGDIR)test_PCM_array_delete$(LOG)\
+         $(LOGDIR)test_PCM_array_insert$(LOG)\
+         $(LOGDIR)test_PCM_array_merge$(LOG)\
+         $(LOGDIR)test_PCM_array_sort_and_find$(LOG)\
          $(LOGDIR)test_PCM_string$(LOG)\
          $(LOGDIR)test_PCM_math$(LOG)\
          $(LOGDIR)test_PCM_file$(LOG)\

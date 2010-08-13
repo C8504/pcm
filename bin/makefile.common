@@ -7,9 +7,9 @@ help:
 	;echo "Choose a target:" \
 	;echo "" \
 	;echo "make [help]                               -- print this help screen" \
-	;echo "make [exe/test_PCM_sq_insert]             -- build test_PCM_sq_insert" \
-	;echo "make [log/test_PCM_sq_insert.log]         -- run test_PCM_sq_insert" \
-	;echo "make [profile/test_PCM_sq_insert.profile] -- profile test_PCM_sq_insert" \
+	;echo "make [exe/test_PCM_array_insert]             -- build test_PCM_array_insert" \
+	;echo "make [log/test_PCM_array_insert.log]         -- run test_PCM_array_insert" \
+	;echo "make [profile/test_PCM_array_insert.profile] -- profile test_PCM_array_insert" \
 	;echo "make [pcmtest]                            -- build all tests" \
 	;echo "make [splint]                             -- use splint to check all C files" \
 	;echo "make [clean]                              -- delete all *.exe and *.log files" \
@@ -79,35 +79,35 @@ $(EXEDIR)test_PCM_link_readfile$(E): $(CSRC) $(CTESTDIR)test_PCM_link_readfile$(
 $(LOGDIR)test_PCM_link_readfile$(LOG): $(EXEDIR)test_PCM_link_readfile$(E)
 	$(call test,test_PCM_link_readfile)
 
-$(EXEDIR)test_PCM_sq_inout$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_inout$(C)
-	$(call compile,test_PCM_sq_inout)
-$(LOGDIR)test_PCM_sq_inout$(LOG): $(EXEDIR)test_PCM_sq_inout$(E)
-	$(call test,test_PCM_sq_inout)
+$(EXEDIR)test_PCM_array_inout$(E): $(CSRC) $(CTESTDIR)test_PCM_array_inout$(C)
+	$(call compile,test_PCM_array_inout)
+$(LOGDIR)test_PCM_array_inout$(LOG): $(EXEDIR)test_PCM_array_inout$(E)
+	$(call test,test_PCM_array_inout)
 
-$(EXEDIR)test_PCM_sq_init_and_free$(E):$(CSRC) $(CTESTDIR)test_PCM_sq_init_and_free$(C)
-	$(call compile,test_PCM_sq_init_and_free)
-$(LOGDIR)test_PCM_sq_init_and_free$(LOG): $(EXEDIR)test_PCM_sq_init_and_free$(E)
-	$(call test,test_PCM_sq_init_and_free)
+$(EXEDIR)test_PCM_array_init_and_free$(E):$(CSRC) $(CTESTDIR)test_PCM_array_init_and_free$(C)
+	$(call compile,test_PCM_array_init_and_free)
+$(LOGDIR)test_PCM_array_init_and_free$(LOG): $(EXEDIR)test_PCM_array_init_and_free$(E)
+	$(call test,test_PCM_array_init_and_free)
 
-$(EXEDIR)test_PCM_sq_delete$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_delete$(C)
-	$(call compile,test_PCM_sq_delete)
-$(LOGDIR)test_PCM_sq_delete$(LOG): $(EXEDIR)test_PCM_sq_delete$(E)
-	$(call test,test_PCM_sq_delete)
+$(EXEDIR)test_PCM_array_delete$(E): $(CSRC) $(CTESTDIR)test_PCM_array_delete$(C)
+	$(call compile,test_PCM_array_delete)
+$(LOGDIR)test_PCM_array_delete$(LOG): $(EXEDIR)test_PCM_array_delete$(E)
+	$(call test,test_PCM_array_delete)
 
-$(EXEDIR)test_PCM_sq_insert$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_insert$(C)
-	$(call compile,test_PCM_sq_insert)
-$(LOGDIR)test_PCM_sq_insert$(LOG): $(EXEDIR)test_PCM_sq_insert$(E)
-	$(call test,test_PCM_sq_insert)
+$(EXEDIR)test_PCM_array_insert$(E): $(CSRC) $(CTESTDIR)test_PCM_array_insert$(C)
+	$(call compile,test_PCM_array_insert)
+$(LOGDIR)test_PCM_array_insert$(LOG): $(EXEDIR)test_PCM_array_insert$(E)
+	$(call test,test_PCM_array_insert)
 
-$(EXEDIR)test_PCM_sq_merge$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_merge$(C)
-	$(call compile,test_PCM_sq_merge)
-$(LOGDIR)test_PCM_sq_merge$(LOG): $(EXEDIR)test_PCM_sq_merge$(E)
-	$(call test,test_PCM_sq_merge)
+$(EXEDIR)test_PCM_array_merge$(E): $(CSRC) $(CTESTDIR)test_PCM_array_merge$(C)
+	$(call compile,test_PCM_array_merge)
+$(LOGDIR)test_PCM_array_merge$(LOG): $(EXEDIR)test_PCM_array_merge$(E)
+	$(call test,test_PCM_array_merge)
 
-$(EXEDIR)test_PCM_sq_sort_and_find$(E): $(CSRC) $(CTESTDIR)test_PCM_sq_sort_and_find$(C)
-	$(call compile,test_PCM_sq_sort_and_find)
-$(LOGDIR)test_PCM_sq_sort_and_find$(LOG): $(EXEDIR)test_PCM_sq_sort_and_find$(E)
-	$(call test,test_PCM_sq_sort_and_find)
+$(EXEDIR)test_PCM_array_sort_and_find$(E): $(CSRC) $(CTESTDIR)test_PCM_array_sort_and_find$(C)
+	$(call compile,test_PCM_array_sort_and_find)
+$(LOGDIR)test_PCM_array_sort_and_find$(LOG): $(EXEDIR)test_PCM_array_sort_and_find$(E)
+	$(call test,test_PCM_array_sort_and_find)
 
 $(EXEDIR)test_PCM_string$(E): $(CSRC) $(CTESTDIR)test_PCM_string$(C)
 	$(call compile,test_PCM_string)

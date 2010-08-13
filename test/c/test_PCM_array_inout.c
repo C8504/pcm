@@ -5,7 +5,7 @@
       如果a和b都未被成功读入，返回值为0
       如果遇到错误或遇到end of file，返回值为EOF。
    */
-#include "PCMseqlist.h"
+#include "PCMarray.h"
 
 int inout()
 {
@@ -16,13 +16,13 @@ int inout()
    int count = 0;
    int sum = 0;
 
-   PCMseqlist *list = NULL;
-   CALL(PCMseqlistinit(&list));
+   PCMarray *list = NULL;
+   CALL(PCMarrayinit(&list));
 
    printf("Please input intergers:\n");
 
    while (1 == scanf ("%d", &num)) {
-      CALL(PCMseqlistinsert(list, count, num));
+      CALL(PCMarrayinsert(list, count, num));
       sum += num;
 
       if ( 0 == count ) {
@@ -36,17 +36,17 @@ int inout()
       count++;
    }
 
-   CALL(PCMseqlistsort (list, list->length, PCMALGSORTSELECT));
+   CALL(PCMarraysort (list, list->length, PCMALGSORTSELECT));
 
-   //CALL(PCMseqlistsort (list, list->length, PCMALGSORTBUBBLE));
+   //CALL(PCMarraysort (list, list->length, PCMALGSORTBUBBLE));
    //if ( error )  goto TERMINATE;
 
-   // CALL(PCMseqlistsort (list, list->length, 0));
+   // CALL(PCMarraysort (list, list->length, 0));
    //if ( error )  goto TERMINATE;
 
-   CALL(PCMseqlistoutput (list));
+   CALL(PCMarrayoutput (list));
 
-   CALL(PCMseqlistfree (&list));
+   CALL(PCMarrayfree (&list));
 
    printf ("You have input %d integers\n", count);
    printf ("The max one is %d\n"         , max);

@@ -2,10 +2,10 @@
 #include "PCM.h"
 #include "PCMsort.h"
 #include "PCMfind.h"
-#include "PCMseqlist.h"
+#include "PCMarray.h"
 
 int
-PCMseqlistinit (PCMseqlist **list)
+PCMarrayinit (PCMarray **list)
 {
    int error = 0;
 
@@ -22,11 +22,11 @@ PCMseqlistinit (PCMseqlist **list)
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistinit */
+} /* End of PCMarrayinit */
 
 /* Free the list*/
 int
-PCMseqlistfree (PCMseqlist **list)
+PCMarrayfree (PCMarray **list)
 {
    int error = 0;
    int temp = 0;
@@ -37,7 +37,7 @@ PCMseqlistfree (PCMseqlist **list)
 
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
-         error = PCMseqlistdelete(*list, (*list)->length - 1, &temp);
+         error = PCMarraydelete(*list, (*list)->length - 1, &temp);
          if ( error )  {
             THROW(error);
          }
@@ -52,11 +52,11 @@ PCMseqlistfree (PCMseqlist **list)
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistfree */
+} /* End of PCMarrayfree */
 
 /* Copy an array to the list with count */
 int
-PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)
+PCMarraycopy (PCMarray *list, const int *arr, int count)
 {
    int i;
    int error = 0;
@@ -66,7 +66,7 @@ PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)
    }
 
    for (i = 0; i < count; ++i) {
-      error = PCMseqlistinsert(list, list->length, arr[i]);
+      error = PCMarrayinsert(list, list->length, arr[i]);
       if ( error ) {
          THROW(error);
       }
@@ -74,11 +74,11 @@ PCMseqlistcopy (PCMseqlist *list, const int *arr, int count)
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistcopy*/
+} /* End of PCMarraycopy*/
 
 /* Merge two lists */
 int
-PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)
+PCMarraymerge (PCMarray *des, const PCMarray* src)
 {
    int i;
    int error = 0;
@@ -89,30 +89,30 @@ PCMseqlistmerge (PCMseqlist *des, const PCMseqlist* src)
    }
 
    for (i = 0; i < src->length ; ++i) {
-      error = PCMseqlistinsert(des, des->length, src->elemp[i]);
+      error = PCMarrayinsert(des, des->length, src->elemp[i]);
       if ( error ) {
          THROW(error);
       }
    }
 
-   error = PCMseqlistsort (des, des->length, 0);
+   error = PCMarraysort (des, des->length, 0);
    if ( error ) {
       THROW(error);
    }
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistmerge*/
+} /* End of PCMarraymerge*/
 
 /* Clear the whole list*/
 int
-PCMseqlistclear (PCMseqlist *list)
+PCMarrayclear (PCMarray *list)
 {
    int error = 0;
    int temp = 0;
 
    while (list->length != 0) {
-      error = PCMseqlistdelete(list, list->length - 1, &temp);
+      error = PCMarraydelete(list, list->length - 1, &temp);
       if ( error )  {
          THROW(error);
       }
@@ -120,11 +120,11 @@ PCMseqlistclear (PCMseqlist *list)
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistclear*/
+} /* End of PCMarrayclear*/
 
 /* Insert an elem to the list with index*/
 int
-PCMseqlistinsert (PCMseqlist *list,
+PCMarrayinsert (PCMarray *list,
       int index,
       const int elem)
 {
@@ -163,11 +163,11 @@ PCMseqlistinsert (PCMseqlist *list,
 
 TERMINATE:
    return error;
-} /* END of PCMseqlistinsert */
+} /* END of PCMarrayinsert */
 
 /* Delete an element in index, and save the deleted element to *e*/
 int
-PCMseqlistdelete (PCMseqlist *list,
+PCMarraydelete (PCMarray *list,
       int index,
       int *e)
 {
@@ -194,23 +194,23 @@ PCMseqlistdelete (PCMseqlist *list,
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistdelete */
+} /* End of PCMarraydelete */
 
 /* Delete the repeat element in list */
 int
-PCMseqlistdeleteR(PCMseqlist *list)
+PCMarraydeleteR(PCMarray *list)
 {
    int error = 0;
    int i, index, e;
 
    for (i = list->length; i > 0; --i) {
-      error = PCMseqlistfind(list, i-1, list->elemp[i-1], &index, 0);
+      error = PCMarrayfind(list, i-1, list->elemp[i-1], &index, 0);
       if ( error )  {
          THROW(error);
       }
 
       if ( index != -1 ) {
-         error = PCMseqlistdelete (list, index, &e);
+         error = PCMarraydelete (list, index, &e);
          if ( error ) {
             THROW(error);
          }
@@ -219,11 +219,11 @@ PCMseqlistdeleteR(PCMseqlist *list)
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistdeleteR */
+} /* End of PCMarraydeleteR */
 
 /* Output the list */
 int
-PCMseqlistoutput (PCMseqlist *list)
+PCMarrayoutput (PCMarray *list)
 {
    int i;
    int error = 0;
@@ -249,11 +249,11 @@ PCMseqlistoutput (PCMseqlist *list)
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistoutput */
+} /* End of PCMarrayoutput */
 
 /* Sort list by customize algorithm, bubble sort by default */
 int
-PCMseqlistsort (PCMseqlist *list,
+PCMarraysort (PCMarray *list,
       int length,
       enum PCMSORTALG alg)
 {
@@ -293,7 +293,7 @@ TERMINATE:
 
 /* Find element in list by customize algorithm, Origin Find by default */
 int
-PCMseqlistfind (PCMseqlist *list,
+PCMarrayfind (PCMarray *list,
       int length,
       const int elem,
       int *index,
@@ -324,5 +324,5 @@ PCMseqlistfind (PCMseqlist *list,
 
 TERMINATE:
    return error;
-} /* End of PCMseqlistfind */
+} /* End of PCMarrayfind */
 
