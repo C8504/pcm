@@ -8,8 +8,8 @@ int main(void)
    int a[5] = {1, 3, 3, 7, 7};
    int b[5] = {1, 3, 6, 6, 10};
 
-   PCMSList odd = NULL;
-   PCMSList even = NULL;
+   PCMarray* odd = NULL;
+   PCMarray* even = NULL;
 
    CALL(PCMarrayinit (&odd));
    CALL(PCMarrayinit (&even));

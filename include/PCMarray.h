@@ -15,8 +15,6 @@ extern "C" {
       int  capacity;      /* The capacity of list*/
    } PCMarray;
 
-   typedef PCMarray* PCMSList;
-
    int PCMarrayinit    (PCMarray **list);
    int PCMarrayfree    (PCMarray **list);
    int PCMarraycopy    (PCMarray *list, const int *arr, int count);
