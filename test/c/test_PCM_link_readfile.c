@@ -14,18 +14,14 @@ int main(void)
       printf ("PCM Error: fopen error!\n");
       goto TERMINATE;
    }
-   error = PCMlinkedlistinit (&mylist1);
-   if ( error )  goto TERMINATE;
-   error = PCMlinkedlistinit (&mylist2);
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistinit (&mylist1));
+   CALL(PCMlinkedlistinit (&mylist2));
 
 
    while (fgets (line, 256, fp) != NULL) {
-      error = PCMlinkedlistappend (mylist1, line);
-      if ( error )  goto TERMINATE;
+      CALL(PCMlinkedlistappend (mylist1, line));
       if ( strstr (line, "malloc") != NULL) {
-         error = PCMlinkedlistappend (mylist2, line);
-         if ( error )  goto TERMINATE;
+         CALL(PCMlinkedlistappend (mylist2, line));
       }
    }
 

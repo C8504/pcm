@@ -49,6 +49,7 @@ extern "C" {
    #define THROW(ERROR)  error = ERROR; \
                          printf ("In %s, line %d ;",__FILE__, __LINE__); \
                          goto TERMINATE;
+   #define CALL(function) error = (function); if ( error ) goto TERMINATE;
 
 
 #ifdef __cplusplus

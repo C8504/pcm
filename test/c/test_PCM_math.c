@@ -11,15 +11,13 @@ int main (void)
    int base = 2;
    int index = 62;
 
-   error = PCMpower (base, index, &r);
-   if ( error )  goto TERMINATE;
+   CALL(PCMpower (base, index, &r));
 
    printf ("PCMpower(%d,%d) == %lld\n", base, index, r);
 
    base = 100;
    index = -1;
-   error = PCMpower (base, index, &r);
-   if ( error )  goto TERMINATE;
+   CALL(PCMpower (base, index, &r));
 
    printf ("PCMpower(%d,%d) == %lld\n", base, index, r);
 TERMINATE:

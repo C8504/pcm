@@ -17,14 +17,12 @@ int inout()
    int sum = 0;
 
    PCMseqlist *list = NULL;
-   error = PCMseqlistinit(&list);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistinit(&list));
 
    printf("Please input intergers:\n");
 
    while (1 == scanf ("%d", &num)) {
-      error = PCMseqlistinsert(list, count, num);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistinsert(list, count, num));
       sum += num;
 
       if ( 0 == count ) {
@@ -38,20 +36,17 @@ int inout()
       count++;
    }
 
-   error = PCMseqlistsort (list, list->length, PCMALGSORTSELECT);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistsort (list, list->length, PCMALGSORTSELECT));
 
-   //error = PCMseqlistsort (list, list->length, PCMALGSORTBUBBLE);
+   //CALL(PCMseqlistsort (list, list->length, PCMALGSORTBUBBLE));
    //if ( error )  goto TERMINATE;
 
-   // error = PCMseqlistsort (list, list->length, 0);
+   // CALL(PCMseqlistsort (list, list->length, 0));
    //if ( error )  goto TERMINATE;
 
-   error = PCMseqlistoutput (list);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistoutput (list));
 
-   error = PCMseqlistfree (&list);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistfree (&list));
 
    printf ("You have input %d integers\n", count);
    printf ("The max one is %d\n"         , max);
@@ -67,9 +62,7 @@ main (void)
    int i = 0;
    int error = 0;
 
-   error = inout();
-
-   if ( error )  goto TERMINATE;
+   CALL(inout());
 
 TERMINATE:
 

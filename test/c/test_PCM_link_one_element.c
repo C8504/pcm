@@ -8,55 +8,41 @@ int testoneelement(void)
    // Use pointer of list object use the init function and free function to
    // manage memory
    PCMlinkedlist *mylist = NULL;
-   error = PCMlinkedlistinit (&mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistinit (&mylist));
 
    printf ("mylist = %p, mylist->first = %p, mylist->last = %p\n",
          mylist, mylist->first, mylist->last);
 
    // append 2 elements
-   error = PCMlinkedlistappend (mylist, "a");
-   if ( error )  goto TERMINATE;
-   error = PCMlinkedlistappend (mylist, "A");
-   if ( error )  goto TERMINATE;
-
-   error = PCMlinkedlistoutput (mylist, "<append>");
+   CALL(PCMlinkedlistappend (mylist, "a"));
+   CALL(PCMlinkedlistappend (mylist, "A"));
+   CALL(PCMlinkedlistoutput (mylist, "<append>"));
 
    // pop like stack
    type = PCMPOPSTACK;
-   error  = PCMlinkedlistpop (mylist, type);
-   if ( error )  goto TERMINATE;
-   error = PCMlinkedlistoutput (mylist, "<pop in stack>");
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistpop (mylist, type));
+   CALL(PCMlinkedlistoutput (mylist, "<pop in stack>"));
 
    // append 1 elements
-   error = PCMlinkedlistappend (mylist, "b");
-   if ( error )  goto TERMINATE;
-
-   error = PCMlinkedlistoutput (mylist, "<append>");
+   CALL(PCMlinkedlistappend (mylist, "b"));
+   CALL(PCMlinkedlistoutput (mylist, "<append>"));
 
    // pop like queue
    type = PCMPOPQUEUE;
-   error  = PCMlinkedlistpop (mylist, type);
-   if ( error )  goto TERMINATE;
-   error = PCMlinkedlistoutput (mylist, "<pop in queue>");
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistpop (mylist, type));
+   CALL(PCMlinkedlistoutput (mylist, "<pop in queue>"));
 
-   error = PCMlinkedlistclear (mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistclear (mylist));
    if ( NULL != mylist )  printf ("list is not NULL after calling clear function!\n\n");
 
    // append 10 elements again
    for (i = 0; i < 10; ++i) {
-      error = PCMlinkedlistappend (mylist, "a");
-      if ( error )  goto TERMINATE;
+      CALL(PCMlinkedlistappend (mylist, "a"));
    }
 
-   error = PCMlinkedlistoutput (mylist, "<append>");
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistoutput (mylist, "<append>"));
 
-   error = PCMlinkedlistfree (&mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistfree (&mylist));
 
    if ( NULL == mylist )  printf ("list is NULL after calling free list function!\n\n");
 
@@ -71,8 +57,7 @@ int main(void)
    int i;
    int error = 0;
 
-   error = testoneelement();
-   if ( error )  goto TERMINATE;
+   CALL(testoneelement());
 
 TERMINATE:
    PCMcheckerror (error); 

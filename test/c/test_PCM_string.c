@@ -30,86 +30,60 @@ int main (void)
    char str3[] = "a b ";
    char str4[] = "ab   ";
 
-   error = PCMstrlen (str1, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str1, &len));
    printf ("str1 = %s, len = %d\n", str1,len);
 
-   error = PCMstrlen (str2, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str2, &len));
    printf ("str2 = %s, len = %d\n", str2,len);
 
-   error = PCMstrtrim (str1);
-   if ( error )  goto TERMINATE;
-
-   error = PCMstrtrim (str2);
-   if ( error )  goto TERMINATE;
-
-   error = PCMstrtrim (str3);
-   if ( error )  goto TERMINATE;
-
-   error = PCMstrtrim (str4);
-   if ( error )  goto TERMINATE;
-
-   error = PCMstrlen (str1, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrtrim (str1));
+   CALL(PCMstrtrim (str2));
+   CALL(PCMstrtrim (str3));
+   CALL(PCMstrtrim (str4));
+   CALL(PCMstrlen (str1, &len));
    printf ("str1 = %s, %d\n", str1, len);
 
-   error = PCMstrlen (str2, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str2, &len));
    printf ("str2 = %s, %d\n", str2, len);
 
-   error = PCMstrlen (str3, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str3, &len));
    printf ("str3 = %s, %d\n", str3, len);
 
-   error = PCMstrlen (str4, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str4, &len));
    printf ("str4 = %s, %d\n", str4, len);
 
    // test PCMstreverse
    PCMstrncpy(str, "Thisisastring", sizeof(str));
    /*    strncpy(str, "Thisisastring", sizeof(str)); */
    printf ("str = %s\n", str);
-   error = PCMstreverse (str);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstreverse (str));
    printf ("str = %s\n", str);
 
-   error = PCMstreverse (str);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstreverse (str));
    printf ("str = %s\n", str);
 
    // test PCMstrdelcharofstring and PCMstrlen
    /*    strncat(str, "This is a string", 10); */
    /* strncpy(str, "This is a string", 10); */
-   error = PCMstrlen (str, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str, &len));
    printf ("str = %s, len = %d\n", str,len);
-   if ( error )  goto TERMINATE;
-   error = PCMdelcharofstring(str, 'p');
-   if ( error )  goto TERMINATE;
+   CALL(PCMdelcharofstring(str, 'p'));
    printf ("%s",str);
    printf ("\n");
 
-   error = PCMdelcharofstring(str, 't');
-   if ( error )  goto TERMINATE;
+   CALL(PCMdelcharofstring(str, 't'));
    printf ("%s", str);
    printf ("\n");
 
-   error = PCMstrlen (str, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrlen (str, &len));
    printf ("str = %s, len = %d\n", str,len);
 
 
    // test PCMstrncat function
    char tail[] = "test_PCMstrncat";
-   /*    error = PCMstrncat (str, tail, sizeof tail); */
-   error = PCMstrncat (str, tail, -1);
-   if( error )
-   {
-      goto TERMINATE;
-   }
-   error = PCMstrlen (str, &len);
-   if ( error )  goto TERMINATE;
+   /*    CALL(PCMstrncat (str, tail, sizeof tail); */
+   CALL(PCMstrncat (str, tail, -1));
+   CALL(PCMstrlen (str, &len));
    printf ("str = %s, len = %d\n", str,len);
 
    // test PCMstrblkstoblk
@@ -117,23 +91,19 @@ int main (void)
    /*    char bstr[] = "ab      "; */
    /*    char bstr[] = "        ab      "; */
    /*    char bstr[] = "        a    b      "; */
-   error = PCMstrblkstoblk (bstr);
-   if ( error )  goto TERMINATE;
-   error = PCMstrlen (bstr, &len);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrblkstoblk (bstr));
+   CALL(PCMstrlen (bstr, &len));
    printf ("bstr = %s, len = %d\n", bstr,len);
 
    // test PCMstrindex
    char bigstr[] = "defefgdefk";
    char substr[] = "def";
    int index;
-   error = PCMstrindex (bigstr, substr, &index);
-   if ( error )  goto TERMINATE;
+   CALL(PCMstrindex (bigstr, substr, &index));
    
    printf ("The last %s in %s at %d\n", substr, bigstr, index);
 
-   error = PCMdelcharofstring(NULL, 't');
-   if ( error )  goto TERMINATE;
+   CALL(PCMdelcharofstring(NULL, 't'));
    printf ("%s",str);
    printf ("\n");
 

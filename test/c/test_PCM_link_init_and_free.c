@@ -10,14 +10,9 @@ int main(void)
 /*    mylist = &l; */
 /*    PCMlinkedlist *p = &mylist; */
    PCMlinkedlist *p = NULL;
-   error = PCMlinkedlistinit (&p);
-   if ( error )  goto TERMINATE;
-
-   error = PCMlinkedlistoutput (p, ":");
-   if ( error )  goto TERMINATE;
-
-   error = PCMlinkedlistfree (&p);
-   if ( error )  goto TERMINATE;
+   CALL(PCMlinkedlistinit (&p));
+   CALL(PCMlinkedlistoutput (p, ":"));
+   CALL(PCMlinkedlistfree (&p));
 
 TERMINATE:
    PCMcheckerror (error); 

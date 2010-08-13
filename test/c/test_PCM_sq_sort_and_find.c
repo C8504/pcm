@@ -7,38 +7,25 @@ int main(void)
    int ind;
    PCMseqlist* mylist = NULL;
 
-   printf ("init my list\n");
-   error = PCMseqlistinit (&mylist);
-   if ( error )  goto TERMINATE;
-
-   printf ("Unit test one:\n");
-   printf ("insert 4 elements into mylist\n");
-   error = PCMseqlistinsert (mylist, 0, 1);
-   if ( error )  goto TERMINATE;
-   error = PCMseqlistinsert (mylist, 1, 10);
-   if ( error )  goto TERMINATE;
-   error = PCMseqlistinsert (mylist, 2, 0);
-   if ( error )  goto TERMINATE;
-   error = PCMseqlistinsert (mylist, 3, 5);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistinit (&mylist));
+   CALL(PCMseqlistinsert (mylist, 0, 1));
+   CALL(PCMseqlistinsert (mylist, 1, 10));
+   CALL(PCMseqlistinsert (mylist, 2, 0));
+   CALL(PCMseqlistinsert (mylist, 3, 5));
     
    for (i = 0; i < 3; ++i) {
-      error = PCMseqlistinsert (mylist,i,i*2);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistinsert (mylist,i,i*2));
    }
 
    for (i = 0; i < 3; ++i) {
-      error = PCMseqlistinsert (mylist,i,i);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistinsert (mylist,i,i));
    }
    
-   printf ("output mylist\n");
    PCMseqlistoutput (mylist);
+   
    printf ("sort mylist\n");
-
    enum PCMSORTALG sortalg = PCMALGSORTBUBBLE;
-   error = PCMseqlistsort (mylist, mylist->length, sortalg);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistsort (mylist, mylist->length, sortalg));
    printf("output mylist after bubble sort\n");
    PCMseqlistoutput (mylist);
 
@@ -50,15 +37,13 @@ int main(void)
    printf ("find the index of element '5'\n");
    enum PCMSEARCHALG findalg = PCMALGORIGINFIND;
    for (i = 0; i < 1000; ++i) {
-      error = PCMseqlistfind (mylist, mylist->length, 5, &ind, findalg);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistfind (mylist, mylist->length, 5, &ind, findalg));
    }
    printf ("Index of 5 is %d\n", ind);
    printf ("find the index of element '5'\n");
    findalg = PCMALGBINFIND;
    for (i = 0; i < 1000; ++i) {
-      error = PCMseqlistfind (mylist, mylist->length, 5, &ind, findalg);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistfind (mylist, mylist->length, 5, &ind, findalg));
    }
    printf ("Index of 5 is %d\n", ind);
 
@@ -93,8 +78,7 @@ int main(void)
       PCMseqlistoutput (mylist);
       if ( error )  goto TERMINATE;*/
 
-   error = PCMseqlistfree (&mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistfree (&mylist));
 
    if ( mylist == NULL )  printf("sqlist free successfully!\n");
 TERMINATE:

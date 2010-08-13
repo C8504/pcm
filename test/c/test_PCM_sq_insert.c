@@ -8,37 +8,29 @@ int main(void)
    PCMseqlist* mylist = NULL;
 
    printf ("init my list\n");
-   error = PCMseqlistinit (&mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistinit (&mylist));
 
    printf ("insert 1-3 elements");
 
    for (i = 0; i < 3; ++i) {
-      error = PCMseqlistinsert (mylist, i, i);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistinsert (mylist, i, i));
    }
-   error = PCMseqlistoutput(mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistoutput(mylist));
 
    printf ("insert 3-5 elements");
    for (i = 3; i < PCMLISTINITSIZE ; ++i) {
-      error = PCMseqlistinsert (mylist, i, i);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistinsert (mylist, i, i));
    }
-   error = PCMseqlistoutput(mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistoutput(mylist));
 
    printf ("insert 5-10 elements");
    for (i = 5; i < 10; ++i) {
-      error = PCMseqlistinsert (mylist, i, i);
-      if ( error )  goto TERMINATE;
+      CALL(PCMseqlistinsert (mylist, i, i));
    }
-   error = PCMseqlistoutput(mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistoutput(mylist));
 
    printf ("free my list\n");
-   error = PCMseqlistfree (&mylist);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistfree (&mylist));
 
    if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:

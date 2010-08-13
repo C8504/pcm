@@ -14,17 +14,12 @@ int main(void)
 
    PCMstack *s = NULL;
 
-   error = PCMstackcreate (&s, 3);
-
-   if( error ) {
-      goto TERMINATE;
-   }
+   CALL(PCMstackcreate (&s, 3));
 
    //integer
    printf ("integer stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = PCMstackpush (s, &a[i]);
-      if ( error )  goto TERMINATE;
+      CALL(PCMstackpush (s, &a[i]));
    }
    for (i = 0; i < 5; ++i) {
       printf ("%5d", *(int*)s->data[i]);
@@ -43,8 +38,7 @@ int main(void)
    //float
    printf ("float stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = PCMstackpush (s, &b[i]);
-      if ( error )  goto TERMINATE;
+      CALL(PCMstackpush (s, &b[i]));
    }
 
    for (i = 0; i < 5; ++i) {
@@ -64,8 +58,7 @@ int main(void)
    //char
    printf ("char stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = PCMstackpush (s, &c[i]);
-      if ( error )  goto TERMINATE;
+      CALL(PCMstackpush (s, &c[i]));
    }
 
    for (i = 0; i < 5; ++i) {
@@ -84,8 +77,7 @@ int main(void)
    //strarray
    printf ("str array stack:\n");
    for (i = 0; i < 5; ++i) {
-      error = PCMstackpush (s, strarr[i]);
-      if ( error )  goto TERMINATE;
+      CALL(PCMstackpush (s, strarr[i]));
    }
 
    for (i = 0; i < 5; ++i) {
@@ -107,8 +99,7 @@ int main(void)
       strcpy(dynamicstrarr[i], strarr[i]);
    }
    for (i = 0; i < 5; ++i) {
-      error = PCMstackpush (s, dynamicstrarr[i]);
-      if ( error )  goto TERMINATE;
+      CALL(PCMstackpush (s, dynamicstrarr[i]));
    }
 
    for (i = 0; i < 5; ++i) {

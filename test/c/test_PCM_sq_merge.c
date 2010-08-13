@@ -11,35 +11,16 @@ int main(void)
    PCMSList odd = NULL;
    PCMSList even = NULL;
 
-   error = PCMseqlistinit (&odd);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistinit (&even);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistcopy (odd, a, 5);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistcopy (even, b, 5);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistmerge (odd, even);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistdeleteR (odd);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistoutput (odd);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistoutput (even);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistfree (&odd);
-   if ( error )  goto TERMINATE;
-
-   error = PCMseqlistfree (&even);
-   if ( error )  goto TERMINATE;
+   CALL(PCMseqlistinit (&odd));
+   CALL(PCMseqlistinit (&even));
+   CALL(PCMseqlistcopy (odd, a, 5));
+   CALL(PCMseqlistcopy (even, b, 5));
+   CALL(PCMseqlistmerge (odd, even));
+   CALL(PCMseqlistdeleteR (odd));
+   CALL(PCMseqlistoutput (odd));
+   CALL(PCMseqlistoutput (even));
+   CALL(PCMseqlistfree (&odd));
+   CALL(PCMseqlistfree (&even));
 
    if ( even == NULL )  printf ("free even successfully!\n");
    if ( odd == NULL  )  printf ("free odd successfully!\n");
