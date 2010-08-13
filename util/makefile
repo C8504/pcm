@@ -72,5 +72,3 @@ LOGFILES=$(LOGDIR)test_PCM_link_init_and_free$(LOG)\
          $(LOGDIR)test_PCM$(LOG)\
          $(LOGDIR)test_PCM_stack$(LOG)
 
-include makefile.cfg
-include makefile.common

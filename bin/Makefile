@@ -1,3 +1,3 @@
 include ../util/makefile
-include ../util/makefile.common
 include ../util/makefile.cfg
+include ../util/makefile.common
