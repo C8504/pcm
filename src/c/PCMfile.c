@@ -6,9 +6,7 @@ PCMfilecreate (PCMfile **fp) {
    int error = 0;
 
    *fp = malloc (sizeof **fp);
-   if ( *fp == NULL ) {
-      THROW(PCMERRNOMEMORY);
-   }
+   CALL(PCMcheckpointer(*fp));
 
    (*fp)->p       = NULL;
    error = PCMstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
@@ -30,8 +28,7 @@ int
 PCMfilefree (PCMfile **fp){
    int error = 0;
 
-   error = PCMcheckpointer (fp);
-   if ( error )  THROW(error);
+   CALL(PCMcheckpointer (fp));
 
    if ( (*fp)->p != NULL ){
       fclose((*fp)->p);
@@ -50,8 +47,7 @@ int
 PCMfileopen (PCMfile *fp, const char *name){
    int error = 0;
 
-   error = PCMcheckpointer (fp);
-   if ( error )  THROW(error);
+   CALL(PCMcheckpointer (fp));
 
    if ((fp->p = fopen(name, "r")) == NULL) {
       THROW(errno);
@@ -73,10 +69,7 @@ PCMfilestatistics (PCMfile *fp)
    int error = 0;
    int i     = 0;
    
-   error = PCMcheckpointer (fp);
-   if ( error ) {
-      THROW(error);
-   }
+   CALL(PCMcheckpointer (fp));
 
    error = PCMfilegetinfo(fp);
    if ( error ) {
@@ -112,10 +105,7 @@ PCMfilegetinfo (PCMfile *fp){
    int state = 0;
    int c;
 
-   error = PCMcheckpointer (fp);
-   if ( error ){
-      THROW(error);
-   }
+   CALL(PCMcheckpointer (fp));
 
    while ((c = getc(fp->p)) != EOF) {
       ++fp->nbytes;
@@ -157,10 +147,7 @@ PCMfilegetline (PCMfile *fp,
    int c     = 0;
    int i     = 0;
 
-   error = PCMcheckpointer (fp);
-   if ( error ) {
-      THROW(error);
-   }
+   CALL(PCMcheckpointer (fp));
 
    while ((i < max-1               ) &&
          ((c = getc(fp->p)) != EOF ) &&
@@ -188,10 +175,7 @@ PCMfilegetmaxline (PCMfile *fp,
    int len   = 0;
    char line[PCMFILEMAXLINE] = {0};
    
-   error = PCMcheckpointer (fp);
-   if ( error ) {
-      THROW(error);
-   }
+   CALL(PCMcheckpointer (fp));
 
    *max = len;
    do {

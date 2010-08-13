@@ -10,13 +10,11 @@ PCMarrayinit (PCMarray **list)
    int error = 0;
 
    *list = malloc(sizeof **list);
-   if ( *list == NULL ) {
-      THROW(PCMERRNOMEMORY);
-   }
+   CALL(PCMcheckpointer(*list));
+   
    (*list)->elemp = malloc(PCMLISTINITSIZE * sizeof(int));
-   if ( (*list)->elemp == NULL ) {
-      THROW(PCMERRNOMEMORY);
-   }
+   CALL(PCMcheckpointer((*list)->elemp));
+   
    (*list)->length = 0;
    (*list)->capacity = PCMLISTINITSIZE;
 
@@ -31,9 +29,7 @@ PCMarrayfree (PCMarray **list)
    int error = 0;
    int temp = 0;
 
-   if ( NULL == list ) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   CALL(PCMcheckpointer(list));
 
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
@@ -61,9 +57,8 @@ PCMarraycopy (PCMarray *list, const int *arr, int count)
    int i;
    int error = 0;
 
-   if ( NULL == list || NULL == arr) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   CALL(PCMcheckpointer(list));
+   CALL(PCMcheckpointer(arr));
 
    for (i = 0; i < count; ++i) {
       error = PCMarrayinsert(list, list->length, arr[i]);
@@ -84,9 +79,8 @@ PCMarraymerge (PCMarray *des, const PCMarray* src)
    int error = 0;
    int index = -1;
 
-   if ( NULL == des || NULL == src) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   CALL(PCMcheckpointer(des));
+   CALL(PCMcheckpointer(src));
 
    for (i = 0; i < src->length ; ++i) {
       error = PCMarrayinsert(des, des->length, src->elemp[i]);
@@ -139,7 +133,7 @@ PCMarrayinsert (PCMarray *list,
       THROW(PCMERRNOTVALIDINDEX);
    }
 
-   assert (list->elemp != NULL);
+   CALL(PCMcheckpointer(list->elemp));
    //extend capacity if length >= capacity in realloc
    if ( list-> length == list->capacity) {
       list->elemp =
@@ -228,9 +222,7 @@ PCMarrayoutput (PCMarray *list)
    int i;
    int error = 0;
 
-   if ( NULL == list ) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   CALL(PCMcheckpointer(list));
 
    printf ("\n++++++++++++++++PCM_sq_list+++++++++++++++++++++\n");
    printf ("list->length = %d\n", list->length);
@@ -259,9 +251,7 @@ PCMarraysort (PCMarray *list,
 {
    int error = 0;
 
-   if ( NULL == list ) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   CALL(PCMcheckpointer(list));
 
    if (length > list->length) {
       length = list->length;
@@ -301,9 +291,7 @@ PCMarrayfind (PCMarray *list,
 {
    int error = 0;
 
-   if ( NULL == list ) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   CALL(PCMcheckpointer(list));
 
    *index = -1;
 
