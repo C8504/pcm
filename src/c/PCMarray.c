@@ -10,10 +10,14 @@ PCMarrayinit (PCMarray **list)
    int error = 0;
 
    *list = malloc(sizeof **list);
-   assert(*list != NULL);
+   if (*list == NULL) {
+      THROW(PCMERRNOMEMORY);
+   }
    
    (*list)->elemp = malloc(PCMLISTINITSIZE * sizeof(int));
-   assert((*list)->elemp != NULL);
+   if ((*list)->elemp == NULL) {
+      THROW(PCMERRNOMEMORY);
+   }
    
    (*list)->length = 0;
    (*list)->capacity = PCMLISTINITSIZE;
@@ -71,7 +75,7 @@ TERMINATE:
    return error;
 } /* End of PCMarraycopy*/
 
-/* Merge two lists */
+/* Merge two listsand sort it*/
 int
 PCMarraymerge (PCMarray *des, const PCMarray* src)
 {
@@ -274,7 +278,7 @@ PCMarraysort (PCMarray *list,
       error = PCMinsertsort (list->elemp, list->length);
    }
    else {
-      THROW(PCMERRWRONGSORTALG);
+      qsort(list->elemp, list->length, sizeof (int), PCMcompare);
    }
 
 TERMINATE:

@@ -6,7 +6,9 @@ PCMfilecreate (PCMfile **fp) {
    int error = 0;
 
    *fp = malloc (sizeof **fp);
-   assert(*fp != NULL);
+   if (*fp == NULL) {
+      THROW(PCMERRNOMEMORY);
+   }
 
    (*fp)->p       = NULL;
    error = PCMstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
