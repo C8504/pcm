@@ -46,10 +46,32 @@ extern "C" {
    typedef void (*FREEFUNC) (void* p);
 
    // macros
-   #define THROW(ERROR)  error = ERROR; \
-                         printf ("In %s, line %d ;",__FILE__, __LINE__); \
-                         goto TERMINATE;
-   #define CALL(function) error = (function); if ( error ) goto TERMINATE;
+   #define THROW(function)  if ( error = function ) { \
+                              printf ("In %s, line %d ;",__FILE__, __LINE__); \
+                              goto TERMINATE;                  \
+                            }
+
+   #define CALL(function) if ( error = function ) goto TERMINATE;
+
+   #define PCM_ALLOC(x,n,t)        do {                            \
+      assert(x == NULL);                                           \
+      x = malloc((n) * sizeof(t));                             \
+      if ( x == NULL ) {                                           \
+         THROW(PCMERRNOMEMORY);                                    \
+      }                                                            \
+   } while(0)
+
+   #define PCM_FREE(x)        do {        \
+      if ( (x) != NULL) {                 \
+         free (x);                        \
+         (x) = NULL;                      \
+      }                                   \
+   } while(0)
+
+   #define DERROR int error = 0
+
+   #define RETURN TERMINATE:      \
+                     return error
 
 
 #ifdef __cplusplus

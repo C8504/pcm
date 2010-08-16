@@ -2,17 +2,13 @@
 
 int
 PCMfilecreate (PCMfile **fp) {
+   DERROR;
    int i     = 0;
-   int error = 0;
 
-   *fp = malloc (sizeof **fp);
-   if (*fp == NULL) {
-      THROW(PCMERRNOMEMORY);
-   }
+   PCM_ALLOC(*fp, 1, **fp);
 
    (*fp)->p       = NULL;
-   error = PCMstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1);
-   if ( error )  goto TERMINATE;
+   THROW(PCMstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1));
    (*fp)->nlines  = 0LL;
    (*fp)->nbytes  = 0LL;
    (*fp)->ndigits = 0LL;
@@ -21,14 +17,13 @@ PCMfilecreate (PCMfile **fp) {
    for (i = 0; i < PCMCHAR; ++i) {
       (*fp)->countofchar[i] = 0;
    }
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMfilecreate*/
 
 int
 PCMfilefree (PCMfile **fp){
-   int error = 0;
+   DERROR;
 
    assert(fp != NULL);
 
@@ -38,16 +33,14 @@ PCMfilefree (PCMfile **fp){
 
    }
 
-   free (*fp);
-   *fp = NULL;
-
-TERMINATE:
-   return error;
+   PCM_FREE(*fp);
+   
+   RETURN;
 } /* End of PCMfilefree*/
 
 int
 PCMfileopen (PCMfile *fp, const char *name){
-   int error = 0;
+   DERROR;
 
    assert(fp != NULL);
 
@@ -55,28 +48,21 @@ PCMfileopen (PCMfile *fp, const char *name){
       THROW(errno);
    }
    else {
-      error = PCMstrncpy(fp->name, name, sizeof fp->name - 1);
-      if ( error ) {
-         THROW(error);
-      }
+      THROW(PCMstrncpy(fp->name, name, sizeof fp->name - 1));
     }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMfileopen */
 
    int
 PCMfilestatistics (PCMfile *fp)
 {
-   int error = 0;
+   DERROR;
    int i     = 0;
    
    assert(fp != NULL);
 
-   error = PCMfilegetinfo(fp);
-   if ( error ) {
-      THROW(error);
-   }
+   THROW(PCMfilegetinfo(fp));
 
    printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
    
@@ -96,14 +82,12 @@ PCMfilestatistics (PCMfile *fp)
 /*         putchar('\n');*/
 /*      }*/
 /*   }*/
-
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMfilestatistics*/
 
 int
 PCMfilegetinfo (PCMfile *fp){
-   int error = 0;
+   DERROR;
    int state = 0;
    int c;
 
@@ -134,9 +118,8 @@ PCMfilegetinfo (PCMfile *fp){
 
    // rewind to the head of file 
    rewind (fp->p);
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMfilepgetinfo*/
 
 int
@@ -145,7 +128,7 @@ PCMfilegetline (PCMfile *fp,
       char    *line,
       int     *length)
 {
-   int error = 0;
+   DERROR;
    int c     = 0;
    int i     = 0;
 
@@ -165,15 +148,14 @@ PCMfilegetline (PCMfile *fp,
    line[i+1] = '\0';
    *length = i;
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMfilegetline */
 
 int
 PCMfilegetmaxline (PCMfile *fp,
       char     *maxline,
       int      *max) {
-   int error = 0;
+   DERROR;
    int len   = 0;
    char line[PCMFILEMAXLINE] = {0};
    
@@ -181,23 +163,16 @@ PCMfilegetmaxline (PCMfile *fp,
 
    *max = len;
    do {
-      error = PCMfilegetline (fp, PCMFILEMAXLINE, line, &len);
-      if ( error ) {
-         THROW(error);
-      }
+      THROW(PCMfilegetline (fp, PCMFILEMAXLINE, line, &len));
       if ( len > *max ) {
          *max = len;
-         error = PCMstrncpy (maxline, line, PCMFILEMAXLINE);
-         if ( error )  {
-            THROW(error);
-         }
+         THROW(PCMstrncpy (maxline, line, PCMFILEMAXLINE));
       }
    }
    while ( len != 0 );
 
    rewind (fp->p);
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMfilegetmaxline*/
 

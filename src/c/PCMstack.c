@@ -2,7 +2,7 @@
 
 int
 PCMstackcreate (PCMstack **sp, size_t size){
-   int error = 0;
+   DERROR;
 
    if ( 0 == size ) {
       *sp = NULL;
@@ -10,33 +10,26 @@ PCMstackcreate (PCMstack **sp, size_t size){
    }
 
    if ( *sp == NULL ) {
-      *sp = malloc (sizeof (**sp));
-      if ( *sp == NULL ) {
+      PCM_ALLOC(*sp, 1, **sp);
+      (*sp)->data = malloc (size * sizeof (void*));
+      if ( (*sp)->data == NULL ) {
+         PCM_FREE (*sp);
          THROW(PCMERRNOMEMORY);
       }
       else {
-         (*sp)->data = malloc (size * sizeof (void*));
-         if ( (*sp)->data == NULL ) {
-            free (*sp);
-            *sp = NULL;
-            THROW(PCMERRNOMEMORY);
-         }
-         else {
-            (*sp)->top  = -1;
-            (*sp)->size = size;
-            (*sp)->data[0] = NULL;
-         }
+         (*sp)->top  = -1;
+         (*sp)->size = size;
+         (*sp)->data[0] = NULL;
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstackcreate */
 
 /* freefunc is used to free the dynamic momery which
  * in (*sp)->data pointers array, if the pointer in (*sp)->data
  * was allocated dynamicly, otherwise pass NULL to freefunc*/
-void
+   void
 PCMstackfree (PCMstack **sp, FREEFUNC freefunc)
 {
    int i = 0;
@@ -49,20 +42,18 @@ PCMstackfree (PCMstack **sp, FREEFUNC freefunc)
                (*sp)->data[i] = NULL;
             }
          }
-         free ((*sp)->data);
-         (*sp)->data = NULL;
+         PCM_FREE ((*sp)->data);
       }
       else {
-         free (*sp);
-         *sp = NULL;
+         PCM_FREE (*sp);
       }
    }
 } /* End of PCMstackfree */
 
-int 
+   int 
 PCMstackpush (PCMstack *s, void *elem)
 {
-   int error = 0;
+   DERROR;
 
    if ( s == NULL ) {
       elem = NULL;
@@ -81,11 +72,10 @@ PCMstackpush (PCMstack *s, void *elem)
       s->data[s->top] = elem;
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstackpush */
 
-void*
+   void*
 PCMstackpop (PCMstack *s)
 {
    void *elem;
@@ -101,7 +91,7 @@ PCMstackpop (PCMstack *s)
    return elem;
 } /* End of PCMstackpop */
 
-int
+   int
 PCMstackisempty (PCMstack *s)
 {
    if( s == NULL || s->top == -1 ){

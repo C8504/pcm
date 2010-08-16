@@ -3,9 +3,9 @@
 PCMdelcharofstring (char * str,
       int  c)
 {
+   DERROR;
    int i     = 0;
    int j     = 0;
-   int error = 0;
 
    assert(str != NULL);
    for (i = 0, j = 0; str[i] != '\0'; ++i) {
@@ -15,37 +15,32 @@ PCMdelcharofstring (char * str,
    }
    str[j] = '\0';
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMdelcharofstring */
 
    int
 PCMstrlen (const char *str,
       size_t     *len)
 {
+   DERROR;
    int i     = 0;
-   int error = 0;
 
    assert(str != NULL);
    while ( str[i] != '\0')
       ++i;
    *len = i;
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstrlen */
 
    int
 PCMstrtrim (char *str)
 {
-   int error = 0;
+   DERROR;
    size_t n  = 0;
    int i     = 0;
 
-   error = PCMstrlen (str, &n);
-   if ( error ) {
-      THROW(error);
-   }
+   THROW(PCMstrlen (str, &n));
    if ( n > 0 ) {
       for (i = n-1; (i >= 0) && (str[i] == ' ' || str[i] == '\t'); --i);
       if ( i >= -1 ) {
@@ -54,24 +49,20 @@ PCMstrtrim (char *str)
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstrtrim*/
 
    int
 PCMstreverse (char *str)
 {
-   int error = 0;
+   DERROR;
    int i     = 0;
    int j     = 0;
    int temp  = 0;
 
    size_t n  = 0;
 
-   error = PCMstrlen (str, &n);
-   if ( error ) {
-      THROW(error);
-   }
+   THROW(PCMstrlen (str, &n));
 
    if ( n > 0 ) {
       j = n - 1;
@@ -83,8 +74,7 @@ PCMstreverse (char *str)
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of ORcstreverse */
 
 /*
@@ -95,17 +85,14 @@ PCMstrncpy (char       *des,
       const char *src,
       int n)
 {
-   int error  = 0;
+   DERROR;
    int i      = 0;
    size_t len = 0;
 
 
    assert(des != NULL);
    assert(src != NULL);
-   error = PCMstrlen (src, &len);
-   if ( error ) {
-      THROW(error);
-   }
+   THROW(PCMstrlen (src, &len));
 
    if ( len <= n ) {
       while ((*des++ = *src++) != '\0'){}
@@ -118,8 +105,7 @@ PCMstrncpy (char       *des,
       des[i] = '\0';
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstrncpy*/
 
    int
@@ -127,16 +113,13 @@ PCMstrncat (char *des,
       const char *src,
       int n)
 {
-   int error  = 0;
+   DERROR;
    int i      = 0;
    size_t len = 0;
 
    assert(des != NULL);
    assert(src != NULL);
-   error = PCMstrlen (src, &len);
-   if ( error ) {
-      THROW(error);
-   }
+   THROW(PCMstrlen (src, &len));
 
    while (*des != '\0') {
       ++des;
@@ -153,13 +136,12 @@ PCMstrncat (char *des,
       des[i] = '\0';
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstrncat function*/
 
 int
 PCMstrblkstoblk (char *str) {
-   int error = 0;
+   DERROR;
    int lastc = 'a';
    int i = 0;
    int j = 0;
@@ -174,14 +156,13 @@ PCMstrblkstoblk (char *str) {
    }
    str[j] = '\0';
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstrlbkstoblk*/
 
    int
 PCMstrindex(char *str, char *substr, int *index)
 {
-   int error = 0;
+   DERROR;
    int i = 0;
    int j = 0;
    int k = 0;
@@ -199,7 +180,6 @@ PCMstrindex(char *str, char *substr, int *index)
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMstrindex*/
 

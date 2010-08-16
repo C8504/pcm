@@ -2,7 +2,7 @@
 int PCMinsertsort(int *a,
       int len)
 {
-   int error = 0;
+   DERROR;
    int i, j;
    int t;
 
@@ -19,15 +19,14 @@ int PCMinsertsort(int *a,
       a[j+1] = t;
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* END of PCMinsertsort*/
 
 int
 PCMselectsort(int *a,
       int len)
 {
-   int error = 0;
+   DERROR;
    int i, j, min;
    int t;
 
@@ -48,15 +47,14 @@ PCMselectsort(int *a,
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMselectsort*/
 
 int
 PCMbubblesort(int *a,
       int len)
 {
-   int error = 0;
+   DERROR;
    int i, j;
    int t;
 
@@ -72,15 +70,14 @@ PCMbubblesort(int *a,
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMbubblesort*/
 
 int
 PCMshellsort(int *a,
       int len)
 {
-   int error = 0;
+   DERROR;
    int i, j, gap;
    int temp;
 
@@ -102,7 +99,6 @@ PCMshellsort(int *a,
       gap = ( gap - 1 ) /3;
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMshellsort */
 

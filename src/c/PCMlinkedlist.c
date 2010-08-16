@@ -6,11 +6,9 @@ PCMnodefree (PCMlinkednode **node)
 {
    if ( *node != NULL ) {
       if ( (*node)->elem != NULL ) {
-         free ((*node)->elem);
-         (*node)->elem = NULL;
+         PCM_FREE ((*node)->elem);
       }
-      free (*node);
-      *node = NULL;
+      PCM_FREE (*node);
    }
 } /* End of PCMnodefree */
 
@@ -18,27 +16,20 @@ int
 PCMnodeallocandinit (PCMlinkednode **node,
       const char* elem)
 {
-   int error = 0;
+   DERROR;
 
-   *node = malloc (sizeof **node);
-   if ( NULL == *node ) {
-      THROW(PCMERRNOMEMORY);
-   }
+   PCM_ALLOC(*node, 1, **node);
 
    if ( elem != NULL ) {
       size_t ssize = 0;
-      error = PCMstrlen (elem, &ssize);
-      if ( error ) {
-         THROW(error);
-      }
+      THROW(PCMstrlen (elem, &ssize));
       ++ssize;
 
       (*node)->elem = malloc (ssize);
       //memset ((*node)->elem, '\0', ssize);
       if ( NULL == (*node)->elem ) {
          // free *node if alloc elem failed.
-         free (*node);
-         *node = NULL;
+         PCM_FREE (*node);
 
          THROW(PCMERRNOMEMORY);
       }
@@ -54,27 +45,21 @@ PCMnodeallocandinit (PCMlinkednode **node,
 
    (*node)->next = NULL;
    (*node)->prev = NULL;
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMnodeallocandinit */
 
 int
 PCMlinkedlistinit (PCMlinkedlist **list)
 {
-   int error = 0;
-
-   *list = malloc (sizeof **list);
-   if ( NULL == *list ) {
-      THROW(PCMERRNOMEMORY);
-   }
+   DERROR;
+   
+   PCM_ALLOC(*list, 1, **list);
 
    (*list)->first = NULL;
    (*list)->last  = NULL;
-
-TERMINATE:
-
-   return error;
+   
+   RETURN;
 } /* End of PCMlinkedlistinit */
 
 
@@ -82,7 +67,7 @@ TERMINATE:
 int
 PCMlinkedlistfree (PCMlinkedlist **list)
 {
-   int error = 0;
+   DERROR;
    PCMlinkednode *oldp = NULL;
 
    while ((*list)->first != NULL) {
@@ -91,22 +76,19 @@ PCMlinkedlistfree (PCMlinkedlist **list)
       PCMnodefree (&oldp);
    }
    (*list)->first = (*list)->last = NULL;
-   free (*list);
-   *list = NULL;
+   PCM_FREE(*list);
 
-   return error;
+   RETURN;
 } /* End of PCMlinkedlistfree */
 
 int
 PCMlinkedlistappend (PCMlinkedlist *list,
       const char* elem)
 {
+   DERROR;
    PCMlinkednode *newnode = NULL;
 
-   int error = PCMnodeallocandinit (&newnode, elem);
-   if ( error ) {
-      THROW(error);
-   }
+   THROW(PCMnodeallocandinit (&newnode, elem));
 
    if ( list->first == NULL &&
          list->last  == NULL  ) {
@@ -117,10 +99,8 @@ PCMlinkedlistappend (PCMlinkedlist *list,
       list->last->next = newnode;
       list->last = newnode;
    }
-
-TERMINATE:
-
-   return error;
+   
+   RETURN;
 } /* END of PCMlinkedlistappend */
 
 //insert the newnode after "p"
@@ -129,7 +109,7 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
       int         pos,
       const char* elem)
 {
-   int error;
+   DERROR;
    int j = 0;
    int len = PCMlinkedlistlength(list);
    PCMlinkednode *p = list->first;
@@ -138,19 +118,13 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
    // If list is an empty list, then ignore pos
    // and the newnode is the list->first and list->last
    if ( len == 0 ) {
-      error = PCMnodeallocandinit (&newnode, elem);
-      if ( error ) {
-         THROW(error);
-      }
+      THROW(PCMnodeallocandinit (&newnode, elem));
       list->first = list->last = newnode;
    }
    else {
       // if pos == len, then just append it
       if ( pos == len ) {
-         error = PCMlinkedlistappend (list, elem);
-         if ( error )  {
-            THROW(error);
-         }
+         THROW(PCMlinkedlistappend (list, elem));
       }
       // if pos in the middle of list
       else {
@@ -167,10 +141,7 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
          }
 
          // creat newnode
-         error = PCMnodeallocandinit (&newnode, elem);
-         if ( error ) {
-            THROW(error)
-         }
+         THROW(PCMnodeallocandinit (&newnode, elem));
 
          // insert the newnode after "p"
          newnode->next = p->next;
@@ -179,21 +150,18 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMlinkedlistinsert */
 
 int
 PCMlinkedlistoutput (PCMlinkedlist *list,
       const char* sp)
 {
-   int error = 0;
+   DERROR;
 
    PCMlinkednode *p;
 
-   if ( list == NULL ) {
-      THROW(PCMERRNULLPOINTER);
-   }
+   assert(list);
    
    printf ("\n++++++++++++++PCM_linked_list++++++++++++++++++++++++++++\n");
    
@@ -218,24 +186,19 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
 
    printf ("\n+++++++++++++++++++END+++++++++++++++++++++++++++++++++++\n");
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMlinkedlistoutput */
 
 int
 PCMlinkedlistclear (PCMlinkedlist *list)
 {
-   int error = 0;
+   DERROR;
 
    while (0 != PCMlinkedlistlength (list)) {
-      error = PCMlinkedlistpop (list, PCMPOPSTACK);
-      if ( error )  {
-         THROW(error);
-      }
+      THROW(PCMlinkedlistpop (list, PCMPOPSTACK));
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMlinkedlistclear */
 
 // Pop is a method used in both stack and queue with type 
@@ -243,7 +206,7 @@ int
 PCMlinkedlistpop (PCMlinkedlist *list,
       enum PCMPOPTYPE type)
 {
-   int error = 0;
+   DERROR;
    PCMlinkednode *p = NULL;
 
    if ( type == PCMPOPQUEUE ) {
@@ -286,11 +249,10 @@ PCMlinkedlistpop (PCMlinkedlist *list,
       THROW(PCMERRNOTSTACKANDQUEUE);
    }
 
-   free (p->elem);
-   free (p);
-
-TERMINATE:
-   return error;
+   PCM_FREE (p->elem);
+   PCM_FREE (p);
+   
+   RETURN;
 } /* End of PCMlinkedlistpop */
 
 int

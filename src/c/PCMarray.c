@@ -7,117 +7,90 @@
 int
 PCMarrayinit (PCMarray **list)
 {
-   int error = 0;
+   DERROR;
 
-   *list = malloc(sizeof **list);
-   if (*list == NULL) {
-      THROW(PCMERRNOMEMORY);
-   }
+   PCM_ALLOC((*list), 1, (**list));
    
-   (*list)->elemp = malloc(PCMLISTINITSIZE * sizeof(int));
-   if ((*list)->elemp == NULL) {
-      THROW(PCMERRNOMEMORY);
-   }
+   PCM_ALLOC((*list)->elemp, PCMLISTINITSIZE, int);
    
    (*list)->length = 0;
    (*list)->capacity = PCMLISTINITSIZE;
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMarrayinit */
 
 /* Free the list*/
 int
 PCMarrayfree (PCMarray **list)
 {
-   int error = 0;
+   DERROR;
    int temp = 0;
 
    assert(list != NULL);
 
    if ( (*list)->elemp != NULL) {
       while ((*list)->length != 0) {
-         error = PCMarraydelete(*list, (*list)->length - 1, &temp);
-         if ( error )  {
-            THROW(error);
-         }
+         THROW(PCMarraydelete(*list, (*list)->length - 1, &temp));
       }
-      free((*list)->elemp);
-      (*list)->elemp = NULL;
+      
+      PCM_FREE((*list)->elemp);
       (*list)->capacity = 0;
    }
 
-   free (*list);
-   *list = NULL;
+   PCM_FREE(*list);
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMarrayfree */
 
 /* Copy an array to the list with count */
 int
 PCMarraycopy (PCMarray *list, const int *arr, int count)
 {
+   DERROR;
    int i;
-   int error = 0;
 
    assert(list != NULL);
    assert(arr  != NULL);
 
    for (i = 0; i < count; ++i) {
-      error = PCMarrayinsert(list, list->length, arr[i]);
-      if ( error ) {
-         THROW(error);
-      }
+      THROW(PCMarrayinsert(list, list->length, arr[i]));
    }
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMarraycopy*/
 
 /* Merge two listsand sort it*/
 int
 PCMarraymerge (PCMarray *des, const PCMarray* src)
 {
+   DERROR;
    int i;
-   int error = 0;
    int index = -1;
 
    assert(des != NULL);
    assert(src != NULL);
 
    for (i = 0; i < src->length ; ++i) {
-      error = PCMarrayinsert(des, des->length, src->elemp[i]);
-      if ( error ) {
-         THROW(error);
-      }
+      THROW(PCMarrayinsert(des, des->length, src->elemp[i]));
    }
 
-   error = PCMarraysort (des, des->length, 0);
-   if ( error ) {
-      THROW(error);
-   }
-
-TERMINATE:
-   return error;
+   THROW(PCMarraysort (des, des->length, 0));
+   
+   RETURN;
 } /* End of PCMarraymerge*/
 
 /* Clear the whole list*/
 int
 PCMarrayclear (PCMarray *list)
 {
-   int error = 0;
+   DERROR;
    int temp = 0;
 
    while (list->length != 0) {
-      error = PCMarraydelete(list, list->length - 1, &temp);
-      if ( error )  {
-         THROW(error);
-      }
+      THROW(PCMarraydelete(list, list->length - 1, &temp));
    }
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMarrayclear*/
 
 /* Insert an elem to the list with index*/
@@ -126,8 +99,7 @@ PCMarrayinsert (PCMarray *list,
       int index,
       const int elem)
 {
-   int error = 0;
-
+   DERROR;
    int *p = NULL;
    int *q = NULL;
 
@@ -159,8 +131,7 @@ PCMarrayinsert (PCMarray *list,
    *p = elem;
    ++list->length;
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* END of PCMarrayinsert */
 
 /* Delete an element in index, and save the deleted element to *e*/
@@ -169,8 +140,7 @@ PCMarraydelete (PCMarray *list,
       int index,
       int *e)
 {
-   int error = 0;
-
+   DERROR;
    int *p = NULL;
    int *q = NULL;
 
@@ -189,42 +159,34 @@ PCMarraydelete (PCMarray *list,
       *q = *(q+1);
    }
    --list->length;
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMarraydelete */
 
 /* Delete the repeat element in list */
 int
 PCMarraydeleteR(PCMarray *list)
 {
-   int error = 0;
+   DERROR;
    int i, index, e;
 
    for (i = list->length; i > 0; --i) {
-      error = PCMarrayfind(list, i-1, list->elemp[i-1], &index, 0);
-      if ( error )  {
-         THROW(error);
-      }
+      THROW(PCMarrayfind(list, i-1, list->elemp[i-1], &index, 0));
 
       if ( index != -1 ) {
-         error = PCMarraydelete (list, index, &e);
-         if ( error ) {
-            THROW(error);
-         }
+         THROW(PCMarraydelete (list, index, &e));
       }
    }
-
-TERMINATE:
-   return error;
+   
+   RETURN;
 } /* End of PCMarraydeleteR */
 
 /* Output the list */
 int
 PCMarrayoutput (PCMarray *list)
 {
+   DERROR;
    int i;
-   int error = 0;
 
    assert(list != NULL);
 
@@ -243,8 +205,7 @@ PCMarrayoutput (PCMarray *list)
    }
    printf ("\n++++++++++++++++END+++++++++++++++++++++++++++++\n");
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMarrayoutput */
 
 /* Sort list by customize algorithm, bubble sort by default */
@@ -253,8 +214,7 @@ PCMarraysort (PCMarray *list,
       int length,
       enum PCMSORTALG alg)
 {
-   int error = 0;
-
+   DERROR;
    assert(list != NULL);
 
    if (length > list->length) {
@@ -263,26 +223,25 @@ PCMarraysort (PCMarray *list,
 
    // take qsort as default alg
    if ( alg == PCMALGSORTSELECT) {
-      error = PCMselectsort(list->elemp, length);
+      THROW(PCMselectsort(list->elemp, length));
    }
    else if ( alg == PCMALGSORTBUBBLE ) {
-      error = PCMbubblesort(list->elemp, list->length);
+      THROW(PCMbubblesort(list->elemp, list->length));
    }
    else if ( alg == PCMALGSORTQUICK ) {
       qsort(list->elemp, list->length, sizeof (int), PCMcompare);
    }
    else if ( alg == PCMALGSORTSHELL) {
-      error = PCMshellsort (list->elemp, list->length);
+      THROW(PCMshellsort (list->elemp, list->length));
    }
    else if ( alg == PCMALGSORTINSERT) {
-      error = PCMinsertsort (list->elemp, list->length);
+      THROW(PCMinsertsort (list->elemp, list->length));
    }
    else {
       qsort(list->elemp, list->length, sizeof (int), PCMcompare);
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMsqlistsort */
 
 /* Find element in list by customize algorithm, Origin Find by default */
@@ -293,7 +252,7 @@ PCMarrayfind (PCMarray *list,
       int *index,
       enum PCMSEARCHALG alg)
 {
-   int error = 0;
+   DERROR;
 
    assert(list != NULL);
 
@@ -305,16 +264,15 @@ PCMarrayfind (PCMarray *list,
 
    // take PCMoriginfind as default alg
    if ( PCMALGORIGINFIND == alg ) {
-      error = PCMoriginfind (list->elemp, length, elem, index);
+      THROW(PCMoriginfind (list->elemp, length, elem, index));
    }
    else if ( PCMALGBINFIND == alg) {
-      error = PCMbinfind (list->elemp, length, elem, index);
+      THROW(PCMbinfind (list->elemp, length, elem, index));
    }
    else {
-      error = PCMoriginfind (list->elemp, length, elem, index);
+      THROW(PCMoriginfind (list->elemp, length, elem, index));
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMarrayfind */
 

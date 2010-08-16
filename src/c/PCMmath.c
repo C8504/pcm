@@ -4,7 +4,7 @@ PCMpower(int base,
       int  n,
       long long *result)
 {
-   int error = 0;
+   DERROR;
    long long p = 1LL;
 
    if ( n < 0 ) {
@@ -22,7 +22,6 @@ PCMpower(int base,
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMpower*/
 

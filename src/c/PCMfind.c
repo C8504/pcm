@@ -6,7 +6,7 @@ PCMoriginfind(int *a,
       const int elem,
       int *index)
 {
-   int error = 0;
+   DERROR;
    int i;
    
    assert(a != NULL);
@@ -17,8 +17,7 @@ PCMoriginfind(int *a,
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMoriginfind*/
 
 int
@@ -27,7 +26,7 @@ PCMbinfind(int *a,
       const int elem, 
       int *index)
 {
-   int error = 0;
+   DERROR;
    int mid = 0;
    int low = 0;
    int high = length-1;
@@ -49,7 +48,6 @@ PCMbinfind(int *a,
       }
    }
 
-TERMINATE:
-   return error;
+   RETURN;
 } /* End of PCMbinfind*/
 
