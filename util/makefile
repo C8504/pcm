@@ -40,7 +40,8 @@ EXE=$(EXEDIR)test_PCM_link_init_and_free$(E)\
     $(EXEDIR)test_PCM_math$(E)\
     $(EXEDIR)test_PCM_file$(E)\
     $(EXEDIR)test_PCM$(E)\
-    $(EXEDIR)test_PCM_stack$(E)
+    $(EXEDIR)test_PCM_stack$(E)\
+    $(EXEDIR)test_PCM_array$(E)
 
 CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
       $(CTESTDIR)test_PCM_link_one_element$(C)\
@@ -55,7 +56,8 @@ CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
       $(CTESTDIR)test_PCM_math$(C)\
       $(CTESTDIR)test_PCM_file$(C)\
       $(CTESTDIR)test_PCM$(C)\
-      $(CTESTDIR)test_PCM_stack$(c)
+      $(CTESTDIR)test_PCM_stack$(C)\
+      $(CTESTDIR)test_PCM_array$(C)
 
 LOGFILES=$(LOGDIR)test_PCM_link_init_and_free$(LOG)\
          $(LOGDIR)test_PCM_link_one_element$(LOG)\
@@ -70,5 +72,6 @@ LOGFILES=$(LOGDIR)test_PCM_link_init_and_free$(LOG)\
          $(LOGDIR)test_PCM_math$(LOG)\
          $(LOGDIR)test_PCM_file$(LOG)\
          $(LOGDIR)test_PCM$(LOG)\
-         $(LOGDIR)test_PCM_stack$(LOG)
+         $(LOGDIR)test_PCM_stack$(LOG)\
+         $(LOGDIR)test_PCM_array$(LOG)
 

@@ -133,6 +133,11 @@ $(EXEDIR)test_PCM_stack$(E): $(CSRC) $(CTESTDIR)test_PCM_stack$(C)
 $(LOGDIR)test_PCM_stack$(LOG): $(EXEDIR)test_PCM_stack$(E)
 	$(call test,test_PCM_stack)
 
+$(EXEDIR)test_PCM_array$(E): $(CSRC) $(CTESTDIR)test_PCM_array$(C)
+	$(call compile,test_PCM_array)
+$(LOGDIR)test_PCM_array$(LOG): $(EXEDIR)test_PCM_array$(E)
+	$(call test,test_PCM_array)
+
 # C++ files
 $(EXEDIR)cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)
 	$(call cppcompile,cast)
