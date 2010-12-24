@@ -8,7 +8,7 @@ Authors: Antony Phillips, Dr Stuart Mitchell  2007
 from pulp import *
 
 # Create the 'prob' variable to contain the problem data
-prob = LpProblem("The Whiskas Problem",MIN)
+prob = Prob("The Whiskas Problem",MIN)
 
 # The 2 variables Beef and Chicken are created with a lower limit of zero
 x1=DVar("ChickenPercent",0,None,LpInteger)

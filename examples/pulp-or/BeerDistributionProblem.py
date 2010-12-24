@@ -35,7 +35,7 @@ costs = [   #Bars
 costs = makeDict([Warehouses,Bars],costs,0)
 
 # Creates the 'prob' variable to contain the problem data
-prob = LpProblem("Beer Distribution Problem",MIN)
+prob = Prob("Beer Distribution Problem",MIN)
 
 # Creates a list of tuples containing all the possible routes for transport
 Routes = [(w,b) for w in Warehouses for b in Bars]

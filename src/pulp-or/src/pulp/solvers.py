@@ -137,14 +137,14 @@ class LpSolver:
 
     def solve(self, lp):
         """Solve the problem lp"""
-        # Always go through the solve method of LpProblem
+        # Always go through the solve method of Prob
         return lp.solve(self)
     
     #TODO: Not sure if this code should be here or in a child class
     def getCplexStyleArrays(self,lp,
                        senseDict={LpConstraintEQ:"E", LpConstraintLE:"L", LpConstraintGE:"G"},
                        LpVarCategories = {LpContinuous: "C",LpInteger: "I"},
-                       LpObjSenses = {LpMaximize : -1,
+                       LpObjSenses = {MAX : -1,
                                       MIN : 1},
                        infBound =  1e20 
                        ):
@@ -884,7 +884,7 @@ class XPRESS(LpSolver_CMD):
         else:
             xpress = os.popen(self.path+" "+lp.name, "w")
         xpress.write("READPROB "+tmpLp+"\n")
-        if lp.sense == LpMaximize:
+        if lp.sense == MAX:
             xpress.write("MAXIM\n")
         else:
             xpress.write("MINIM\n")
@@ -1366,7 +1366,7 @@ class GUROBI(LpSolver):
             log.debug("create the gurobi model")
             lp.solverModel = gurobipy.Model(lp.name)
             log.debug("set the sense of the problem")
-            if lp.sense == LpMaximize:
+            if lp.sense == MAX:
                 lp.solverModel.setAttr("ModelSense", -1)
             if self.timeLimit:
                 lp.solverModel.setParam("TimeLimit", self.timeLimit)
@@ -1546,7 +1546,7 @@ class PYGLPK(LpSolver):
             lp.solverModel = glpk.LPX()
             lp.solverModel.name = lp.name
             log.debug("set the sense of the problem")
-            if lp.sense == LpMaximize:
+            if lp.sense == MAX:
                 lp.solverModel.obj.maximize = True
             log.debug("add the Constraints to the problem")
             lp.solverModel.rows.add(len(lp.constraints.keys()))
@@ -1730,7 +1730,7 @@ class YAPOSIB(LpSolver):
             prob = lp.solverModel
             prob.name = lp.name
             log.debug("set the sense of the problem")
-            if lp.sense == LpMaximize:
+            if lp.sense == MAX:
                 prob.obj.maximize = True
             log.debug("add the variables to the problem")
             for var in lp.variables():

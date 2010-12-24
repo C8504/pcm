@@ -15,7 +15,7 @@ activity = [  #Chairs
               [3, 1.5] #Polisher
               ]
 activity = makeDict([Resources,Chairs],activity)
-prob = LpProblem("Furniture Manufacturing Problem", LpMaximize)
+prob = Prob("Furniture Manufacturing Problem", MAX)
 vars = DVar.dicts("Number of Chairs",Chairs, lowBound = 0)
 #objective
 prob += lpSum([costs[c]*vars[c] for c in Chairs])

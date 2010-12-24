@@ -7,7 +7,7 @@
 from pulp import *
 
 # A new LP problem
-prob = LpProblem("test6", MIN)
+prob = Prob("test6", MIN)
 
 # objective
 obj = LpConstraintVar("obj")

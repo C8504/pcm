@@ -37,7 +37,7 @@ x = DVar.matrix("x", (N,), 0, 1, LpInteger)
 y = DVar.matrix("y", (S, N), 0, 1, LpInteger)
 
 # Problem
-lp = LpProblem("Planification", MIN)
+lp = Prob("Planification", MIN)
 
 # Objective: expected earnings
 lp += lpDot(x, c) - lpDot(q, y)/float(s)

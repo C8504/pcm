@@ -73,7 +73,7 @@ for a in Arcs:
     vars[a].bounds(mins[a], maxs[a])
 
 # Creates the 'prob' variable to contain the problem data    
-prob = LpProblem("American Steel Problem",MIN)
+prob = Prob("American Steel Problem",MIN)
 
 # Creates the objective function
 prob += lpSum([vars[a]* costs[a] for a in Arcs]), "Total Cost of Transport"

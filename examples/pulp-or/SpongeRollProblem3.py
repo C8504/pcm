@@ -103,7 +103,7 @@ rollData = {#Length Demand SalePrice
 patterns = makeDict([PatternNames,LenOpts],patterns,0)
 
 # The variable 'prob' is created
-prob = LpProblem("Cutting Stock Problem",MIN)
+prob = Prob("Cutting Stock Problem",MIN)
 
 # The problem variables of the number of each pattern to make are created
 pattVars = DVar.dicts("Patt",PatternNames,0,None,LpInteger)

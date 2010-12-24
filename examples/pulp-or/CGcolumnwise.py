@@ -38,7 +38,7 @@ def createMaster():
     (rollDemand,surplusPrice) = splitDict(rollData)
     
     # The variable 'prob' is created
-    prob = LpProblem("MasterSpongeRollProblem",MIN)
+    prob = Prob("MasterSpongeRollProblem",MIN)
     
     # The variable 'obj' is created and set as the LP's objective function
     obj = LpConstraintVar("Obj")
@@ -112,7 +112,7 @@ def masterSolve(prob,relax = True):
 def subSolve(duals):
     
     # The variable 'prob' is created
-    prob = LpProblem("SubProb",MIN)
+    prob = Prob("SubProb",MIN)
     
     # The problem variables are created
     vars = DVar.dicts("Roll Length", Pattern.lenOpts, 0, None, LpInteger)

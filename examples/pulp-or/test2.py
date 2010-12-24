@@ -11,7 +11,7 @@ from pulp import *
 from math import *
 
 # A new LP problem
-prob = LpProblem("test2", LpMaximize)
+prob = Prob("test2", MAX)
 
 # Parameters
 # Size of the problem

@@ -13,7 +13,7 @@ from pulp import *
 from random import *
 
 # A new LP problem
-prob = LpProblem("test5", MIN)
+prob = Prob("test5", MIN)
 
 # Parameters
 # Number of constraints

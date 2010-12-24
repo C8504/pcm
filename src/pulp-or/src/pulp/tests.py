@@ -65,7 +65,7 @@ def pulpTest001(solver):
 
 def pulpTest010(solver):
     # Continuous
-    prob = LpProblem("test010", MIN)
+    prob = Prob("test010", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -80,7 +80,7 @@ def pulpTest010(solver):
 
 def pulpTest011(solver):
     # Continuous Maximisation
-    prob = LpProblem("test011", LpMaximize)
+    prob = Prob("test011", MAX)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -95,7 +95,7 @@ def pulpTest011(solver):
 
 def pulpTest012(solver):
     # Unbounded
-    prob = LpProblem("test012", LpMaximize)
+    prob = Prob("test012", MAX)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -124,7 +124,7 @@ def pulpTest012(solver):
 
 def pulpTest020(solver):
     # MIP
-    prob = LpProblem("test020", MIN)
+    prob = Prob("test020", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0, None, LpInteger)
@@ -137,7 +137,7 @@ def pulpTest020(solver):
 
 def pulpTest030(solver):
     # relaxed MIP
-    prob = LpProblem("test030", MIN)
+    prob = Prob("test030", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0, None, LpInteger)
@@ -152,7 +152,7 @@ def pulpTest030(solver):
 
 def pulpTest040(solver):
     # Feasibility only
-    prob = LpProblem("test040", MIN)
+    prob = Prob("test040", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0, None, LpInteger)
@@ -165,7 +165,7 @@ def pulpTest040(solver):
 
 def pulpTest050(solver):
     # Infeasible
-    prob = LpProblem("test050", MIN)
+    prob = Prob("test050", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0, 10)
@@ -184,7 +184,7 @@ def pulpTest050(solver):
 
 def pulpTest060(solver):
     # Integer Infeasible
-    prob = LpProblem("test060", MIN)
+    prob = Prob("test060", MIN)
     x = LpVariable("x", 0, 4, LpInteger)
     y = LpVariable("y", -1, 1, LpInteger)
     z = LpVariable("z", 0, 10, LpInteger)
@@ -205,7 +205,7 @@ def pulpTest060(solver):
 
 def pulpTest070(solver):
     #Column Based modelling of PulpTest1
-    prob = LpProblem("test070", MIN)
+    prob = Prob("test070", MIN)
     obj = LpConstraintVar("obj")
     # constraints
     a = LpConstraintVar("C1", LpConstraintLE, 5)
@@ -225,7 +225,7 @@ def pulpTest070(solver):
 
 def pulpTest075(solver):
     #Column Based modelling of PulpTest1 with empty constraints
-    prob = LpProblem("test075", MIN)
+    prob = Prob("test075", MIN)
     obj = LpConstraintVar("obj")
     # constraints
     a = LpConstraintVar("C1", LpConstraintLE, 5)
@@ -248,7 +248,7 @@ def pulpTest080(solver):
     """
     Test the reporting of dual variables slacks and reduced costs
     """
-    prob = LpProblem("test080", MIN)
+    prob = Prob("test080", MIN)
     x = LpVariable("x", 0, 5)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -271,7 +271,7 @@ def pulpTest080(solver):
 
 def pulpTest090(solver):
     #Column Based modelling of PulpTest1 with a resolve
-    prob = LpProblem("test090", MIN)
+    prob = Prob("test090", MIN)
     obj = LpConstraintVar("obj")
     # constraints
     a = LpConstraintVar("C1", LpConstraintLE, 5)
@@ -300,7 +300,7 @@ def pulpTest100(solver):
     Test the ability to sequentially solve a problem
     """
     # set up a cubic feasible region
-    prob = LpProblem("test100", MIN)
+    prob = Prob("test100", MIN)
     x = LpVariable("x", 0, 1)
     y = LpVariable("y", 0, 1)
     z = LpVariable("z", 0, 1)
@@ -320,7 +320,7 @@ def pulpTest110(solver):
     """
     Test the ability to use fractional constraints
     """
-    prob = LpProblem("test110", MIN)
+    prob = Prob("test110", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -339,7 +339,7 @@ def pulpTest120(solver):
     """
     Test the ability to use Elastic constraints
     """
-    prob = LpProblem("test120", MIN)
+    prob = Prob("test120", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -357,7 +357,7 @@ def pulpTest121(solver):
     """
     Test the ability to use Elastic constraints
     """
-    prob = LpProblem("test121", MIN)
+    prob = Prob("test121", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -375,7 +375,7 @@ def pulpTest122(solver):
     """
     Test the ability to use Elastic constraints (penalty unchanged)
     """
-    prob = LpProblem("test122", MIN)
+    prob = Prob("test122", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)
@@ -394,7 +394,7 @@ def pulpTest123(solver):
     """
     Test the ability to use Elastic constraints (penalty unbounded)
     """
-    prob = LpProblem("test123", MIN)
+    prob = Prob("test123", MIN)
     x = LpVariable("x", 0, 4)
     y = LpVariable("y", -1, 1)
     z = LpVariable("z", 0)

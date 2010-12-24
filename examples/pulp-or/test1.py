@@ -5,7 +5,7 @@
 from pulp import *
 
 # A new LP problem
-prob = LpProblem("test1", MIN)
+prob = Prob("test1", MIN)
 
 # Variables
 # 0 <= x <= 4

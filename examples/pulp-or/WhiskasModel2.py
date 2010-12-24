@@ -51,7 +51,7 @@ saltPercent = {'CHICKEN': 0.002,
                'GEL': 0.000}
 
 # Create the 'prob' variable to contain the problem data
-prob = LpProblem("The Whiskas Problem", MIN)
+prob = Prob("The Whiskas Problem", MIN)
 
 # A dictionary called 'ingredient_vars' is created to contain the referenced Variables
 ingredient_vars = DVar.dicts("Ingr",Ingredients,0)

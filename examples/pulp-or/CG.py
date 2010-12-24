@@ -32,7 +32,7 @@ def masterSolve(Patterns, rollData, relax = True):
     (rollDemand,surplusPrice) = splitDict(rollData)
     
     # The variable 'prob' is created
-    prob = LpProblem("Cutting Stock Problem",MIN)
+    prob = Prob("Cutting Stock Problem",MIN)
     
     # vartype represents whether or not the variables are relaxed
     if relax:
@@ -82,7 +82,7 @@ def masterSolve(Patterns, rollData, relax = True):
 def subSolve(Patterns, duals):
     
     # The variable 'prob' is created
-    prob = LpProblem("SubProb",MIN)
+    prob = Prob("SubProb",MIN)
     
     # The problem variables are created
     vars = DVar.dicts("Roll Length", Pattern.lenOpts, 0, None, LpInteger)
