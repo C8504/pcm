@@ -145,6 +145,8 @@ def setConfigInformation(**keywords):
 # Default solver selection
 if COINMP_DLL().available():
     LpSolverDefault = COINMP_DLL()
+elif CPLEX_DLL().available():
+    LpSolverDefault = CPLEX_DLL()
 elif CPLEX_CMD().available():
     LpSolverDefault = CPLEX_CMD()
 elif COIN_CMD().available():
