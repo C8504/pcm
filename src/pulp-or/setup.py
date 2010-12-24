@@ -34,14 +34,13 @@ problems.
       ],
       #ext_modules = [pulpCOIN],
       package_dir={'':'src'},
-      packages = ['pulp', 'pulp.solverdir'],
+      packages = ['pulp'],
       package_data = {'pulp' : ["AUTHORS","LICENSE","pulp.cfg.linux",
                                 "pulp.cfg.win",
                                 "LICENSE.CoinMP.txt",
                                 "AUTHORS.CoinMP.txt",
                                 "README.CoinMP.txt",
-                                ],
-                      'pulp.solverdir' : ['*.*']},
+                                ]},
       requires = ['pyparsing(>=1.5.2)'],
       entry_points = ("""
       [console_scripts]
