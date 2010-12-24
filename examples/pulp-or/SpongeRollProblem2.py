@@ -49,7 +49,7 @@ pattVars = DVar.dicts("Patt",PatternNames,0,None,LpInteger)
 surplusVars = DVar.dicts("Surp",LenOpts,0,None,LpInteger)
 
 # The variable 'prob' is created
-prob = LpProblem("Cutting Stock Problem",LpMinimize)
+prob = LpProblem("Cutting Stock Problem",MIN)
 
 # The objective function is entered: the total number of large rolls used * the fixed cost of each minus the surplus
 # sales and the trim sales

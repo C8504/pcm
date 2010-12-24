@@ -22,7 +22,7 @@ for i in range(3):
         Boxes += [[(Rows[3*i+k],Cols[3*j+l]) for k in range(3) for l in range(3)]]
 
 # The prob variable is created to contain the problem data        
-prob = LpProblem("Sudoku Problem",LpMinimize)
+prob = LpProblem("Sudoku Problem",MIN)
 
 # The problem variables are created
 choices = DVar.dicts("Choice",(Vals,Rows,Cols),0,1,LpInteger)

@@ -46,7 +46,7 @@ To create a variable 0 <= y <= 1
 >>> y = DVar("y", 0, 1)
 
 Use LpProblem() to create new problems. Create "myProblem"
->>> prob = LpProblem("myProblem", LpMinimize)
+>>> prob = LpProblem("myProblem", MIN)
 
 Combine variables to create expressions and constraints and add them to the
 problem. 
@@ -1035,7 +1035,7 @@ class LpConstraintVar(LpElement):
 
 class LpProblem(object):
     """An LP Problem"""
-    def __init__(self, name = "NoName", sense = LpMinimize):
+    def __init__(self, name = "NoName", sense = MIN):
         """
         Creates an LP Problem
         
@@ -1043,7 +1043,7 @@ class LpProblem(object):
             
         :param name: name of the problem used in the output .lp file
         :param sense: of the LP problem objective.  \
-                Either :data:`~pulp.constants.LpMinimize` (default) \
+                Either :data:`~pulp.constants.MIN` (default) \
                 or :data:`~pulp.constants.LpMaximize`.
         :return: An LP Problem
         """
@@ -1580,7 +1580,7 @@ class LpProblem(object):
             status = solver.actualSolve(self)
             statuses.append(status)
             if debug: self.writeLP("%sSequence.lp"%i)          
-            if self.sense == LpMinimize:
+            if self.sense == MIN:
                 self += obj <= value(obj)*rel + absol,"%s_Sequence_Objective"%i 
             elif self.sense == LpMaximize:
                 self += obj >= value(obj)*rel + absol,"%s_Sequence_Objective"%i
@@ -1625,7 +1625,7 @@ class FixedElasticSubProblem(LpProblem):
                                         proportionFreeBound = None,
                                         proportionFreeBoundList = None):
         subProblemName =  "%s_elastic_SubProblem" % constraint.name
-        LpProblem.__init__(self, subProblemName, LpMinimize)
+        LpProblem.__init__(self, subProblemName, MIN)
         self.objective = LpAffineExpression()
         self.constraint = constraint
         self.constant = constraint.constant
@@ -1763,7 +1763,7 @@ class FractionElasticSubProblem(FixedElasticSubProblem):
             raise PulpError, 'only one of denominator and complement must be specified'
         self.RHS = RHS
         self.lowTarget = self.upTarget = None
-        LpProblem.__init__(self, subProblemName, LpMinimize)
+        LpProblem.__init__(self, subProblemName, MIN)
         self.freeVar = DVar("_free_bound",
                                   upBound = 0, lowBound = 0)
         self.upVar = DVar("_pos_penalty_var",

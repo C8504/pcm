@@ -5,7 +5,7 @@
 from pulp import *
 
 # A new LP problem
-prob = LpProblem("test7", LpMinimize)
+prob = LpProblem("test7", MIN)
 
 x = DVar("x", 0, 4)
 

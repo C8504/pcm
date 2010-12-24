@@ -27,7 +27,7 @@ x = pulp.DVar.dicts('table', possible_tables,
                             upBound = 1,
                             cat = pulp.LpInteger)
 
-seating_model = pulp.LpProblem("Wedding Seating Model", pulp.LpMinimize)
+seating_model = pulp.LpProblem("Wedding Seating Model", pulp.MIN)
 
 seating_model += sum([happiness(table) * x[table] for table in possible_tables])
 

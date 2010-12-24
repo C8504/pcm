@@ -145,7 +145,7 @@ class LpSolver:
                        senseDict={LpConstraintEQ:"E", LpConstraintLE:"L", LpConstraintGE:"G"},
                        LpVarCategories = {LpContinuous: "C",LpInteger: "I"},
                        LpObjSenses = {LpMaximize : -1,
-                                      LpMinimize : 1},
+                                      MIN : 1},
                        infBound =  1e20 
                        ):
         """returns the arrays suitable to pass to a cdll Cplex

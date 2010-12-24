@@ -11,7 +11,7 @@
 from pulp import *
 from math import *
 
-prob = LpProblem("test3", LpMinimize)
+prob = LpProblem("test3", MIN)
 
 # The number of time steps
 tmax = 9

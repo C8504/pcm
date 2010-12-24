@@ -35,7 +35,7 @@ patterns = makeDict([LenOpts,PatternNames],patterns,0)
 vars = DVar.dicts("Patt",PatternNames,0,None,LpInteger)
 
 # The variable 'prob' is created
-prob = LpProblem("Cutting Stock Problem",LpMinimize)
+prob = LpProblem("Cutting Stock Problem",MIN)
 
 # The objective function is entered: the total number of large rolls used * the fixed cost of each
 prob += lpSum([vars[i]*cost for i in PatternNames]),"Production Cost"

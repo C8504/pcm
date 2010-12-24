@@ -39,9 +39,9 @@ LpCategories = {LpContinuous: "Continuous", LpInteger: "Integer",
                 LpBinary: "Binary"}
 
 # objective sense
-LpMinimize = 1
+MIN = 1
 LpMaximize = -1
-LpSenses = {LpMaximize:"Maximize", LpMinimize:"Minimize"}
+LpSenses = {LpMaximize:"Maximize", MIN:"Minimize"}
 
 # problem status
 LpStatusNotSolved = 0

@@ -105,7 +105,7 @@ Patterns = makePatterns(Pattern.totalRollLength,Pattern.lenOpts)
 (rollDemand,surplusPrice) = splitDict(rollData)
 
 # The variable 'prob' is created
-prob = LpProblem("Cutting Stock Problem",LpMinimize)
+prob = LpProblem("Cutting Stock Problem",MIN)
 
 # The problem variables of the number of each pattern to make are created
 pattVars = DVar.dicts("Patt",Patterns,0,None,LpInteger)

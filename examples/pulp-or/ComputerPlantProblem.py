@@ -61,7 +61,7 @@ flow = DVar.dicts("Route",(Plants,Stores),0,None,LpInteger)
 build = DVar.dicts("BuildaPlant",Plants,0,1,LpInteger)
 
 # Creates the 'prob' variable to contain the problem data
-prob = LpProblem("Computer Plant Problem",LpMinimize)
+prob = LpProblem("Computer Plant Problem",MIN)
 
 # The objective function is added to prob - The sum of the transportation costs and the building fixed costs
 prob += lpSum([flow[p][s]*costs[p][s] for (p,s) in Routes])+lpSum([fixedCost[p]*build[p] for p in Plants]),"Total Costs"
