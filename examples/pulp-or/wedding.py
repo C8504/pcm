@@ -22,7 +22,7 @@ possible_tables = [tuple(c) for c in pulp.allcombinations(guests,
                                         max_table_size)]
 
 #create a binary variable to state that a table setting is used
-x = pulp.LpVariable.dicts('table', possible_tables, 
+x = pulp.DVar.dicts('table', possible_tables, 
                             lowBound = 0,
                             upBound = 1,
                             cat = pulp.LpInteger)

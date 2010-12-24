@@ -39,11 +39,11 @@ The examples require at least a solver in your PATH or a shared library file.
 Documentation is found on https://www.coin-or.org/PuLP/.
 A comprehensive wiki can be found at https://www.coin-or.org/PuLP/
 
-Use LpVariable() to create new variables. To create a variable 0 <= x <= 3
->>> x = LpVariable("x", 0, 3)
+Use DVar() to create new variables. To create a variable 0 <= x <= 3
+>>> x = DVar("x", 0, 3)
 
 To create a variable 0 <= y <= 1
->>> y = LpVariable("y", 0, 1)
+>>> y = DVar("y", 0, 1)
 
 Use LpProblem() to create new problems. Create "myProblem"
 >>> prob = LpProblem("myProblem", LpMinimize)
@@ -69,7 +69,7 @@ You can get the value of the variables using value(). ex:
 
 Exported Classes:
     - LpProblem -- Container class for a Linear programming problem
-    - LpVariable -- Variables that are added to constraints in the LP
+    - DVar -- Variables that are added to constraints in the LP
     - LpConstraint -- A constraint of the general form 
       a1x1+a2x2 ...anxn (<=, =, >=) b 
     - LpConstraintVar -- Used to construct a column of the model in column-wise 
@@ -157,7 +157,7 @@ else:
     LpSolverDefault = None
 
 class LpElement(object):
-    """Base class for LpVariable and LpConstraintVar 
+    """Base class for DVar and LpConstraintVar 
     """
     #to remove illegal characters from the names
     trans = string.maketrans("-+[] ->/","________")
@@ -228,7 +228,7 @@ class LpElement(object):
         return LpAffineExpression(self) == other
 
     def __ne__(self, other):
-        if isinstance(other, LpVariable):
+        if isinstance(other, DVar):
             return self.name is not other.name
         elif isinstance(other, LpAffineExpression):
             if other.isAtomic():
@@ -239,7 +239,7 @@ class LpElement(object):
             return 1
 
   
-class LpVariable(LpElement):
+class DVar(LpElement):
     """
     This class models an LP Variable with the specified associated parameters
         
@@ -282,11 +282,11 @@ class LpVariable(LpElement):
         index = indexs[0]
         indexs = indexs[1:]
         if len(indexs) == 0:
-            return [LpVariable(name % tuple(indexStart + [i]),
+            return [DVar(name % tuple(indexStart + [i]),
                                             lowBound, upBound, cat)
                         for i in index]
         else:
-            return [LpVariable.matrix(name, indexs, lowBound,
+            return [DVar.matrix(name, indexs, lowBound,
                                         upBound, cat, indexStart + [i])
                        for i in index]
     matrix = classmethod(matrix)
@@ -319,10 +319,10 @@ class LpVariable(LpElement):
         d = {}
         if len(indexs) == 0:
             for i in index:
-                d[i] = LpVariable(name % tuple(indexStart + [str(i)]), lowBound, upBound, cat)
+                d[i] = DVar(name % tuple(indexStart + [str(i)]), lowBound, upBound, cat)
         else:
             for i in index:
-                d[i] = LpVariable.dicts(name, indexs, lowBound, upBound, cat, indexStart + [i])
+                d[i] = DVar.dicts(name, indexs, lowBound, upBound, cat, indexStart + [i])
         return d
     dicts = classmethod(dicts)
 
@@ -490,7 +490,7 @@ class LpVariable(LpElement):
 
 class LpAffineExpression(_DICT_TYPE):
     """
-    A linear combination of :class:`LpVariables<LpVariable>`.
+    A linear combination of :class:`LpVariables<DVar>`.
     Can be initialised with the following:
   
     #.   e = None: an empty Expression
@@ -508,7 +508,7 @@ class LpAffineExpression(_DICT_TYPE):
        >>> d
        1*x_0 + -3*x_1 + 4*x_2 + 0
        >>> x_name = ['x_0', 'x_1', 'x_2']
-       >>> x = [LpVariable(x_name[i], lowBound = 0, upBound = 10) for i in range(3) ]
+       >>> x = [DVar(x_name[i], lowBound = 0, upBound = 10) for i in range(3) ]
        >>> c = LpAffineExpression([ (x[0],1), (x[1],-3), (x[2],4)])
        >>> c
        1*x_0 + -3*x_1 + 4*x_2 + 0
@@ -740,7 +740,7 @@ class LpAffineExpression(_DICT_TYPE):
                 if c != 0:
                     for v,x in self.iteritems():
                         e[v] = c * x
-        elif isinstance(other,LpVariable):
+        elif isinstance(other,DVar):
             return self * LpAffineExpression(other)
         else:
             if other != 0:
@@ -753,7 +753,7 @@ class LpAffineExpression(_DICT_TYPE):
         return self * other
         
     def __div__(self, other):
-        if isinstance(other,LpAffineExpression) or isinstance(other,LpVariable):
+        if isinstance(other,LpAffineExpression) or isinstance(other,DVar):
             if len(other):
                 raise TypeError, "Expressions cannot be divided by a non-constant expression"
             other = other.constant
@@ -1265,7 +1265,7 @@ class LpProblem(object):
         elif isinstance(other, LpAffineExpression):
             self.objective = other
             self.objective.name = name
-        elif isinstance(other, LpVariable) or type(other) in [int, float]:
+        elif isinstance(other, DVar) or type(other) in [int, float]:
             self.objective = LpAffineExpression(other)
             self.objective.name = name
         else:
@@ -1509,7 +1509,7 @@ class LpProblem(object):
         if not isinstance(self.objective, LpAffineExpression):
             self.objective = LpAffineExpression(self.objective)
         if self.objective.isNumericalConstant():
-            dummyVar = LpVariable("__dummy", 0, 0)
+            dummyVar = DVar("__dummy", 0, 0)
             self.objective += dummyVar
         else:
             dummyVar = None
@@ -1633,11 +1633,11 @@ class FixedElasticSubProblem(LpProblem):
         self.objective = LpAffineExpression()
         self += constraint, "_Constraint"
         #create and add these variables but disabled
-        self.freeVar = LpVariable("_free_bound",
+        self.freeVar = DVar("_free_bound",
                                   upBound = 0, lowBound = 0)
-        self.upVar = LpVariable("_pos_penalty_var",
+        self.upVar = DVar("_pos_penalty_var",
                                 upBound = 0, lowBound = 0)
-        self.lowVar = LpVariable("_neg_penalty_var",
+        self.lowVar = DVar("_neg_penalty_var",
                                  upBound = 0, lowBound = 0)
         constraint.addInPlace(self.freeVar + self.lowVar + self.upVar)
         if proportionFreeBound:
@@ -1764,11 +1764,11 @@ class FractionElasticSubProblem(FixedElasticSubProblem):
         self.RHS = RHS
         self.lowTarget = self.upTarget = None
         LpProblem.__init__(self, subProblemName, LpMinimize)
-        self.freeVar = LpVariable("_free_bound",
+        self.freeVar = DVar("_free_bound",
                                   upBound = 0, lowBound = 0)
-        self.upVar = LpVariable("_pos_penalty_var",
+        self.upVar = DVar("_pos_penalty_var",
                                 upBound = 0, lowBound = 0)
-        self.lowVar = LpVariable("_neg_penalty_var",
+        self.lowVar = DVar("_neg_penalty_var",
                                  upBound = 0, lowBound = 0)
         if proportionFreeBound:
             proportionFreeBoundList = [proportionFreeBound, proportionFreeBound]  
@@ -1848,7 +1848,7 @@ class LpVariableDict(dict):
         if key in self:
             return dict.__getitem__(self, key)
         else:
-            self[key] = LpVariable(name % key, lowBound, upBound, cat)
+            self[key] = DVar(name % key, lowBound, upBound, cat)
             return self[key]
 
 # Utility functions

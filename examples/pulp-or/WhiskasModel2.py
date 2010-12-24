@@ -54,7 +54,7 @@ saltPercent = {'CHICKEN': 0.002,
 prob = LpProblem("The Whiskas Problem", LpMinimize)
 
 # A dictionary called 'ingredient_vars' is created to contain the referenced Variables
-ingredient_vars = LpVariable.dicts("Ingr",Ingredients,0)
+ingredient_vars = DVar.dicts("Ingr",Ingredients,0)
 
 # The objective function is added to 'prob' first
 prob += lpSum([costs[i]*ingredient_vars[i] for i in Ingredients]), "Total Cost of Ingredients per can"

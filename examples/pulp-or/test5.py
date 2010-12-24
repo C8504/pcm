@@ -25,11 +25,11 @@ D = 100
 n = 10*(m-1)
 
 # A vector of n binary variables
-x = LpVariable.matrix("x", range(n), 0, 1, LpInteger)
+x = DVar.matrix("x", range(n), 0, 1, LpInteger)
 
 # Slacks
-s = LpVariable.matrix("s", range(m), 0)
-w = LpVariable.matrix("w", range(m), 0)
+s = DVar.matrix("s", range(m), 0)
+w = DVar.matrix("w", range(m), 0)
 
 # Objective
 prob += lpSum(s) + lpSum(w)

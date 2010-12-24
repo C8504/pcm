@@ -7,11 +7,11 @@ from pulp import *
 # A new LP problem
 prob = LpProblem("test7", LpMinimize)
 
-x = LpVariable("x", 0, 4)
+x = DVar("x", 0, 4)
 
-y = LpVariable("y", -1, 1)
+y = DVar("y", -1, 1)
 
-z = LpVariable("z", 0)
+z = DVar("z", 0)
 
 prob += x + 4*y + 9*z, "obj"
 

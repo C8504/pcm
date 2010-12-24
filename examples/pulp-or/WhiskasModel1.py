@@ -11,8 +11,8 @@ from pulp import *
 prob = LpProblem("The Whiskas Problem",LpMinimize)
 
 # The 2 variables Beef and Chicken are created with a lower limit of zero
-x1=LpVariable("ChickenPercent",0,None,LpInteger)
-x2=LpVariable("BeefPercent",0)
+x1=DVar("ChickenPercent",0,None,LpInteger)
+x2=DVar("BeefPercent",0)
 
 # The objective function is added to 'prob' first
 prob += 0.013*x1 + 0.008*x2, "Total Cost of Ingredients per can"

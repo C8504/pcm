@@ -24,7 +24,7 @@ for i in range(3):
 prob = LpProblem("Sudoku Problem",LpMinimize)
 
 # The problem variables are created
-choices = LpVariable.dicts("Choice",(Vals,Rows,Cols),0,1,LpInteger)
+choices = DVar.dicts("Choice",(Vals,Rows,Cols),0,1,LpInteger)
 
 # The arbitrary objective function is added
 prob += 0, "Arbitrary Objective Function"

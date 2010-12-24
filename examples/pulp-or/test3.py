@@ -46,13 +46,13 @@ costs = [i+1 for i in unit]
 startupcosts = [100*(i+1) for i in unit]
 
 # Production variables for each time step and each thermal unit.
-p = LpVariable.matrix("p", (time, unit), 0)
+p = DVar.matrix("p", (time, unit), 0)
 for t in time:
 	for i in unit:
 		p[t][i].upBound = pmax[i]
 
 # State (started/stopped) variables for each time step and each thermal unit
-d = LpVariable.matrix("d", (xtime, unit), 0, 1, LpInteger)
+d = DVar.matrix("d", (xtime, unit), 0, 1, LpInteger)
 
 # Production constraint relative to the unit state (started/stoped)
 for t in time:
@@ -63,7 +63,7 @@ for t in time:
 		prob += p[t][i] >= pmin[i]*d[t][i]
 
 # Startup variables: 1 if the unit will be started next time step
-u = LpVariable.matrix("u", (time, unit), 0)
+u = DVar.matrix("u", (time, unit), 0)
 
 # Dynamic startup constraints
 # Initialy, all groups are started
@@ -73,7 +73,7 @@ for t in time:
 		prob += u[t][i] >= d[t+1][i] - d[t][i]
 
 # Storage for the hydro plant (must not go below 0)
-s = LpVariable.matrix("s", xtime, 0)
+s = DVar.matrix("s", xtime, 0)
 
 # Initial storage
 s[0] = sini

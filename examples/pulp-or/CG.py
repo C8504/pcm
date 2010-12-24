@@ -41,8 +41,8 @@ def masterSolve(Patterns, rollData, relax = True):
         vartype = LpInteger
     
     # The problem variables are created    
-    pattVars = LpVariable.dicts("Pattern", Patterns, 0, None, vartype)
-    surplusVars = LpVariable.dicts("Surplus", Pattern.lenOpts, 0, None, vartype)
+    pattVars = DVar.dicts("Pattern", Patterns, 0, None, vartype)
+    surplusVars = DVar.dicts("Surplus", Pattern.lenOpts, 0, None, vartype)
     
     # The objective function is entered: (the total number of large rolls used * the cost of each) -
     # (the value of the surplus stock) - (the value of the trim)
@@ -85,9 +85,9 @@ def subSolve(Patterns, duals):
     prob = LpProblem("SubProb",LpMinimize)
     
     # The problem variables are created
-    vars = LpVariable.dicts("Roll Length", Pattern.lenOpts, 0, None, LpInteger)
+    vars = DVar.dicts("Roll Length", Pattern.lenOpts, 0, None, LpInteger)
     
-    trim = LpVariable("Trim", 0 ,None,LpInteger)
+    trim = DVar("Trim", 0 ,None,LpInteger)
     
     # The objective function is entered: the reduced cost of a new pattern
     prob += (Pattern.cost - Pattern.trimValue*trim) - lpSum([vars[i]*duals[i] for i in Pattern.lenOpts]), "Objective"

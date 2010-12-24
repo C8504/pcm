@@ -32,7 +32,7 @@ cost = 1
 patterns = makeDict([LenOpts,PatternNames],patterns,0)
 
 # The problem variables of the number of each pattern to make are created
-vars = LpVariable.dicts("Patt",PatternNames,0,None,LpInteger)
+vars = DVar.dicts("Patt",PatternNames,0,None,LpInteger)
 
 # The variable 'prob' is created
 prob = LpProblem("Cutting Stock Problem",LpMinimize)
