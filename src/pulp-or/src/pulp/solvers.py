@@ -41,44 +41,44 @@ from tempfile import mktemp
 from constants import *
 
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger( __name__ )
 
-class PulpSolverError(Exception):
+class PulpSolverError( Exception ):
     """
     Pulp Solver-related exceptions
     """
     pass
 
 #import configuration information
-def initialize(filename):
+def initialize( filename ):
     """ reads the configuration file to initialise the module"""
-    here = os.path.dirname(filename)
-    config = ConfigParser.SafeConfigParser({'here':here})
-    config.read(filename)
+    here = os.path.dirname( filename )
+    config = ConfigParser.SafeConfigParser( {'here':here} )
+    config.read( filename )
     try:
-        cplex_dll_path = config.get("locations", "CplexPath")
+        cplex_dll_path = config.get( "locations", "CplexPath" )
     except ConfigParser.NoOptionError:
         cplex_dll_path = 'libcplex110.so'
     try:
-        coinMP_path = config.get("locations", "CoinMPPath").split(', ')
+        coinMP_path = config.get( "locations", "CoinMPPath" ).split( ', ' )
     except ConfigParser.NoOptionError:
         coinMP_path = ['libCoinMP.so']
     try:
-        gurobi_path = config.get("locations", "GurobiPath")
+        gurobi_path = config.get( "locations", "GurobiPath" )
     except ConfigParser.NoOptionError:
         gurobi_path = '/opt/gurobi201/linux32/lib/python2.5'
     try:
-        cbc_path = config.get("locations", "CbcPath")
+        cbc_path = config.get( "locations", "CbcPath" )
     except ConfigParser.NoOptionError:
         cbc_path = 'cbc'
     try:
-        glpk_path = config.get("locations", "GlpkPath")
+        glpk_path = config.get( "locations", "GlpkPath" )
     except ConfigParser.NoOptionError:
         glpk_path = 'glpsol'
-    for i,path in enumerate(coinMP_path):
-        if not os.path.dirname(path):
+    for i, path in enumerate( coinMP_path ):
+        if not os.path.dirname( path ):
             #if no pathname is supplied assume the file is in the same directory
-            coinMP_path[i] = os.path.join(os.path.dirname(config_filename),path) 
+            coinMP_path[i] = os.path.join( os.path.dirname( config_filename ), path )
     return cplex_dll_path, coinMP_path, gurobi_path, cbc_path, glpk_path
 
 #pick up the correct config file depending on operating system
@@ -87,66 +87,66 @@ if sys.platform == 'win32':
     PULPCFGFILE += ".win"
 else:
     PULPCFGFILE += ".linux"
-    
+
 if __name__ != '__main__':
-    DIRNAME = os.path.dirname(__file__)
-    config_filename = os.path.join(DIRNAME,
-                                   PULPCFGFILE)
+    DIRNAME = os.path.dirname( __file__ )
+    config_filename = os.path.join( DIRNAME,
+                                   PULPCFGFILE )
 else: #run as a script
     from pulp import __file__ as fname
-    DIRNAME = os.path.dirname(fname)
-    config_filename = os.path.join(DIRNAME,
-                                   PULPCFGFILE)
+    DIRNAME = os.path.dirname( fname )
+    config_filename = os.path.join( DIRNAME,
+                                   PULPCFGFILE )
 cplex_dll_path, coinMP_path, gurobi_path, cbc_path, glpk_path = \
-        initialize(config_filename)
+        initialize( config_filename )
 
 
 # See later for LpSolverDefault definition
 class LpSolver:
     """A generic LP Solver"""
 
-    def __init__(self, mip = True, msg = True, options = [], *args, **kwargs):
+    def __init__( self, mip = True, msg = True, options = [], *args, **kwargs ):
         self.mip = mip
         self.msg = msg
         self.options = options
 
-    def available(self):
+    def available( self ):
         """True if the solver is available"""
         raise NotImplementedError
 
-    def actualSolve(self, lp):
+    def actualSolve( self, lp ):
         """Solve a well formulated lp problem"""
         raise NotImplementedError
 
-    def actualResolve(self,lp, **kwargs):
+    def actualResolve( self, lp, **kwargs ):
         """
         uses existing problem information and solves the problem
         If it is not implelemented in the solver
         just solve again
         """
-        self.actualSolve(lp, **kwargs)
+        self.actualSolve( lp, **kwargs )
 
-    def copy(self):
+    def copy( self ):
         """Make a copy of self"""
-        
+
         aCopy = self.__class__()
         aCopy.mip = self.mip
         aCopy.msg = self.msg
         aCopy.options = self.options
         return aCopy
 
-    def solve(self, lp):
+    def solve( self, lp ):
         """Solve the problem lp"""
         # Always go through the solve method of Prob
-        return lp.solve(self)
-    
+        return lp.solve( self )
+
     #TODO: Not sure if this code should be here or in a child class
-    def getCplexStyleArrays(self,lp,
-                       senseDict={LpConstraintEQ:"E", LpConstraintLE:"L", LpConstraintGE:"G"},
-                       LpVarCategories = {LpContinuous: "C",LpInteger: "I"},
-                       LpObjSenses = {MAX : -1,
+    def getCplexStyleArrays( self, lp,
+                       senseDict = {LpConstraintEQ:"E", LpConstraintLE:"L", LpConstraintGE:"G"},
+                       LpVarCategories = {LpContinuous: "C", LpInteger: "I"},
+                       LpObjSenses = {MAX :-1,
                                       MIN : 1},
-                       infBound =  1e20 
+                       infBound = 1e20
                        ):
         """returns the arrays suitable to pass to a cdll Cplex
         or other solvers that are similar
@@ -154,28 +154,28 @@ class LpSolver:
         Copyright (c) Stuart Mitchell 2007
         """
         rangeCount = 0
-        variables=list(lp.variables())
-        numVars = len(variables)
+        variables = list( lp.variables() )
+        numVars = len( variables )
         #associate each variable with a ordinal
-        self.v2n=dict(((variables[i],i) for i in range(numVars)))
-        self.vname2n=dict(((variables[i].name,i) for i in range(numVars)))            
-        self.n2v=dict((i,variables[i]) for i in range(numVars))
+        self.v2n = dict( ( ( variables[i], i ) for i in range( numVars ) ) )
+        self.vname2n = dict( ( ( variables[i].name, i ) for i in range( numVars ) ) )
+        self.n2v = dict( ( i, variables[i] ) for i in range( numVars ) )
         #objective values
         objSense = LpObjSenses[lp.sense]
         NumVarDoubleArray = ctypes.c_double * numVars
-        objectCoeffs=NumVarDoubleArray()
+        objectCoeffs = NumVarDoubleArray()
         #print "Get objective Values"
-        for v,val in lp.objective.iteritems():
-            objectCoeffs[self.v2n[v]]=val
+        for v, val in lp.objective.iteritems():
+            objectCoeffs[self.v2n[v]] = val
         #values for variables
-        objectConst = ctypes.c_double(0.0)
+        objectConst = ctypes.c_double( 0.0 )
         NumVarStrArray = ctypes.c_char_p * numVars
         colNames = NumVarStrArray()
         lowerBounds = NumVarDoubleArray()
         upperBounds = NumVarDoubleArray()
         initValues = NumVarDoubleArray()
         for v in lp.variables():
-            colNames[self.v2n[v]] = str(v.name)
+            colNames[self.v2n[v]] = str( v.name )
             initValues[self.v2n[v]] = 0.0
             if v.lowBound != None:
                 lowerBounds[self.v2n[v]] = v.lowBound
@@ -186,7 +186,7 @@ class LpSolver:
             else:
                 upperBounds[self.v2n[v]] = infBound
         #values for constraints
-        numRows =len(lp.constraints)
+        numRows = len( lp.constraints )
         NumRowDoubleArray = ctypes.c_double * numRows
         NumRowStrArray = ctypes.c_char_p * numRows
         NumRowCharArray = ctypes.c_char * numRows
@@ -201,22 +201,22 @@ class LpSolver:
             rhsValues[i] = -lp.constraints[c].constant
             #for ranged constraints a<= constraint >=b
             rangeValues[i] = 0.0
-            rowNames[i] = str(c)
+            rowNames[i] = str( c )
             rowType[i] = senseDict[lp.constraints[c].sense]
             self.c2n[c] = i
             self.n2c[i] = c
-            i = i+1
+            i = i + 1
         #return the coefficient matrix as a series of vectors
         coeffs = lp.coefficients()
-        sparseMatrix = sparse.Matrix(range(numRows), range(numVars))
-        for var,row,coeff in coeffs:
-            sparseMatrix.add(self.c2n[row], self.vname2n[var], coeff)
-        (numels, mystartsBase, mylenBase, myindBase, 
-         myelemBase) = sparseMatrix.col_based_arrays() 
-        elemBase = ctypesArrayFill(myelemBase, ctypes.c_double)
-        indBase = ctypesArrayFill(myindBase, ctypes.c_int)
-        startsBase = ctypesArrayFill(mystartsBase, ctypes.c_int)
-        lenBase = ctypesArrayFill(mylenBase, ctypes.c_int)
+        sparseMatrix = sparse.Matrix( range( numRows ), range( numVars ) )
+        for var, row, coeff in coeffs:
+            sparseMatrix.add( self.c2n[row], self.vname2n[var], coeff )
+        ( numels, mystartsBase, mylenBase, myindBase,
+         myelemBase ) = sparseMatrix.col_based_arrays()
+        elemBase = ctypesArrayFill( myelemBase, ctypes.c_double )
+        indBase = ctypesArrayFill( myindBase, ctypes.c_int )
+        startsBase = ctypesArrayFill( mystartsBase, ctypes.c_int )
+        lenBase = ctypesArrayFill( mylenBase, ctypes.c_int )
         #MIP Variables
         NumVarCharArray = ctypes.c_char * numVars
         columnType = NumVarCharArray()
@@ -225,17 +225,17 @@ class LpSolver:
                 columnType[self.v2n[v]] = LpVarCategories[v.cat]
         self.addedVars = numVars
         self.addedRows = numRows
-        return  (numVars, numRows, numels, rangeCount, 
-            objSense, objectCoeffs, objectConst, 
-            rhsValues, rangeValues, rowType, startsBase, lenBase, indBase, 
-            elemBase, lowerBounds, upperBounds, initValues, colNames, 
-            rowNames, columnType, self.n2v, self.n2c)
+        return  ( numVars, numRows, numels, rangeCount,
+            objSense, objectCoeffs, objectConst,
+            rhsValues, rangeValues, rowType, startsBase, lenBase, indBase,
+            elemBase, lowerBounds, upperBounds, initValues, colNames,
+            rowNames, columnType, self.n2v, self.n2c )
 
 
-class LpSolver_CMD(LpSolver):
+class LpSolver_CMD( LpSolver ):
     """A generic command line LP Solver"""
-    def __init__(self, path = None, keepFiles = 0, mip = 1, msg = 1, options = []):
-        LpSolver.__init__(self, mip, msg, options)
+    def __init__( self, path = None, keepFiles = 0, mip = 1, msg = 1, options = [] ):
+        LpSolver.__init__( self, mip, msg, options )
         if path is None:
             self.path = self.defaultPath()
         else:
@@ -243,114 +243,114 @@ class LpSolver_CMD(LpSolver):
         self.keepFiles = keepFiles
         self.setTmpDir()
 
-    def copy(self):
+    def copy( self ):
         """Make a copy of self"""
-        
-        aCopy = LpSolver.copy(self)
+
+        aCopy = LpSolver.copy( self )
         aCopy.path = self.path
         aCopy.keepFiles = self.keepFiles
         aCopy.tmpDir = self.tmpDir
         return aCopy
 
-    def setTmpDir(self):
+    def setTmpDir( self ):
         """Set the tmpDir attribute to a reasonnable location for a temporary
         directory"""
         if os.name != 'nt':
             # On unix use /tmp by default
-            self.tmpDir = os.environ.get("TMPDIR", "/tmp")
-            self.tmpDir = os.environ.get("TMP", self.tmpDir)
+            self.tmpDir = os.environ.get( "TMPDIR", "/tmp" )
+            self.tmpDir = os.environ.get( "TMP", self.tmpDir )
         else:
             # On Windows use the current directory
-            self.tmpDir = os.environ.get("TMPDIR", "")
-            self.tmpDir = os.environ.get("TMP", self.tmpDir)
-            self.tmpDir = os.environ.get("TEMP", self.tmpDir)
-        if not os.path.isdir(self.tmpDir):
+            self.tmpDir = os.environ.get( "TMPDIR", "" )
+            self.tmpDir = os.environ.get( "TMP", self.tmpDir )
+            self.tmpDir = os.environ.get( "TEMP", self.tmpDir )
+        if not os.path.isdir( self.tmpDir ):
             self.tmpDir = ""
-        elif not os.access(self.tmpDir, os.F_OK + os.W_OK):
+        elif not os.access( self.tmpDir, os.F_OK + os.W_OK ):
             self.tmpDir = ""
 
-    def defaultPath(self):
+    def defaultPath( self ):
         raise NotImplementedError
 
-    def executableExtension(name):
+    def executableExtension( name ):
         if os.name != 'nt':
             return name
         else:
-            return name+".exe"
-    executableExtension = staticmethod(executableExtension)
+            return name + ".exe"
+    executableExtension = staticmethod( executableExtension )
 
-    def executable(command):
+    def executable( command ):
         """Checks that the solver command is executable,
         And returns the actual path to it."""
 
-        if os.path.isabs(command):
-            if os.access(command, os.X_OK):
+        if os.path.isabs( command ):
+            if os.access( command, os.X_OK ):
                 return command
-        for path in os.environ.get("PATH", []).split(os.pathsep):
-            if os.access(os.path.join(path, command), os.X_OK):
-                return os.path.join(path, command)
+        for path in os.environ.get( "PATH", [] ).split( os.pathsep ):
+            if os.access( os.path.join( path, command ), os.X_OK ):
+                return os.path.join( path, command )
         return False
-    executable = staticmethod(executable)
+    executable = staticmethod( executable )
 
-class GLPK_CMD(LpSolver_CMD):
+class GLPK_CMD( LpSolver_CMD ):
     """The GLPK LP solver"""
-    def defaultPath(self):
-        return self.executableExtension(glpk_path)
+    def defaultPath( self ):
+        return self.executableExtension( glpk_path )
 
-    def available(self):
+    def available( self ):
         """True if the solver is available"""
-        return self.executable(self.path)
+        return self.executable( self.path )
 
-    def actualSolve(self, lp):
+    def actualSolve( self, lp ):
         """Solve a well formulated lp problem"""
-        if not self.executable(self.path):
-            raise PulpSolverError, "PuLP: cannot execute "+self.path
+        if not self.executable( self.path ):
+            raise PulpSolverError, "PuLP: cannot execute " + self.path
         if not self.keepFiles:
             pid = os.getpid()
-            tmpLp = os.path.join(self.tmpDir, "%d-pulp.lp" % pid)
-            tmpSol = os.path.join(self.tmpDir, "%d-pulp.sol" % pid)
+            tmpLp = os.path.join( self.tmpDir, "%d-pulp.lp" % pid )
+            tmpSol = os.path.join( self.tmpDir, "%d-pulp.sol" % pid )
         else:
-            tmpLp = lp.name+"-pulp.lp"
-            tmpSol = lp.name+"-pulp.sol"
-        lp.writeLP(tmpLp, writeSOS = 0)
+            tmpLp = lp.name + "-pulp.lp"
+            tmpSol = lp.name + "-pulp.sol"
+        lp.writeLP( tmpLp, writeSOS = 0 )
         proc = ["glpsol", "--cpxlp", tmpLp, "-o", tmpSol]
-        if not self.mip: proc.append('--nomip')
-        proc.extend(self.options)
+        if not self.mip: proc.append( '--nomip' )
+        proc.extend( self.options )
 
         self.solution_time = clock()
         if not self.msg:
             proc[0] = self.path
-            pipe = open(os.devnull, 'w')
-            rc = subprocess.call(proc, stdout = pipe,
-                             stderr = pipe)
+            pipe = open( os.devnull, 'w' )
+            rc = subprocess.call( proc, stdout = pipe,
+                             stderr = pipe )
             if rc:
-                raise PulpSolverError, "PuLP: Error while trying to execute "+self.path
+                raise PulpSolverError, "PuLP: Error while trying to execute " + self.path
         else:
             if os.name != 'nt':
-                rc = os.spawnvp(os.P_WAIT, self.path, proc)
+                rc = os.spawnvp( os.P_WAIT, self.path, proc )
             else:
-                rc = os.spawnv(os.P_WAIT, self.executable(self.path), proc)
+                rc = os.spawnv( os.P_WAIT, self.executable( self.path ), proc )
             if rc == 127:
-                raise PulpSolverError, "PuLP: Error while trying to execute "+self.path
+                raise PulpSolverError, "PuLP: Error while trying to execute " + self.path
         self.solution_time += clock()
 
-        if not os.path.exists(tmpSol):
-            raise PulpSolverError, "PuLP: Error while executing "+self.path
-        lp.status, values = self.readsol(tmpSol)
-        lp.assignVarsVals(values)
+        if not os.path.exists( tmpSol ):
+            raise PulpSolverError, "PuLP: Error while executing " + self.path
+        lp.status, values = self.readsol( tmpSol )
+        lp.assignVarsVals( values )
         if not self.keepFiles:
-            try: os.remove(tmpLp)
+            try: os.remove( tmpLp )
             except: pass
-            try: os.remove(tmpSol)
+            try: os.remove( tmpSol )
             except: pass
         return lp.status
 
-    def readsol(self,filename):
+    def readsol( self, filename ):
         """Read a GLPK solution file"""
-        f = file(filename)
+        f = file( filename )
         f.readline()
-        rows = int(f.readline().split()[1])
-        cols = int(f.readline().split()[1])
+        rows = int( f.readline().split()[1] )
+        cols = int( f.readline().split()[1] )
         f.readline()
         statusString = f.readline()[12:-1]
         glpkStatus = {
@@ -366,144 +366,144 @@ class GLPK_CMD(LpSolver_CMD):
         if statusString not in glpkStatus:
             raise PulpSolverError, "Unknown status returned by GLPK"
         status = glpkStatus[statusString]
-        isInteger = statusString in ["INTEGER OPTIMAL","INTEGER UNDEFINED"]
+        isInteger = statusString in ["INTEGER OPTIMAL", "INTEGER UNDEFINED"]
         values = {}
-        for i in range(4): f.readline()
-        for i in range(rows):
+        for i in range( 4 ): f.readline()
+        for i in range( rows ):
             line = f.readline().split()
-            if len(line) ==2: f.readline()
-        for i in range(3):
+            if len( line ) == 2: f.readline()
+        for i in range( 3 ):
             f.readline()
-        for i in range(cols):
+        for i in range( cols ):
             line = f.readline().split()
             name = line[1]
-            if len(line) ==2: line = [0,0]+f.readline().split()
+            if len( line ) == 2: line = [0, 0] + f.readline().split()
             if isInteger:
-                if line[2] == "*": value = int(line[3])
-                else: value = float(line[2])
+                if line[2] == "*": value = int( line[3] )
+                else: value = float( line[2] )
             else:
-                value = float(line[3])
+                value = float( line[3] )
             values[name] = value
         return status, values
 GLPK = GLPK_CMD
 
-class CPLEX_CMD(LpSolver_CMD):
+class CPLEX_CMD( LpSolver_CMD ):
     """The CPLEX LP solver"""
-    def defaultPath(self):
-        return self.executableExtension("cplex")
+    def defaultPath( self ):
+        return self.executableExtension( "cplex" )
 
-    def available(self):
+    def available( self ):
         """True if the solver is available"""
-        return self.executable(self.path)
+        return self.executable( self.path )
 
-    def actualSolve(self, lp):
+    def actualSolve( self, lp ):
         """Solve a well formulated lp problem"""
-        if not self.executable(self.path):
-            raise PulpSolverError, "PuLP: cannot execute "+self.path
+        if not self.executable( self.path ):
+            raise PulpSolverError, "PuLP: cannot execute " + self.path
         if not self.keepFiles:
             pid = os.getpid()
-            tmpLp = os.path.join(self.tmpDir, "%d-pulp.lp" % pid)
-            tmpSol = os.path.join(self.tmpDir, "%d-pulp.sol" % pid)
+            tmpLp = os.path.join( self.tmpDir, "%d-pulp.lp" % pid )
+            tmpSol = os.path.join( self.tmpDir, "%d-pulp.sol" % pid )
         else:
-            tmpLp = lp.name+"-pulp.lp"
-            tmpSol = lp.name+"-pulp.sol"
-        lp.writeLP(tmpLp, writeSOS = 1)
-        try: os.remove(tmpSol)
+            tmpLp = lp.name + "-pulp.lp"
+            tmpSol = lp.name + "-pulp.sol"
+        lp.writeLP( tmpLp, writeSOS = 1 )
+        try: os.remove( tmpSol )
         except: pass
         if not self.msg:
-            cplex = subprocess.Popen(self.path, stdin = subprocess.PIPE, 
-                stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+            cplex = subprocess.Popen( self.path, stdin = subprocess.PIPE,
+                stdout = subprocess.PIPE, stderr = subprocess.PIPE )
         else:
-            cplex = subprocess.Popen(self.path, stdin = subprocess.PIPE)
-        cplex_cmds = "read "+tmpLp+"\n"
+            cplex = subprocess.Popen( self.path, stdin = subprocess.PIPE )
+        cplex_cmds = "read " + tmpLp + "\n"
         for option in self.options:
-            cplex_cmds += option+"\n"
+            cplex_cmds += option + "\n"
         if lp.isMIP():
             if self.mip:
                 cplex_cmds += "mipopt\n"
                 cplex_cmds += "change problem fixed\n"
             else:
                 cplex_cmds += "change problem lp\n"
-                
+
         cplex_cmds += "optimize\n"
-        cplex_cmds += "write "+tmpSol+"\n"
+        cplex_cmds += "write " + tmpSol + "\n"
         cplex_cmds += "quit\n"
-        cplex.communicate(cplex_cmds)       
+        cplex.communicate( cplex_cmds )
         if cplex.returncode != 0:
-            raise PulpSolverError, "PuLP: Error while trying to execute "+self.path
+            raise PulpSolverError, "PuLP: Error while trying to execute " + self.path
         if not self.keepFiles:
-            try: os.remove(tmpLp)
+            try: os.remove( tmpLp )
             except: pass
-        if not os.path.exists(tmpSol):
+        if not os.path.exists( tmpSol ):
             status = LpStatusInfeasible
         else:
-            status, values, reducedCosts, shadowPrices, slacks = self.readsol(tmpSol)
+            status, values, reducedCosts, shadowPrices, slacks = self.readsol( tmpSol )
         if not self.keepFiles:
-            try: os.remove(tmpSol)
+            try: os.remove( tmpSol )
             except: pass
-            try: os.remove("cplex.log")
+            try: os.remove( "cplex.log" )
             except: pass
         if status != LpStatusInfeasible:
-            lp.assignVarsVals(values)
-            lp.assignVarsDj(reducedCosts)                          
-            lp.assignConsPi(shadowPrices)
-            lp.assignConsSlack(slacks)          
+            lp.assignVarsVals( values )
+            lp.assignVarsDj( reducedCosts )
+            lp.assignConsPi( shadowPrices )
+            lp.assignConsSlack( slacks )
         lp.status = status
         return status
 
-    def readsol(self,filename):
+    def readsol( self, filename ):
         """Read a CPLEX solution file"""
         try:
             import xml.etree.ElementTree as et
         except ImportError:
             import elementtree.ElementTree as et
-        solutionXML = et.parse(filename).getroot()
-        solutionheader = solutionXML.find("header")
-        statusString = solutionheader.get("solutionStatusString")
+        solutionXML = et.parse( filename ).getroot()
+        solutionheader = solutionXML.find( "header" )
+        statusString = solutionheader.get( "solutionStatusString" )
         cplexStatus = {
             "optimal":LpStatusOptimal,
             }
         if statusString not in cplexStatus:
-            raise PulpSolverError, "Unknown status returned by CPLEX: "+statusString
+            raise PulpSolverError, "Unknown status returned by CPLEX: " + statusString
         status = cplexStatus[statusString]
-        
+
         shadowPrices = {}
         slacks = {}
         shadowPrices = {}
         slacks = {}
-        constraints = solutionXML.find("linearConstraints")
+        constraints = solutionXML.find( "linearConstraints" )
         for constraint in constraints:
-                name = constraint.get("name")
-                shadowPrice = constraint.get("dual")
-                slack = constraint.get("slack")
-                shadowPrices[name] = float(shadowPrice)
-                slacks[name] = float(slack)
-        
+                name = constraint.get( "name" )
+                shadowPrice = constraint.get( "dual" )
+                slack = constraint.get( "slack" )
+                shadowPrices[name] = float( shadowPrice )
+                slacks[name] = float( slack )
+
         values = {}
         reducedCosts = {}
-        for variable in solutionXML.find("variables"):
-                name = variable.get("name")
-                value = variable.get("value")
-                reducedCost = variable.get("reducedCost")
-                values[name] = float(value)
-                reducedCosts[name] = float(reducedCost)
+        for variable in solutionXML.find( "variables" ):
+                name = variable.get( "name" )
+                value = variable.get( "value" )
+                reducedCost = variable.get( "reducedCost" )
+                values[name] = float( value )
+                reducedCosts[name] = float( reducedCost )
 
         return status, values, reducedCosts, shadowPrices, slacks
 
-def CPLEX_DLL_load_dll(path):
+def CPLEX_DLL_load_dll( path ):
     """
     function that loads the DLL useful for debugging installation problems
     """
     import ctypes
-    if os.name in ['nt','dos']:
-        lib = ctypes.windll.LoadLibrary(path)
+    if os.name in ['nt', 'dos']:
+        lib = ctypes.windll.LoadLibrary( path )
     else:
-        lib = ctypes.cdll.LoadLibrary(path)
+        lib = ctypes.cdll.LoadLibrary( path )
     return lib
 
 try:
     import ctypes
-    class CPLEX_DLL(LpSolver):
+    class CPLEX_DLL( LpSolver ):
         """
         The CPLEX LP/MIP solver (via a Dynamic library DLL - windows or SO - Linux)
         
@@ -512,29 +512,29 @@ try:
         For api functions that have not been wrapped in this solver please use 
         the ctypes library interface to the cplex api in CPLEX_DLL.lib
         """
-        lib = CPLEX_DLL_load_dll(cplex_dll_path)
+        lib = CPLEX_DLL_load_dll( cplex_dll_path )
         #parameters manually found in solver manual
         CPX_PARAM_EPGAP = 2009
         CPX_PARAM_MEMORYEMPHASIS = 1082 # from Cplex 11.0 manual
         CPX_PARAM_TILIM = 1039
         #argtypes for CPLEX functions
-        lib.CPXsetintparam.argtypes = [ctypes.c_void_p, 
+        lib.CPXsetintparam.argtypes = [ctypes.c_void_p,
                          ctypes.c_int, ctypes.c_int]
-        lib.CPXsetdblparam.argtypes = [ctypes.c_void_p, ctypes.c_int, 
+        lib.CPXsetdblparam.argtypes = [ctypes.c_void_p, ctypes.c_int,
                                                 ctypes.c_double]
-        lib.CPXfopen.argtypes = [ctypes.c_char_p, 
+        lib.CPXfopen.argtypes = [ctypes.c_char_p,
                                       ctypes.c_char_p]
         lib.CPXfopen.restype = ctypes.c_void_p
-        lib.CPXsetlogfile.argtypes = [ctypes.c_void_p, 
-                                      ctypes.c_void_p] 
+        lib.CPXsetlogfile.argtypes = [ctypes.c_void_p,
+                                      ctypes.c_void_p]
 
-        def __init__(self, 
-                    mip = True, 
-                    msg = True, 
+        def __init__( self,
+                    mip = True,
+                    msg = True,
                     timeLimit = None,
-                    epgap = None, 
-                    logfilename = None, 
-                    emphasizeMemory = False):
+                    epgap = None,
+                    logfilename = None,
+                    emphasizeMemory = False ):
             """
             Initializes the CPLEX_DLL solver.
             
@@ -545,81 +545,81 @@ try:
             @param emphasizeMemory: makes the solver emphasize Memory over 
               solution time
             """
-            LpSolver.__init__(self, mip, msg)
+            LpSolver.__init__( self, mip, msg )
             self.timeLimit = timeLimit
             self.grabLicence()
-            self.setMemoryEmphasis(emphasizeMemory)
+            self.setMemoryEmphasis( emphasizeMemory )
             if epgap is not None:
-                self.changeEpgap(epgap)
+                self.changeEpgap( epgap )
             if timeLimit is not None:
-                self.changeTimeLimit(timeLimit)
+                self.changeTimeLimit( timeLimit )
             if logfilename is not None:
-                self.setlogfile(logfilename)
+                self.setlogfile( logfilename )
             else:
                 self.logfile = None
 
-        def setlogfile(self, filename):
+        def setlogfile( self, filename ):
             """
             sets the logfile for cplex output
             """
-            self.logfilep = CPLEX_DLL.lib.CPXfopen(filename, "w")
-            CPLEX_DLL.lib.CPXsetlogfile(self.env, self.logfilep)
-        
-        def changeEpgap(self, epgap = 10**-4):
+            self.logfilep = CPLEX_DLL.lib.CPXfopen( filename, "w" )
+            CPLEX_DLL.lib.CPXsetlogfile( self.env, self.logfilep )
+
+        def changeEpgap( self, epgap = 10 ** -4 ):
             """
             Change cplex solver integer bound gap tolerence
             """
-            CPLEX_DLL.lib.CPXsetdblparam(self.env,CPLEX_DLL.CPX_PARAM_EPGAP,
-                                            epgap)
+            CPLEX_DLL.lib.CPXsetdblparam( self.env, CPLEX_DLL.CPX_PARAM_EPGAP,
+                                            epgap )
 
-        def setTimeLimit(self, timeLimit = 0.0):
+        def setTimeLimit( self, timeLimit = 0.0 ):
             """
             Make cplex limit the time it takes --added CBM 8/28/09
             """
-            CPLEX_DLL.lib.CPXsetdblparam(self.env,CPLEX_DLL.CPX_PARAM_TILIM,
-                                                float(timeLimit))
+            CPLEX_DLL.lib.CPXsetdblparam( self.env, CPLEX_DLL.CPX_PARAM_TILIM,
+                                                float( timeLimit ) )
 
-        def setMemoryEmphasis(self, yesOrNo = False):
+        def setMemoryEmphasis( self, yesOrNo = False ):
             """
             Make cplex try to conserve memory at the expense of
             performance.
             """
-            CPLEX_DLL.lib.CPXsetintparam(self.env,
-                            CPLEX_DLL.CPX_PARAM_MEMORYEMPHASIS,yesOrNo)
-            
-        def findSolutionValues(self, lp, numcols, numrows):
+            CPLEX_DLL.lib.CPXsetintparam( self.env,
+                            CPLEX_DLL.CPX_PARAM_MEMORYEMPHASIS, yesOrNo )
+
+        def findSolutionValues( self, lp, numcols, numrows ):
             byref = ctypes.byref
             solutionStatus = ctypes.c_int()
             objectiveValue = ctypes.c_double()
-            x = (ctypes.c_double * numcols)()
-            pi = (ctypes.c_double * numrows)()
-            slack = (ctypes.c_double * numrows)()
-            dj = (ctypes.c_double * numcols)()
-            status= CPLEX_DLL.lib.CPXsolwrite(self.env, self.hprob, 
-                                                "CplexTest.sol")
+            x = ( ctypes.c_double * numcols )()
+            pi = ( ctypes.c_double * numrows )()
+            slack = ( ctypes.c_double * numrows )()
+            dj = ( ctypes.c_double * numcols )()
+            status = CPLEX_DLL.lib.CPXsolwrite( self.env, self.hprob,
+                                                "CplexTest.sol" )
             if lp.isMIP():
-                solutionStatus.value = CPLEX_DLL.lib.CPXgetstat(self.env,
-                                                                 self.hprob)
-                status = CPLEX_DLL.lib.CPXgetobjval(self.env, self.hprob, 
-                                                    byref(objectiveValue))
+                solutionStatus.value = CPLEX_DLL.lib.CPXgetstat( self.env,
+                                                                 self.hprob )
+                status = CPLEX_DLL.lib.CPXgetobjval( self.env, self.hprob,
+                                                    byref( objectiveValue ) )
                 if status != 0 and status != 1217: #no solution exists
-                    raise PulpSolverError, ("Error in CPXgetobjval status=" 
-                                          + str(status))
-                
-                status = CPLEX_DLL.lib.CPXgetx(self.env, self.hprob, 
-                                                byref(x), 0, numcols - 1)
+                    raise PulpSolverError, ( "Error in CPXgetobjval status="
+                                          + str( status ) )
+
+                status = CPLEX_DLL.lib.CPXgetx( self.env, self.hprob,
+                                                byref( x ), 0, numcols - 1 )
                 if status != 0 and status != 1217:
-                    raise PulpSolverError, "Error in CPXgetx status=" + str(status)                
+                    raise PulpSolverError, "Error in CPXgetx status=" + str( status )
             else:
-                status = CPLEX_DLL.lib.CPXsolution(self.env, self.hprob, 
-                                              byref(solutionStatus), 
-                                              byref(objectiveValue), 
-                                              byref(x), byref(pi), 
-                                              byref(slack), byref(dj))
+                status = CPLEX_DLL.lib.CPXsolution( self.env, self.hprob,
+                                              byref( solutionStatus ),
+                                              byref( objectiveValue ),
+                                              byref( x ), byref( pi ),
+                                              byref( slack ), byref( dj ) )
             # 102 is the cplex return status for
             # integer optimal within tolerance
             # and is useful for breaking symmetry.
-            CplexLpStatus = {1: LpStatusOptimal, 3: LpStatusInfeasible, 
+            CplexLpStatus = {1: LpStatusOptimal, 3: LpStatusInfeasible,
                                   2: LpStatusUnbounded, 0: LpStatusNotSolved,
                                   101: LpStatusOptimal, 102: LpStatusOptimal,
                                   103: LpStatusInfeasible}
@@ -628,175 +628,175 @@ try:
             variabledjvalues = {}
             constraintpivalues = {}
             constraintslackvalues = {}
-            for i in range(numcols):
+            for i in range( numcols ):
                 variablevalues[self.n2v[i].name] = x[i]
                 variabledjvalues[self.n2v[i].name] = dj[i]
-            lp.assignVarsVals(variablevalues)
-            lp.assignVarsDj(variabledjvalues)            
+            lp.assignVarsVals( variablevalues )
+            lp.assignVarsDj( variabledjvalues )
             #put pi and slack variables against the constraints
-            for i in range(numrows):
+            for i in range( numrows ):
                 constraintpivalues[self.n2c[i]] = pi[i]
-                constraintslackvalues[self.n2c[i]] = slack[i]                
-            lp.assignConsPi(constraintpivalues)
-            lp.assignConsSlack(constraintslackvalues)
+                constraintslackvalues[self.n2c[i]] = slack[i]
+            lp.assignConsPi( constraintpivalues )
+            lp.assignConsSlack( constraintslackvalues )
             #TODO: clear up the name of self.n2c
             if self.msg:
                 print "Cplex status=", solutionStatus.value
             lp.resolveOK = True
             for var in lp.variables():
                 var.isModified = False
-            lp.status = CplexLpStatus.get(solutionStatus.value,
-                                          LpStatusUndefined)
+            lp.status = CplexLpStatus.get( solutionStatus.value,
+                                          LpStatusUndefined )
             return lp.status
 
-        def __del__(self):
+        def __del__( self ):
             #LpSolver.__del__(self)
             self.releaseLicence()
 
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return True
 
-        def grabLicence(self):
+        def grabLicence( self ):
             """
             Returns True if a CPLEX licence can be obtained.
             The licence is kept until releaseLicence() is called.
             """
             status = ctypes.c_int()
-            self.env = CPLEX_DLL.lib.CPXopenCPLEX(ctypes.byref(status))
-            if not(status.value == 0):
-                raise PulpSolverError, ("CPLEX library failed on " + 
-                                    "CPXopenCPLEX status=" + str(status))
-            
+            self.env = CPLEX_DLL.lib.CPXopenCPLEX( ctypes.byref( status ) )
+            if not( status.value == 0 ):
+                raise PulpSolverError, ( "CPLEX library failed on " +
+                                    "CPXopenCPLEX status=" + str( status ) )
 
-        def releaseLicence(self):
+
+        def releaseLicence( self ):
             """Release a previously obtained CPLEX licence"""
-            if getattr(self,"env",False):
-                status=CPLEX_DLL.lib.CPXcloseCPLEX(self.env)
+            if getattr( self, "env", False ):
+                status = CPLEX_DLL.lib.CPXcloseCPLEX( self.env )
             else:
                 raise PulpSolverError, "No CPLEX enviroment to close"
 
-        def callSolver(self, isMIP):
+        def callSolver( self, isMIP ):
             """Solves the problem with cplex
             """
             #solve the problem
             self.cplexTime = -clock()
             if isMIP and self.mip:
-                status= CPLEX_DLL.lib.CPXmipopt(self.env, self.hprob)
+                status = CPLEX_DLL.lib.CPXmipopt( self.env, self.hprob )
                 if status != 0:
-                    raise PulpSolverError, ("Error in CPXmipopt status=" 
-                                        + str(status))
+                    raise PulpSolverError, ( "Error in CPXmipopt status="
+                                        + str( status ) )
             else:
-                status = CPLEX_DLL.lib.CPXlpopt(self.env, self.hprob)
+                status = CPLEX_DLL.lib.CPXlpopt( self.env, self.hprob )
                 if status != 0:
-                    raise PulpSolverError, ("Error in CPXlpopt status=" 
-                                            + str(status))
+                    raise PulpSolverError, ( "Error in CPXlpopt status="
+                                            + str( status ) )
             self.cplexTime += clock()
 
-        def actualSolve(self, lp):
+        def actualSolve( self, lp ):
             """Solve a well formulated lp problem"""
             #TODO alter so that msg parameter is handled correctly
             status = ctypes.c_int()
             byref = ctypes.byref   #shortcut to function
-            self.hprob = CPLEX_DLL.lib.CPXcreateprob(self.env, 
-                                                    byref(status), lp.name)
+            self.hprob = CPLEX_DLL.lib.CPXcreateprob( self.env,
+                                                    byref( status ), lp.name )
             if status.value != 0:
-                raise PulpSolverError, ("Error in CPXcreateprob status=" 
-                                    + str(status)) 
-            (numcols, numrows, numels, rangeCount, 
-                objSense, obj, objconst, 
-                rhs, rangeValues, rowSense, matbeg, matcnt, matind, 
-                matval, lb, ub, initValues, colname, 
-                rowname, xctype, n2v, n2c )= self.getCplexStyleArrays(lp)
-            status.value = CPLEX_DLL.lib.CPXcopylpwnames (self.env, self.hprob, 
+                raise PulpSolverError, ( "Error in CPXcreateprob status="
+                                    + str( status ) )
+            ( numcols, numrows, numels, rangeCount,
+                objSense, obj, objconst,
+                rhs, rangeValues, rowSense, matbeg, matcnt, matind,
+                matval, lb, ub, initValues, colname,
+                rowname, xctype, n2v, n2c ) = self.getCplexStyleArrays( lp )
+            status.value = CPLEX_DLL.lib.CPXcopylpwnames ( self.env, self.hprob,
                                  numcols, numrows,
                                  objSense, obj, rhs, rowSense, matbeg, matcnt,
-                                 matind, matval, lb, ub, None, colname, rowname)
+                                 matind, matval, lb, ub, None, colname, rowname )
             if status.value != 0:
-                raise PulpSolverError, ("Error in CPXcopylpwnames status=" + 
-                                        str(status)) 
+                raise PulpSolverError, ( "Error in CPXcopylpwnames status=" +
+                                        str( status ) )
             if lp.isMIP() and self.mip:
-                status.value = CPLEX_DLL.lib.CPXcopyctype(self.env, 
-                                                          self.hprob, 
-                                                          xctype)
+                status.value = CPLEX_DLL.lib.CPXcopyctype( self.env,
+                                                          self.hprob,
+                                                          xctype )
             if status.value != 0:
-                raise PulpSolverError, ("Error in CPXcopyctype status=" + 
-                                        str(status)) 
+                raise PulpSolverError, ( "Error in CPXcopyctype status=" +
+                                        str( status ) )
             #set the initial solution            
-            self.callSolver(lp.isMIP())
+            self.callSolver( lp.isMIP() )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp, numcols, numrows)          
+            solutionStatus = self.findSolutionValues( lp, numcols, numrows )
             for var in lp.variables():
                 var.modified = False
             return solutionStatus
 
-        
-        def actualResolve(self,lp):
+
+        def actualResolve( self, lp ):
             """looks at which variables have been modified and changes them
             """
             #TODO: Add changing variables not just adding them
             #TODO: look at constraints
-            modifiedVars = [var for var in lp.variables() if var.modified] 
+            modifiedVars = [var for var in lp.variables() if var.modified]
             #assumes that all variables flagged as modified 
             #need to be added to the problem
-            newVars = modifiedVars 
+            newVars = modifiedVars
             #print newVars
-            self.v2n.update([(var, i+self.addedVars) 
-                                for i,var in enumerate(newVars)])
-            self.n2v.update([(i+self.addedVars, var) 
-                                for i,var in enumerate(newVars)])
-            self.vname2n.update([(var.name, i+self.addedVars) 
-                                for i,var in enumerate(newVars)])
+            self.v2n.update( [( var, i + self.addedVars )
+                                for i, var in enumerate( newVars )] )
+            self.n2v.update( [( i + self.addedVars, var )
+                                for i, var in enumerate( newVars )] )
+            self.vname2n.update( [( var.name, i + self.addedVars )
+                                for i, var in enumerate( newVars )] )
             oldVars = self.addedVars
-            self.addedVars += len(newVars)
-            (ccnt,nzcnt,obj,cmatbeg, 
-            cmatlen, cmatind,cmatval,
-            lb,ub, initvals,
-            colname, coltype) = self.getSparseCols(newVars, lp, oldVars, 
-                                defBound = 1e20)
-            CPXaddcolsStatus = CPLEX_DLL.lib.CPXaddcols(self.env, self.hprob,
+            self.addedVars += len( newVars )
+            ( ccnt, nzcnt, obj, cmatbeg,
+            cmatlen, cmatind, cmatval,
+            lb, ub, initvals,
+            colname, coltype ) = self.getSparseCols( newVars, lp, oldVars,
+                                defBound = 1e20 )
+            CPXaddcolsStatus = CPLEX_DLL.lib.CPXaddcols( self.env, self.hprob,
                                           ccnt, nzcnt,
-                                          obj,cmatbeg, 
-                                          cmatind,cmatval, 
-                                          lb,ub,colname)
+                                          obj, cmatbeg,
+                                          cmatind, cmatval,
+                                          lb, ub, colname )
             #add the column types
             if lp.isMIP() and self.mip:
-                indices = (ctypes.c_int * len(newVars))()
-                for i,var in enumerate(newVars):
-                    indices[i] = oldVars +i
-                CPXchgctypeStatus = CPLEX_DLL.lib.CPXchgctype (self.env, 
+                indices = ( ctypes.c_int * len( newVars ) )()
+                for i, var in enumerate( newVars ):
+                    indices[i] = oldVars + i
+                CPXchgctypeStatus = CPLEX_DLL.lib.CPXchgctype ( self.env,
                                                  self.hprob,
-                                                 ccnt, indices, coltype);
+                                                 ccnt, indices, coltype );
             #solve the problem
-            self.callSolver(lp.isMIP())
+            self.callSolver( lp.isMIP() )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp, self.addedVars, 
-                                                     self.addedRows)                     
+            solutionStatus = self.findSolutionValues( lp, self.addedVars,
+                                                     self.addedRows )
             for var in modifiedVars:
                 var.modified = False
             return solutionStatus
-                
-        def getSparseCols(self, vars, lp, offset = 0, defBound = 1e20):
+
+        def getSparseCols( self, vars, lp, offset = 0, defBound = 1e20 ):
             """
             outputs the variables in var as a sparse matrix,
             suitable for cplex and Coin
 
             Copyright (c) Stuart Mitchell 2007
             """
-            numVars = len(vars)
-            obj = (ctypes.c_double * numVars)()
-            cmatbeg = (ctypes.c_int * numVars)()
+            numVars = len( vars )
+            obj = ( ctypes.c_double * numVars )()
+            cmatbeg = ( ctypes.c_int * numVars )()
             mycmatind = []
             mycmatval = []
             rangeCount = 0
             #values for variables
-            colNames =  (ctypes.c_char_p * numVars)()
-            lowerBounds =  (ctypes.c_double * numVars)()
-            upperBounds =  (ctypes.c_double * numVars)()
-            initValues =  (ctypes.c_double * numVars)()
-            i=0
+            colNames = ( ctypes.c_char_p * numVars )()
+            lowerBounds = ( ctypes.c_double * numVars )()
+            upperBounds = ( ctypes.c_double * numVars )()
+            initValues = ( ctypes.c_double * numVars )()
+            i = 0
             for v in vars:
-                colNames[i] = str(v.name)
+                colNames[i] = str( v.name )
                 initValues[i] = v.init
                 if v.lowBound != None:
                     lowerBounds[i] = v.lowBound
@@ -806,29 +806,29 @@ try:
                     upperBounds[i] = v.upBound
                 else:
                     upperBounds[i] = defBound
-                i+= 1
+                i += 1
                 #create the new variables    
             #values for constraints
             #return the coefficient matrix as a series of vectors
             myobjectCoeffs = {}
-            numRows = len(lp.constraints)
-            sparseMatrix = sparse.Matrix(range(numRows), range(numVars))
+            numRows = len( lp.constraints )
+            sparseMatrix = sparse.Matrix( range( numRows ), range( numVars ) )
             for var in vars:
-                for row,coeff in var.expression.iteritems():
+                for row, coeff in var.expression.iteritems():
                    if row.name == lp.objective.name:
                         myobjectCoeffs[var] = coeff
                    else:
-                        sparseMatrix.add(self.c2n[row.name], self.v2n[var] - offset, coeff)
+                        sparseMatrix.add( self.c2n[row.name], self.v2n[var] - offset, coeff )
             #objective values
-            objectCoeffs = (ctypes.c_double * numVars)()
+            objectCoeffs = ( ctypes.c_double * numVars )()
             for var in vars:
-                objectCoeffs[self.v2n[var]-offset] = myobjectCoeffs[var]
-            (numels, mystartsBase, mylenBase, myindBase, 
-             myelemBase) = sparseMatrix.col_based_arrays() 
-            elemBase = ctypesArrayFill(myelemBase, ctypes.c_double)
-            indBase = ctypesArrayFill(myindBase, ctypes.c_int)
-            startsBase = ctypesArrayFill(mystartsBase, ctypes.c_int)
-            lenBase = ctypesArrayFill(mylenBase, ctypes.c_int)
+                objectCoeffs[self.v2n[var] - offset] = myobjectCoeffs[var]
+            ( numels, mystartsBase, mylenBase, myindBase,
+             myelemBase ) = sparseMatrix.col_based_arrays()
+            elemBase = ctypesArrayFill( myelemBase, ctypes.c_double )
+            indBase = ctypesArrayFill( myindBase, ctypes.c_int )
+            startsBase = ctypesArrayFill( mystartsBase, ctypes.c_int )
+            lenBase = ctypesArrayFill( mylenBase, ctypes.c_int )
             #MIP Variables
             NumVarCharArray = ctypes.c_char * numVars
             columnType = NumVarCharArray()
@@ -837,115 +837,115 @@ try:
                                     LpInteger: "I"}
                 for v in vars:
                     columnType[self.v2n[v] - offset] = CplexLpCategories[v.cat]
-            return  numVars, numels,  objectCoeffs, \
+            return  numVars, numels, objectCoeffs, \
                 startsBase, lenBase, indBase, \
                 elemBase, lowerBounds, upperBounds, initValues, colNames, \
                 columnType
-             
-            
-        
+
+
+
     CPLEX = CPLEX_DLL
-except (ImportError,OSError):
-    class CPLEX_DLL(LpSolver):
+except ( ImportError, OSError ):
+    class CPLEX_DLL( LpSolver ):
         """The CPLEX LP/MIP solver PHANTOM Something went wrong!!!!"""
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return False
-        def actualSolve(self, lp):
+        def actualSolve( self, lp ):
             """Solve a well formulated lp problem"""
             raise PulpSolverError, "CPLEX_DLL: Not Available"
     CPLEX = CPLEX_CMD
 
 
 
-class XPRESS(LpSolver_CMD):
+class XPRESS( LpSolver_CMD ):
     """The XPRESS LP solver"""
-    def defaultPath(self):
-        return self.executableExtension("optimizer")
+    def defaultPath( self ):
+        return self.executableExtension( "optimizer" )
 
-    def available(self):
+    def available( self ):
         """True if the solver is available"""
-        return self.executable(self.path)
+        return self.executable( self.path )
 
-    def actualSolve(self, lp):
+    def actualSolve( self, lp ):
         """Solve a well formulated lp problem"""
-        if not self.executable(self.path):
-            raise PulpSolverError, "PuLP: cannot execute "+self.path
+        if not self.executable( self.path ):
+            raise PulpSolverError, "PuLP: cannot execute " + self.path
         if not self.keepFiles:
             pid = os.getpid()
-            tmpLp = os.path.join(self.tmpDir, "%d-pulp.lp" % pid)
-            tmpSol = os.path.join(self.tmpDir, "%d-pulp.prt" % pid)
+            tmpLp = os.path.join( self.tmpDir, "%d-pulp.lp" % pid )
+            tmpSol = os.path.join( self.tmpDir, "%d-pulp.prt" % pid )
         else:
-            tmpLp = lp.name+"-pulp.lp"
-            tmpSol = lp.name+"-pulp.prt"
-        lp.writeLP(tmpLp, writeSOS = 1, mip = self.mip)
+            tmpLp = lp.name + "-pulp.lp"
+            tmpSol = lp.name + "-pulp.prt"
+        lp.writeLP( tmpLp, writeSOS = 1, mip = self.mip )
         if not self.msg:
-            xpress = os.popen(self.path+" "+lp.name+" > /dev/null 2> /dev/null", "w")
+            xpress = os.popen( self.path + " " + lp.name + " > /dev/null 2> /dev/null", "w" )
         else:
-            xpress = os.popen(self.path+" "+lp.name, "w")
-        xpress.write("READPROB "+tmpLp+"\n")
+            xpress = os.popen( self.path + " " + lp.name, "w" )
+        xpress.write( "READPROB " + tmpLp + "\n" )
         if lp.sense == MAX:
-            xpress.write("MAXIM\n")
+            xpress.write( "MAXIM\n" )
         else:
-            xpress.write("MINIM\n")
+            xpress.write( "MINIM\n" )
         if lp.isMIP() and self.mip:
-            xpress.write("GLOBAL\n")
-        xpress.write("WRITEPRTSOL "+tmpSol+"\n")
-        xpress.write("QUIT\n")
+            xpress.write( "GLOBAL\n" )
+        xpress.write( "WRITEPRTSOL " + tmpSol + "\n" )
+        xpress.write( "QUIT\n" )
         if xpress.close() != None:
-            raise PulpSolverError, "PuLP: Error while executing "+self.path
-        status, values = self.readsol(tmpSol)
+            raise PulpSolverError, "PuLP: Error while executing " + self.path
+        status, values = self.readsol( tmpSol )
         if not self.keepFiles:
-            try: os.remove(tmpLp)
+            try: os.remove( tmpLp )
             except: pass
-            try: os.remove(tmpSol)
+            try: os.remove( tmpSol )
             except: pass
         lp.status = status
-        lp.assignVarsVals(values)
-        if abs(lp.infeasibilityGap(self.mip)) > 1e-5: # Arbitrary
+        lp.assignVarsVals( values )
+        if abs( lp.infeasibilityGap( self.mip ) ) > 1e-5: # Arbitrary
             lp.status = LpStatusInfeasible
         return lp.status
 
-    def readsol(self,filename):
+    def readsol( self, filename ):
         """Read an XPRESS solution file"""
-        f = file(filename)
-        for i in range(6): f.readline()
+        f = file( filename )
+        for i in range( 6 ): f.readline()
         l = f.readline().split()
 
-        rows = int(l[2])
-        cols = int(l[5])
-        for i in range(3): f.readline()
+        rows = int( l[2] )
+        cols = int( l[5] )
+        for i in range( 3 ): f.readline()
         statusString = f.readline().split()[0]
         xpressStatus = {
             "Optimal":LpStatusOptimal,
             }
         if statusString not in xpressStatus:
-            raise PulpSolverError, "Unknow status returned by XPRESS: "+statusString
+            raise PulpSolverError, "Unknow status returned by XPRESS: " + statusString
         status = xpressStatus[statusString]
         values = {}
         while 1:
             l = f.readline()
             if l == "": break
             line = l.split()
-            if len(line) and line[0] == 'C':
+            if len( line ) and line[0] == 'C':
                 name = line[2]
-                value = float(line[4])
+                value = float( line[4] )
                 values[name] = value
         return status, values
 
-class COIN_CMD(LpSolver_CMD):
+class COIN_CMD( LpSolver_CMD ):
     """The COIN CLP/CBC LP solver
     now only uses cbc
     """
 
-    def defaultPath(self):
-        return self.executableExtension(cbc_path)
+    def defaultPath( self ):
+        return self.executableExtension( cbc_path )
 
-    def __init__(self, path = None, keepFiles = 0, mip = 1,
+    def __init__( self, path = None, keepFiles = 0, mip = 1,
             msg = 0, cuts = None, presolve = None, dual = None,
             strong = None, options = [],
-            fracGap = None, maxSeconds = None, threads = None):
-        LpSolver_CMD.__init__(self, path, keepFiles, mip, msg, options)
+            fracGap = None, maxSeconds = None, threads = None ):
+        LpSolver_CMD.__init__( self, path, keepFiles, mip, msg, options )
         self.cuts = cuts
         self.presolve = presolve
         self.dual = dual
@@ -957,43 +957,43 @@ class COIN_CMD(LpSolver_CMD):
         if os.name == 'nt':
             self.tmpDir = ''
 
-    def copy(self):
+    def copy( self ):
         """Make a copy of self"""
-        aCopy = LpSolver_CMD.copy(self)
+        aCopy = LpSolver_CMD.copy( self )
         aCopy.cuts = self.cuts
         aCopy.presolve = self.presolve
         aCopy.dual = self.dual
         aCopy.strong = self.strong
         return aCopy
 
-    def actualSolve(self, lp):
+    def actualSolve( self, lp ):
         """Solve a well formulated lp problem"""
-        return self.solve_CBC(lp)
+        return self.solve_CBC( lp )
 
-    def available(self):
+    def available( self ):
         """True if the solver is available"""
-        return self.executable(self.path)
+        return self.executable( self.path )
 
-    def solve_CBC(self, lp):
+    def solve_CBC( self, lp ):
         """Solve a MIP problem using CBC"""
-        if not self.executable(self.path):
-            raise PulpSolverError, "Pulp: cannot execute %s cwd: %s"%(self.path,
-                                   os.getcwd())
+        if not self.executable( self.path ):
+            raise PulpSolverError, "Pulp: cannot execute %s cwd: %s" % ( self.path,
+                                   os.getcwd() )
         if not self.keepFiles:
             pid = os.getpid()
-            tmpLp = os.path.join(self.tmpDir, "%d-pulp.lp" % pid)
-            tmpSol = os.path.join(self.tmpDir, "%d-pulp.sol" % pid)
+            tmpLp = os.path.join( self.tmpDir, "%d-pulp.lp" % pid )
+            tmpSol = os.path.join( self.tmpDir, "%d-pulp.sol" % pid )
         else:
-            tmpLp = lp.name+"-pulp.lp"
-            tmpSol = lp.name+"-pulp.sol"
-        lp.writeLP(tmpLp)
-        cmds = ' '+tmpLp+" "
+            tmpLp = lp.name + "-pulp.lp"
+            tmpSol = lp.name + "-pulp.sol"
+        lp.writeLP( tmpLp )
+        cmds = ' ' + tmpLp + " "
         if self.threads:
-            cmds += "threads %s "%self.threads
+            cmds += "threads %s " % self.threads
         if self.fracGap is not None:
-            cmds += "ratio %s "%self.fracGap
+            cmds += "ratio %s " % self.fracGap
         if self.maxSeconds is not None:
-            cmds += "sec %s "%self.maxSeconds
+            cmds += "sec %s " % self.maxSeconds
         if self.presolve:
             cmds += "presolve on "
         if self.strong:
@@ -1004,38 +1004,38 @@ class COIN_CMD(LpSolver_CMD):
             cmds += "knapsack on "
             cmds += "probing on "
         for option in self.options:
-            cmds += option+" "
+            cmds += option + " "
         if self.mip:
             cmds += "branch "
         else:
             cmds += "initialSolve "
-        cmds += "solution "+tmpSol+" "
+        cmds += "solution " + tmpSol + " "
         if self.msg:
             pipe = None
         else:
-            pipe = open(os.devnull, 'w')
-        logging.debug(self.path + cmds)
-        cbc = subprocess.Popen((self.path + cmds).split(), stdout = pipe,
-                             stderr = pipe)
+            pipe = open( os.devnull, 'w' )
+        logging.debug( self.path + cmds )
+        cbc = subprocess.Popen( ( self.path + cmds ).split(), stdout = pipe,
+                             stderr = pipe )
         if cbc.wait() != 0:
-            raise PulpSolverError, "Pulp: Error while trying to execute " +  \
+            raise PulpSolverError, "Pulp: Error while trying to execute " + \
                                     self.path
-        if not os.path.exists(tmpSol):
-            raise PulpSolverError, "Pulp: Error while executing "+self.path
-        lp.status, values = self.readsol_CBC(tmpSol, lp, lp.variables())
-        lp.assignVarsVals(values)
+        if not os.path.exists( tmpSol ):
+            raise PulpSolverError, "Pulp: Error while executing " + self.path
+        lp.status, values = self.readsol_CBC( tmpSol, lp, lp.variables() )
+        lp.assignVarsVals( values )
         if not self.keepFiles:
             try:
-                os.remove(tmpLp)
+                os.remove( tmpLp )
             except:
                 pass
             try:
-                os.remove(tmpSol)
+                os.remove( tmpSol )
             except:
                 pass
         return lp.status
 
-    def readsol_CBC(self, filename, lp, vs):
+    def readsol_CBC( self, filename, lp, vs ):
         """Read a CBC solution file"""
         values = {}
         for v in vs:
@@ -1044,37 +1044,37 @@ class COIN_CMD(LpSolver_CMD):
                     'Infeasible': LpStatusInfeasible,
                     'Unbounded': LpStatusUnbounded,
                     'Stopped': LpStatusNotSolved}
-        f = file(filename)
+        f = file( filename )
         statusstr = f.readline().split()[0]
-        status = cbcStatus.get(statusstr, LpStatusUndefined)
+        status = cbcStatus.get( statusstr, LpStatusUndefined )
         for l in f:
-            if len(l)<=2:
+            if len( l ) <= 2:
                 break
             l = l.split()
             vn = l[1]
             if vn in values:
-                values[vn] = float(l[2])
+                values[vn] = float( l[2] )
         return status, values
 
 COIN = COIN_CMD
 
-def COINMP_DLL_load_dll(path):
+def COINMP_DLL_load_dll( path ):
     """
     function that loads the DLL useful for debugging installation problems
     """
     import ctypes
     if os.name == 'nt':
-        lib = ctypes.windll.LoadLibrary(path[-1])
+        lib = ctypes.windll.LoadLibrary( path[-1] )
     else:
         #linux hack to get working
         for libpath in path[:-1]:
             #RTLD_LAZY = 0x00001
             mode = ctypes.RTLD_GLOBAL
-            ctypes.CDLL(libpath, mode = mode)
-        lib = ctypes.CDLL(path[-1], mode = mode)
+            ctypes.CDLL( libpath, mode = mode )
+        lib = ctypes.CDLL( path[-1], mode = mode )
     return lib
 
-class COINMP_DLL(LpSolver):
+class COINMP_DLL( LpSolver ):
     """
     The COIN_MP LP MIP solver (via a DLL or linux so)
     
@@ -1082,36 +1082,36 @@ class COINMP_DLL(LpSolver):
     :param epgap: The fractional mip tolerance
     """
     try:
-        lib = COINMP_DLL_load_dll(coinMP_path)
-    except (ImportError, OSError):
+        lib = COINMP_DLL_load_dll( coinMP_path )
+    except ( ImportError, OSError ):
         @classmethod
-        def available(cls):
+        def available( cls ):
             """True if the solver is available"""
             return False
-        def actualSolve(self, lp):
+        def actualSolve( self, lp ):
             """Solve a well formulated lp problem"""
             raise PulpSolverError, "COINMP_DLL: Not Available"
-    else:    
+    else:
         COIN_INT_LOGLEVEL = 7
         COIN_REAL_MAXSECONDS = 16
         COIN_REAL_MIPMAXSEC = 19
         COIN_REAL_MIPFRACGAP = 34
         lib.CoinGetInfinity.restype = ctypes.c_double
         lib.CoinGetVersionStr.restype = ctypes.c_char_p
-        lib.CoinGetSolutionText.restype=ctypes.c_char_p
-        lib.CoinGetObjectValue.restype=ctypes.c_double
-        lib.CoinGetMipBestBound.restype=ctypes.c_double
+        lib.CoinGetSolutionText.restype = ctypes.c_char_p
+        lib.CoinGetObjectValue.restype = ctypes.c_double
+        lib.CoinGetMipBestBound.restype = ctypes.c_double
 
-        def __init__(self, mip = 1, msg = 1, cuts = 1, presolve = 1, dual = 1,
+        def __init__( self, mip = 1, msg = 1, cuts = 1, presolve = 1, dual = 1,
             crash = 0, scale = 1, rounding = 1, integerPresolve = 1, strong = 5,
-            timeLimit = None, epgap = None):
-            LpSolver.__init__(self, mip, msg)
+            timeLimit = None, epgap = None ):
+            LpSolver.__init__( self, mip, msg )
             self.maxSeconds = None
             if timeLimit is not None:
-                self.maxSeconds = float(timeLimit)
+                self.maxSeconds = float( timeLimit )
             self.fracGap = None
             if epgap is not None:
-                self.fracGap = float(epgap)
+                self.fracGap = float( epgap )
             #Todo: these options are not yet implemented
             self.cuts = cuts
             self.presolve = presolve
@@ -1122,9 +1122,9 @@ class COINMP_DLL(LpSolver):
             self.integerPresolve = integerPresolve
             self.strong = strong
 
-        def copy(self):
+        def copy( self ):
             """Make a copy of self"""
-        
+
             aCopy = LpSolver.copy()
             aCopy.cuts = self.cuts
             aCopy.presolve = self.presolve
@@ -1137,11 +1137,11 @@ class COINMP_DLL(LpSolver):
             return aCopy
 
         @classmethod
-        def available(cls):
+        def available( cls ):
             """True if the solver is available"""
             return True
 
-        def getSolverVersion(self):
+        def getSolverVersion( self ):
             """
             returns a solver version string 
              
@@ -1150,73 +1150,73 @@ class COINMP_DLL(LpSolver):
             '...'
             """
             return self.lib.CoinGetVersionStr()
-            
-        def actualSolve(self, lp):
+
+        def actualSolve( self, lp ):
             """Solve a well formulated lp problem"""
             #TODO alter so that msg parameter is handled correctly
             self.debug = 0
             #initialise solver
-            self.lib.CoinInitSolver("")
+            self.lib.CoinInitSolver( "" )
             #create problem
-            self.hProb = hProb = self.lib.CoinCreateProblem(lp.name);
+            self.hProb = hProb = self.lib.CoinCreateProblem( lp.name );
             #set problem options
             if self.maxSeconds:
                 if self.mip:
-                    self.lib.CoinSetRealOption(hProb, self.COIN_REAL_MIPMAXSEC,
-                                          ctypes.c_double(self.maxSeconds))
+                    self.lib.CoinSetRealOption( hProb, self.COIN_REAL_MIPMAXSEC,
+                                          ctypes.c_double( self.maxSeconds ) )
                 else:
-                    self.lib.CoinSetRealOption(hProb, self.COIN_REAL_MAXSECONDS,
-                                          ctypes.c_double(self.maxSeconds))
+                    self.lib.CoinSetRealOption( hProb, self.COIN_REAL_MAXSECONDS,
+                                          ctypes.c_double( self.maxSeconds ) )
             if self.fracGap:
                #Hopefully this is the bound gap tolerance
-               self.lib.CoinSetRealOption(hProb, self.COIN_REAL_MIPFRACGAP,
-                                          ctypes.c_double(self.fracGap))
+               self.lib.CoinSetRealOption( hProb, self.COIN_REAL_MIPFRACGAP,
+                                          ctypes.c_double( self.fracGap ) )
             #CoinGetInfinity is needed for varibles with no bounds
             coinDblMax = self.lib.CoinGetInfinity()
             if self.debug: print "Before getCoinMPArrays"
-            (numVars, numRows, numels, rangeCount,
-                objectSense, objectCoeffs, objectConst, 
-                rhsValues, rangeValues, rowType, startsBase, 
-                lenBase, indBase, 
-                elemBase, lowerBounds, upperBounds, initValues, colNames, 
-                rowNames, columnType, n2v, n2c) = self.getCplexStyleArrays(lp)
-            self.lib.CoinLoadProblem(hProb,
+            ( numVars, numRows, numels, rangeCount,
+                objectSense, objectCoeffs, objectConst,
+                rhsValues, rangeValues, rowType, startsBase,
+                lenBase, indBase,
+                elemBase, lowerBounds, upperBounds, initValues, colNames,
+                rowNames, columnType, n2v, n2c ) = self.getCplexStyleArrays( lp )
+            self.lib.CoinLoadProblem( hProb,
                                    numVars, numRows, numels, rangeCount,
                                    objectSense, objectConst, objectCoeffs,
                                    lowerBounds, upperBounds, rowType,
                                    rhsValues, rangeValues, startsBase,
                                    lenBase, indBase, elemBase,
-                                   colNames, rowNames, "Objective")
+                                   colNames, rowNames, "Objective" )
             if lp.isMIP() and self.mip:
-                self.lib.CoinLoadInteger(hProb,columnType)
+                self.lib.CoinLoadInteger( hProb, columnType )
             if self.msg == 0:
                 #close stdout to get rid of messages
-                tempfile = open(mktemp(),'w')
-                savestdout = os.dup(1)
-                os.close(1)
-                if os.dup(tempfile.fileno()) != 1:
+                tempfile = open( mktemp(), 'w' )
+                savestdout = os.dup( 1 )
+                os.close( 1 )
+                if os.dup( tempfile.fileno() ) != 1:
                     raise PulpSolverError, "couldn't redirect stdout - dup() error"
             self.coinTime = -clock()
-            self.lib.CoinOptimizeProblem(hProb, 0);
+            self.lib.CoinOptimizeProblem( hProb, 0 );
             self.coinTime += clock()
 
             if self.msg == 0:
                 #reopen stdout
-                os.close(1)
-                os.dup(savestdout)
-                os.close(savestdout)
-           
+                os.close( 1 )
+                os.dup( savestdout )
+                os.close( savestdout )
+
             CoinLpStatus = {0:LpStatusOptimal,
                             1:LpStatusInfeasible,
                             2:LpStatusInfeasible,
                             3:LpStatusNotSolved,
                             4:LpStatusNotSolved,
                             5:LpStatusNotSolved,
-                            -1:LpStatusUndefined
+                            - 1:LpStatusUndefined
                             }
-            solutionStatus = self.lib.CoinGetSolutionStatus(hProb)
-            solutionText = self.lib.CoinGetSolutionText(hProb,solutionStatus)
-            objectValue =  self.lib.CoinGetObjectValue(hProb)
+            solutionStatus = self.lib.CoinGetSolutionStatus( hProb )
+            solutionText = self.lib.CoinGetSolutionText( hProb, solutionStatus )
+            objectValue = self.lib.CoinGetObjectValue( hProb )
 
             #get the solution values
             NumVarDoubleArray = ctypes.c_double * numVars
@@ -1225,40 +1225,40 @@ class COINMP_DLL(LpSolver):
             cReducedCost = NumVarDoubleArray()
             cSlackValues = NumRowsDoubleArray()
             cShadowPrices = NumRowsDoubleArray()
-            self.lib.CoinGetSolutionValues(hProb, ctypes.byref(cActivity),
-                                         ctypes.byref(cReducedCost),
-                                         ctypes.byref(cSlackValues),
-                                         ctypes.byref(cShadowPrices))
+            self.lib.CoinGetSolutionValues( hProb, ctypes.byref( cActivity ),
+                                         ctypes.byref( cReducedCost ),
+                                         ctypes.byref( cSlackValues ),
+                                         ctypes.byref( cShadowPrices ) )
 
             variablevalues = {}
             variabledjvalues = {}
             constraintpivalues = {}
             constraintslackvalues = {}
             if lp.isMIP() and self.mip:
-                lp.bestBound = self.lib.CoinGetMipBestBound(hProb)
-            for i in range(numVars):
+                lp.bestBound = self.lib.CoinGetMipBestBound( hProb )
+            for i in range( numVars ):
                 variablevalues[self.n2v[i].name] = cActivity[i]
                 variabledjvalues[self.n2v[i].name] = cReducedCost[i]
-            lp.assignVarsVals(variablevalues)
-            lp.assignVarsDj(variabledjvalues)            
+            lp.assignVarsVals( variablevalues )
+            lp.assignVarsDj( variabledjvalues )
             #put pi and slack variables against the constraints
-            for i in range(numRows):
+            for i in range( numRows ):
                 constraintpivalues[self.n2c[i]] = cShadowPrices[i]
                 constraintslackvalues[self.n2c[i]] = \
-                    rhsValues[i] - cSlackValues[i]                
-            lp.assignConsPi(constraintpivalues)
-            lp.assignConsSlack(constraintslackvalues)
-                       
+                    rhsValues[i] - cSlackValues[i]
+            lp.assignConsPi( constraintpivalues )
+            lp.assignConsSlack( constraintslackvalues )
+
             self.lib.CoinFreeSolver()
-            lp.status = CoinLpStatus[self.lib.CoinGetSolutionStatus(hProb)]
-            return lp.status        
+            lp.status = CoinLpStatus[self.lib.CoinGetSolutionStatus( hProb )]
+            return lp.status
 
 if COINMP_DLL.available():
     COIN = COINMP_DLL
 
 # to import the gurobipy name into the module scope
 gurobipy = None
-class GUROBI(LpSolver):
+class GUROBI( LpSolver ):
     """
     The Gurobi LP/MIP solver (via its python interface)
     
@@ -1267,25 +1267,25 @@ class GUROBI(LpSolver):
     and the Model is in prob.solverModel
     """
     try:
-        sys.path.append(gurobi_path)
+        sys.path.append( gurobi_path )
         # to import the name into the module scope
         global gurobipy
         import gurobipy
     except: #FIXME: Bug because gurobi returns 
             #a gurobi exception on failed imports
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return False
-        def actualSolve(self, lp, callback = None):
+        def actualSolve( self, lp, callback = None ):
             """Solve a well formulated lp problem"""
             raise PulpSolverError, "GUROBI: Not Available"
     else:
-        def __init__(self, 
-                    mip = True, 
-                    msg = True, 
+        def __init__( self,
+                    mip = True,
+                    msg = True,
                     timeLimit = None,
                     epgap = None,
-                    **solverParams):
+                    **solverParams ):
             """
             Initializes the Gurobi solver.
             
@@ -1294,24 +1294,24 @@ class GUROBI(LpSolver):
             @param timeLimit: sets the maximum time for solution
             @param epgap: sets the integer bound gap
             """
-            LpSolver.__init__(self, mip, msg)
+            LpSolver.__init__( self, mip, msg )
             self.timeLimit = timeLimit
             self.epgap = epgap
             #set the output of gurobi
             if not self.msg:
-                gurobipy.setParam("OutputFlag", 0)
+                gurobipy.setParam( "OutputFlag", 0 )
             #set the gurobi parameter values
-            for key,value in solverParams.items():
-                gurobipy.setParam(key, value)
+            for key, value in solverParams.items():
+                gurobipy.setParam( key, value )
 
-        def findSolutionValues(self, lp):
+        def findSolutionValues( self, lp ):
             model = lp.solverModel
             solutionStatus = model.Status
             GRB = gurobipy.GRB
             gurobiLpStatus = {GRB.OPTIMAL: LpStatusOptimal,
-                                   GRB.INFEASIBLE: LpStatusInfeasible, 
-                                   GRB.INF_OR_UNBD: LpStatusInfeasible, 
-                                   GRB.UNBOUNDED: LpStatusUnbounded, 
+                                   GRB.INFEASIBLE: LpStatusInfeasible,
+                                   GRB.INF_OR_UNBD: LpStatusInfeasible,
+                                   GRB.UNBOUNDED: LpStatusUnbounded,
                                    GRB.ITERATION_LIMIT: LpStatusNotSolved,
                                    GRB.NODE_LIMIT: LpStatusNotSolved,
                                    GRB.TIME_LIMIT: LpStatusNotSolved,
@@ -1321,7 +1321,7 @@ class GUROBI(LpSolver):
                                    }
             #populate pulp solution values
             for var in lp.variables():
-                try: 
+                try:
                     var.varValue = var.solverVar.X
                 except gurobipy.GurobiError:
                     pass
@@ -1331,7 +1331,7 @@ class GUROBI(LpSolver):
                     pass
             #put pi and slack variables against the constraints
             for constr in lp.constraints.values():
-                try: 
+                try:
                     constr.pi = constr.solverConstraint.Pi
                 except gurobipy.GurobiError:
                     pass
@@ -1344,35 +1344,35 @@ class GUROBI(LpSolver):
             lp.resolveOK = True
             for var in lp.variables():
                 var.isModified = False
-            lp.status = gurobiLpStatus.get(solutionStatus, LpStatusUndefined)
+            lp.status = gurobiLpStatus.get( solutionStatus, LpStatusUndefined )
             return lp.status
 
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return True
-            
-        def callSolver(self, lp, callback = None):
+
+        def callSolver( self, lp, callback = None ):
             """Solves the problem with gurobi
             """
             #solve the problem
             self.solveTime = -clock()
-            lp.solverModel.optimize(callback = callback)
+            lp.solverModel.optimize( callback = callback )
             self.solveTime += clock()
 
-        def buildSolverModel(self, lp):
+        def buildSolverModel( self, lp ):
             """
             Takes the pulp lp model and translates it into a gurobi model
             """
-            log.debug("create the gurobi model")
-            lp.solverModel = gurobipy.Model(lp.name)
-            log.debug("set the sense of the problem")
+            log.debug( "create the gurobi model" )
+            lp.solverModel = gurobipy.Model( lp.name )
+            log.debug( "set the sense of the problem" )
             if lp.sense == MAX:
-                lp.solverModel.setAttr("ModelSense", -1)
+                lp.solverModel.setAttr( "ModelSense", -1 )
             if self.timeLimit:
-                lp.solverModel.setParam("TimeLimit", self.timeLimit)
+                lp.solverModel.setParam( "TimeLimit", self.timeLimit )
             if self.epgap:
-                lp.solverModel.setParam("MIPGap", self.epgap)
-            log.debug("add the variables to the problem")
+                lp.solverModel.setParam( "MIPGap", self.epgap )
+            log.debug( "add the variables to the problem" )
             for var in lp.variables():
                 lowBound = var.lowBound
                 if lowBound is None:
@@ -1380,19 +1380,19 @@ class GUROBI(LpSolver):
                 upBound = var.upBound
                 if upBound is None:
                     upBound = gurobipy.GRB.INFINITY
-                obj = lp.objective.get(var, 0.0)
+                obj = lp.objective.get( var, 0.0 )
                 varType = gurobipy.GRB.CONTINUOUS
                 if var.cat == LpInteger and self.mip:
-                    varType = gurobipy.GRB.INTEGER                    
-                var.solverVar = lp.solverModel.addVar(lowBound, upBound, 
+                    varType = gurobipy.GRB.INTEGER
+                var.solverVar = lp.solverModel.addVar( lowBound, upBound,
                             vtype = varType,
-                            obj = obj, name = var.name)
+                            obj = obj, name = var.name )
             lp.solverModel.update()
-            log.debug("add the Constraints to the problem")
-            for name,constraint in lp.constraints.items():
+            log.debug( "add the Constraints to the problem" )
+            for name, constraint in lp.constraints.items():
                 #build the expression
-                expr = gurobipy.LinExpr(constraint.values(), 
-                            [v.solverVar for v in constraint.keys()])
+                expr = gurobipy.LinExpr( constraint.values(),
+                            [v.solverVar for v in constraint.keys()] )
                 if constraint.sense == LpConstraintLE:
                     relation = gurobipy.GRB.LESS_EQUAL
                 elif constraint.sense == LpConstraintGE:
@@ -1401,44 +1401,44 @@ class GUROBI(LpSolver):
                     relation = gurobipy.GRB.EQUAL
                 else:
                     raise PulpSolverError, 'Detected an invalid constraint type'
-                constraint.solverConstraint = lp.solverModel.addConstr(expr, 
-                    relation, -constraint.constant, name)
-            lp.solverModel.update() 
-                               
-        def actualSolve(self, lp, callback = None):
+                constraint.solverConstraint = lp.solverModel.addConstr( expr,
+                    relation, -constraint.constant, name )
+            lp.solverModel.update()
+
+        def actualSolve( self, lp, callback = None ):
             """
             Solve a well formulated lp problem
 
             creates a gurobi model, variables and constraints and attaches
             them to the lp model which it then solves
             """
-            self.buildSolverModel(lp)
+            self.buildSolverModel( lp )
             #set the initial solution                        
-            log.debug("Solve the Model using gurobi")
-            self.callSolver(lp, callback = callback)
+            log.debug( "Solve the Model using gurobi" )
+            self.callSolver( lp, callback = callback )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp)          
+            solutionStatus = self.findSolutionValues( lp )
             for var in lp.variables():
                 var.modified = False
             for constraint in lp.constraints.values():
                 constraint.modified = False
             return solutionStatus
 
-        def actualResolve(self, lp, callback = None):
+        def actualResolve( self, lp, callback = None ):
             """
             Solve a well formulated lp problem
 
             uses the old solver and modifies the rhs of the modified constraints
             """
-            log.debug("Resolve the Model using gurobi")
+            log.debug( "Resolve the Model using gurobi" )
             for constraint in lp.constraints.values():
                 if constraint.modified:
-                    constraint.solverConstraint.setAttr(gurobipy.GRB.Attr.RHS, 
-                                                        -constraint.constant)
-            lp.solverModel.update() 
-            self.callSolver(lp, callback = callback)
+                    constraint.solverConstraint.setAttr( gurobipy.GRB.Attr.RHS,
+                                                        - constraint.constant )
+            lp.solverModel.update()
+            self.callSolver( lp, callback = callback )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp)          
+            solutionStatus = self.findSolutionValues( lp )
             for var in lp.variables():
                 var.modified = False
             for constraint in lp.constraints.values():
@@ -1447,7 +1447,7 @@ class GUROBI(LpSolver):
 
 #get the glpk name in global scope
 glpk = None
-class PYGLPK(LpSolver):
+class PYGLPK( LpSolver ):
     """
     The glpk LP/MIP solver (via its python interface)
 
@@ -1460,19 +1460,19 @@ class PYGLPK(LpSolver):
         global glpk
         import glpk
     except ImportError:
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return False
-        def actualSolve(self, lp, callback = None):
+        def actualSolve( self, lp, callback = None ):
             """Solve a well formulated lp problem"""
             raise PulpSolverError, "GLPK: Not Available"
     else:
-        def __init__(self,
+        def __init__( self,
                     mip = True,
                     msg = True,
                     timeLimit = None,
                     epgap = None,
-                    **solverParams):
+                    **solverParams ):
             """
             Initializes the glpk solver.
 
@@ -1482,13 +1482,13 @@ class PYGLPK(LpSolver):
             @param epgap: sets the integer bound gap
             @param solverParams: not handled
             """
-            LpSolver.__init__(self, mip, msg)
+            LpSolver.__init__( self, mip, msg )
             self.timeLimit = timeLimit # time limits are not handled
             self.epgap = epgap
             if not self.msg:
                 glpk.env.term_on = False
 
-        def findSolutionValues(self, lp):
+        def findSolutionValues( self, lp ):
             model = lp.solverModel
             solutionStatus = model.status
             glpkLpStatus = {"opt": LpStatusOptimal,
@@ -1517,113 +1517,113 @@ class PYGLPK(LpSolver):
             lp.resolveOK = True
             for var in lp.variables():
                 var.isModified = False
-            lp.status = glpkLpStatus.get(solutionStatus,
-                    LpStatusUndefined)
+            lp.status = glpkLpStatus.get( solutionStatus,
+                    LpStatusUndefined )
             return lp.status
 
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return True
 
-        def callSolver(self, lp, callback = None):
+        def callSolver( self, lp, callback = None ):
             """Solves the problem with glpk
             """
             self.solveTime = -clock()
             lp.solverModel.simplex()
             if self.mip:
-                if (lp.solverModel.status != "infeas"
+                if ( lp.solverModel.status != "infeas"
                         and lp.solverModel.status != "nofeas"
                         and lp.solverModel.status != "unbnd"
                         ):
                     lp.solverModel.integer()
             self.solveTime += clock()
 
-        def buildSolverModel(self, lp):
+        def buildSolverModel( self, lp ):
             """
             Takes the pulp lp model and translates it into a glpk model
             """
-            log.debug("create the glpk model")
+            log.debug( "create the glpk model" )
             lp.solverModel = glpk.LPX()
             lp.solverModel.name = lp.name
-            log.debug("set the sense of the problem")
+            log.debug( "set the sense of the problem" )
             if lp.sense == MAX:
                 lp.solverModel.obj.maximize = True
-            log.debug("add the Constraints to the problem")
-            lp.solverModel.rows.add(len(lp.constraints.keys()))
+            log.debug( "add the Constraints to the problem" )
+            lp.solverModel.rows.add( len( lp.constraints.keys() ) )
             i = 0
             for name, constraint in lp.constraints.items():
                 row = lp.solverModel.rows[i]
                 row.name = name
                 if constraint.sense == LpConstraintLE:
-                    row.bounds = None,-constraint.constant
+                    row.bounds = None, -constraint.constant
                 elif constraint.sense == LpConstraintGE:
                     row.bounds = -constraint.constant, None
                 elif constraint.sense == LpConstraintEQ:
-                    row.bounds = -constraint.constant,-constraint.constant
+                    row.bounds = -constraint.constant, -constraint.constant
                 else:
                     raise PulpSolverError, 'Detected an invalid constraint type'
                 i += 1
                 constraint.solverConstraint = row
-            log.debug("add the variables to the problem")
-            lp.solverModel.cols.add(len(lp.variables()))
+            log.debug( "add the variables to the problem" )
+            lp.solverModel.cols.add( len( lp.variables() ) )
             j = 0
             for var in lp.variables():
                 col = lp.solverModel.cols[j]
                 col.name = var.name
-                col.bounds = var.lowBound,var.upBound
+                col.bounds = var.lowBound, var.upBound
                 if var.cat == LpInteger:
                     col.kind = int
                 var.solverVar = col
                 j += 1
-            log.debug("set the objective function")
-            lp.solverModel.obj[:] = [lp.objective.get(var, 0.0) for var in
+            log.debug( "set the objective function" )
+            lp.solverModel.obj[:] = [lp.objective.get( var, 0.0 ) for var in
                     lp.variables()]
-            log.debug("set the problem matrix")
-            for name,constraint in lp.constraints.items():
-                constraint.solverConstraint.matrix =[(var.solverVar.index,
+            log.debug( "set the problem matrix" )
+            for name, constraint in lp.constraints.items():
+                constraint.solverConstraint.matrix = [( var.solverVar.index,
                     value ) for var, value in constraint.items()]
 
-        def actualSolve(self, lp, callback = None):
+        def actualSolve( self, lp, callback = None ):
             """
             Solve a well formulated lp problem
 
             creates a glpk model, variables and constraints and attaches
             them to the lp model which it then solves
             """
-            self.buildSolverModel(lp)
+            self.buildSolverModel( lp )
             #set the initial solution
-            log.debug("Solve the Model using glpk")
-            self.callSolver(lp, callback = callback)
+            log.debug( "Solve the Model using glpk" )
+            self.callSolver( lp, callback = callback )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp)
+            solutionStatus = self.findSolutionValues( lp )
             for var in lp.variables():
                 var.modified = False
             for constraint in lp.constraints.values():
                 constraint.modified = False
             return solutionStatus
 
-        def actualResolve(self, lp, callback = None):
+        def actualResolve( self, lp, callback = None ):
             """
             Solve a well formulated lp problem
 
             uses the old solver and modifies the rhs of the modified
             constraints
             """
-            log.debug("Resolve the Model using glpk")
+            log.debug( "Resolve the Model using glpk" )
             for constraint in lp.constraints.values():
                 row = constraint.solverConstraint
                 if constraint.modified:
                     if constraint.sense == LpConstraintLE:
-                        row.bounds = None,-constraint.constant
+                        row.bounds = None, -constraint.constant
                     elif constraint.sense == LpConstraintGE:
                         row.bounds = -constraint.constant, None
                     elif constraint.sense == LpConstraintEQ:
-                        row.bounds = -constraint.constant,-constraint.constant
+                        row.bounds = -constraint.constant, -constraint.constant
                     else:
                         raise PulpSolverError, 'Detected an invalid constraint type'
-            self.callSolver(lp, callback = callback)
+            self.callSolver( lp, callback = callback )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp)
+            solutionStatus = self.findSolutionValues( lp )
             for var in lp.variables():
                 var.modified = False
             for constraint in lp.constraints.values():
@@ -1631,7 +1631,7 @@ class PYGLPK(LpSolver):
             return solutionStatus
 
 yaposib = None
-class YAPOSIB(LpSolver):
+class YAPOSIB( LpSolver ):
     """
     COIN OSI (via its python interface)
 
@@ -1644,20 +1644,20 @@ class YAPOSIB(LpSolver):
         global yaposib
         import yaposib
     except ImportError:
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return False
-        def actualSolve(self, lp, callback = None):
+        def actualSolve( self, lp, callback = None ):
             """Solve a well formulated lp problem"""
             raise PulpSolverError, "YAPOSIB: Not Available"
     else:
-        def __init__(self,
+        def __init__( self,
                     mip = True,
                     msg = True,
                     timeLimit = None,
                     epgap = None,
                     solverName = "Clp",
-                    **solverParams):
+                    **solverParams ):
             """
             Initializes the yaposib solver.
 
@@ -1669,10 +1669,10 @@ class YAPOSIB(LpSolver):
             @param epgap:        not supported
             @param solverParams: not supported
             """
-            LpSolver.__init__(self, mip, msg)
+            LpSolver.__init__( self, mip, msg )
             self.solverName = solverName
 
-        def findSolutionValues(self, lp):
+        def findSolutionValues( self, lp ):
             model = lp.solverModel
             solutionStatus = model.status
             glpkLpStatus = {"optimal": LpStatusOptimal,
@@ -1694,47 +1694,47 @@ class YAPOSIB(LpSolver):
             lp.resolveOK = True
             for var in lp.variables():
                 var.isModified = False
-            lp.status = glpkLpStatus.get(solutionStatus,
-                    LpStatusUndefined)
+            lp.status = glpkLpStatus.get( solutionStatus,
+                    LpStatusUndefined )
             return lp.status
 
-        def available(self):
+        def available( self ):
             """True if the solver is available"""
             return True
 
-        def callSolver(self, lp, callback = None):
+        def callSolver( self, lp, callback = None ):
             """Solves the problem with yaposib
             """
             if self.msg == 0:
                 #close stdout to get rid of messages
-                tempfile = open(mktemp(),'w')
-                savestdout = os.dup(1)
-                os.close(1)
-                if os.dup(tempfile.fileno()) != 1:
+                tempfile = open( mktemp(), 'w' )
+                savestdout = os.dup( 1 )
+                os.close( 1 )
+                if os.dup( tempfile.fileno() ) != 1:
                     raise PulpSolverError, "couldn't redirect stdout - dup() error"
             self.solveTime = -clock()
-            lp.solverModel.solve(self.mip)
+            lp.solverModel.solve( self.mip )
             self.solveTime += clock()
             if self.msg == 0:
                 #reopen stdout
-                os.close(1)
-                os.dup(savestdout)
-                os.close(savestdout)
+                os.close( 1 )
+                os.dup( savestdout )
+                os.close( savestdout )
 
-        def buildSolverModel(self, lp):
+        def buildSolverModel( self, lp ):
             """
             Takes the pulp lp model and translates it into a yaposib model
             """
-            log.debug("create the yaposib model")
-            lp.solverModel = yaposib.Problem(self.solverName)
+            log.debug( "create the yaposib model" )
+            lp.solverModel = yaposib.Problem( self.solverName )
             prob = lp.solverModel
             prob.name = lp.name
-            log.debug("set the sense of the problem")
+            log.debug( "set the sense of the problem" )
             if lp.sense == MAX:
                 prob.obj.maximize = True
-            log.debug("add the variables to the problem")
+            log.debug( "add the variables to the problem" )
             for var in lp.variables():
-                col = prob.cols.add(yaposib.vec([]))
+                col = prob.cols.add( yaposib.vec( [] ) )
                 col.name = var.name
                 if not var.lowBound is None:
                     col.lowerbound = var.lowBound
@@ -1742,12 +1742,12 @@ class YAPOSIB(LpSolver):
                     col.upperbound = var.upBound
                 if var.cat == LpInteger:
                     col.integer = True
-                prob.obj[col.index] = lp.objective.get(var, 0.0)
+                prob.obj[col.index] = lp.objective.get( var, 0.0 )
                 var.solverVar = col
-            log.debug("add the Constraints to the problem")
+            log.debug( "add the Constraints to the problem" )
             for name, constraint in lp.constraints.items():
-                row = prob.rows.add(yaposib.vec([(var.solverVar.index,
-                    value) for var, value in constraint.items()]))
+                row = prob.rows.add( yaposib.vec( [( var.solverVar.index,
+                    value ) for var, value in constraint.items()] ) )
                 if constraint.sense == LpConstraintLE:
                     row.upperbound = -constraint.constant
                 elif constraint.sense == LpConstraintGE:
@@ -1760,33 +1760,33 @@ class YAPOSIB(LpSolver):
                 row.name = name
                 constraint.solverConstraint = row
 
-        def actualSolve(self, lp, callback = None):
+        def actualSolve( self, lp, callback = None ):
             """
             Solve a well formulated lp problem
 
             creates a yaposib model, variables and constraints and attaches
             them to the lp model which it then solves
             """
-            self.buildSolverModel(lp)
+            self.buildSolverModel( lp )
             #set the initial solution
-            log.debug("Solve the model using yaposib")
-            self.callSolver(lp, callback = callback)
+            log.debug( "Solve the model using yaposib" )
+            self.callSolver( lp, callback = callback )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp)
+            solutionStatus = self.findSolutionValues( lp )
             for var in lp.variables():
                 var.modified = False
             for constraint in lp.constraints.values():
                 constraint.modified = False
             return solutionStatus
 
-        def actualResolve(self, lp, callback = None):
+        def actualResolve( self, lp, callback = None ):
             """
             Solve a well formulated lp problem
 
             uses the old solver and modifies the rhs of the modified
             constraints
             """
-            log.debug("Resolve the model using yaposib")
+            log.debug( "Resolve the model using yaposib" )
             for constraint in lp.constraints.values():
                 row = constraint.solverConstraint
                 if constraint.modified:
@@ -1799,9 +1799,9 @@ class YAPOSIB(LpSolver):
                         row.lowerbound = -constraint.constant
                     else:
                         raise PulpSolverError, 'Detected an invalid constraint type'
-            self.callSolver(lp, callback = callback)
+            self.callSolver( lp, callback = callback )
             #get the solution information
-            solutionStatus = self.findSolutionValues(lp)
+            solutionStatus = self.findSolutionValues( lp )
             for var in lp.variables():
                 var.modified = False
             for constraint in lp.constraints.values():
@@ -1810,17 +1810,17 @@ class YAPOSIB(LpSolver):
 
 try:
     import ctypes
-    def ctypesArrayFill(myList, type=ctypes.c_double):
+    def ctypesArrayFill( myList, type = ctypes.c_double ):
         """
         Creates a c array with ctypes from a python list
         type is the type of the c array
         """
-        ctype= type * len(myList)
+        ctype = type * len( myList )
         cList = ctype()
-        for i,elem in enumerate(myList):
-            cList[i] = elem 
+        for i, elem in enumerate( myList ):
+            cList[i] = elem
         return cList
-except(ImportError):
-    def ctypesArrayFill(myList, type = None):
+except( ImportError ):
+    def ctypesArrayFill( myList, type = None ):
         return None
 

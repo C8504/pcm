@@ -40,42 +40,42 @@ demand = { #Store    Demand
 costs = [  #Stores
          #SD BA TU DA
          [5, 3, 2, 6], #SF
-         [4, 7, 8, 10],#LA    Plants
+         [4, 7, 8, 10], #LA    Plants
          [6, 5, 3, 8], #PH
          [9, 8, 6, 5]  #DE         
          ]
 
 # Creates a list of tuples containing all the possible routes for transport
-Routes = [(p,s) for p in Plants for s in Stores]
+Routes = [( p, s ) for p in Plants for s in Stores]
 
 # Splits the dictionaries to be more understandable
-(supply,fixedCost) = splitDict(supplyData)
+( supply, fixedCost ) = splitDict( supplyData )
 
 # The cost data is made into a dictionary
-costs = makeDict([Plants,Stores],costs,0)
+costs = makeDict( [Plants, Stores], costs, 0 )
 
 # Creates the problem variables of the Flow on the Arcs
-flow = DVar.dicts("Route",(Plants,Stores),0,None,LpInteger)
+flow = DVar.dicts( "Route", ( Plants, Stores ), 0, None, LpInteger )
 
 # Creates the master problem variables of whether to build the Plants or not
-build = DVar.dicts("BuildaPlant",Plants,0,1,LpInteger)
+build = DVar.dicts( "BuildaPlant", Plants, 0, 1, LpInteger )
 
 # Creates the 'prob' variable to contain the problem data
-prob = Prob("Computer Plant Problem",MIN)
+prob = Prob( "Computer Plant Problem", MIN )
 
 # The objective function is added to prob - The sum of the transportation costs and the building fixed costs
-prob += lpSum([flow[p][s]*costs[p][s] for (p,s) in Routes])+lpSum([fixedCost[p]*build[p] for p in Plants]),"Total Costs"
+prob += lpSum( [flow[p][s] * costs[p][s] for ( p, s ) in Routes] ) + lpSum( [fixedCost[p] * build[p] for p in Plants] ), "Total Costs"
 
 # The Supply maximum constraints are added for each supply node (plant)
 for p in Plants:
-    prob += lpSum([flow[p][s] for s in Stores])<=supply[p]*build[p], "Sum of Products out of Plant %s"%p
+    prob += lpSum( [flow[p][s] for s in Stores] ) <= supply[p] * build[p], "Sum of Products out of Plant %s" % p
 
 # The Demand minimum constraints are added for each demand node (store)
 for s in Stores:
-    prob += lpSum([flow[p][s] for p in Plants])>=demand[s], "Sum of Products into Stores %s"%s
+    prob += lpSum( [flow[p][s] for p in Plants] ) >= demand[s], "Sum of Products into Stores %s" % s
 
 # The problem data is written to an .lp file
-prob.writeLP("ComputerPlantProblem.lp")
+prob.writeLP( "ComputerPlantProblem.lp" )
 
 # The problem is solved using PuLP's choice of Solver
 prob.solve()
@@ -88,4 +88,4 @@ for v in prob.variables():
     print v.name, "=", v.varValue
 
 # The optimised objective function value is printed to the screen    
-print "Total Costs = ", value(prob.objective)
+print "Total Costs = ", value( prob.objective )

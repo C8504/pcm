@@ -5,29 +5,29 @@
 from pulp import *
 
 # A new LP problem
-prob = Prob("test1", MIN)
+prob = Prob( "test1", MIN )
 
 # Variables
 # 0 <= x <= 4
-x = DVar("x", 0, 4)
+x = DVar( "x", 0, 4 )
 # -1 <= y <= 1
-y = DVar("y", -1, 1)
+y = DVar( "y", -1, 1 )
 # 0 <= z
-z = DVar("z", 0)
+z = DVar( "z", 0 )
 # Use None for +/- Infinity, i.e. z <= 0 -> DVar("z", None, 0)
 
 # Objective
-prob += x + 4*y + 9*z, "obj"
+prob += x + 4 * y + 9 * z, "obj"
 # (the name at the end is facultative)
 
 # Constraints
-prob += x+y <= 5, "c1"
-prob += x+z >= 10, "c2"
-prob += -y+z == 7, "c3"
+prob += x + y <= 5, "c1"
+prob += x + z >= 10, "c2"
+prob += -y + z == 7, "c3"
 # (the names at the end are facultative)
 
 # Write the problem as an LP file
-prob.writeLP("test1.lp")
+prob.writeLP( "test1.lp" )
 
 # Solve the problem using the default solver
 prob.solve()
@@ -49,4 +49,4 @@ for v in prob.variables():
 	print v.name, "=", v.varValue
 
 # Print the value of the objective
-print "objective=", value(prob.objective)
+print "objective=", value( prob.objective )

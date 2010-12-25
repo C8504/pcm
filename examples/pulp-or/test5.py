@@ -13,7 +13,7 @@ from pulp import *
 from random import *
 
 # A new LP problem
-prob = Prob("test5", MIN)
+prob = Prob( "test5", MIN )
 
 # Parameters
 # Number of constraints
@@ -22,22 +22,22 @@ m = 3
 D = 100
 
 # Number of variables
-n = 10*(m-1)
+n = 10 * ( m - 1 )
 
 # A vector of n binary variables
-x = DVar.matrix("x", range(n), 0, 1, LpInteger)
+x = DVar.matrix( "x", range( n ), 0, 1, LpInteger )
 
 # Slacks
-s = DVar.matrix("s", range(m), 0)
-w = DVar.matrix("w", range(m), 0)
+s = DVar.matrix( "s", range( m ), 0 )
+w = DVar.matrix( "w", range( m ), 0 )
 
 # Objective
-prob += lpSum(s) + lpSum(w)
+prob += lpSum( s ) + lpSum( w )
 
 # Constraints
-d = [[randint(0,D) for i in range(n)] for j in range(m)]
-for j in range(m):
-	prob += lpDot(d[j], x) + s[j] - w[j] == lpSum(d[j])/2
+d = [[randint( 0, D ) for i in range( n )] for j in range( m )]
+for j in range( m ):
+	prob += lpDot( d[j], x ) + s[j] - w[j] == lpSum( d[j] ) / 2
 
 # Resolution
 prob.solve()
@@ -50,4 +50,4 @@ for v in prob.variables():
 	print v.name, "=", v.varValue
 
 # Print the value of the objective
-print "objective=", value(prob.objective)
+print "objective=", value( prob.objective )

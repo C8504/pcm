@@ -11,23 +11,23 @@ from pulp import *
 from math import *
 
 # A new LP problem
-prob = Prob("test2", MAX)
+prob = Prob( "test2", MAX )
 
 # Parameters
 # Size of the problem
 n = 15
-k = floor(log(n)/log(2));
+k = floor( log( n ) / log( 2 ) );
 
 # A vector of n binary variables
-x = DVar.matrix("x", range(n), 0, 1, LpInteger)
+x = DVar.matrix( "x", range( n ), 0, 1, LpInteger )
 
 # A vector of weights
-a = [pow(2,k + n + 1) + pow(2,k + n + 1 - j) + 1 for j in range(1,n+1)]
+a = [pow( 2, k + n + 1 ) + pow( 2, k + n + 1 - j ) + 1 for j in range( 1, n + 1 )]
 # The maximum weight
-b = 0.5 * floor(sum(a))
+b = 0.5 * floor( sum( a ) )
 
 # The total weight
-weight = lpDot(a, x)
+weight = lpDot( a, x )
 
 # Objective
 prob += weight
@@ -45,4 +45,4 @@ for v in prob.variables():
 	print v.name, "=", v.varValue
 
 # Print the value of the objective
-print "objective=", value(prob.objective)
+print "objective=", value( prob.objective )

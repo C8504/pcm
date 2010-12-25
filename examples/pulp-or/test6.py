@@ -7,36 +7,36 @@
 from pulp import *
 
 # A new LP problem
-prob = Prob("test6", MIN)
+prob = Prob( "test6", MIN )
 
 # objective
-obj = LpConstraintVar("obj")
+obj = LpConstraintVar( "obj" )
 
 # constraints
 
-a = LpConstraintVar("Ca", LpConstraintLE, 5)
+a = LpConstraintVar( "Ca", LpConstraintLE, 5 )
 
-b = LpConstraintVar("Cb", LpConstraintGE, 10)
+b = LpConstraintVar( "Cb", LpConstraintGE, 10 )
 
-c = LpConstraintVar("Cc", LpConstraintEQ, 7)
+c = LpConstraintVar( "Cc", LpConstraintEQ, 7 )
 
-prob.setObjective(obj)
+prob.setObjective( obj )
 prob += a
 prob += b
 prob += c
 
 # Variables
 # 0 <= x <= 4
-x = DVar("x", 0, 4, LpContinuous, obj + a + b)
+x = DVar( "x", 0, 4, LpContinuous, obj + a + b )
 # -1 <= y <= 1
-y = DVar("y", -1, 1, LpContinuous, 4*obj + a - c)
+y = DVar( "y", -1, 1, LpContinuous, 4 * obj + a - c )
 # 0 <= z
-z = DVar("z", 0, None, LpContinuous, 9*obj + b + c)
+z = DVar( "z", 0, None, LpContinuous, 9 * obj + b + c )
 # Use None for +/- Infinity, i.e. z <= 0 -> DVar("z", None, 0)
 
 
 # Write the problem as an LP file
-prob.writeLP("test6.lp")
+prob.writeLP( "test6.lp" )
 
 # Solve the problem using the default solver
 prob.solve()
@@ -58,4 +58,4 @@ for v in prob.variables():
     print v.name, "=", v.varValue
 
 # Print the value of the objective
-print "objective=", value(prob.objective)
+print "objective=", value( prob.objective )

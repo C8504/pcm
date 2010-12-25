@@ -35,7 +35,7 @@ EPS = 1e-7
 LpContinuous = "Continuous"
 LpInteger = "Integer"
 LpBinary = "Binary"
-LpCategories = {LpContinuous: "Continuous", LpInteger: "Integer", 
+LpCategories = {LpContinuous: "Continuous", LpInteger: "Integer",
                 LpBinary: "Binary"}
 
 # objective sense
@@ -65,7 +65,7 @@ LpConstraintSenses = {LpConstraintEQ:"=", LpConstraintLE:"<=", LpConstraintGE:">
 # LP line size
 LpCplexLPLineSize = 78
 
-def isiterable(obj):
-    try: obj=iter(obj)
+def isiterable( obj ):
+    try: obj = iter( obj )
     except: return False
     else: return True

@@ -5,21 +5,21 @@
 from pulp import *
 
 # A new LP problem
-prob = Prob("test7", MIN)
+prob = Prob( "test7", MIN )
 
-x = DVar("x", 0, 4)
+x = DVar( "x", 0, 4 )
 
-y = DVar("y", -1, 1)
+y = DVar( "y", -1, 1 )
 
-z = DVar("z", 0)
+z = DVar( "z", 0 )
 
-prob += x + 4*y + 9*z, "obj"
+prob += x + 4 * y + 9 * z, "obj"
 
 prob += x + y <= 5, "c1"
-prob += x + z >= 10,"c2"
-prob += -y+ z == 7,"c3"
+prob += x + z >= 10, "c2"
+prob += -y + z == 7, "c3"
 
-prob.writeLP("test7.lp")
+prob.writeLP( "test7.lp" )
 
 prob.solve()
 
@@ -28,7 +28,7 @@ print "Status:", LpStatus[prob.status]
 for v in prob.variables():
 	print v.name, "=", v.varValue, "\tReduced Cost =", v.dj
 
-print "objective=", value(prob.objective)
+print "objective=", value( prob.objective )
 
 print "\nSensitivity Analysis\nConstraint\t\tShadow Price\tSlack"
 for name, c in prob.constraints.items():
