@@ -53,7 +53,7 @@ def createMaster():
     # The surplus variables are created
     surplusVars = []
     for i in Pattern.lenOpts:
-        surplusVars += [DVar( "Surplus " + i, 0, None, LpContinuous, -surplusPrice[i] * obj - constraints[i] )]
+        surplusVars += [DVar( "Surplus " + i, 0, None, LpC, -surplusPrice[i] * obj - constraints[i] )]
 
     return prob, obj, constraints
 
@@ -81,7 +81,7 @@ def addPatterns( obj, constraints, newPatterns ):
     # The pattern variables are created
     pattVars = []
     for i in Patterns:
-        pattVars += [DVar( "Pattern " + i.name, 0, None, LpContinuous, ( i.cost - Pattern.trimValue * i.trim() ) * obj\
+        pattVars += [DVar( "Pattern " + i.name, 0, None, LpC, ( i.cost - Pattern.trimValue * i.trim() ) * obj\
          + lpSum( [constraints[l] * i.lengthsdict[l] for l in Pattern.lenOpts] ) )]
 
 def masterSolve( prob, relax = True ):
@@ -89,7 +89,7 @@ def masterSolve( prob, relax = True ):
     # Unrelaxes the Integer Constraint
     if not relax:
         for v in prob.variables():
-            v.cat = LpInteger
+            v.cat = LpI
 
     # The problem is solved and rounded
     prob.solve()
@@ -115,9 +115,9 @@ def subSolve( duals ):
     prob = Prob( "SubProb", MIN )
 
     # The problem variables are created
-    vars = DVar.dicts( "Roll Length", Pattern.lenOpts, 0, None, LpInteger )
+    vars = DVar.dicts( "Roll Length", Pattern.lenOpts, 0, None, LpI )
 
-    trim = DVar( "Trim", 0 , None, LpInteger )
+    trim = DVar( "Trim", 0 , None, LpI )
 
     # The objective function is entered: the reduced cost of a new pattern
     prob += ( Pattern.cost - Pattern.trimValue * trim ) - lpSum( [vars[i] * duals[i] for i in Pattern.lenOpts] ), "Objective"

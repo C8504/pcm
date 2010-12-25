@@ -32,11 +32,11 @@ Note that hopefully these will be changed into something more pythonic
 EPS = 1e-7
 
 # variable categories
-LpContinuous = "Continuous"
-LpInteger = "Integer"
-LpBinary = "Binary"
-LpCategories = {LpContinuous: "Continuous", LpInteger: "Integer",
-                LpBinary: "Binary"}
+LpC = "Continuous"
+LpI = "Integer"
+LpB = "Binary"
+LpCategories = {LpC: "Continuous", LpI: "Integer",
+                LpB: "Binary"}
 
 # objective sense
 MIN = 1

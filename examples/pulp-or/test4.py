@@ -32,9 +32,9 @@ delta = [[randint( ai, ai + bi ) for ai, bi in ab] for ab in interval]
 
 # Variables
 # x : Whether or not to start a project
-x = DVar.matrix( "x", ( N, ), 0, 1, LpInteger )
+x = DVar.matrix( "x", ( N, ), 0, 1, LpI )
 # y : Whether or not to finish it, in each scenario
-y = DVar.matrix( "y", ( S, N ), 0, 1, LpInteger )
+y = DVar.matrix( "y", ( S, N ), 0, 1, LpI )
 
 # Problem
 lp = Prob( "Planification", MIN )

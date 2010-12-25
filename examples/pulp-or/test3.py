@@ -52,7 +52,7 @@ for t in time:
 		p[t][i].upBound = pmax[i]
 
 # State (started/stopped) variables for each time step and each thermal unit
-d = DVar.matrix( "d", ( xtime, unit ), 0, 1, LpInteger )
+d = DVar.matrix( "d", ( xtime, unit ), 0, 1, LpI )
 
 # Production constraint relative to the unit state (started/stoped)
 for t in time:

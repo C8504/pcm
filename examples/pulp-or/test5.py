@@ -25,7 +25,7 @@ D = 100
 n = 10 * ( m - 1 )
 
 # A vector of n binary variables
-x = DVar.matrix( "x", range( n ), 0, 1, LpInteger )
+x = DVar.matrix( "x", range( n ), 0, 1, LpI )
 
 # Slacks
 s = DVar.matrix( "s", range( m ), 0 )

@@ -55,9 +55,9 @@ def pulpTest001( solver ):
     """
     Test that a variable is deleted when it is suptracted to 0
     """
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
     c1 = x + y <= 5
     c2 = c1 + z - z
     print "\t Testing zero subtraction"
@@ -66,10 +66,10 @@ def pulpTest001( solver ):
 def pulpTest010( solver ):
     # Continuous
     prob = Prob( "test010", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w", 0 )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w", 0 )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -81,10 +81,10 @@ def pulpTest010( solver ):
 def pulpTest011( solver ):
     # Continuous Maximisation
     prob = Prob( "test011", MAX )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w", 0 )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w", 0 )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -96,10 +96,10 @@ def pulpTest011( solver ):
 def pulpTest012( solver ):
     # Unbounded
     prob = Prob( "test012", MAX )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w", 0 )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w", 0 )
     prob += x + 4 * y + 9 * z + w, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -125,9 +125,9 @@ def pulpTest012( solver ):
 def pulpTest020( solver ):
     # MIP
     prob = Prob( "test020", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0, None, LpInteger )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0, None, LpI )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -138,9 +138,9 @@ def pulpTest020( solver ):
 def pulpTest030( solver ):
     # relaxed MIP
     prob = Prob( "test030", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0, None, LpInteger )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0, None, LpI )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -153,9 +153,9 @@ def pulpTest030( solver ):
 def pulpTest040( solver ):
     # Feasibility only
     prob = Prob( "test040", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0, None, LpInteger )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0, None, LpI )
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
     prob += -y + z == 7.5, "c3"
@@ -166,9 +166,9 @@ def pulpTest040( solver ):
 def pulpTest050( solver ):
     # Infeasible
     prob = Prob( "test050", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0, 10 )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0, 10 )
     prob += x + y <= 5.2, "c1"
     prob += x + z >= 10.3, "c2"
     prob += -y + z == 17.5, "c3"
@@ -185,9 +185,9 @@ def pulpTest050( solver ):
 def pulpTest060( solver ):
     # Integer Infeasible
     prob = Prob( "test060", MIN )
-    x = LpVariable( "x", 0, 4, LpInteger )
-    y = LpVariable( "y", -1, 1, LpInteger )
-    z = LpVariable( "z", 0, 10, LpInteger )
+    x = DVar( "x", 0, 4, LpI )
+    y = DVar( "y", -1, 1, LpI )
+    z = DVar( "z", 0, 10, LpI )
     prob += x + y <= 5.2, "c1"
     prob += x + z >= 10.3, "c2"
     prob += -y + z == 7.4, "c3"
@@ -217,9 +217,9 @@ def pulpTest070( solver ):
     prob += b
     prob += c
     # Variables
-    x = LpVariable( "x", 0, 4, LpContinuous, obj + a + b )
-    y = LpVariable( "y", -1, 1, LpContinuous, 4 * obj + a - c )
-    z = LpVariable( "z", 0, None, LpContinuous, 9 * obj + b + c )
+    x = DVar( "x", 0, 4, LpC, obj + a + b )
+    y = DVar( "y", -1, 1, LpC, 4 * obj + a - c )
+    z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
     print "\t Testing column based modelling"
     pulpTestCheck( prob, solver, [LpStatusOptimal], {x:4, y:-1, z:6} )
 
@@ -237,9 +237,9 @@ def pulpTest075( solver ):
     prob += b
     prob += c
     # Variables
-    x = LpVariable( "x", 0, 4, LpContinuous, obj + b )
-    y = LpVariable( "y", -1, 1, LpContinuous, 4 * obj - c )
-    z = LpVariable( "z", 0, None, LpContinuous, 9 * obj + b + c )
+    x = DVar( "x", 0, 4, LpC, obj + b )
+    y = DVar( "y", -1, 1, LpC, 4 * obj - c )
+    z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
     if solver.__class__ in [CPLEX_DLL, CPLEX_CMD, COINMP_DLL]:
         print "\t Testing column based modelling with empty constraints"
         pulpTestCheck( prob, solver, [LpStatusOptimal], {x:4, y:-1, z:6} )
@@ -249,9 +249,9 @@ def pulpTest080( solver ):
     Test the reporting of dual variables slacks and reduced costs
     """
     prob = Prob( "test080", MIN )
-    x = LpVariable( "x", 0, 5 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
+    x = DVar( "x", 0, 5 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
     c1 = x + y <= 5
     c2 = x + z >= 10
     c3 = -y + z == 7
@@ -284,10 +284,10 @@ def pulpTest090( solver ):
     prob += c
 
     prob.setSolver( solver )# Variables
-    x = LpVariable( "x", 0, 4, LpContinuous, obj + a + b )
-    y = LpVariable( "y", -1, 1, LpContinuous, 4 * obj + a - c )
+    x = DVar( "x", 0, 4, LpC, obj + a + b )
+    y = DVar( "y", -1, 1, LpC, 4 * obj + a - c )
     prob.resolve()
-    z = LpVariable( "z", 0, None, LpContinuous, 9 * obj + b + c )
+    z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
     if solver.__class__ in [CPLEX_DLL, COINMP_DLL]:
         print "\t Testing resolve of problem"
         prob.resolve()
@@ -301,9 +301,9 @@ def pulpTest100( solver ):
     """
     # set up a cubic feasible region
     prob = Prob( "test100", MIN )
-    x = LpVariable( "x", 0, 1 )
-    y = LpVariable( "y", 0, 1 )
-    z = LpVariable( "z", 0, 1 )
+    x = DVar( "x", 0, 1 )
+    y = DVar( "y", 0, 1 )
+    z = DVar( "z", 0, 1 )
 
     obj1 = x + 0 * y + 0 * z
     obj2 = 0 * x - 1 * y + 0 * z
@@ -321,10 +321,10 @@ def pulpTest110( solver ):
     Test the ability to use fractional constraints
     """
     prob = Prob( "test110", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w", 0 )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w", 0 )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -340,10 +340,10 @@ def pulpTest120( solver ):
     Test the ability to use Elastic constraints
     """
     prob = Prob( "test120", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w" )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w" )
     prob += x + 4 * y + 9 * z + w, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -358,10 +358,10 @@ def pulpTest121( solver ):
     Test the ability to use Elastic constraints
     """
     prob = Prob( "test121", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w" )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w" )
     prob += x + 4 * y + 9 * z + w, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -376,10 +376,10 @@ def pulpTest122( solver ):
     Test the ability to use Elastic constraints (penalty unchanged)
     """
     prob = Prob( "test122", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w" )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w" )
     prob += x + 4 * y + 9 * z + w, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -395,10 +395,10 @@ def pulpTest123( solver ):
     Test the ability to use Elastic constraints (penalty unbounded)
     """
     prob = Prob( "test123", MIN )
-    x = LpVariable( "x", 0, 4 )
-    y = LpVariable( "y", -1, 1 )
-    z = LpVariable( "z", 0 )
-    w = LpVariable( "w" )
+    x = DVar( "x", 0, 4 )
+    y = DVar( "y", -1, 1 )
+    z = DVar( "z", 0 )
+    w = DVar( "w" )
     prob += x + 4 * y + 9 * z + w, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"

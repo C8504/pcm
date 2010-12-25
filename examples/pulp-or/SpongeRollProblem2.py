@@ -43,10 +43,10 @@ trimValue = 0.04
 patterns = makeDict( [LenOpts, PatternNames], patterns, 0 )
 
 # The problem variables of the number of each pattern to make are created
-pattVars = DVar.dicts( "Patt", PatternNames, 0, None, LpInteger )
+pattVars = DVar.dicts( "Patt", PatternNames, 0, None, LpI )
 
 # The problem variables of the number of surplus rolls for each length are created
-surplusVars = DVar.dicts( "Surp", LenOpts, 0, None, LpInteger )
+surplusVars = DVar.dicts( "Surp", LenOpts, 0, None, LpI )
 
 # The variable 'prob' is created
 prob = Prob( "Cutting Stock Problem", MIN )

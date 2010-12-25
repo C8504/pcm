@@ -25,7 +25,7 @@ possible_tables = [tuple( c ) for c in pulp.allcombinations( guests,
 x = pulp.DVar.dicts( 'table', possible_tables,
                             lowBound = 0,
                             upBound = 1,
-                            cat = pulp.LpInteger )
+                            cat = pulp.LpI )
 
 seating_model = pulp.Prob( "Wedding Seating Model", pulp.MIN )
 

@@ -143,7 +143,7 @@ class LpSolver:
     #TODO: Not sure if this code should be here or in a child class
     def getCplexStyleArrays( self, lp,
                        senseDict = {LpConstraintEQ:"E", LpConstraintLE:"L", LpConstraintGE:"G"},
-                       LpVarCategories = {LpContinuous: "C", LpInteger: "I"},
+                       LpVarCategories = {LpC: "C", LpI: "I"},
                        LpObjSenses = {MAX :-1,
                                       MIN : 1},
                        infBound = 1e20
@@ -833,8 +833,8 @@ try:
             NumVarCharArray = ctypes.c_char * numVars
             columnType = NumVarCharArray()
             if lp.isMIP():
-                CplexLpCategories = {LpContinuous: "C",
-                                    LpInteger: "I"}
+                CplexLpCategories = {LpC: "C",
+                                    LpI: "I"}
                 for v in vars:
                     columnType[self.v2n[v] - offset] = CplexLpCategories[v.cat]
             return  numVars, numels, objectCoeffs, \
@@ -1382,7 +1382,7 @@ class GUROBI( LpSolver ):
                     upBound = gurobipy.GRB.INFINITY
                 obj = lp.objective.get( var, 0.0 )
                 varType = gurobipy.GRB.CONTINUOUS
-                if var.cat == LpInteger and self.mip:
+                if var.cat == LpI and self.mip:
                     varType = gurobipy.GRB.INTEGER
                 var.solverVar = lp.solverModel.addVar( lowBound, upBound,
                             vtype = varType,
@@ -1571,7 +1571,7 @@ class PYGLPK( LpSolver ):
                 col = lp.solverModel.cols[j]
                 col.name = var.name
                 col.bounds = var.lowBound, var.upBound
-                if var.cat == LpInteger:
+                if var.cat == LpI:
                     col.kind = int
                 var.solverVar = col
                 j += 1
@@ -1740,7 +1740,7 @@ class YAPOSIB( LpSolver ):
                     col.lowerbound = var.lowBound
                 if not var.upBound is None:
                     col.upperbound = var.upBound
-                if var.cat == LpInteger:
+                if var.cat == LpI:
                     col.integer = True
                 prob.obj[col.index] = lp.objective.get( var, 0.0 )
                 var.solverVar = col

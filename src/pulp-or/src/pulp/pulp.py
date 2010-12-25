@@ -254,7 +254,7 @@ class DVar( LpElement ):
         existence in the objective function and constraints
     """
     def __init__( self, name, lowBound = None, upBound = None,
-                  cat = LpContinuous, e = None ):
+                  cat = LpC, e = None ):
         LpElement.__init__( self, name )
         self.lowBound = lowBound
         self.upBound = upBound
@@ -263,10 +263,10 @@ class DVar( LpElement ):
         self.init = 0
         #code to add a variable to constraints for column based 
         # modelling
-        if cat == LpBinary:
+        if cat == LpB:
             self.lowBound = 0
             self.upBound = 1
-            self.cat = LpInteger
+            self.cat = LpI
         if e:
             self.add_expression( e )
 
@@ -291,7 +291,7 @@ class DVar( LpElement ):
                        for i in index]
     matrix = classmethod( matrix )
 
-    def dicts( self, name, indexs, lowBound = None, upBound = None, cat = LpContinuous,
+    def dicts( self, name, indexs, lowBound = None, upBound = None, cat = LpC,
         indexStart = [] ):
         """
         Creates a dictionary of LP variables
@@ -326,7 +326,7 @@ class DVar( LpElement ):
         return d
     dicts = classmethod( dicts )
 
-    def dict( self, name, indexs, lowBound = None, upBound = None, cat = LpContinuous ):
+    def dict( self, name, indexs, lowBound = None, upBound = None, cat = LpC ):
         if not isinstance( indexs, tuple ): indexs = ( indexs, )
         if "%" not in name: name += "_%s" * len( indexs )
 
@@ -377,11 +377,11 @@ class DVar( LpElement ):
                 self.varValue = self.upBound
             elif self.lowBound != None and self.varValue < self.lowBound and self.varValue >= self.lowBound - eps:
                 self.varValue = self.lowBound
-            if self.cat == LpInteger and abs( round( self.varValue ) - self.varValue ) <= epsInt:
+            if self.cat == LpI and abs( round( self.varValue ) - self.varValue ) <= epsInt:
                 self.varValue = round( self.varValue )
 
     def roundedValue( self, eps = 1e-5 ):
-        if self.cat == LpInteger and self.varValue != None \
+        if self.cat == LpI and self.varValue != None \
             and abs( self.varValue - round( self.varValue ) ) <= eps:
             return round( self.varValue )
         else:
@@ -418,7 +418,7 @@ class DVar( LpElement ):
             return False
         if self.lowBound != None and self.varValue < self.lowBound - eps:
             return False
-        if self.cat == LpInteger and abs( round( self.varValue ) - self.varValue ) > eps:
+        if self.cat == LpI and abs( round( self.varValue ) - self.varValue ) > eps:
             return False
         return True
 
@@ -428,12 +428,12 @@ class DVar( LpElement ):
             return self.varValue - self.upBound
         if self.lowBound != None and self.varValue < self.lowBound:
             return self.varValue - self.lowBound
-        if mip and self.cat == LpInteger and round( self.varValue ) - self.varValue != 0:
+        if mip and self.cat == LpI and round( self.varValue ) - self.varValue != 0:
             return round( self.varValue ) - self.varValue
         return 0
 
     def isBinary( self ):
-        return self.cat == LpInteger and self.lowBound == 0 and self.upBound == 1
+        return self.cat == LpI and self.lowBound == 0 and self.upBound == 1
 
     def isFree( self ):
         return self.lowBound == None and self.upBound == None
@@ -451,7 +451,7 @@ class DVar( LpElement ):
             s = "-inf <= "
         # Note: XPRESS and CPLEX do not interpret integer variables without 
         # explicit bounds
-        elif ( self.lowBound == 0 and self.cat == LpContinuous ):
+        elif ( self.lowBound == 0 and self.cat == LpC ):
             s = ""
         else:
             s = "%.12g <= " % self.lowBound
@@ -1119,7 +1119,7 @@ class Prob( object ):
 
     def isMIP( self ):
         for v in self.variables():
-            if v.cat == LpInteger: return 1
+            if v.cat == LpI: return 1
         return 0
 
     def roundSolution( self, epsInt = 1e-5, eps = 1e-7 ):
@@ -1361,7 +1361,7 @@ class Prob( object ):
                     coefs[n] = {k:c[v]}
 
         for v in vs:
-            if mip and v.cat == LpInteger:
+            if mip and v.cat == LpI:
                 f.write( "    MARK      'MARKER'                 'INTORG'\n" )
             n = v.name
             if rename: n = variablesNames[n]
@@ -1372,7 +1372,7 @@ class Prob( object ):
 
             # objective function
             if v in cobj: f.write( "    %-8s  %-8s  % .5e\n" % ( n, objName, cobj[v] ) )
-            if mip and v.cat == LpInteger:
+            if mip and v.cat == LpI:
                 f.write( "    MARK      'MARKER'                 'INTEND'\n" )
         # right hand side
         f.write( "RHS\n" )
@@ -1388,14 +1388,14 @@ class Prob( object ):
             if rename: n = variablesNames[n]
             if v.lowBound != None and v.lowBound == v.upBound:
                 f.write( " FX BND       %-8s  % .5e\n" % ( n, v.lowBound ) )
-            elif v.lowBound == 0 and v.upBound == 1 and mip and v.cat == LpInteger:
+            elif v.lowBound == 0 and v.upBound == 1 and mip and v.cat == LpI:
                 f.write( " BV BND       %-8s\n" % n )
             else:
                 if v.lowBound != None:
                     # In MPS files, variables with no bounds (i.e. >= 0)
                     # are assumed BV by COIN and CPLEX.
                     # So we explicitly write a 0 lower bound in this case.
-                    if v.lowBound != 0 or ( mip and v.cat == LpInteger and v.upBound == None ):
+                    if v.lowBound != 0 or ( mip and v.cat == LpI and v.upBound == None ):
                         f.write( " LO BND       %-8s  % .5e\n" % ( n, v.lowBound ) )
                 else:
                     if v.upBound != None:
@@ -1446,7 +1446,7 @@ class Prob( object ):
         # Note: XPRESS and CPLEX do not interpret integer variables without 
         # explicit bounds
         if mip:
-            vg = [v for v in vs if not ( v.isPositive() and v.cat == LpContinuous ) \
+            vg = [v for v in vs if not ( v.isPositive() and v.cat == LpC ) \
                 and not v.isBinary()]
         else:
             vg = [v for v in vs if not v.isPositive()]
@@ -1456,7 +1456,7 @@ class Prob( object ):
                 f.write( "%s\n" % v.asCplexLpVariable() )
         # Integer non-binary variables
         if mip:
-            vg = [v for v in vs if v.cat == LpInteger and not v.isBinary()]
+            vg = [v for v in vs if v.cat == LpI and not v.isBinary()]
             if vg:
                 f.write( "Generals\n" )
                 for v in vg: f.write( "%s\n" % v.name )
@@ -1840,7 +1840,7 @@ class FractionElasticSubProblem( FixedElasticSubProblem ):
 
 class LpVariableDict( dict ):
     """An LP variable generator"""
-    def __init__( self, name, data = {}, lowBound = None, upBound = None, cat = LpContinuous ):
+    def __init__( self, name, data = {}, lowBound = None, upBound = None, cat = LpC ):
         self.name = name
         dict.__init__( self, data )
 

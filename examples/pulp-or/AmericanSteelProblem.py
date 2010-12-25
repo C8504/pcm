@@ -67,7 +67,7 @@ arcData = { #      ARC                Cost Min Max
 ( costs, mins, maxs ) = splitDict( arcData )
 
 # Creates the boundless Variables as Integers
-vars = DVar.dicts( "Route", Arcs, None, None, LpInteger )
+vars = DVar.dicts( "Route", Arcs, None, None, LpI )
 
 # Creates the upper and lower bounds on the variables
 for a in Arcs:
