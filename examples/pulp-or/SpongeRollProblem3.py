@@ -106,10 +106,10 @@ patterns = makeDict( [PatternNames, LenOpts], patterns, 0 )
 prob = Prob( "Cutting Stock Problem", MIN )
 
 # The problem variables of the number of each pattern to make are created
-pattVars = DVar.dicts( "Patt", PatternNames, 0, None, LpI )
+pattVars = DVar.dicts( "Patt", PatternNames, 0, None, DVarI )
 
 # The problem variables of the number of surplus rolls for each length are created
-surplusVars = DVar.dicts( "Surp", LenOpts, 0, None, LpI )
+surplusVars = DVar.dicts( "Surp", LenOpts, 0, None, DVarI )
 
 # The objective function is entered: (the total number of large rolls used * the cost of each) - (the value of the surplus stock) - (the value of the trim)
 prob += lpSum( [pattVars[i] * cost for i in PatternNames] ) - lpSum( [surplusVars[i] * surplusPrice[i] for i in LenOpts] ) - lpSum( [pattVars[i] * trim[i] * trimValue for i in PatternNames] ), "Net Production Cost"

@@ -11,7 +11,7 @@ from pulp import *
 prob = Prob( "The Whiskas Problem", MIN )
 
 # The 2 variables Beef and Chicken are created with a lower limit of zero
-x1 = DVar( "ChickenPercent", 0, None, LpI )
+x1 = DVar( "ChickenPercent", 0, None, DVarI )
 x2 = DVar( "BeefPercent", 0 )
 
 # The objective function is added to 'prob' first

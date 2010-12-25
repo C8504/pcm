@@ -41,7 +41,7 @@ prob = Prob( "Beer Distribution Problem", MIN )
 Routes = [( w, b ) for w in Warehouses for b in Bars]
 
 # A dictionary called 'Vars' is created to contain the referenced variables(the routes)
-vars = DVar.dicts( "Route", ( Warehouses, Bars ), 0, None, LpI )
+vars = DVar.dicts( "Route", ( Warehouses, Bars ), 0, None, DVarI )
 
 # The objective function is added to 'prob' first
 prob += lpSum( [vars[w][b] * costs[w][b] for ( w, b ) in Routes] ), "Sum_of_Transporting_Costs"

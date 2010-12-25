@@ -55,10 +55,10 @@ Routes = [( p, s ) for p in Plants for s in Stores]
 costs = makeDict( [Plants, Stores], costs, 0 )
 
 # Creates the problem variables of the Flow on the Arcs
-flow = DVar.dicts( "Route", ( Plants, Stores ), 0, None, LpI )
+flow = DVar.dicts( "Route", ( Plants, Stores ), 0, None, DVarI )
 
 # Creates the master problem variables of whether to build the Plants or not
-build = DVar.dicts( "BuildaPlant", Plants, 0, 1, LpI )
+build = DVar.dicts( "BuildaPlant", Plants, 0, 1, DVarI )
 
 # Creates the 'prob' variable to contain the problem data
 prob = Prob( "Computer Plant Problem", MIN )

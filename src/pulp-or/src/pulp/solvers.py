@@ -142,8 +142,8 @@ class LpSolver:
 
     #TODO: Not sure if this code should be here or in a child class
     def getCplexStyleArrays( self, lp,
-                       senseDict = {LpConstraintEQ:"E", LpConstraintLE:"L", LpConstraintGE:"G"},
-                       LpVarCategories = {LpC: "C", LpI: "I"},
+                       senseDict = {DVarConstraintEQ:"E", DVarConstraintLE:"L", DVarConstraintGE:"G"},
+                       LpVarCategories = {DVarC: "C", DVarI: "I"},
                        LpObjSenses = {MAX :-1,
                                       MIN : 1},
                        infBound = 1e20
@@ -833,10 +833,10 @@ try:
             NumVarCharArray = ctypes.c_char * numVars
             columnType = NumVarCharArray()
             if lp.isMIP():
-                CplexLpCategories = {LpC: "C",
-                                    LpI: "I"}
+                CplexDVarType = {DVarC: "C",
+                                    DVarI: "I"}
                 for v in vars:
-                    columnType[self.v2n[v] - offset] = CplexLpCategories[v.cat]
+                    columnType[self.v2n[v] - offset] = CplexDVarType[v.cat]
             return  numVars, numels, objectCoeffs, \
                 startsBase, lenBase, indBase, \
                 elemBase, lowerBounds, upperBounds, initValues, colNames, \
@@ -1382,7 +1382,7 @@ class GUROBI( LpSolver ):
                     upBound = gurobipy.GRB.INFINITY
                 obj = lp.objective.get( var, 0.0 )
                 varType = gurobipy.GRB.CONTINUOUS
-                if var.cat == LpI and self.mip:
+                if var.cat == DVarI and self.mip:
                     varType = gurobipy.GRB.INTEGER
                 var.solverVar = lp.solverModel.addVar( lowBound, upBound,
                             vtype = varType,
@@ -1393,11 +1393,11 @@ class GUROBI( LpSolver ):
                 #build the expression
                 expr = gurobipy.LinExpr( constraint.values(),
                             [v.solverVar for v in constraint.keys()] )
-                if constraint.sense == LpConstraintLE:
+                if constraint.sense == DVarConstraintLE:
                     relation = gurobipy.GRB.LESS_EQUAL
-                elif constraint.sense == LpConstraintGE:
+                elif constraint.sense == DVarConstraintGE:
                     relation = gurobipy.GRB.GREATER_EQUAL
-                elif constraint.sense == LpConstraintEQ:
+                elif constraint.sense == DVarConstraintEQ:
                     relation = gurobipy.GRB.EQUAL
                 else:
                     raise PulpSolverError, 'Detected an invalid constraint type'
@@ -1554,11 +1554,11 @@ class PYGLPK( LpSolver ):
             for name, constraint in lp.constraints.items():
                 row = lp.solverModel.rows[i]
                 row.name = name
-                if constraint.sense == LpConstraintLE:
+                if constraint.sense == DVarConstraintLE:
                     row.bounds = None, -constraint.constant
-                elif constraint.sense == LpConstraintGE:
+                elif constraint.sense == DVarConstraintGE:
                     row.bounds = -constraint.constant, None
-                elif constraint.sense == LpConstraintEQ:
+                elif constraint.sense == DVarConstraintEQ:
                     row.bounds = -constraint.constant, -constraint.constant
                 else:
                     raise PulpSolverError, 'Detected an invalid constraint type'
@@ -1571,7 +1571,7 @@ class PYGLPK( LpSolver ):
                 col = lp.solverModel.cols[j]
                 col.name = var.name
                 col.bounds = var.lowBound, var.upBound
-                if var.cat == LpI:
+                if var.cat == DVarI:
                     col.kind = int
                 var.solverVar = col
                 j += 1
@@ -1613,11 +1613,11 @@ class PYGLPK( LpSolver ):
             for constraint in lp.constraints.values():
                 row = constraint.solverConstraint
                 if constraint.modified:
-                    if constraint.sense == LpConstraintLE:
+                    if constraint.sense == DVarConstraintLE:
                         row.bounds = None, -constraint.constant
-                    elif constraint.sense == LpConstraintGE:
+                    elif constraint.sense == DVarConstraintGE:
                         row.bounds = -constraint.constant, None
-                    elif constraint.sense == LpConstraintEQ:
+                    elif constraint.sense == DVarConstraintEQ:
                         row.bounds = -constraint.constant, -constraint.constant
                     else:
                         raise PulpSolverError, 'Detected an invalid constraint type'
@@ -1740,7 +1740,7 @@ class YAPOSIB( LpSolver ):
                     col.lowerbound = var.lowBound
                 if not var.upBound is None:
                     col.upperbound = var.upBound
-                if var.cat == LpI:
+                if var.cat == DVarI:
                     col.integer = True
                 prob.obj[col.index] = lp.objective.get( var, 0.0 )
                 var.solverVar = col
@@ -1748,11 +1748,11 @@ class YAPOSIB( LpSolver ):
             for name, constraint in lp.constraints.items():
                 row = prob.rows.add( yaposib.vec( [( var.solverVar.index,
                     value ) for var, value in constraint.items()] ) )
-                if constraint.sense == LpConstraintLE:
+                if constraint.sense == DVarConstraintLE:
                     row.upperbound = -constraint.constant
-                elif constraint.sense == LpConstraintGE:
+                elif constraint.sense == DVarConstraintGE:
                     row.lowerbound = -constraint.constant
-                elif constraint.sense == LpConstraintEQ:
+                elif constraint.sense == DVarConstraintEQ:
                     row.upperbound = -constraint.constant
                     row.lowerbound = -constraint.constant
                 else:
@@ -1790,11 +1790,11 @@ class YAPOSIB( LpSolver ):
             for constraint in lp.constraints.values():
                 row = constraint.solverConstraint
                 if constraint.modified:
-                    if constraint.sense == LpConstraintLE:
+                    if constraint.sense == DVarConstraintLE:
                         row.upperbound = -constraint.constant
-                    elif constraint.sense == LpConstraintGE:
+                    elif constraint.sense == DVarConstraintGE:
                         row.lowerbound = -constraint.constant
-                    elif constraint.sense == LpConstraintEQ:
+                    elif constraint.sense == DVarConstraintEQ:
                         row.upperbound = -constraint.constant
                         row.lowerbound = -constraint.constant
                     else:

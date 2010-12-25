@@ -127,7 +127,7 @@ def pulpTest020( solver ):
     prob = Prob( "test020", MIN )
     x = DVar( "x", 0, 4 )
     y = DVar( "y", -1, 1 )
-    z = DVar( "z", 0, None, LpI )
+    z = DVar( "z", 0, None, DVarI )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -140,7 +140,7 @@ def pulpTest030( solver ):
     prob = Prob( "test030", MIN )
     x = DVar( "x", 0, 4 )
     y = DVar( "y", -1, 1 )
-    z = DVar( "z", 0, None, LpI )
+    z = DVar( "z", 0, None, DVarI )
     prob += x + 4 * y + 9 * z, "obj"
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
@@ -155,7 +155,7 @@ def pulpTest040( solver ):
     prob = Prob( "test040", MIN )
     x = DVar( "x", 0, 4 )
     y = DVar( "y", -1, 1 )
-    z = DVar( "z", 0, None, LpI )
+    z = DVar( "z", 0, None, DVarI )
     prob += x + y <= 5, "c1"
     prob += x + z >= 10, "c2"
     prob += -y + z == 7.5, "c3"
@@ -185,9 +185,9 @@ def pulpTest050( solver ):
 def pulpTest060( solver ):
     # Integer Infeasible
     prob = Prob( "test060", MIN )
-    x = DVar( "x", 0, 4, LpI )
-    y = DVar( "y", -1, 1, LpI )
-    z = DVar( "z", 0, 10, LpI )
+    x = DVar( "x", 0, 4, DVarI )
+    y = DVar( "y", -1, 1, DVarI )
+    z = DVar( "z", 0, 10, DVarI )
     prob += x + y <= 5.2, "c1"
     prob += x + z >= 10.3, "c2"
     prob += -y + z == 7.4, "c3"
@@ -208,18 +208,18 @@ def pulpTest070( solver ):
     prob = Prob( "test070", MIN )
     obj = LpConstraintVar( "obj" )
     # constraints
-    a = LpConstraintVar( "C1", LpConstraintLE, 5 )
-    b = LpConstraintVar( "C2", LpConstraintGE, 10 )
-    c = LpConstraintVar( "C3", LpConstraintEQ, 7 )
+    a = LpConstraintVar( "C1", DVarConstraintLE, 5 )
+    b = LpConstraintVar( "C2", DVarConstraintGE, 10 )
+    c = LpConstraintVar( "C3", DVarConstraintEQ, 7 )
 
     prob.setObjective( obj )
     prob += a
     prob += b
     prob += c
     # Variables
-    x = DVar( "x", 0, 4, LpC, obj + a + b )
-    y = DVar( "y", -1, 1, LpC, 4 * obj + a - c )
-    z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
+    x = DVar( "x", 0, 4, DVarC, obj + a + b )
+    y = DVar( "y", -1, 1, DVarC, 4 * obj + a - c )
+    z = DVar( "z", 0, None, DVarC, 9 * obj + b + c )
     print "\t Testing column based modelling"
     pulpTestCheck( prob, solver, [LpStatusOptimal], {x:4, y:-1, z:6} )
 
@@ -228,18 +228,18 @@ def pulpTest075( solver ):
     prob = Prob( "test075", MIN )
     obj = LpConstraintVar( "obj" )
     # constraints
-    a = LpConstraintVar( "C1", LpConstraintLE, 5 )
-    b = LpConstraintVar( "C2", LpConstraintGE, 10 )
-    c = LpConstraintVar( "C3", LpConstraintEQ, 7 )
+    a = LpConstraintVar( "C1", DVarConstraintLE, 5 )
+    b = LpConstraintVar( "C2", DVarConstraintGE, 10 )
+    c = LpConstraintVar( "C3", DVarConstraintEQ, 7 )
 
     prob.setObjective( obj )
     prob += a
     prob += b
     prob += c
     # Variables
-    x = DVar( "x", 0, 4, LpC, obj + b )
-    y = DVar( "y", -1, 1, LpC, 4 * obj - c )
-    z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
+    x = DVar( "x", 0, 4, DVarC, obj + b )
+    y = DVar( "y", -1, 1, DVarC, 4 * obj - c )
+    z = DVar( "z", 0, None, DVarC, 9 * obj + b + c )
     if solver.__class__ in [CPLEX_DLL, CPLEX_CMD, COINMP_DLL]:
         print "\t Testing column based modelling with empty constraints"
         pulpTestCheck( prob, solver, [LpStatusOptimal], {x:4, y:-1, z:6} )
@@ -274,9 +274,9 @@ def pulpTest090( solver ):
     prob = Prob( "test090", MIN )
     obj = LpConstraintVar( "obj" )
     # constraints
-    a = LpConstraintVar( "C1", LpConstraintLE, 5 )
-    b = LpConstraintVar( "C2", LpConstraintGE, 10 )
-    c = LpConstraintVar( "C3", LpConstraintEQ, 7 )
+    a = LpConstraintVar( "C1", DVarConstraintLE, 5 )
+    b = LpConstraintVar( "C2", DVarConstraintGE, 10 )
+    c = LpConstraintVar( "C3", DVarConstraintEQ, 7 )
 
     prob.setObjective( obj )
     prob += a
@@ -284,10 +284,10 @@ def pulpTest090( solver ):
     prob += c
 
     prob.setSolver( solver )# Variables
-    x = DVar( "x", 0, 4, LpC, obj + a + b )
-    y = DVar( "y", -1, 1, LpC, 4 * obj + a - c )
+    x = DVar( "x", 0, 4, DVarC, obj + a + b )
+    y = DVar( "y", -1, 1, DVarC, 4 * obj + a - c )
     prob.resolve()
-    z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
+    z = DVar( "z", 0, None, DVarC, 9 * obj + b + c )
     if solver.__class__ in [CPLEX_DLL, COINMP_DLL]:
         print "\t Testing resolve of problem"
         prob.resolve()
@@ -330,7 +330,7 @@ def pulpTest110( solver ):
     prob += x + z >= 10, "c2"
     prob += -y + z == 7, "c3"
     prob += w >= 0, "c4"
-    prob += LpFractionConstraint( x, z, LpConstraintEQ, 0.5, name = 'c5' )
+    prob += LpFractionConstraint( x, z, DVarConstraintEQ, 0.5, name = 'c5' )
     print "\t Testing fractional constraints"
     pulpTestCheck( prob, solver, [LpStatusOptimal],
                     {x:10 / 3.0, y:-1 / 3.0, z:20 / 3.0, w:0} )

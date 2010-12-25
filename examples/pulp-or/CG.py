@@ -36,9 +36,9 @@ def masterSolve( Patterns, rollData, relax = True ):
 
     # vartype represents whether or not the variables are relaxed
     if relax:
-        vartype = LpC
+        vartype = DVarC
     else:
-        vartype = LpI
+        vartype = DVarI
 
     # The problem variables are created    
     pattVars = DVar.dicts( "Pattern", Patterns, 0, None, vartype )
@@ -85,9 +85,9 @@ def subSolve( Patterns, duals ):
     prob = Prob( "SubProb", MIN )
 
     # The problem variables are created
-    vars = DVar.dicts( "Roll Length", Pattern.lenOpts, 0, None, LpI )
+    vars = DVar.dicts( "Roll Length", Pattern.lenOpts, 0, None, DVarI )
 
-    trim = DVar( "Trim", 0 , None, LpI )
+    trim = DVar( "Trim", 0 , None, DVarI )
 
     # The objective function is entered: the reduced cost of a new pattern
     prob += ( Pattern.cost - Pattern.trimValue * trim ) - lpSum( [vars[i] * duals[i] for i in Pattern.lenOpts] ), "Objective"

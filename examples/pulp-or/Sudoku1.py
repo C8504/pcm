@@ -25,7 +25,7 @@ for i in range( 3 ):
 prob = Prob( "Sudoku Problem", MIN )
 
 # The problem variables are created
-choices = DVar.dicts( "Choice", ( Vals, Rows, Cols ), 0, 1, LpI )
+choices = DVar.dicts( "Choice", ( Vals, Rows, Cols ), 0, 1, DVarI )
 
 # The arbitrary objective function is added
 prob += 0, "Arbitrary Objective Function"

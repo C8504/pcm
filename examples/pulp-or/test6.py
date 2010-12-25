@@ -14,11 +14,11 @@ obj = LpConstraintVar( "obj" )
 
 # constraints
 
-a = LpConstraintVar( "Ca", LpConstraintLE, 5 )
+a = LpConstraintVar( "Ca", DVarConstraintLE, 5 )
 
-b = LpConstraintVar( "Cb", LpConstraintGE, 10 )
+b = LpConstraintVar( "Cb", DVarConstraintGE, 10 )
 
-c = LpConstraintVar( "Cc", LpConstraintEQ, 7 )
+c = LpConstraintVar( "Cc", DVarConstraintEQ, 7 )
 
 prob.setObjective( obj )
 prob += a
@@ -27,11 +27,11 @@ prob += c
 
 # Variables
 # 0 <= x <= 4
-x = DVar( "x", 0, 4, LpC, obj + a + b )
+x = DVar( "x", 0, 4, DVarC, obj + a + b )
 # -1 <= y <= 1
-y = DVar( "y", -1, 1, LpC, 4 * obj + a - c )
+y = DVar( "y", -1, 1, DVarC, 4 * obj + a - c )
 # 0 <= z
-z = DVar( "z", 0, None, LpC, 9 * obj + b + c )
+z = DVar( "z", 0, None, DVarC, 9 * obj + b + c )
 # Use None for +/- Infinity, i.e. z <= 0 -> DVar("z", None, 0)
 
 

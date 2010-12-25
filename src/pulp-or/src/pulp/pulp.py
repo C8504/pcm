@@ -70,7 +70,7 @@ You can get the value of the variables using value(). ex:
 Exported Classes:
     - Prob -- Container class for a Linear programming problem
     - DVar -- Variables that are added to constraints in the LP
-    - LpConstraint -- A constraint of the general form 
+    - DVarConstraint -- A constraint of the general form 
       a1x1+a2x2 ...anxn (<=, =, >=) b 
     - LpConstraintVar -- Used to construct a column of the model in column-wise 
       modelling
@@ -254,7 +254,7 @@ class DVar( LpElement ):
         existence in the objective function and constraints
     """
     def __init__( self, name, lowBound = None, upBound = None,
-                  cat = LpC, e = None ):
+                  cat = DVarC, e = None ):
         LpElement.__init__( self, name )
         self.lowBound = lowBound
         self.upBound = upBound
@@ -263,10 +263,10 @@ class DVar( LpElement ):
         self.init = 0
         #code to add a variable to constraints for column based 
         # modelling
-        if cat == LpB:
+        if cat == DVarB:
             self.lowBound = 0
             self.upBound = 1
-            self.cat = LpI
+            self.cat = DVarI
         if e:
             self.add_expression( e )
 
@@ -274,7 +274,7 @@ class DVar( LpElement ):
         self.expression = e
         self.addVariableToConstraints( e )
 
-    def matrix( self, name, indexs, lowBound = None, upBound = None, cat = LpC,
+    def matrix( self, name, indexs, lowBound = None, upBound = None, cat = DVarC,
             indexStart = [] ):
         if not isinstance( indexs, tuple ): indexs = ( indexs, )
         if "%" not in name: name += "_%s" * len( indexs )
@@ -291,7 +291,7 @@ class DVar( LpElement ):
                        for i in index]
     matrix = classmethod( matrix )
 
-    def dicts( self, name, indexs, lowBound = None, upBound = None, cat = LpC,
+    def dicts( self, name, indexs, lowBound = None, upBound = None, cat = DVarC,
         indexStart = [] ):
         """
         Creates a dictionary of LP variables
@@ -326,7 +326,7 @@ class DVar( LpElement ):
         return d
     dicts = classmethod( dicts )
 
-    def dict( self, name, indexs, lowBound = None, upBound = None, cat = LpC ):
+    def dict( self, name, indexs, lowBound = None, upBound = None, cat = DVarC ):
         if not isinstance( indexs, tuple ): indexs = ( indexs, )
         if "%" not in name: name += "_%s" * len( indexs )
 
@@ -377,11 +377,11 @@ class DVar( LpElement ):
                 self.varValue = self.upBound
             elif self.lowBound != None and self.varValue < self.lowBound and self.varValue >= self.lowBound - eps:
                 self.varValue = self.lowBound
-            if self.cat == LpI and abs( round( self.varValue ) - self.varValue ) <= epsInt:
+            if self.cat == DVarI and abs( round( self.varValue ) - self.varValue ) <= epsInt:
                 self.varValue = round( self.varValue )
 
     def roundedValue( self, eps = 1e-5 ):
-        if self.cat == LpI and self.varValue != None \
+        if self.cat == DVarI and self.varValue != None \
             and abs( self.varValue - round( self.varValue ) ) <= eps:
             return round( self.varValue )
         else:
@@ -418,7 +418,7 @@ class DVar( LpElement ):
             return False
         if self.lowBound != None and self.varValue < self.lowBound - eps:
             return False
-        if self.cat == LpI and abs( round( self.varValue ) - self.varValue ) > eps:
+        if self.cat == DVarI and abs( round( self.varValue ) - self.varValue ) > eps:
             return False
         return True
 
@@ -428,12 +428,12 @@ class DVar( LpElement ):
             return self.varValue - self.upBound
         if self.lowBound != None and self.varValue < self.lowBound:
             return self.varValue - self.lowBound
-        if mip and self.cat == LpI and round( self.varValue ) - self.varValue != 0:
+        if mip and self.cat == DVarI and round( self.varValue ) - self.varValue != 0:
             return round( self.varValue ) - self.varValue
         return 0
 
     def isBinary( self ):
-        return self.cat == LpI and self.lowBound == 0 and self.upBound == 1
+        return self.cat == DVarI and self.lowBound == 0 and self.upBound == 1
 
     def isFree( self ):
         return self.lowBound == None and self.upBound == None
@@ -451,7 +451,7 @@ class DVar( LpElement ):
             s = "-inf <= "
         # Note: XPRESS and CPLEX do not interpret integer variables without 
         # explicit bounds
-        elif ( self.lowBound == 0 and self.cat == LpC ):
+        elif ( self.lowBound == 0 and self.cat == DVarC ):
             s = ""
         else:
             s = "%.12g <= " % self.lowBound
@@ -643,7 +643,7 @@ class LpAffineExpression( _DICT_TYPE ):
             notFirst = 1
             if val == 1: ns += v.name
             else: ns += "%.12g %s" % ( val, v.name )
-            if len( sl ) + len( ns ) > LpCplexLPLineSize:
+            if len( sl ) + len( ns ) > DVarCplexLPLineSize:
                 s += sl + "\n"
                 sl = ns
             else:
@@ -655,7 +655,7 @@ class LpAffineExpression( _DICT_TYPE ):
             if constant:
                 if self.constant < 0: ns = " - " + str( -self.constant )
                 elif self.constant > 0: ns = " + " + str( self.constant )
-        if len( sl ) + len( ns ) > LpCplexLPLineSize:
+        if len( sl ) + len( ns ) > DVarCplexLPLineSize:
             s += sl + "\n" + ns + "\n"
         else:
             s += sl + ns + "\n"
@@ -777,21 +777,21 @@ class LpAffineExpression( _DICT_TYPE ):
         return e
 
     def __le__( self, other ):
-        return LpConstraint( self - other, LpConstraintLE )
+        return DVarConstraint( self - other, DVarConstraintLE )
 
     def __ge__( self, other ):
-        return LpConstraint( self - other, LpConstraintGE )
+        return DVarConstraint( self - other, DVarConstraintGE )
 
     def __eq__( self, other ):
-        return LpConstraint( self - other, LpConstraintEQ )
+        return DVarConstraint( self - other, DVarConstraintEQ )
 
-class LpConstraint( LpAffineExpression ):
+class DVarConstraint( LpAffineExpression ):
     """An LP constraint"""
-    def __init__( self, e = None, sense = LpConstraintEQ,
+    def __init__( self, e = None, sense = DVarConstraintEQ,
                   name = None, rhs = None ):
         """
         :param e: an instance of :class:`LpAffineExpression`
-        :param sense: one of :data:`~pulp.constants.LpConstraintEQ`, :data:`~pulp.constants.LpConstraintGE`, :data:`~pulp.constants.LpConstraintLE` (0, 1, -1 respectively)
+        :param sense: one of :data:`~pulp.constants.DVarConstraintEQ`, :data:`~pulp.constants.DVarConstraintGE`, :data:`~pulp.constants.DVarConstraintLE` (0, 1, -1 respectively)
         :param name: identifying string 
         :param rhs: numerical value of constraint target
         """
@@ -804,10 +804,10 @@ class LpConstraint( LpAffineExpression ):
     def __str__( self ):
         s = LpAffineExpression.__str__( self, 0 )
         if self.sense:
-            s += " " + LpConstraintSenses[self.sense] + " " + str( -self.constant )
+            s += " " + DVarConstraintSenses[self.sense] + " " + str( -self.constant )
         return s
 
-    def asCplexLpConstraint( self, name ):
+    def asCplexDVarConstraint( self, name ):
         # Immonde.
         s = ""
         sl = name + ":"
@@ -824,7 +824,7 @@ class LpConstraint( LpAffineExpression ):
             notFirst = 1
             if val == 1: ns += v.name
             else: ns += "%.12g %s" % ( val , v.name )
-            if len( sl ) + len( ns ) > LpCplexLPLineSize:
+            if len( sl ) + len( ns ) > DVarCplexLPLineSize:
                 s += sl + "\n"
                 sl = ns
             else:
@@ -832,8 +832,8 @@ class LpConstraint( LpAffineExpression ):
         if not self: sl += "0"
         c = -self.constant
         if c == 0: c = 0 # Supress sign
-        ns = " %s %.12g" % ( LpConstraintSenses[self.sense], c )
-        if len( sl ) + len( ns ) > LpCplexLPLineSize:
+        ns = " %s %.12g" % ( DVarConstraintSenses[self.sense], c )
+        if len( sl ) + len( ns ) > DVarCplexLPLineSize:
             s += sl + "\n" + ns + "\n"
         else:
             s += sl + ns + "\n"
@@ -849,18 +849,18 @@ class LpConstraint( LpAffineExpression ):
     def __repr__( self ):
         s = LpAffineExpression.__repr__( self )
         if self.sense is not None:
-            s += " " + LpConstraintSenses[self.sense] + " 0"
+            s += " " + DVarConstraintSenses[self.sense] + " 0"
         return s
 
     def copy( self ):
         """Make a copy of self"""
-        return LpConstraint( self, self.sense )
+        return DVarConstraint( self, self.sense )
 
     def emptyCopy( self ):
-        return LpConstraint( sense = self.sense )
+        return DVarConstraint( sense = self.sense )
 
     def addInPlace( self, other ):
-        if isinstance( other, LpConstraint ):
+        if isinstance( other, DVarConstraint ):
             if self.sense * other.sense >= 0:
                 LpAffineExpression.addInPlace( self, other )
                 self.sense |= other.sense
@@ -876,7 +876,7 @@ class LpConstraint( LpAffineExpression ):
         return self
 
     def subInPlace( self, other ):
-        if isinstance( other, LpConstraint ):
+        if isinstance( other, DVarConstraint ):
             if self.sense * other.sense <= 0:
                 LpAffineExpression.subInPlace( self, other )
                 self.sense |= -other.sense
@@ -909,7 +909,7 @@ class LpConstraint( LpAffineExpression ):
         return ( -self ).addInPlace( other )
 
     def __mul__( self, other ):
-        if isinstance( other, LpConstraint ):
+        if isinstance( other, DVarConstraint ):
             c = LpAffineExpression.__mul__( self, other )
             if c.sense == 0:
                 c.sense = other.sense
@@ -923,7 +923,7 @@ class LpConstraint( LpAffineExpression ):
         return self * other
 
     def __div__( self, other ):
-        if isinstance( other, LpConstraint ):
+        if isinstance( other, DVarConstraint ):
             c = LpAffineExpression.__div__( self, other )
             if c.sense == 0:
                 c.sense = other.sense
@@ -934,7 +934,7 @@ class LpConstraint( LpAffineExpression ):
             return LpAffineExpression.__mul__( self, other )
 
     def __rdiv__( self, other ):
-        if isinstance( other, LpConstraint ):
+        if isinstance( other, DVarConstraint ):
             c = LpAffineExpression.__rdiv__( self, other )
             if c.sense == 0:
                 c.sense = other.sense
@@ -946,7 +946,7 @@ class LpConstraint( LpAffineExpression ):
 
     def valid( self, eps = 0 ):
         val = self.value()
-        if self.sense == LpConstraintEQ: return abs( val ) <= eps
+        if self.sense == DVarConstraintEQ: return abs( val ) <= eps
         else: return val * self.sense >= -eps
 
     def makeElasticSubProblem( self, *args, **kwargs ):
@@ -957,11 +957,11 @@ class LpConstraint( LpAffineExpression ):
         """
         return FixedElasticSubProblem( self, *args, **kwargs )
 
-class LpFractionConstraint( LpConstraint ):
+class LpFractionConstraint( DVarConstraint ):
     """
     Creates a constraint that enforces a fraction requirement a/b = c
     """
-    def __init__( self, numerator, denominator = None, sense = LpConstraintEQ,
+    def __init__( self, numerator, denominator = None, sense = DVarConstraintEQ,
                  RHS = 1.0, name = None,
                  complement = None ):
         """
@@ -987,7 +987,7 @@ class LpFractionConstraint( LpConstraint ):
             self.denominator = denominator
             self.complement = complement
         lhs = self.numerator - RHS * self.denominator
-        LpConstraint.__init__( self, lhs,
+        DVarConstraint.__init__( self, lhs,
               sense = sense, rhs = 0, name = name )
         self.RHS = RHS
 
@@ -1020,7 +1020,7 @@ class LpConstraintVar( LpElement ):
     def __init__( self, name = None , sense = None,
                  rhs = None, e = None ):
         LpElement.__init__( self, name )
-        self.constraint = LpConstraint( name = self.name, sense = sense,
+        self.constraint = DVarConstraint( name = self.name, sense = sense,
                                        rhs = rhs , e = e )
 
     def addVariable( self, var, coeff ):
@@ -1077,10 +1077,10 @@ class Prob( object ):
         if self.constraints:
             string += "SUBJECT TO\n"
             for n, c in self.constraints.iteritems():
-                string += c.asCplexLpConstraint( n ) + "\n"
+                string += c.asCplexDVarConstraint( n ) + "\n"
         string += "VARIABLES\n"
         for v in sorted( self.variables() ):
-            string += v.asCplexLpVariable() + " " + LpCategories[v.cat] + "\n"
+            string += v.asCplexLpVariable() + " " + DVarType[v.cat] + "\n"
         return string
 
     def copy( self ):
@@ -1119,7 +1119,7 @@ class Prob( object ):
 
     def isMIP( self ):
         for v in self.variables():
-            if v.cat == LpI: return 1
+            if v.cat == DVarI: return 1
         return 0
 
     def roundSolution( self, epsInt = 1e-5, eps = 1e-7 ):
@@ -1209,8 +1209,8 @@ class Prob( object ):
         self.addConstraint( constraint, name )
 
     def addConstraint( self, constraint, name = None ):
-        if not isinstance( constraint, LpConstraint ):
-            raise TypeError, "Can only add LpConstraint objects"
+        if not isinstance( constraint, DVarConstraint ):
+            raise TypeError, "Can only add DVarConstraint objects"
         if name:
             constraint.name = name
         try:
@@ -1219,7 +1219,7 @@ class Prob( object ):
             else:
                 name = self.unusedConstraintName()
         except AttributeError:
-            raise TypeError, "Can only add LpConstraint objects"
+            raise TypeError, "Can only add DVarConstraint objects"
             #removed as this test fails for empty constraints
 #        if len(constraint) == 0:
 #            if not constraint.valid():
@@ -1260,7 +1260,7 @@ class Prob( object ):
             return self
         if isinstance( other, LpConstraintVar ):
             self.addConstraint( other.constraint )
-        elif isinstance( other, LpConstraint ):
+        elif isinstance( other, DVarConstraint ):
             self.addConstraint( other, name )
         elif isinstance( other, LpAffineExpression ):
             self.objective = other
@@ -1269,7 +1269,7 @@ class Prob( object ):
             self.objective = LpAffineExpression( other )
             self.objective.name = name
         else:
-            raise TypeError, "Can only add LpConstraintVar, LpConstraint, LpAffineExpression or True objects"
+            raise TypeError, "Can only add LpConstraintVar, DVarConstraint, LpAffineExpression or True objects"
         return self
 
     def extend( self, other, use_objective = True ):
@@ -1331,7 +1331,7 @@ class Prob( object ):
             cobj.name = n
         if rename:
             constraintsNames, variablesNames, cobj.name = self.normalisedNames()
-        f.write( "*SENSE:" + LpSenses[mpsSense] + "\n" )
+        f.write( "*SENSE:" + Sense[mpsSense] + "\n" )
         n = self.name
         if rename: n = "MODEL"
         f.write( "NAME          " + n + "\n" )
@@ -1341,7 +1341,7 @@ class Prob( object ):
         objName = cobj.name
         if not objName: objName = "OBJ"
         f.write( " N  %s\n" % objName )
-        mpsConstraintType = {LpConstraintLE:"L", LpConstraintEQ:"E", LpConstraintGE:"G"}
+        mpsConstraintType = {DVarConstraintLE:"L", DVarConstraintEQ:"E", DVarConstraintGE:"G"}
         for k, c in self.constraints.iteritems():
             if rename: k = constraintsNames[k]
             f.write( " " + mpsConstraintType[c.sense] + "  " + k + "\n" )
@@ -1361,7 +1361,7 @@ class Prob( object ):
                     coefs[n] = {k:c[v]}
 
         for v in vs:
-            if mip and v.cat == LpI:
+            if mip and v.cat == DVarI:
                 f.write( "    MARK      'MARKER'                 'INTORG'\n" )
             n = v.name
             if rename: n = variablesNames[n]
@@ -1372,7 +1372,7 @@ class Prob( object ):
 
             # objective function
             if v in cobj: f.write( "    %-8s  %-8s  % .5e\n" % ( n, objName, cobj[v] ) )
-            if mip and v.cat == LpI:
+            if mip and v.cat == DVarI:
                 f.write( "    MARK      'MARKER'                 'INTEND'\n" )
         # right hand side
         f.write( "RHS\n" )
@@ -1388,14 +1388,14 @@ class Prob( object ):
             if rename: n = variablesNames[n]
             if v.lowBound != None and v.lowBound == v.upBound:
                 f.write( " FX BND       %-8s  % .5e\n" % ( n, v.lowBound ) )
-            elif v.lowBound == 0 and v.upBound == 1 and mip and v.cat == LpI:
+            elif v.lowBound == 0 and v.upBound == 1 and mip and v.cat == DVarI:
                 f.write( " BV BND       %-8s\n" % n )
             else:
                 if v.lowBound != None:
                     # In MPS files, variables with no bounds (i.e. >= 0)
                     # are assumed BV by COIN and CPLEX.
                     # So we explicitly write a 0 lower bound in this case.
-                    if v.lowBound != 0 or ( mip and v.cat == LpI and v.upBound == None ):
+                    if v.lowBound != 0 or ( mip and v.cat == DVarI and v.upBound == None ):
                         f.write( " LO BND       %-8s  % .5e\n" % ( n, v.lowBound ) )
                 else:
                     if v.upBound != None:
@@ -1439,14 +1439,14 @@ class Prob( object ):
         ks = self.constraints.keys()
         ks.sort()
         for k in ks:
-            f.write( self.constraints[k].asCplexLpConstraint( k ) )
+            f.write( self.constraints[k].asCplexDVarConstraint( k ) )
         vs = list( self.variables() )
         vs.sort()
         # Bounds on non-"positive" variables
         # Note: XPRESS and CPLEX do not interpret integer variables without 
         # explicit bounds
         if mip:
-            vg = [v for v in vs if not ( v.isPositive() and v.cat == LpC ) \
+            vg = [v for v in vs if not ( v.isPositive() and v.cat == DVarC ) \
                 and not v.isBinary()]
         else:
             vg = [v for v in vs if not v.isPositive()]
@@ -1456,7 +1456,7 @@ class Prob( object ):
                 f.write( "%s\n" % v.asCplexLpVariable() )
         # Integer non-binary variables
         if mip:
-            vg = [v for v in vs if v.cat == LpI and not v.isBinary()]
+            vg = [v for v in vs if v.cat == DVarI and not v.isBinary()]
             if vg:
                 f.write( "Generals\n" )
                 for v in vg: f.write( "%s\n" % v.name )
@@ -1612,7 +1612,7 @@ class FixedElasticSubProblem( Prob ):
     Contains the subproblem generated by converting a fixed constraint 
     :math:`\sum_{i}a_i x_i = b` into an elastic constraint.
 
-    :param constraint: The LpConstraint that the elastic constraint is based on
+    :param constraint: The DVarConstraint that the elastic constraint is based on
     :param penalty: penalty applied for violation (+ve or -ve) of the constraints
     :param proportionFreeBound: 
         the proportional bound (+ve and -ve) on 
@@ -1780,12 +1780,12 @@ class FractionElasticSubProblem( FixedElasticSubProblem ):
         #create an objective
         self += LpAffineExpression()
         #There are three cases if the constraint.sense is ==, <=, >=
-        if sense in [LpConstraintEQ, LpConstraintLE]:
+        if sense in [DVarConstraintEQ, DVarConstraintLE]:
             #create a constraint the sets the upper bound of target
             self.upTarget = RHS + upProportionFreeBound
             self.upConstraint = LpFractionConstraint( self.numerator,
                                     self.complement,
-                                    LpConstraintLE,
+                                    DVarConstraintLE,
                                     self.upTarget,
                                     denominator = self.denominator )
             if penalty is not None:
@@ -1793,12 +1793,12 @@ class FractionElasticSubProblem( FixedElasticSubProblem ):
                 self.objective += -1 * penalty * self.lowVar
                 self.upConstraint += self.lowVar
             self += self.upConstraint, '_upper_constraint'
-        if sense in [LpConstraintEQ, LpConstraintGE]:
+        if sense in [DVarConstraintEQ, DVarConstraintGE]:
             #create a constraint the sets the lower bound of target
             self.lowTarget = RHS - lowProportionFreeBound
             self.lowConstraint = LpFractionConstraint( self.numerator,
                                                  self.complement,
-                                                LpConstraintGE,
+                                                DVarConstraintGE,
                                                 self.lowTarget,
                                                 denominator = self.denominator )
             if penalty is not None:
@@ -1840,7 +1840,7 @@ class FractionElasticSubProblem( FixedElasticSubProblem ):
 
 class LpVariableDict( dict ):
     """An LP variable generator"""
-    def __init__( self, name, data = {}, lowBound = None, upBound = None, cat = LpC ):
+    def __init__( self, name, data = {}, lowBound = None, upBound = None, cat = DVarC ):
         self.name = name
         dict.__init__( self, data )
 

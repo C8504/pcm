@@ -32,16 +32,16 @@ Note that hopefully these will be changed into something more pythonic
 EPS = 1e-7
 
 # variable categories
-LpC = "Continuous"
-LpI = "Integer"
-LpB = "Binary"
-LpCategories = {LpC: "Continuous", LpI: "Integer",
-                LpB: "Binary"}
+DVarC = "Continuous"
+DVarI = "Integer"
+DVarB = "Binary"
+DVarType = {DVarC: "Continuous", DVarI: "Integer",
+                DVarB: "Binary"}
 
 # objective sense
 MIN = 1
 MAX = -1
-LpSenses = {MAX:"Maximize", MIN:"Minimize"}
+Sense = {MAX:"Maximize", MIN:"Minimize"}
 
 # problem status
 LpStatusNotSolved = 0
@@ -57,13 +57,13 @@ LpStatus = { LpStatusNotSolved:"Not Solved",
     }
 
 # constraint sense
-LpConstraintLE = -1
-LpConstraintEQ = 0
-LpConstraintGE = 1
-LpConstraintSenses = {LpConstraintEQ:"=", LpConstraintLE:"<=", LpConstraintGE:">="}
+DVarConstraintLE = -1
+DVarConstraintEQ = 0
+DVarConstraintGE = 1
+DVarConstraintSenses = {DVarConstraintEQ:"=", DVarConstraintLE:"<=", DVarConstraintGE:">="}
 
 # LP line size
-LpCplexLPLineSize = 78
+DVarCplexLPLineSize = 78
 
 def isiterable( obj ):
     try: obj = iter( obj )
