@@ -105,7 +105,7 @@ while True:
         prob += lpSum( [choices[v][r][c] for v in Vals
                                         for r in Rows
                                         for c in Cols
-                                        if value( vars[v][r][c] ) == 1] ) <= 80
+                                        if value( choices[v][r][c] ) == 1] ) <= 80
     # If a new optimal solution cannot be found, we end the program    
     else:
         break
