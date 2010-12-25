@@ -274,7 +274,7 @@ class DVar( LpElement ):
         self.expression = e
         self.addVariableToConstraints( e )
 
-    def matrix( self, name, indexs, lowBound = None, upBound = None, cat = 0,
+    def matrix( self, name, indexs, lowBound = None, upBound = None, cat = LpC,
             indexStart = [] ):
         if not isinstance( indexs, tuple ): indexs = ( indexs, )
         if "%" not in name: name += "_%s" * len( indexs )
