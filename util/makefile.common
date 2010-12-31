@@ -37,6 +37,14 @@ tags:
 	-ctags -o TAGS -R ../src/c/* ../include/*
 pcm: $(EXE) tags
 
+lib:
+	$(CCOMPILE) -c $(OTHER) $(INCLUDE) $(CSRC)
+	ar cr libpcm.a *.o
+	if !(test -d ../lib); then mkdir ../lib; fi
+	cp -p libpcm.a ../lib/libpcm.a
+	rm *.a
+	rm *.o
+
 pcmtest: $(LOGFILES)
 	@if test `cat $(LOGFILES) | grep 'PCM Error' | wc -l` -gt 0; then \
 	  echo "";\
