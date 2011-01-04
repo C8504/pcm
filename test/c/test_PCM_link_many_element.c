@@ -21,7 +21,7 @@ int testmanyelements()
 
    CALL(PCMlinkedlistoutput (mylist, ":"));
 
-   // append 10 elements too
+   // append 10 elements again
    for (i = 0; i < 10; ++i) {
       CALL(PCMlinkedlistappend (mylist, "b"));
    }
