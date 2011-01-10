@@ -176,3 +176,15 @@ PCMfilegetmaxline (PCMfile *fp,
    RETURN;
 } /* End of PCMfilegetmaxline*/
 
+int
+PCMfilestat (const char* filename) {
+   DERROR;
+
+   PCMfile *fp = NULL;
+   CALL(PCMfilecreate(&fp));
+   CALL(PCMfileopen(fp, filename));
+   CALL(PCMfilestatistics(fp));
+   CALL(PCMfilefree(&fp));
+
+   RETURN;
+} /* End of PCMfilestat */

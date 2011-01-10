@@ -26,6 +26,7 @@ extern "C" {
                          /*out*/int     *length);
    int PCMfilegetmaxline(PCMfile *fp, char *maxline, int *max);
    int PCMfilegetinfo   (PCMfile *fp);
+   int PCMfilestat      (const char* filename);
 
 #ifdef __cplusplus
 }
