@@ -45,7 +45,7 @@ PCMnodeallocandinit (PCMlinkednode **node,
 
    (*node)->next = NULL;
    (*node)->prev = NULL;
-   
+
    RETURN;
 } /* End of PCMnodeallocandinit */
 
@@ -53,12 +53,12 @@ int
 PCMlinkedlistinit (PCMlinkedlist **list)
 {
    DERROR;
-   
+
    PCM_ALLOC(*list, 1, **list);
 
    (*list)->first = NULL;
    (*list)->last  = NULL;
-   
+
    RETURN;
 } /* End of PCMlinkedlistinit */
 
@@ -99,7 +99,7 @@ PCMlinkedlistappend (PCMlinkedlist *list,
       list->last->next = newnode;
       list->last = newnode;
    }
-   
+
    RETURN;
 } /* END of PCMlinkedlistappend */
 
@@ -162,9 +162,9 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
    PCMlinkednode *p;
 
    assert(list);
-   
-   printf ("\n++++++++++++++PCM_linked_list++++++++++++++++++++++++++++\n");
-   
+
+   //printf ("\n++++++++++++++PCM_linked_list++++++++++++++++++++++++++++\n");
+
    if ( list->first != NULL &&
          list->last  != NULL   ) {
       p = list->first;
@@ -178,13 +178,13 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
          p = p->next;
       }
       printf ("\n");
-      printf ("Have %d elements in this list\n\n", PCMlinkedlistlength (list));
+      printf ("There are %d elements in this list\n\n", PCMlinkedlistlength (list));
    }
    else {
       printf ("This is an empty list now\n\n");
    }
 
-   printf ("\n+++++++++++++++++++END+++++++++++++++++++++++++++++++++++\n");
+   //printf ("\n+++++++++++++++++++END+++++++++++++++++++++++++++++++++++\n");
 
    RETURN;
 } /* End of PCMlinkedlistoutput */
@@ -201,7 +201,7 @@ PCMlinkedlistclear (PCMlinkedlist *list)
    RETURN;
 } /* End of PCMlinkedlistclear */
 
-// Pop is a method used in both stack and queue with type 
+// Pop is a method used in both stack and queue with type
 int
 PCMlinkedlistpop (PCMlinkedlist *list,
       enum PCMPOPTYPE type)
@@ -251,7 +251,7 @@ PCMlinkedlistpop (PCMlinkedlist *list,
 
    PCM_FREE (p->elem);
    PCM_FREE (p);
-   
+
    RETURN;
 } /* End of PCMlinkedlistpop */
 

@@ -45,6 +45,13 @@ lib:
 	rm *.a
 	rm *.o
 
+python:
+	echo 'make python wrapper by swig'
+	swig -python PCM_Python.i
+	$(CCOMPILE) -c -fpic $(OTHER) $(INCLUDE) $(CSRC) \
+	-I /usr/include/python2.6 *.c
+	$(CCOMPILE) -shared *.o -o _PCM_Python.so
+
 pcmtest: $(LOGFILES)
 	@if test `cat $(LOGFILES) | grep 'PCM Error' | wc -l` -gt 0; then \
 	  echo "";\
