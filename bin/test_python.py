@@ -1,5 +1,13 @@
 import PCM_Python as pcmpy
-f = pcmpy.PCMfilecreate()
-pcmpy.PCMfileopen(f,'IM.lp')
-pcmpy.PCMfilestat(f)
-pcmpy.PCMfilefree(f)
+import sys
+
+if len(sys.argv) < 2: 
+   print 'Please provide a file as input'
+else:
+   f = pcmpy.PCMfilecreate()
+   status = pcmpy.PCMfileopen(f, sys.argv[1])
+   if status == 0:  
+      pcmpy.PCMfilestat(f)
+      pcmpy.PCMfilefree(f)
+   else:
+      print 'Error code: ' + str(status)
