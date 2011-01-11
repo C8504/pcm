@@ -40,6 +40,7 @@ Has now achieved the function (incomplete):
    9. Automated build
   10. Automated testing
   11. Automated performance profiling
+  12. Python wapper by Swig
 
 Chinese Version:
 
@@ -78,4 +79,4 @@ pcm {
    9. 自动化build
   10. 自动化测试
   11. 自动化performance profiling
-
+  12. 用swig封装PCM的C函数库为python库
