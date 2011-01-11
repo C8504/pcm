@@ -11,11 +11,10 @@ main(int argc, char **argv)
       goto TERMINATE;
    }
 
-   PCMfile *fp = NULL;
+   PCMfile *fp = PCMfilecreate();
 
-   CALL(PCMfilecreate(&fp));
    CALL(PCMfileopen(fp, argv[1]));
-   CALL(PCMfilestatistics(fp));
+   CALL(PCMfilestat(fp));
 
    char str[PCMFILEMAXLINE] = {0};
    int len = 0;
@@ -33,7 +32,7 @@ main(int argc, char **argv)
    /*while (len > 0);*/
 
 
-   CALL(PCMfilefree(&fp));
+   CALL(PCMfilefree(fp));
 
 TERMINATE:
    PCMcheckerror(error);
