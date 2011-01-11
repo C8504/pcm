@@ -11,11 +11,18 @@
 #include "PCMstack.h"
 #include "PCMerrormap.h"
 %}
-%include ""
+%include "typemaps.i"
+%include "cstring.i"
 
+%cstring_bounded_output(char *line, 1024);
 int PCMpower (int, int, long long *OUTPUT);
 
 PCMfile* PCMfilecreate();
-int PCMfilefree  (PCMfile *fp);
-int PCMfileopen      (PCMfile *fp, const char *name);
-int PCMfilestat      (PCMfile *fp);
+int PCMfilefree       (PCMfile *fp);
+int PCMfileopen       (PCMfile *fp, const char *name);
+int PCMfilestat       (PCMfile *fp);
+int PCMfilegetmaxline (PCMfile *fp, char *line, int *OUTPUT);
+int PCMfilegetline    (/*in*/ PCMfile *fp,
+                       /*in*/ int     max,
+                       /*out*/char    *line,
+                       /*out*/int     *OUTPUT);
