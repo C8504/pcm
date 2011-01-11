@@ -45,7 +45,7 @@ lib:
 	rm *.a
 	rm *.o
 
-python:
+pcmpy:
 	swig -python PCM_Python.i
 	$(CCOMPILE) -c -fpic $(OTHER) $(INCLUDE) $(CSRC) \
 	-I /usr/include/python2.6 *.c
@@ -69,7 +69,7 @@ testclean:
 	@rm -f -r $(LOGDIR) $(PROFDIR) $(EXEDIR) $(SPLINTDIR)
 
 clean: testclean
-	@rm -f error  */*.stackdump gmon.out *.o *.c *.py *pyc *.so */*.a
+	@rm -f error  */*.stackdump gmon.out *.o *.c *pyc *.so */*.a
 
 # C files
 $(EXEDIR)test_PCM_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_PCM_link_init_and_free$(C)
@@ -158,5 +158,5 @@ $(EXEDIR)cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)
 $(LOGDIR)cast$(LOG): $(EXEDIR)cast$(E)
 	$(call test,cast)
 
-.PHONY: test splint clean
+.PHONY: test splint clean pcmpy
 
