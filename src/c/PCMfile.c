@@ -1,39 +1,41 @@
 #include "PCMfile.h"
 
-int
-PCMfilecreate (PCMfile **fp) {
-   DERROR;
+PCMfile* 
+PCMfilecreate () {
+   int error = 0;
    int i     = 0;
+   PCMfile *fp = NULL;
 
-   PCM_ALLOC(*fp, 1, **fp);
+   PCM_ALLOC(fp, 1, *fp);
 
-   (*fp)->p       = NULL;
-   THROW(PCMstrncpy ((*fp)->name, "", sizeof (*fp)->name + 1));
-   (*fp)->nlines  = 0LL;
-   (*fp)->nbytes  = 0LL;
-   (*fp)->ndigits = 0LL;
-   (*fp)->nwords  = 0LL;
+   fp->p       = NULL;
+   PCMstrncpy (fp->name, "", sizeof fp->name + 1);
+   fp->nlines  = 0LL;
+   fp->nbytes  = 0LL;
+   fp->ndigits = 0LL;
+   fp->nwords  = 0LL;
 
    for (i = 0; i < PCMCHAR; ++i) {
-      (*fp)->countofchar[i] = 0;
+      fp->countofchar[i] = 0;
    }
-   
-   RETURN;
+
+TERMINATE:
+   return fp;
 } /* End of PCMfilecreate*/
 
 int
-PCMfilefree (PCMfile **fp){
+PCMfilefree (PCMfile *fp){
    DERROR;
 
    assert(fp != NULL);
 
-   if ( (*fp)->p != NULL ){
-      fclose((*fp)->p);
-      (*fp)->p = NULL;
+   if ( fp->p != NULL ){
+      fclose(fp->p);
+      fp->p = NULL;
 
    }
 
-   PCM_FREE(*fp);
+   PCM_FREE(fp);
    
    RETURN;
 } /* End of PCMfilefree*/
@@ -55,7 +57,7 @@ PCMfileopen (PCMfile *fp, const char *name){
 } /* End of PCMfileopen */
 
    int
-PCMfilestatistics (PCMfile *fp)
+PCMfilestat (PCMfile *fp)
 {
    DERROR;
    int i     = 0;
@@ -176,15 +178,3 @@ PCMfilegetmaxline (PCMfile *fp,
    RETURN;
 } /* End of PCMfilegetmaxline*/
 
-int
-PCMfilestat (const char* filename) {
-   DERROR;
-
-   PCMfile *fp = NULL;
-   CALL(PCMfilecreate(&fp));
-   CALL(PCMfileopen(fp, filename));
-   CALL(PCMfilestatistics(fp));
-   CALL(PCMfilefree(&fp));
-
-   RETURN;
-} /* End of PCMfilestat */
