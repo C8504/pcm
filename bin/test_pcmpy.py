@@ -8,6 +8,6 @@ else:
    status = pcmpy.PCMfileopen(f, sys.argv[1])
    if status == 0:  
       pcmpy.PCMfilestat(f)
-      pcmpy.PCMfilefree(f)
    else:
       print 'Error code: ' + str(status)
+   pcmpy.PCMfilefree(f)
