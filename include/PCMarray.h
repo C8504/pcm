@@ -15,8 +15,8 @@ extern "C" {
       int  capacity;      /* The capacity of list*/
    } PCMarray;
 
-   int PCMarrayinit    (PCMarray **list);
-   int PCMarrayfree    (PCMarray **list);
+   PCMarray* PCMarrayinit    ();
+   int PCMarrayfree    (PCMarray *list);
    int PCMarraycopy    (PCMarray *list, const int *arr, int count);
    int PCMarraymerge   (PCMarray *des,  const PCMarray* src);
    int PCMarrayclear   (PCMarray *list);

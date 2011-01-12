@@ -30,16 +30,15 @@ void test_PCM_array_init_and_free(void)
    /*    mylist.capacity = 10; */
    /*    CALL(PCMarrayinsert (&mylist, 0, 19); */
    /*    if ( error )  goto TERMINATE; */
-   PCMarray* mylist = NULL;
+   PCMarray* mylist = PCMarrayinit ();
 
-   CALL(PCMarrayinit (&mylist));
    CALL(PCMarrayoutput(mylist));
-   CALL(PCMarrayfree (&mylist));
+   CALL(PCMarrayfree (mylist));
 
    if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:
    PCMcheckerror (error);
-   if ( NULL != mylist )  PCMarrayfree (&mylist);
+   if ( NULL != mylist )  PCMarrayfree (mylist);
 
 }
 
@@ -47,9 +46,8 @@ void test_PCM_array_delete(void)
 {
    int i, e;
    int error = 0;
-   PCMarray* mylist = NULL;
+   PCMarray* mylist = PCMarrayinit ();
 
-   CALL(PCMarrayinit (&mylist));
    printf ("insert 3 elements\n");
    CALL(PCMarrayinsert (mylist, 0, 8));
    CALL(PCMarrayinsert (mylist, 0, 100));
@@ -68,7 +66,7 @@ void test_PCM_array_delete(void)
    if ( mylist == NULL )  printf("sqlist free successfully!\n");
 TERMINATE:
    PCMcheckerror (error);
-   if ( NULL != mylist )  PCMarrayfree (&mylist);
+   if ( NULL != mylist )  PCMarrayfree (mylist);
 
 }
 
@@ -81,8 +79,7 @@ void test_PCM_array_inout(void)
    int count = 0;
    int sum = 0;
 
-   PCMarray *list = NULL;
-   CALL(PCMarrayinit(&list));
+   PCMarray* list = PCMarrayinit ();
 
    printf("Please input intergers:\n");
 
@@ -111,7 +108,7 @@ void test_PCM_array_inout(void)
 
    CALL(PCMarrayoutput (list));
 
-   CALL(PCMarrayfree (&list));
+   CALL(PCMarrayfree (list));
 
    printf ("You have input %d integers\n", count);
    printf ("The max one is %d\n"         , max);
@@ -119,7 +116,7 @@ void test_PCM_array_inout(void)
 
 TERMINATE:
    PCMcheckerror(error);
-   if ( NULL != list )   PCMarrayfree(&list);
+   if ( NULL != list )   PCMarrayfree(list);
 }
 
 void test_PCM_array_insert(void) 
@@ -127,10 +124,8 @@ void test_PCM_array_insert(void)
    int i;
    int error = 0;
 
-   PCMarray* mylist = NULL;
-
    printf ("init my list\n");
-   CALL(PCMarrayinit (&mylist));
+   PCMarray* mylist = PCMarrayinit ();
 
    printf ("insert 1-3 elements");
 
@@ -152,13 +147,13 @@ void test_PCM_array_insert(void)
    CALL(PCMarrayoutput(mylist));
 
    printf ("free my list\n");
-   CALL(PCMarrayfree (&mylist));
+   CALL(PCMarrayfree (mylist));
 
    if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:
 
    PCMcheckerror (error); 
-   if ( NULL != mylist )  PCMarrayfree (&mylist);
+   if ( NULL != mylist )  PCMarrayfree (mylist);
 
 }
 
@@ -170,19 +165,17 @@ void test_PCM_array_merge(void)
    int a[5] = {1, 3, 3, 7, 7};
    int b[5] = {1, 3, 6, 6, 10};
 
-   PCMarray* odd = NULL;
-   PCMarray* even = NULL;
+   PCMarray* odd = PCMarrayinit();
+   PCMarray* even = PCMarrayinit();
 
-   CALL(PCMarrayinit (&odd));
-   CALL(PCMarrayinit (&even));
    CALL(PCMarraycopy (odd, a, 5));
    CALL(PCMarraycopy (even, b, 5));
    CALL(PCMarraymerge (odd, even));
    CALL(PCMarraydeleteR (odd));
    CALL(PCMarrayoutput (odd));
    CALL(PCMarrayoutput (even));
-   CALL(PCMarrayfree (&odd));
-   CALL(PCMarrayfree (&even));
+   CALL(PCMarrayfree (odd));
+   CALL(PCMarrayfree (even));
 
    if ( even == NULL )  printf ("free even successfully!\n");
    if ( odd == NULL  )  printf ("free odd successfully!\n");
@@ -195,10 +188,10 @@ void test_PCM_array_sort_and_find(void)
    int i;
    int error = 0;
    int ind;
-   PCMarray* mylist = NULL;
-
+   
    printf("sort_and_find\n");
-   CALL(PCMarrayinit (&mylist));
+   PCMarray* mylist = PCMarrayinit();
+
    printf("after init\n");
    CALL(PCMarrayinsert (mylist, 0, 1));
    CALL(PCMarrayinsert (mylist, 1, 10));
@@ -270,7 +263,7 @@ void test_PCM_array_sort_and_find(void)
       PCMarrayoutput (mylist);
       if ( error )  goto TERMINATE;*/
 
-   CALL(PCMarrayfree (&mylist));
+   CALL(PCMarrayfree (mylist));
 
    if ( mylist == NULL )  printf("sqlist free successfully!\n");
 TERMINATE:

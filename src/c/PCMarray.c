@@ -4,40 +4,38 @@
 #include "PCMfind.h"
 #include "PCMarray.h"
 
-int
-PCMarrayinit (PCMarray **list)
+PCMarray*
+PCMarrayinit ()
 {
-   DERROR;
-
-   PCM_ALLOC((*list), 1, (**list));
+   PCM_ALLOC((list), 1, (*list));
    
-   PCM_ALLOC((*list)->elemp, PCMLISTINITSIZE, int);
+   PCM_ALLOC((list)->elemp, PCMLISTINITSIZE, int);
    
-   (*list)->length = 0;
-   (*list)->capacity = PCMLISTINITSIZE;
+   (list)->length = 0;
+   (list)->capacity = PCMLISTINITSIZE;
 
-   RETURN;
+   return list;
 } /* End of PCMarrayinit */
 
 /* Free the list*/
 int
-PCMarrayfree (PCMarray **list)
+PCMarrayfree (PCMarray *list)
 {
    DERROR;
    int temp = 0;
 
    assert(list != NULL);
 
-   if ( (*list)->elemp != NULL) {
-      while ((*list)->length != 0) {
-         THROW(PCMarraydelete(*list, (*list)->length - 1, &temp));
+   if ( list->elemp != NULL) {
+      while (list->length != 0) {
+         THROW(PCMarraydelete(list, list->length - 1, &temp));
       }
       
-      PCM_FREE((*list)->elemp);
-      (*list)->capacity = 0;
+      PCM_FREE(list->elemp);
+      list->capacity = 0;
    }
 
-   PCM_FREE(*list);
+   PCM_FREE(list);
 
    RETURN;
 } /* End of PCMarrayfree */
