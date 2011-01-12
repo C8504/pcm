@@ -32,7 +32,7 @@ main(int argc, char **argv)
    /*while (len > 0);*/
 
 
-   CALL(PCMfilefree(fp));
+   PCMfilefree(fp);
 
 TERMINATE:
    PCMcheckerror(error);
