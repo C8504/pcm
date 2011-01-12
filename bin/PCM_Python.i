@@ -18,7 +18,7 @@
 int PCMpower (int, int, long long *OUTPUT);
 
 PCMfile* PCMfilecreate();
-int PCMfilefree       (PCMfile *fp);
+void PCMfilefree      (PCMfile *fp);
 int PCMfileopen       (PCMfile *fp, const char *name);
 int PCMfilestat       (PCMfile *fp);
 int PCMfilegetmaxline (PCMfile *fp, char *line, int *OUTPUT);

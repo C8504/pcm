@@ -23,10 +23,8 @@ TERMINATE:
    return fp;
 } /* End of PCMfilecreate*/
 
-int
+void
 PCMfilefree (PCMfile *fp){
-   DERROR;
-
    assert(fp != NULL);
 
    if ( fp->p != NULL ){
@@ -36,8 +34,6 @@ PCMfilefree (PCMfile *fp){
    }
 
    PCM_FREE(fp);
-   
-   RETURN;
 } /* End of PCMfilefree*/
 
 int
@@ -56,38 +52,7 @@ PCMfileopen (PCMfile *fp, const char *name){
    RETURN;
 } /* End of PCMfileopen */
 
-   int
-PCMfilestat (PCMfile *fp)
-{
-   DERROR;
-   int i     = 0;
-   
-   assert(fp != NULL);
-
-   THROW(PCMfilegetinfo(fp));
-
-   printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
-   
-   printf ("File name: %s\n", fp->name);
-   printf ("There are %lld lines\n", fp->nlines);
-   printf ("There are %lld words\n", fp->nwords);
-   printf ("There are %lld bytes\n", fp->nbytes);
-   printf ("There are %lld digits\n", fp->ndigits);
-
-   printf ("\n++++++++++++++++END++++++++++++++++++++++++++++++++++++\n");
-/*   for (i = 0; i < PCMCHAR; ++i) {*/
-/*      if (isprint(i)) {*/
-/*         printf ("Count of char ");*/
-/*         putchar((char)(i));*/
-/*         putchar(':');*/
-/*         printf ("%lld", fp->countofchar[i]);*/
-/*         putchar('\n');*/
-/*      }*/
-/*   }*/
-   RETURN;
-} /* End of PCMfilestatistics*/
-
-int
+static int
 PCMfilegetinfo (PCMfile *fp){
    DERROR;
    int state = 0;
@@ -123,6 +88,39 @@ PCMfilegetinfo (PCMfile *fp){
    
    RETURN;
 } /* End of PCMfilepgetinfo*/
+
+int
+PCMfilestat (PCMfile *fp)
+{
+   DERROR;
+   int i     = 0;
+   
+   assert(fp != NULL);
+
+   THROW(PCMfilegetinfo(fp));
+
+   printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
+   
+   printf ("File name: %s\n", fp->name);
+   printf ("There are %lld lines\n", fp->nlines);
+   printf ("There are %lld words\n", fp->nwords);
+   printf ("There are %lld bytes\n", fp->nbytes);
+   printf ("There are %lld digits\n", fp->ndigits);
+
+   for (i = 0; i < PCMCHAR; ++i) {
+      if (isprint(i)) {
+         printf ("Count of char ");
+         putchar((char)(i));
+         putchar(':');
+         printf ("%lld", fp->countofchar[i]);
+         putchar('\n');
+      }
+   }
+
+   printf ("\n++++++++++++++++END++++++++++++++++++++++++++++++++++++\n");
+
+   RETURN;
+} /* End of PCMfilestatistics*/
 
 int
 PCMfilegetline (PCMfile *fp,
