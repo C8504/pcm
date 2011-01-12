@@ -12,6 +12,8 @@
 #include "PCMerrormap.h"
 %}
 %include "typemaps.i"
+%include "carrays.i"
+%array_class(int, intArray);
 int PCMpower (int, int, long long *OUTPUT);
 
 %include "cstring.i"
@@ -40,6 +42,7 @@ int PCMarraydelete  (PCMarray *list, int index, int* OUTPUT);
 int PCMarraydeleteR (PCMarray *list);
 int PCMarrayclear   (PCMarray *list);
 int PCMarraymerge   (PCMarray *des,  const PCMarray* src);
+int PCMarraycopy    (PCMarray *list, const int* arr, int count);
 int PCMarraysort    (PCMarray *list, int length, enum PCMSORTALG alg);
 int PCMarrayfind    (PCMarray *list, int length, const int elem,
                      int *OUTPUT, enum PCMSEARCHALG alg);

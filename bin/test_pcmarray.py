@@ -8,6 +8,10 @@ pcmpy.PCMarrayinsert(a,0,3)
 pcmpy.PCMarrayinsert(a,0,2)
 pcmpy.PCMarrayinsert(b,0,3)
 pcmpy.PCMarrayinsert(b,0,2)
+arr = pcmpy.intArray(10)
+for i in range(10):
+   arr[i] = i
+pcmpy.PCMarraycopy(a,arr,10)
 #pcmpy.PCMarraymerge(a,b)
 pcmpy.PCMarrayoutput(a)
 pcmpy.PCMarraysort(a,3,pcmpy.PCMALGSORTBUBBLE)
