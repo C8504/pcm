@@ -7,13 +7,17 @@
 PCMarray*
 PCMarrayinit ()
 {
-   PCM_ALLOC((list), 1, (*list));
+   int error = 0;
+   PCMarray* list = NULL;
+   PCM_ALLOC(list, 1, (*list));
+   list->elemp = NULL;
    
    PCM_ALLOC((list)->elemp, PCMLISTINITSIZE, int);
    
    (list)->length = 0;
    (list)->capacity = PCMLISTINITSIZE;
 
+TERMINATE:
    return list;
 } /* End of PCMarrayinit */
 
