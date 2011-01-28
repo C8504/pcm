@@ -95,10 +95,9 @@ int main(void)
    //dynamic string array
    printf ("dynamic string array:\n");
    for (i = 0; i < 5; ++i) {
+      dynamicstrarr[i] = NULL;
       dynamicstrarr[i] = malloc (sizeof(char*));
       strcpy(dynamicstrarr[i], strarr[i]);
-   }
-   for (i = 0; i < 5; ++i) {
       CALL(PCMstackpush (s, dynamicstrarr[i]));
    }
 
@@ -115,6 +114,7 @@ int main(void)
    if ( PCMstackisempty(s) ) {
       printf ("stack is empty now!\n");
    }
+   PCMstackfree (&s, free);
 
 TERMINATE:
    PCMstackfree (&s, free);

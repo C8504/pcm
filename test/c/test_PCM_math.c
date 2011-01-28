@@ -16,7 +16,7 @@ int main (void)
    printf ("PCMpower(%d,%d) == %lld\n", base, index, r);
 
    base = 100;
-   index = -1;
+   index = 1;
    CALL(PCMpower (base, index, &r));
 
    printf ("PCMpower(%d,%d) == %lld\n", base, index, r);

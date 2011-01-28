@@ -11,9 +11,9 @@ PCMarrayinit ()
    PCMarray* list = NULL;
    PCM_ALLOC(list, 1, (*list));
    list->elemp = NULL;
-   
+
    PCM_ALLOC((list)->elemp, PCMLISTINITSIZE, int);
-   
+
    (list)->length = 0;
    (list)->capacity = PCMLISTINITSIZE;
 
@@ -34,7 +34,7 @@ PCMarrayfree (PCMarray *list)
       while (list->length != 0) {
          THROW(PCMarraydelete(list, list->length - 1, &temp));
       }
-      
+
       PCM_FREE(list->elemp);
       list->capacity = 0;
    }
@@ -57,7 +57,7 @@ PCMarraycopy (PCMarray *list, const int *arr, int count)
    for (i = 0; i < count; ++i) {
       THROW(PCMarrayinsert(list, list->length, arr[i]));
    }
-   
+
    RETURN;
 } /* End of PCMarraycopy*/
 
@@ -77,7 +77,7 @@ PCMarraymerge (PCMarray *des, const PCMarray* src)
    }
 
    THROW(PCMarraysort (des, des->length, 0));
-   
+
    RETURN;
 } /* End of PCMarraymerge*/
 
@@ -91,7 +91,7 @@ PCMarrayclear (PCMarray *list)
    while (list->length != 0) {
       THROW(PCMarraydelete(list, list->length - 1, &temp));
    }
-   
+
    RETURN;
 } /* End of PCMarrayclear*/
 
@@ -157,11 +157,11 @@ PCMarraydelete (PCMarray *list,
 
    //move the element which after list[index] to previous
    p = &list->elemp[index];
-   for (q = p; q <= &(list->elemp[list->length-1]); ++q) {
+   for (q = p; q < &(list->elemp[list->length-1]); ++q) {
       *q = *(q+1);
    }
    --list->length;
-   
+
    RETURN;
 } /* End of PCMarraydelete */
 
@@ -179,7 +179,7 @@ PCMarraydeleteR(PCMarray *list)
          THROW(PCMarraydelete (list, index, &e));
       }
    }
-   
+
    RETURN;
 } /* End of PCMarraydeleteR */
 

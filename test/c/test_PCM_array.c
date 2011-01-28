@@ -11,7 +11,7 @@ static void run_test(UnitTestFunction test)
 void run_tests(UnitTestFunction *tests)
 {
    int i = 0;
-   
+
    for (i = 0; tests[i] != NULL; ++i) {
       run_test(tests[i]);
    }
@@ -34,6 +34,7 @@ void test_PCM_array_init_and_free(void)
 
    CALL(PCMarrayoutput(mylist));
    CALL(PCMarrayfree (mylist));
+   mylist = NULL;
 
    if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:
@@ -61,7 +62,8 @@ void test_PCM_array_delete(void)
    CALL(PCMarrayoutput (mylist));
    CALL(PCMarrayclear (mylist));
    CALL(PCMarrayoutput (mylist));
-   CALL(PCMarrayfree (&mylist));
+   CALL(PCMarrayfree (mylist));
+   mylist = NULL;
 
    if ( mylist == NULL )  printf("sqlist free successfully!\n");
 TERMINATE:
@@ -70,7 +72,7 @@ TERMINATE:
 
 }
 
-void test_PCM_array_inout(void) 
+void test_PCM_array_inout(void)
 {
    int error = 0;
    int num = 0;
@@ -109,6 +111,7 @@ void test_PCM_array_inout(void)
    CALL(PCMarrayoutput (list));
 
    CALL(PCMarrayfree (list));
+   list = NULL;
 
    printf ("You have input %d integers\n", count);
    printf ("The max one is %d\n"         , max);
@@ -119,7 +122,7 @@ TERMINATE:
    if ( NULL != list )   PCMarrayfree(list);
 }
 
-void test_PCM_array_insert(void) 
+void test_PCM_array_insert(void)
 {
    int i;
    int error = 0;
@@ -148,16 +151,17 @@ void test_PCM_array_insert(void)
 
    printf ("free my list\n");
    CALL(PCMarrayfree (mylist));
+   mylist = NULL;
 
    if ( mylist == NULL )  printf("free mylist successfully!");
 TERMINATE:
 
-   PCMcheckerror (error); 
+   PCMcheckerror (error);
    if ( NULL != mylist )  PCMarrayfree (mylist);
 
 }
 
-void test_PCM_array_merge(void) 
+void test_PCM_array_merge(void)
 {
    int i;
    int error = 0;
@@ -176,6 +180,7 @@ void test_PCM_array_merge(void)
    CALL(PCMarrayoutput (even));
    CALL(PCMarrayfree (odd));
    CALL(PCMarrayfree (even));
+   odd = even = NULL;
 
    if ( even == NULL )  printf ("free even successfully!\n");
    if ( odd == NULL  )  printf ("free odd successfully!\n");
@@ -183,12 +188,12 @@ TERMINATE:
    PCMcheckerror (error);
 }
 
-void test_PCM_array_sort_and_find(void) 
+void test_PCM_array_sort_and_find(void)
 {
    int i;
    int error = 0;
    int ind;
-   
+
    printf("sort_and_find\n");
    PCMarray* mylist = PCMarrayinit();
 
@@ -197,7 +202,7 @@ void test_PCM_array_sort_and_find(void)
    CALL(PCMarrayinsert (mylist, 1, 10));
    CALL(PCMarrayinsert (mylist, 2, 0));
    CALL(PCMarrayinsert (mylist, 3, 5));
-    
+
    for (i = 0; i < 3; ++i) {
       CALL(PCMarrayinsert (mylist,i,i*2));
    }
@@ -205,9 +210,9 @@ void test_PCM_array_sort_and_find(void)
    for (i = 0; i < 3; ++i) {
       CALL(PCMarrayinsert (mylist,i,i));
    }
-   
+
    PCMarrayoutput (mylist);
-   
+
    printf ("sort mylist\n");
    enum PCMSORTALG sortalg = PCMALGSORTBUBBLE;
    CALL(PCMarraysort (mylist, mylist->length, sortalg));
@@ -264,10 +269,11 @@ void test_PCM_array_sort_and_find(void)
       if ( error )  goto TERMINATE;*/
 
    CALL(PCMarrayfree (mylist));
+   mylist = NULL;
 
    if ( mylist == NULL )  printf("sqlist free successfully!\n");
 TERMINATE:
-   PCMcheckerror (error); 
+   PCMcheckerror (error);
 }
 
 
@@ -284,8 +290,8 @@ static UnitTestFunction tests[] = {
 
 int main()
 {
-   
-  run_tests(tests); 
-   
+
+  run_tests(tests);
+
   return 0;
 }

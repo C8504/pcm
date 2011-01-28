@@ -92,36 +92,6 @@ $(EXEDIR)test_PCM_link_readfile$(E): $(CSRC) $(CTESTDIR)test_PCM_link_readfile$(
 $(LOGDIR)test_PCM_link_readfile$(LOG): $(EXEDIR)test_PCM_link_readfile$(E)
 	$(call test,test_PCM_link_readfile)
 
-$(EXEDIR)test_PCM_array_inout$(E): $(CSRC) $(CTESTDIR)test_PCM_array_inout$(C)
-	$(call compile,test_PCM_array_inout)
-$(LOGDIR)test_PCM_array_inout$(LOG): $(EXEDIR)test_PCM_array_inout$(E)
-	$(call test,test_PCM_array_inout)
-
-$(EXEDIR)test_PCM_array_init_and_free$(E):$(CSRC) $(CTESTDIR)test_PCM_array_init_and_free$(C)
-	$(call compile,test_PCM_array_init_and_free)
-$(LOGDIR)test_PCM_array_init_and_free$(LOG): $(EXEDIR)test_PCM_array_init_and_free$(E)
-	$(call test,test_PCM_array_init_and_free)
-
-$(EXEDIR)test_PCM_array_delete$(E): $(CSRC) $(CTESTDIR)test_PCM_array_delete$(C)
-	$(call compile,test_PCM_array_delete)
-$(LOGDIR)test_PCM_array_delete$(LOG): $(EXEDIR)test_PCM_array_delete$(E)
-	$(call test,test_PCM_array_delete)
-
-$(EXEDIR)test_PCM_array_insert$(E): $(CSRC) $(CTESTDIR)test_PCM_array_insert$(C)
-	$(call compile,test_PCM_array_insert)
-$(LOGDIR)test_PCM_array_insert$(LOG): $(EXEDIR)test_PCM_array_insert$(E)
-	$(call test,test_PCM_array_insert)
-
-$(EXEDIR)test_PCM_array_merge$(E): $(CSRC) $(CTESTDIR)test_PCM_array_merge$(C)
-	$(call compile,test_PCM_array_merge)
-$(LOGDIR)test_PCM_array_merge$(LOG): $(EXEDIR)test_PCM_array_merge$(E)
-	$(call test,test_PCM_array_merge)
-
-$(EXEDIR)test_PCM_array_sort_and_find$(E): $(CSRC) $(CTESTDIR)test_PCM_array_sort_and_find$(C)
-	$(call compile,test_PCM_array_sort_and_find)
-$(LOGDIR)test_PCM_array_sort_and_find$(LOG): $(EXEDIR)test_PCM_array_sort_and_find$(E)
-	$(call test,test_PCM_array_sort_and_find)
-
 $(EXEDIR)test_PCM_string$(E): $(CSRC) $(CTESTDIR)test_PCM_string$(C)
 	$(call compile,test_PCM_string)
 $(LOGDIR)test_PCM_string$(LOG): $(EXEDIR)test_PCM_string$(E)

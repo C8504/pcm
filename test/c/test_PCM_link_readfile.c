@@ -9,7 +9,7 @@ int main(void)
    PCMlinkedlist *mylist1 = NULL;
    PCMlinkedlist *mylist2 = NULL;
 
-   fp = fopen ("../data/PCM.c", "r");
+   fp = fopen ("Makefile", "r");
    if ( fp == NULL)  {
       printf ("PCM Error: fopen error!\n");
       goto TERMINATE;
@@ -32,6 +32,6 @@ int main(void)
    fclose (fp);
 
 TERMINATE:
-   PCMcheckerror (error); 
+   PCMcheckerror (error);
    return 0;
 }
