@@ -33,9 +33,8 @@ test =                                                        \
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
          -o $(EXEDIR)$(1)$(E);                                                   
-tags:
-	-ctags -o TAGS -R ../src/c/* ../include/*
-pcm: $(EXE) tags
+
+pcm: $(EXE)
 
 lib:
 	$(CCOMPILE) -c $(OTHER) $(INCLUDE) $(CSRC)
