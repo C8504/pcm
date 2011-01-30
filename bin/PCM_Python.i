@@ -18,7 +18,7 @@ int PCMpower (int, int, long long *OUTPUT);
 
 %include "cstring.i"
 %cstring_bounded_output(char *line, 1024);
-PCMfile* PCMfilecreate(const char*name);
+PCMfile* PCMfilecreate();
 void PCMfilefree      (PCMfile *fp);
 int PCMfileopen       (PCMfile *fp, const char *name);
 int PCMfilestat       (PCMfile *fp);
@@ -34,7 +34,7 @@ enum PCMSORTALG {PCMALGSORTSELECT = 80001,
                  PCMALGSORTINSERT};
 enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
                    PCMALGBINFIND};
-PCMarray* PCMarraynew    ();
+PCMarray* PCMarraynew    (const char* name);
 int PCMarrayfree    (PCMarray *list);
 int PCMarrayoutput  (PCMarray *list);
 int PCMarrayinsert  (PCMarray *list, int index, const int elem);
