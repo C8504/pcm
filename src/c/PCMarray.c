@@ -17,10 +17,12 @@ PCMarraynew (const char* name)
     (list)->length = 0;
     (list)->capacity = PCMLISTINITSIZE;
 
-    if (NULL != name) {
+    if (NULL != name)
+    {
         strcpy((list)->name, name);
     }
-    else {
+    else
+    {
         strcpy((list)->name, "list");
     }
 
@@ -37,7 +39,7 @@ PCMarrayfree (PCMarray *list)
 
     assert(list != NULL);
 
-    if ( list->elemp != NULL)
+    if ( list->elemp != NULL )
     {
         while (list->length != 0)
         {
@@ -117,7 +119,7 @@ PCMarrayinsert (PCMarray *list,
 
     //check index
     if ( index < 0            ||
-            index > list->length   )
+         index > list->length   )
     {
         THROW(PCMERRNOTVALIDINDEX);
     }
@@ -161,8 +163,8 @@ PCMarraydelete (PCMarray *list,
     int *q = NULL;
 
     //check index
-    if ( index < 0              ||
-            index > list->length - 1   )
+    if ( index < 0               ||
+         index > list->length - 1   )
     {
         THROW(PCMERRNOTVALIDINDEX);
     }
