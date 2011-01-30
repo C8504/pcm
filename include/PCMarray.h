@@ -29,6 +29,7 @@ extern "C" {
     int PCMarraysort    (PCMarray *list, int length, enum PCMSORTALG alg);
     int PCMarrayfind    (PCMarray *list, int length, const int elem,
                          int *index, enum PCMSEARCHALG alg);
+    int PCMarraylen     (PCMarray *list);
 #ifdef __cplusplus
 }
 #endif

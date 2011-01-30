@@ -1,4 +1,14 @@
 #include "PCM.h"
+
+void
+PCMversion(char* version)
+{
+    assert(version);
+
+    sprintf(version, "PCM version: %s", VER);
+
+} /* End of PCMversion */
+
 void
 PCMcheckerror (int error)
 {

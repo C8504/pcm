@@ -107,6 +107,7 @@ PCMfilestat (PCMfile *fp)
 {
     DERROR;
     int i     = 0;
+    int j     = 0;
 
     assert(fp != NULL);
 
@@ -122,13 +123,24 @@ PCMfilestat (PCMfile *fp)
     {
         if (isprint(i))
         {
-            printf ("Count of char ");
-            putchar((char)(i));
-            putchar(':');
-            printf ("%lld", fp->countofchar[i]);
-            putchar('\n');
+            if ( 0 != fp->countofchar[i] )
+            {
+                j++;
+                printf ("Count of char ");
+                putchar((char)(i));
+                putchar(':');
+                printf ("%8lld   ", fp->countofchar[i]);
+            }
+
+            if ( 0 == j%3 && 0 != j )
+            {
+                printf("\n");
+                j = 0;
+            }
         }
     }
+
+    printf("\n");
 
     RETURN;
 } /* End of PCMfilestatistics*/

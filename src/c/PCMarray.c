@@ -226,7 +226,7 @@ PCMarrayoutput (PCMarray *list)
     }
     else
     {
-        printf("This is a NULL list!");
+        printf("This is a NULL int array!");
     }
     printf("\n");
     printf("\n");
@@ -259,6 +259,7 @@ PCMarraysort (PCMarray *list,
     }
     else if ( alg == PCMALGSORTQUICK )
     {
+        printf("using default quick sort....\n");
         qsort(list->elemp, list->length, sizeof (int), PCMcompare);
     }
     else if ( alg == PCMALGSORTSHELL)
@@ -271,6 +272,7 @@ PCMarraysort (PCMarray *list,
     }
     else
     {
+        printf("using default quick sort....\n");
         qsort(list->elemp, list->length, sizeof (int), PCMcompare);
     }
 
@@ -313,3 +315,8 @@ PCMarrayfind (PCMarray *list,
     RETURN;
 } /* End of PCMarrayfind */
 
+int
+PCMarraylen(PCMarray *list)
+{
+    return list->length;
+} /* End of PCMarraylen */

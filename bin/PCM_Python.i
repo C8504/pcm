@@ -1,5 +1,6 @@
 %module PCM_Python
 %{
+#include "PCM.h"
 #include "PCMfile.h"
 #include "PCMarray.h"
 #include "PCMstring.h"
@@ -13,12 +14,15 @@
 %}
 %include "typemaps.i"
 %include "carrays.i"
-%array_class(int, intArray);
-int PCMpower (int, int, long long *OUTPUT);
-
 %include "cstring.i"
 %cstring_bounded_output(char *line, 1024);
+%array_class(int, intArray);
+
+void PCMversion (char* line);
+int PCMpower (int, int, long long *OUTPUT);
 PCMfile* PCMfilecreate();
+
+
 void PCMfilefree      (PCMfile *fp);
 int PCMfileopen       (PCMfile *fp, const char *name);
 int PCMfilestat       (PCMfile *fp);
@@ -36,6 +40,7 @@ enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
                    PCMALGBINFIND};
 PCMarray* PCMarraynew    (const char* name);
 int PCMarrayfree    (PCMarray *list);
+int PCMarraylen     (PCMarray *list);
 int PCMarrayoutput  (PCMarray *list);
 int PCMarrayinsert  (PCMarray *list, int index, const int elem);
 int PCMarraydelete  (PCMarray *list, int index, int* OUTPUT);

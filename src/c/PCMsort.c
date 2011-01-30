@@ -2,6 +2,7 @@
 int PCMinsertsort(int *a,
                   int len)
 {
+    printf("set sort_alg to 1, using insert sort....\n");
     DERROR;
     int i, j;
     int t;
@@ -28,6 +29,7 @@ int
 PCMselectsort(int *a,
               int len)
 {
+    printf("set sort_alg to 2, using select sort....\n");
     DERROR;
     int i, j, min;
     int t;
@@ -60,6 +62,7 @@ int
 PCMbubblesort(int *a,
               int len)
 {
+    printf("set sort_alg to 3, using bubble sort....\n");
     DERROR;
     int i, j;
     int t;
@@ -86,6 +89,7 @@ int
 PCMshellsort(int *a,
              int len)
 {
+    printf("set sort_alg to 4, using shell sort....\n");
     DERROR;
     int i, j, gap;
     int temp;

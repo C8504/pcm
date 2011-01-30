@@ -13,7 +13,7 @@ extern "C" {
 #define PCMLISTINCREMENT   5
 
 #define PCMFILEMAXLINE         1000
-#define PCMFILENAME            20
+#define PCMFILENAME            256
 #define PCMCHAR                128
 
     enum BOOL
@@ -78,6 +78,8 @@ extern "C" {
 
 #define RETURN TERMINATE:      \
                      return error
+
+#define VER "1.0.0.0"
 
 
 #ifdef __cplusplus

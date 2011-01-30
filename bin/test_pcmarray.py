@@ -1,5 +1,6 @@
 import PCM_Python as pcmpy
-
+version = pcmpy.PCMversion()
+print version
 a = pcmpy.PCMarraynew("1")
 b = pcmpy.PCMarraynew("2")
 pcmpy.PCMarrayinsert(a,0,1)
