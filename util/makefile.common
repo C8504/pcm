@@ -7,9 +7,9 @@ help:
 	;echo "Choose a target:" \
 	;echo "" \
 	;echo "make [help]                               -- print this help screen" \
-	;echo "make [exe/test_PCM_array_insert]             -- build test_PCM_array_insert" \
-	;echo "make [log/test_PCM_array_insert.log]         -- run test_PCM_array_insert" \
-	;echo "make [profile/test_PCM_array_insert.profile] -- profile test_PCM_array_insert" \
+	;echo "make [exe/test_PCM_array]                 -- build test_PCM_array" \
+	;echo "make [log/test_PCM_link.log]              -- run test_PCM_link" \
+	;echo "make [profile/test_link.profile]          -- profile test_PCM_array" \
 	;echo "make [pcmtest]                            -- build all tests" \
 	;echo "make [splint]                             -- use splint to check all C files" \
 	;echo "make [clean]                              -- delete all *.exe and *.log files" \
@@ -71,25 +71,6 @@ clean: testclean
 	@rm -f error  */*.stackdump gmon.out *.o *.c *pyc *.so */*.a
 
 # C files
-$(EXEDIR)test_PCM_link_init_and_free$(E): $(CSRC) $(CTESTDIR)test_PCM_link_init_and_free$(C)
-	$(call compile,test_PCM_link_init_and_free)
-$(LOGDIR)test_PCM_link_init_and_free$(LOG): $(EXEDIR)test_PCM_link_init_and_free$(E)
-	$(call test,test_PCM_link_init_and_free)
-
-$(EXEDIR)test_PCM_link_one_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_one_element$(C)
-	$(call compile,test_PCM_link_one_element)
-$(LOGDIR)test_PCM_link_one_element$(LOG): $(EXEDIR)test_PCM_link_one_element$(E)
-	$(call test,test_PCM_link_one_element)
-
-$(EXEDIR)test_PCM_link_many_element$(E): $(CSRC) $(CTESTDIR)test_PCM_link_many_element$(C)
-	$(call compile,test_PCM_link_many_element)
-$(LOGDIR)test_PCM_link_many_element$(LOG): $(EXEDIR)test_PCM_link_many_element$(E)
-	$(call test,test_PCM_link_many_element)
-
-$(EXEDIR)test_PCM_link_readfile$(E): $(CSRC) $(CTESTDIR)test_PCM_link_readfile$(C)
-	$(call compile,test_PCM_link_readfile)
-$(LOGDIR)test_PCM_link_readfile$(LOG): $(EXEDIR)test_PCM_link_readfile$(E)
-	$(call test,test_PCM_link_readfile)
 
 $(EXEDIR)test_PCM_string$(E): $(CSRC) $(CTESTDIR)test_PCM_string$(C)
 	$(call compile,test_PCM_string)
@@ -120,6 +101,11 @@ $(EXEDIR)test_PCM_array$(E): $(CSRC) $(CTESTDIR)test_PCM_array$(C)
 	$(call compile,test_PCM_array)
 $(LOGDIR)test_PCM_array$(LOG): $(EXEDIR)test_PCM_array$(E)
 	$(call test,test_PCM_array)
+
+$(EXEDIR)test_PCM_link$(E): $(CSRC) $(CTESTDIR)test_PCM_link$(C)
+	$(call compile,test_PCM_link)
+$(LOGDIR)test_PCM_link$(LOG): $(EXEDIR)test_PCM_link$(E)
+	$(call test,test_PCM_link)
 
 # C++ files
 $(EXEDIR)cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)

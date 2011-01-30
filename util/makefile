@@ -28,10 +28,7 @@ CSRC=$(CSRCDIR)PCMlinkedlist$(C)\
      $(CSRCDIR)PCMfile$(C)\
      $(CSRCDIR)PCMstack$(C)
 
-EXE=$(EXEDIR)test_PCM_link_init_and_free$(E)\
-    $(EXEDIR)test_PCM_link_one_element$(E)\
-    $(EXEDIR)test_PCM_link_many_element$(E)\
-    $(EXEDIR)test_PCM_link_readfile$(E)\
+EXE=$(EXEDIR)test_PCM_link$(E)\
     $(EXEDIR)test_PCM_string$(E)\
     $(EXEDIR)test_PCM_math$(E)\
     $(EXEDIR)test_PCM_file$(E)\
@@ -39,10 +36,7 @@ EXE=$(EXEDIR)test_PCM_link_init_and_free$(E)\
     $(EXEDIR)test_PCM_stack$(E)\
     $(EXEDIR)test_PCM_array$(E)
 
-CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
-      $(CTESTDIR)test_PCM_link_one_element$(C)\
-      $(CTESTDIR)test_PCM_link_many_element$(C)\
-      $(CTESTDIR)test_PCM_link_readfile$(C)\
+CTEST=$(CTESTDIR)test_PCM_link$(C)\
       $(CTESTDIR)test_PCM_string$(C)\
       $(CTESTDIR)test_PCM_math$(C)\
       $(CTESTDIR)test_PCM_file$(C)\
@@ -50,10 +44,7 @@ CTEST=$(CTESTDIR)test_PCM_link_init_and_free$(C)\
       $(CTESTDIR)test_PCM_stack$(C)\
       $(CTESTDIR)test_PCM_array$(C)
 
-LOGFILES=$(LOGDIR)test_PCM_link_init_and_free$(LOG)\
-         $(LOGDIR)test_PCM_link_one_element$(LOG)\
-         $(LOGDIR)test_PCM_link_many_element$(LOG)\
-         $(LOGDIR)test_PCM_link_readfile$(LOG)\
+LOGFILES=$(LOGDIR)test_PCM_link$(LOG)\
          $(LOGDIR)test_PCM_string$(LOG)\
          $(LOGDIR)test_PCM_math$(LOG)\
          $(LOGDIR)test_PCM_file$(LOG)\
