@@ -64,4 +64,4 @@ class Intarray(object):
     def sort(self):
         """sort pcm Intarray."""
         _pcm.PCMarraysort(self.intarray, _pcm.PCMarraylen(self.intarray), self.sortalg)
-        _pcm.PCMarrayoutput(self.intarray)
+        #_pcm.PCMarrayoutput(self.intarray)
