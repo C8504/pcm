@@ -7,7 +7,7 @@ def get_version():
 class File(object):
     def __init__(self):
         self.f = _pcm.PCMfilecreate()
-        self.load = False;
+        self.load = False
 
     def __del__(self):
         _pcm.PCMfilefree(self.f)
@@ -25,6 +25,8 @@ class File(object):
     def stat(self):
         if self.load and self.status == 0:
             _pcm.PCMfilestat(self.f)
+        else:
+            print 'Please load file by load method first'
 
 class Intarray(object):
     def __init__(self,name):
