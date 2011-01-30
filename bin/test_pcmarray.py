@@ -1,7 +1,7 @@
 import PCM_Python as pcmpy
 
-a = pcmpy.PCMarrayinit()
-b = pcmpy.PCMarrayinit()
+a = pcmpy.PCMarraynew()
+b = pcmpy.PCMarraynew()
 pcmpy.PCMarrayinsert(a,0,1)
 pcmpy.PCMarrayinsert(a,0,5)
 pcmpy.PCMarrayinsert(a,0,3)

@@ -31,7 +31,7 @@ void test_PCM_array_init_and_free(void)
     /*    mylist.capacity = 10; */
     /*    CALL(PCMarrayinsert (&mylist, 0, 19); */
     /*    if ( error )  goto TERMINATE; */
-    PCMarray* mylist = PCMarrayinit ();
+    PCMarray* mylist = PCMarraynew ();
 
     CALL(PCMarrayoutput(mylist));
     CALL(PCMarrayfree (mylist));
@@ -48,7 +48,7 @@ void test_PCM_array_delete(void)
 {
     int i, e;
     int error = 0;
-    PCMarray* mylist = PCMarrayinit ();
+    PCMarray* mylist = PCMarraynew ();
 
     printf ("insert 3 elements\n");
     CALL(PCMarrayinsert (mylist, 0, 8));
@@ -82,7 +82,7 @@ void test_PCM_array_inout(void)
     int count = 0;
     int sum = 0;
 
-    PCMarray* list = PCMarrayinit ();
+    PCMarray* list = PCMarraynew ();
 
     printf("Please input intergers:\n");
 
@@ -133,7 +133,7 @@ void test_PCM_array_insert(void)
     int error = 0;
 
     printf ("init my list\n");
-    PCMarray* mylist = PCMarrayinit ();
+    PCMarray* mylist = PCMarraynew ();
 
     printf ("insert 1-3 elements");
 
@@ -177,8 +177,8 @@ void test_PCM_array_merge(void)
     int a[5] = {1, 3, 3, 7, 7};
     int b[5] = {1, 3, 6, 6, 10};
 
-    PCMarray* odd = PCMarrayinit();
-    PCMarray* even = PCMarrayinit();
+    PCMarray* odd = PCMarraynew();
+    PCMarray* even = PCMarraynew();
 
     CALL(PCMarraycopy (odd, a, 5));
     CALL(PCMarraycopy (even, b, 5));
@@ -203,7 +203,7 @@ void test_PCM_array_sort_and_find(void)
     int ind;
 
     printf("sort_and_find\n");
-    PCMarray* mylist = PCMarrayinit();
+    PCMarray* mylist = PCMarraynew();
 
     printf("after init\n");
     CALL(PCMarrayinsert (mylist, 0, 1));

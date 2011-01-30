@@ -34,7 +34,7 @@ enum PCMSORTALG {PCMALGSORTSELECT = 80001,
                  PCMALGSORTINSERT};
 enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
                    PCMALGBINFIND};
-PCMarray* PCMarrayinit    ();
+PCMarray* PCMarraynew    ();
 int PCMarrayfree    (PCMarray *list);
 int PCMarrayoutput  (PCMarray *list);
 int PCMarrayinsert  (PCMarray *list, int index, const int elem);

@@ -5,7 +5,7 @@
 #include "PCMarray.h"
 
 PCMarray*
-PCMarrayinit ()
+PCMarraynew ()
 {
     int error = 0;
     PCMarray* list = NULL;
@@ -19,7 +19,7 @@ PCMarrayinit ()
 
 TERMINATE:
     return list;
-} /* End of PCMarrayinit */
+} /* End of PCMarraynew */
 
 /* Free the list*/
 int
@@ -79,8 +79,6 @@ PCMarraymerge (PCMarray *des, const PCMarray* src)
     {
         THROW(PCMarrayinsert(des, des->length, src->elemp[i]));
     }
-
-    THROW(PCMarraysort (des, des->length, 0));
 
     RETURN;
 } /* End of PCMarraymerge*/
