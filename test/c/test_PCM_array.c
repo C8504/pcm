@@ -1,24 +1,5 @@
 #include "PCMarray.h"
-
-// unit test framework in C
-typedef void (*UnitTestFunction)(void);
-
-static void run_test(UnitTestFunction test)
-{
-    test();
-}
-
-void run_tests(UnitTestFunction *tests)
-{
-    int i = 0;
-
-    for (i = 0; tests[i] != NULL; ++i)
-    {
-        run_test(tests[i]);
-    }
-}
-
-
+#include "utframework.h"
 
 void test_PCM_array_init_and_free(void)
 {
@@ -31,7 +12,7 @@ void test_PCM_array_init_and_free(void)
     /*    mylist.capacity = 10; */
     /*    CALL(PCMarrayinsert (&mylist, 0, 19); */
     /*    if ( error )  goto TERMINATE; */
-    PCMarray* mylist = PCMarraynew ();
+    PCMarray* mylist = PCMarraynew("list1");
 
     CALL(PCMarrayoutput(mylist));
     CALL(PCMarrayfree (mylist));
@@ -48,7 +29,7 @@ void test_PCM_array_delete(void)
 {
     int i, e;
     int error = 0;
-    PCMarray* mylist = PCMarraynew ();
+    PCMarray* mylist = PCMarraynew("list2");
 
     printf ("insert 3 elements\n");
     CALL(PCMarrayinsert (mylist, 0, 8));
@@ -82,7 +63,7 @@ void test_PCM_array_inout(void)
     int count = 0;
     int sum = 0;
 
-    PCMarray* list = PCMarraynew ();
+    PCMarray* list = PCMarraynew("list3");
 
     printf("Please input intergers:\n");
 
@@ -133,7 +114,7 @@ void test_PCM_array_insert(void)
     int error = 0;
 
     printf ("init my list\n");
-    PCMarray* mylist = PCMarraynew ();
+    PCMarray* mylist = PCMarraynew("list4");
 
     printf ("insert 1-3 elements");
 
@@ -177,8 +158,8 @@ void test_PCM_array_merge(void)
     int a[5] = {1, 3, 3, 7, 7};
     int b[5] = {1, 3, 6, 6, 10};
 
-    PCMarray* odd = PCMarraynew();
-    PCMarray* even = PCMarraynew();
+    PCMarray* odd = PCMarraynew("list5");
+    PCMarray* even = PCMarraynew("list6");
 
     CALL(PCMarraycopy (odd, a, 5));
     CALL(PCMarraycopy (even, b, 5));
@@ -203,7 +184,7 @@ void test_PCM_array_sort_and_find(void)
     int ind;
 
     printf("sort_and_find\n");
-    PCMarray* mylist = PCMarraynew();
+    PCMarray* mylist = PCMarraynew("list7");
 
     printf("after init\n");
     CALL(PCMarrayinsert (mylist, 0, 1));
@@ -288,13 +269,10 @@ TERMINATE:
     PCMcheckerror (error);
 }
 
-
-
 static UnitTestFunction tests[] =
 {
     test_PCM_array_init_and_free,
     test_PCM_array_delete,
-    //test_PCM_array_inout,
     test_PCM_array_insert,
     test_PCM_array_sort_and_find,
     test_PCM_array_merge,
@@ -303,7 +281,6 @@ static UnitTestFunction tests[] =
 
 int main()
 {
-
     run_tests(tests);
 
     return 0;

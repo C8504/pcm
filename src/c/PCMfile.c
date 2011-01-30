@@ -112,8 +112,6 @@ PCMfilestat (PCMfile *fp)
 
     THROW(PCMfilegetinfo(fp));
 
-    printf ("\n++++++++++++++++PCM file statistics++++++++++++++++++++\n");
-
     printf ("File name: %s\n", fp->name);
     printf ("There are %lld lines\n", fp->nlines);
     printf ("There are %lld words\n", fp->nwords);
@@ -131,8 +129,6 @@ PCMfilestat (PCMfile *fp)
             putchar('\n');
         }
     }
-
-    printf ("\n++++++++++++++++END++++++++++++++++++++++++++++++++++++\n");
 
     RETURN;
 } /* End of PCMfilestatistics*/

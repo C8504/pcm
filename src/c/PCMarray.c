@@ -5,7 +5,7 @@
 #include "PCMarray.h"
 
 PCMarray*
-PCMarraynew ()
+PCMarraynew (const char* name)
 {
     int error = 0;
     PCMarray* list = NULL;
@@ -16,6 +16,13 @@ PCMarraynew ()
 
     (list)->length = 0;
     (list)->capacity = PCMLISTINITSIZE;
+
+    if (NULL != name) {
+        strcpy((list)->name, name);
+    }
+    else {
+        strcpy((list)->name, "list");
+    }
 
 TERMINATE:
     return list;
@@ -203,7 +210,7 @@ PCMarrayoutput (PCMarray *list)
 
     assert(list != NULL);
 
-    printf ("\n++++++++++++++++PCM_sq_list+++++++++++++++++++++\n");
+    printf ("list->name: %s\n", list->name);
     printf ("list->length = %d\n", list->length);
     printf ("list->capacity = %d\n", list->capacity);
 
@@ -219,7 +226,8 @@ PCMarrayoutput (PCMarray *list)
     {
         printf("This is a NULL list!");
     }
-    printf ("\n++++++++++++++++END+++++++++++++++++++++++++++++\n");
+    printf("\n");
+    printf("\n");
 
     RETURN;
 } /* End of PCMarrayoutput */

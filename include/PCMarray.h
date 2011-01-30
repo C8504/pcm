@@ -14,12 +14,13 @@ extern "C" {
         int *elemp;     /* The basic address of list */
         int  length;        /* The length of list */
         int  capacity;      /* The capacity of list*/
+        char name[256];
     } PCMarray;
 
-    PCMarray* PCMarraynew    ();
+    PCMarray* PCMarraynew (const char *name);
     int PCMarrayfree    (PCMarray *list);
     int PCMarraycopy    (PCMarray *list, const int *arr, int count);
-    int PCMarraymerge (PCMarray *des,  const PCMarray* src);
+    int PCMarraymerge   (PCMarray *des,  const PCMarray* src);
     int PCMarrayclear   (PCMarray *list);
     int PCMarrayinsert  (PCMarray *list, int index, const int elem);
     int PCMarraydelete  (PCMarray *list, int index, int* e);

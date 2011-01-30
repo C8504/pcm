@@ -18,7 +18,7 @@ int PCMpower (int, int, long long *OUTPUT);
 
 %include "cstring.i"
 %cstring_bounded_output(char *line, 1024);
-PCMfile* PCMfilecreate();
+PCMfile* PCMfilecreate(const char*name);
 void PCMfilefree      (PCMfile *fp);
 int PCMfileopen       (PCMfile *fp, const char *name);
 int PCMfilestat       (PCMfile *fp);
