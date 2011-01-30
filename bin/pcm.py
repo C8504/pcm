@@ -1,7 +1,7 @@
 import PCM_Python as _pcm
 
 def get_version():
-        """Returns a string specifying the version of IntArray."""
+        """Returns a string specifying the version of PCM."""
         return _pcm.PCMversion()
 
 class File(object):
@@ -43,7 +43,7 @@ class Intarray(object):
         _pcm.PCMarraycopy(self.intarray, arr, l)
 
     def set_sortalg(self, alg):
-        """set pcm.intarray sort algorithm."""
+        """set pcm.Intarray sort algorithm."""
         if   alg == 1:
             self.sortalg = _pcm.PCMALGSORTINSERT
         elif alg == 2:
@@ -56,10 +56,10 @@ class Intarray(object):
             self.sorgalg = _pcm.PCMALGSORTQUICK
 
     def output(self):
-        """print pcm intarray."""
+        """print pcm Intarray."""
         _pcm.PCMarrayoutput(self.intarray)
 
     def sort(self):
-        """sort pcm intarray."""
+        """sort pcm Intarray."""
         _pcm.PCMarraysort(self.intarray, _pcm.PCMarraylen(self.intarray), self.sortalg)
         _pcm.PCMarrayoutput(self.intarray)
