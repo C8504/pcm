@@ -15,7 +15,7 @@ help:
 	;echo "make [clean]                              -- delete all *.exe and *.log files" \
 	;echo "make [testclean]                          -- delete all *.log files" \
 	;echo "make [pcm]                                -- compile all c/c++ programs" \
-	;echo "make [tags]                               -- generate ctags" \
+	;echo "make [pcmpy]                              -- generate pcm python wrapper" \
 	)
 
 compile =                                                 \
@@ -28,11 +28,11 @@ compile =                                                 \
 test =                                                        \
          if test -e gmon.out; then rm gmon.out; fi; \
          ./$(EXEDIR)$(1)$(E) > $(LOGDIR)$(1)$(LOG);                \
-			gprof $(EXEDIR)$(1)$(E) gmon.out > $(PROFDIR)$(1).profile; 
+			gprof $(EXEDIR)$(1)$(E) gmon.out > $(PROFDIR)$(1).profile;
 
 cppcompile =                                                  \
          $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
-         -o $(EXEDIR)$(1)$(E);                                                   
+         -o $(EXEDIR)$(1)$(E);
 
 pcm: $(EXE)
 
