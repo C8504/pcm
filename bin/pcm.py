@@ -4,6 +4,7 @@ def get_version():
         """Returns a string specifying the version of PCM."""
         return _pcm.PCMversion()
 
+
 class File(object):
     def __init__(self):
         self.f = _pcm.PCMfilecreate()
@@ -27,6 +28,7 @@ class File(object):
             _pcm.PCMfilestat(self.f)
         else:
             print 'Please load file by load method first'
+
 
 class Intarray(object):
     def __init__(self,name):
@@ -55,7 +57,7 @@ class Intarray(object):
         elif alg == 4:
             self.sortalg = _pcm.PCMALGSORTSHELL
         elif alg == 0:
-            self.sorgalg = _pcm.PCMALGSORTQUICK
+            self.sortalg = _pcm.PCMALGSORTQUICK
 
     def output(self):
         """print pcm Intarray."""

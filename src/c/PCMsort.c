@@ -91,14 +91,14 @@ PCMshellsort(int *a,
 {
     printf("set sort_alg to 4, using shell sort....\n");
     DERROR;
-    int i, j, gap;
-    int temp;
+    int i, j, temp;
+    int gap = 0;
 
     assert(a != NULL);
 
-    while (gap * 3 + 1 <= len)
+    while (gap <= len)
     {
-        gap=gap * 3 + 1;
+        gap = gap * 3 + 1;
     }
     while (gap > 0)
     {
