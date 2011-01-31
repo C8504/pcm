@@ -234,7 +234,7 @@ PCMarrayoutput (PCMarray *list)
     RETURN;
 } /* End of PCMarrayoutput */
 
-/* Sort list by customize algorithm, bubble sort by default */
+/* Sort list by customize algorithm, quick sort by default */
 int
 PCMarraysort (PCMarray *list,
               int length,
@@ -251,10 +251,12 @@ PCMarraysort (PCMarray *list,
     // take qsort as default alg
     if ( alg == PCMALGSORTSELECT)
     {
+        printf("set sort_alg to 2, using select sort....\n");
         THROW(PCMselectsort(list->elemp, length));
     }
     else if ( alg == PCMALGSORTBUBBLE )
     {
+        printf("set sort_alg to 3, using bubble sort....\n");
         THROW(PCMbubblesort(list->elemp, list->length));
     }
     else if ( alg == PCMALGSORTQUICK )
@@ -264,10 +266,12 @@ PCMarraysort (PCMarray *list,
     }
     else if ( alg == PCMALGSORTSHELL)
     {
+        printf("set sort_alg to 4, using shell sort....\n");
         THROW(PCMshellsort (list->elemp, list->length));
     }
     else if ( alg == PCMALGSORTINSERT)
     {
+        printf("set sort_alg to 1, using insert sort....\n");
         THROW(PCMinsertsort (list->elemp, list->length));
     }
     else
