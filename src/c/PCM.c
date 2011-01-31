@@ -15,7 +15,7 @@ PCMcheckerror (int error)
     int i = 0;
 
     if ( error > PCMERRSTART &&
-            error < PCMERREND     )
+         error < PCMERREND      )
     {
         int nErrors = sizeof (errorMap) / sizeof (errorMap[0]);
 
