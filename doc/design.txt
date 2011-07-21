@@ -34,7 +34,7 @@ PCMsort + PCMfind 在PCMseqlist里面被使用
    int PCMshellsort (int *a, int len);
 }
 
-＊PCMfind // 默认为PCMoriginfind
+*PCMfind // 默认为PCMoriginfind
 {
    #include "PCM.h"
    int PCMoriginfind (int *a, int length, const int elem, int *index);
