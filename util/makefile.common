@@ -25,13 +25,17 @@ compile =                                                 \
          if !(test -d splint); then mkdir splint; fi; \
          $(CCOMPILE) $(OTHER) $(INCLUDE) $(CTESTDIR)$(1)$(C) $(CSRC) \
          -o $(EXEDIR)$(1)$(E);
+
 test =                                                        \
-         if test -e gmon.out; then rm gmon.out; fi; \
-         ./$(EXEDIR)$(1)$(E) > $(LOGDIR)$(1)$(LOG);                \
-			gprof $(EXEDIR)$(1)$(E) gmon.out > $(PROFDIR)$(1).profile;
+         if !(test -d exe); then mkdir exe; fi; \
+         if !(test -d log); then mkdir log; fi; \
+         if !(test -d profile); then mkdir profile; fi; \
+         if !(test -d splint); then mkdir splint; fi; \
+         ./$(EXEDIR)$(1)$(E) > $(LOGDIR)$(1)$(LOG);
 
 cppcompile =                                                  \
-         $(CPPCOMPILE) -I $(INCLUDE) $(CTESTDIR)$(1)$(CPP) $(CPPSRC) \
+         if !(test -d exe); then mkdir exe; fi;\
+         $(CPPCOMPILE) $(OTHER) $(INCLUDE) $(CPPTESTDIR)$(1)$(CPP) $(CPPSRC) \
          -o $(EXEDIR)$(1)$(E);
 
 pcm: $(EXE)
@@ -106,12 +110,18 @@ $(EXEDIR)test_PCM_link$(E): $(CSRC) $(CTESTDIR)test_PCM_link$(C)
 	$(call compile,test_PCM_link)
 $(LOGDIR)test_PCM_link$(LOG): $(EXEDIR)test_PCM_link$(E)
 	$(call test,test_PCM_link)
+	$(call test,helloworld)
 
 # C++ files
-$(EXEDIR)cast$(E): $(CPPSRC) $(CTESTDIR)cast$(CPP)
+$(EXEDIR)cast$(E): $(CPPTESTDIR)cast$(CPP)
 	$(call cppcompile,cast)
 $(LOGDIR)cast$(LOG): $(EXEDIR)cast$(E)
 	$(call test,cast)
+
+$(EXEDIR)helloworld$(E): $(CPPTESTDIR)helloworld$(CPP)
+	$(call cppcompile,helloworld)
+$(LOGDIR)helloworld$(LOG): $(EXEDIR)helloworld$(E)
+	$(call test,helloworld)
 
 .PHONY: test splint clean pcmpy
 
