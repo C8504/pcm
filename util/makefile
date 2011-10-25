@@ -58,6 +58,6 @@ LOGFILES=$(LOGDIR)test_PCM_link$(LOG)\
          $(LOGDIR)test_PCM$(LOG)\
          $(LOGDIR)test_PCM_stack$(LOG)\
          $(LOGDIR)test_PCM_array$(LOG)\
-			$(LOGDIR)helloworld$(LOG)\
-			$(LOGDIR)cast$(LOG)
+         $(LOGDIR)helloworld$(LOG)\
+         $(LOGDIR)cast$(LOG)
 
