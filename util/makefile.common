@@ -110,7 +110,6 @@ $(EXEDIR)test_PCM_link$(E): $(CSRC) $(CTESTDIR)test_PCM_link$(C)
 	$(call compile,test_PCM_link)
 $(LOGDIR)test_PCM_link$(LOG): $(EXEDIR)test_PCM_link$(E)
 	$(call test,test_PCM_link)
-	$(call test,helloworld)
 
 # C++ files
 $(EXEDIR)cast$(E): $(CPPTESTDIR)cast$(CPP)

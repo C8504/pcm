@@ -38,8 +38,7 @@ EXE=$(EXEDIR)test_PCM_link$(E)\
     $(EXEDIR)test_PCM_file$(E)\
     $(EXEDIR)test_PCM$(E)\
     $(EXEDIR)test_PCM_stack$(E)\
-    $(EXEDIR)test_PCM_array$(E)\
-	 $(EXEDIR)test$(E)
+    $(EXEDIR)test_PCM_array$(E)
 
 CTEST=$(CTESTDIR)test_PCM_link$(C)\
       $(CTESTDIR)test_PCM_string$(C)\
