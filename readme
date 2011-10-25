@@ -1,35 +1,37 @@
-I have been thinking about the following questions
+I have been thought about the following questions:
 
 
-• In their daily work, how our programming precipitation
-   (including algorithms, frameworks, tools), let us advance a little every day?
+• In the daily work, how to grow?
+   (including algorithms, frameworks, tools)
 
 • How convenient for everyone to join us in research-based programming techniques,
   to pool our collective wisdom, it is best to write code, such as using C to
-  write a few sorting algorithms,Sorting algorithm that is faster and so on, how to
-  use C language function pointers, how to test automation, how profile C program,
-  how to use git, vim, make, etc.?
+  write a few sorting algorithms, which sorting algorithm that is faster, and 
+  how to use C language function pointers, how to test automation, 
+  how profile C program, how to use git, vim, make, etc.?
 
-• How to teach beginners the basic programming skills, preferably the code level?
+• How to teach beginners basic programming skills, preferably in code level?
 
-• See a very interesting algorithm or puzzle, and I want to achieve their own try,
-  but the lack of a convenient platform to write code and share and discuss.
+• Saw a very interesting algorithm or puzzle, and I want to try,
+  but lack a convenient platform to write code and share to discuss.
 
 So I wrote this pcm (Programmer Competency Matrix):
 http://www.indiangeek.net/wp-content/uploads/Programmer%20competency%20matrix.htm
 
 Directory structure
 pcm (
-    README
-    bin     ----------- makefile and python wrapper
-    data    ----------- test data
-    include ----------- header files
-    src     ----------- Source
-    test    ----------- test file
-    util    ----------- utility files, such as makefiles
+    bin	     ----------- makefile and python wrapper
+	data     ----------- test data
+	doc      ----------- design doc
+	examples ----------- examples
+	include  ----------- header files
+	readme
+	src      ----------- source
+	test     ----------- test file
+	util     ----------- utility files, such as makefiles
 )
 
-Has now achieved the function (incomplete):
+Done:
 
    1. File Statistics
    2. Sorting Algorithm
@@ -63,13 +65,15 @@ http://www.indiangeek.net/wp-content/uploads/Programmer%20competency%20matrix.ht
 目录结构
 
 PCM {
-    README
-    bin      -----------makefile 和python wrapper
-    data     -----------测试数据
-    include  -----------头文件
-    src      -----------源文件
-    test     -----------测试文件
-    util     -----------makefiles
+    bin	     ----------- makefile and python wrapper
+	data     ----------- test data
+	doc      ----------- design doc
+	examples ----------- examples
+	include  ----------- header files
+	readme
+	src      ----------- source
+	test     ----------- test file
+	util     ----------- utility files, such as makefiles
 }
 
 现在已经实现了的功能（不全）：
