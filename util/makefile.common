@@ -72,7 +72,7 @@ testclean:
 	@rm -f -r $(LOGDIR) $(PROFDIR) $(EXEDIR) $(SPLINTDIR)
 
 clean: testclean
-	@rm -f error  */*.stackdump gmon.out *.o *.c *pyc *.so */*.a
+	rm -f error  */*.stackdump gmon.out *.o *.c *pyc *.so */*.a
 
 # C files
 
