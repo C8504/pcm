@@ -1,31 +1,29 @@
-I have been thought about the following questions:
+********这个项目仅仅用来学习和交流，不作其他应用***********
 
+To solve below questions:
 
-• In the daily work, how to grow?
+• With the daily work, how to improve our programming skills?
    (including algorithms, frameworks, tools)
 
-• How convenient for everyone to join us in research-based programming techniques,
-  to pool our collective wisdom, it is best to write code, such as using C to
-  write a few sorting algorithms, which sorting algorithm that is faster, and 
-  how to use C language function pointers, how to test automation, 
-  how profile C program, how to use git, vim, make, etc.?
+• How to invovle as much as possiable people to join us in 
+  programming learning?
 
 • How to teach beginners basic programming skills, preferably in code level?
 
-• Saw a very interesting algorithm or puzzle, and I want to try,
-  but lack a convenient platform to write code and share to discuss.
+• Saw a very interesting algorithm or puzzle, and want to try,
+  but don't have a good platform to write code and share.
 
-So I wrote this pcm (Programmer Competency Matrix):
+So I wrote this pcm project, the name is stand for (Programmer Competency Matrix):
 http://www.indiangeek.net/wp-content/uploads/Programmer%20competency%20matrix.htm
 
 Directory structure
 pcm (
-    bin	     ----------- makefile and python wrapper
+   bin	   ----------- makefile and python wrapper
 	data     ----------- test data
 	doc      ----------- design doc
 	examples ----------- examples
 	include  ----------- header files
-	readme
+	readme   ----------- this file
 	src      ----------- source
 	test     ----------- test file
 	util     ----------- utility files, such as makefiles
@@ -44,49 +42,50 @@ Done:
    9. Automated build
   10. Automated testing
   11. Automated performance profiling
-  12. Python wapper by Swig and Interactive Python client
+  12. Python wapper by Swig and Interactive Python client on linux
 
 Chinese Version:
 
 我一直在思考以下问题，
 
-•在日常工作中，怎么沉淀我们的编程技术（包括算法，框架，工具）,让我们每天都进步一点点？
+•在日常工作中, 怎么沉淀我们的编程技术（包括算法, 框架, 工具）, 让我们每天都进步一点点？
 
-•怎么让大家方便的和我们一起研究基础的编程技术，集合大家集体的智慧，最好能写代码，比如用C写几个排序算法，
-那个排序算法比较快等等，怎么使用C语言中的函数指针，怎么让测试自动化，怎么profile C程序, 怎么使用git，vim,make 等等？
+•怎么让大家方便的和我们一起研究基础的编程技术, 集合大家集体的智慧, 最好能写代码,
+那个排序算法比较快等等, 怎么使用C语言中的函数指针, 怎么让测试自动化, 怎么profile 
+C程序, 怎么使用git,vim,make 等等？
 
-•如何交流编程技术，最好是代码级别的？
+•如何尽可能方便地交流编程技术？
 
-•看到非常有趣的算法或者谜题，也想自己实现试试看，但是缺少一个方便的平台来写代码和共享以及讨论。
+•看到非常有趣的算法或者谜题, 也想自己实现试试看, 但是缺少一个方便的平台来写代码和共享以及讨论。
 
-所以就有了这个叫做PCM的东西，PCM的名字来源于(Programmer Competency Matrix):
+所以就做了这个叫做PCM的东西, PCM的名字来源于(Programmer Competency Matrix):
 http://www.indiangeek.net/wp-content/uploads/Programmer%20competency%20matrix.htm
 
 目录结构
 
-PCM {
-    bin	     ----------- makefile and python wrapper
+pcm (
+   bin	   ----------- makefile and python wrapper
 	data     ----------- test data
 	doc      ----------- design doc
 	examples ----------- examples
 	include  ----------- header files
-	readme
+	readme   ----------- this file
 	src      ----------- source
 	test     ----------- test file
 	util     ----------- utility files, such as makefiles
-}
+)
 
-现在已经实现了的功能（不全）：
+Done:
 
-   1. 文件统计
-   2. 排序算法
-   3. 查找算法
-   4. 顺序表
-   5. 链表
-   6. 栈
-   7. 数学
-   8. 字符串
-   9. 自动化build
-  10. 自动化测试
-  11. 自动化performance profiling
-  12. 用swig封装PCM的C函数库为python库以及可交互的python client
+   1. File Statistics
+   2. Sorting Algorithm
+   3. Search algorithm
+   4. IntArray
+   5. Linkedlist
+   6. Stack
+   7. Mathematics
+   8. String
+   9. Automated build
+  10. Automated testing
+  11. Automated performance profiling
+  12. Python wapper by Swig and Interactive Python client on linux
