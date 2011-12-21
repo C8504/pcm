@@ -96,14 +96,14 @@ public class Transfer {
    }
 
 public static void main(String[] args) {
-		Timer timer = new Timer().start();
-		for(int i = 0; i < 100000000; i++) {
-			toChineseCurrency(1018600002);
-		}
-		timer.stop();
-		System.out.println("Time costs: " + timer.timeCosts());
-		System.out.println(toChineseCurrency(1018600002));
-	}
+      Timer timer = new Timer().start();
+      for(int i = 0; i < 100000000; i++) {
+         toChineseCurrency(1018600002);
+      }
+      timer.stop();
+      System.out.println("Time costs: " + timer.timeCosts());
+      System.out.println(toChineseCurrency(1018600002));
+   }
 
 }
 
