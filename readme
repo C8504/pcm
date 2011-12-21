@@ -1,36 +1,33 @@
 ********这个项目仅仅用来学习和交流，不作其他应用***********
 
-To solve below questions:
+To solve below problems:
 
-• With the daily work, how to improve our programming skills?
+• During daily work, how to improve our programming skills?
    (including algorithms, frameworks, tools)
 
-• How to invovle as much as possiable people to join us in 
-  programming learning?
+• How to invovle as much as possiable people to learn programming?
 
-• How to teach beginners basic programming skills, preferably in code level?
+• How to teach beginners basic programming skills, in code level?
 
 • Saw a very interesting algorithm or puzzle, and want to try,
   but don't have a good platform to write code and share.
 
-So I wrote this pcm project, the name is stand for (Programmer Competency Matrix):
+So I wrote this pcm project in github, the name is stand for (Programmer Competency Matrix):
 http://www.indiangeek.net/wp-content/uploads/Programmer%20competency%20matrix.htm
 
 Directory structure
 pcm (
-   bin	   ----------- makefile and python wrapper
-	data     ----------- test data
-	doc      ----------- design doc
-	examples ----------- examples
-	include  ----------- header files
-	readme   ----------- this file
-	src      ----------- source
-	test     ----------- test file
-	util     ----------- utility files, such as makefiles
+   bin      ----------- makefile and python wrapper
+   data     ----------- test data
+   doc      ----------- design doc
+   include  ----------- header files
+   readme   ----------- this file
+   src      ----------- source
+   test     ----------- test file
+   util     ----------- utility files, such as makefiles
 )
 
-Done:
-
+To Be Done:
    1. File Statistics
    2. Sorting Algorithm
    3. Search algorithm
@@ -64,19 +61,17 @@ http://www.indiangeek.net/wp-content/uploads/Programmer%20competency%20matrix.ht
 目录结构
 
 pcm (
-   bin	   ----------- makefile and python wrapper
-	data     ----------- test data
-	doc      ----------- design doc
-	examples ----------- examples
-	include  ----------- header files
-	readme   ----------- this file
-	src      ----------- source
-	test     ----------- test file
-	util     ----------- utility files, such as makefiles
+   bin      ----------- makefile and python wrapper
+   data     ----------- test data
+   doc      ----------- design doc
+   include  ----------- header files
+   readme   ----------- this file
+   src      ----------- source
+   test     ----------- test file
+   util     ----------- utility files, such as makefiles
 )
 
-Done:
-
+To Be Done:
    1. File Statistics
    2. Sorting Algorithm
    3. Search algorithm
