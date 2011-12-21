@@ -6,20 +6,20 @@ PCMoriginfind(int *a,
               const int elem,
               int *index)
 {
-    DERROR;
-    int i;
+   DERROR;
+   int i;
 
-    assert(a != NULL);
+   assert(a != NULL);
 
-    for (i = 0; i < length; ++i)
-    {
-        if ( a[i] == elem )
-        {
-            *index = i;
-        }
-    }
+   for (i = 0; i < length; ++i)
+   {
+      if ( a[i] == elem )
+      {
+         *index = i;
+      }
+   }
 
-    RETURN;
+   RETURN;
 } /* End of PCMoriginfind*/
 
 int
@@ -28,32 +28,32 @@ PCMbinfind(int *a,
            const int elem,
            int *index)
 {
-    DERROR;
-    int mid = 0;
-    int low = 0;
-    int high = length-1;
+   DERROR;
+   int mid = 0;
+   int low = 0;
+   int high = length-1;
 
-    assert(a != NULL);
+   assert(a != NULL);
 
-    *index = -1;
-    while (low <= high)
-    {
-        mid = (low + high)/2;
-        if ( elem > a[mid] )
-        {
-            low  = mid + 1;
-        }
-        else if( elem < a[mid] )
-        {
-            high = mid - 1;
-        }
-        else
-        {
-            *index = mid;
-            goto TERMINATE;
-        }
-    }
+   *index = -1;
+   while (low <= high)
+   {
+      mid = (low + high)/2;
+      if ( elem > a[mid] )
+      {
+         low  = mid + 1;
+      }
+      else if( elem < a[mid] )
+      {
+         high = mid - 1;
+      }
+      else
+      {
+         *index = mid;
+         goto TERMINATE;
+      }
+   }
 
-    RETURN;
+   RETURN;
 } /* End of PCMbinfind*/
 

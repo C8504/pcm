@@ -14,7 +14,7 @@ PCMnodefree (PCMlinkednode **node)
 
 int
 PCMnodeallocandinit (PCMlinkednode **node,
-      const char* elem)
+                     const char* elem)
 {
    DERROR;
 
@@ -83,7 +83,7 @@ PCMlinkedlistfree (PCMlinkedlist **list)
 
 int
 PCMlinkedlistappend (PCMlinkedlist *list,
-      const char* elem)
+                     const char* elem)
 {
    DERROR;
    PCMlinkednode *newnode = NULL;
@@ -91,8 +91,8 @@ PCMlinkedlistappend (PCMlinkedlist *list,
    THROW(PCMnodeallocandinit (&newnode, elem));
 
    if ( list->first == NULL &&
-         list->last  == NULL  ) {
-      list->last = list->first = newnode;
+      list->last  == NULL  ) {
+         list->last = list->first = newnode;
    }
    else {
       newnode->prev = list->last;
@@ -106,8 +106,8 @@ PCMlinkedlistappend (PCMlinkedlist *list,
 //insert the newnode after "p"
 int
 PCMlinkedlistinsert (PCMlinkedlist *list,
-      int         pos,
-      const char* elem)
+                     int         pos,
+                     const char* elem)
 {
    DERROR;
    int j = 0;
@@ -130,8 +130,8 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
       else {
          // check pos
          if ( pos < 1  ||
-              pos > len  ) {
-            THROW(PCMERRNOTVALIDINDEX);
+            pos > len  ) {
+               THROW(PCMERRNOTVALIDINDEX);
          }
 
          // find the node at pos "p"
@@ -155,7 +155,7 @@ PCMlinkedlistinsert (PCMlinkedlist *list,
 
 int
 PCMlinkedlistoutput (PCMlinkedlist *list,
-      const char* sp)
+                     const char* sp)
 {
    DERROR;
 
@@ -166,19 +166,19 @@ PCMlinkedlistoutput (PCMlinkedlist *list,
    //printf ("\n++++++++++++++PCM_linked_list++++++++++++++++++++++++++++\n");
 
    if ( list->first != NULL &&
-         list->last  != NULL   ) {
-      p = list->first;
-      while ( p != NULL) {
-         if ( sp != NULL ) {
-            printf ("%s%s", p->elem, sp);
+      list->last  != NULL   ) {
+         p = list->first;
+         while ( p != NULL) {
+            if ( sp != NULL ) {
+               printf ("%s%s", p->elem, sp);
+            }
+            else {
+               printf ("%s", p->elem);
+            }
+            p = p->next;
          }
-         else {
-            printf ("%s", p->elem);
-         }
-         p = p->next;
-      }
-      printf ("\n");
-      printf ("There are %d elements in this list\n\n", PCMlinkedlistlength (list));
+         printf ("\n");
+         printf ("There are %d elements in this list\n\n", PCMlinkedlistlength (list));
    }
    else {
       printf ("This is an empty list now\n\n");
@@ -204,7 +204,7 @@ PCMlinkedlistclear (PCMlinkedlist *list)
 // Pop is a method used in both stack and queue with type
 int
 PCMlinkedlistpop (PCMlinkedlist *list,
-      enum PCMPOPTYPE type)
+                  enum PCMPOPTYPE type)
 {
    DERROR;
    PCMlinkednode *p = NULL;

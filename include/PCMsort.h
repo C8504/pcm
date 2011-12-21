@@ -32,10 +32,10 @@ extern "C" {
 #endif
 
 #include "PCM.h"
-    int PCMbubblesort (int *a, int len);
-    int PCMselectsort (int *a, int len);
-    int PCMshellsort  (int *a, int len);
-    int PCMinsertsort (int *a, int len);
+   int PCMbubblesort (int *a, int len);
+   int PCMselectsort (int *a, int len);
+   int PCMshellsort  (int *a, int len);
+   int PCMinsertsort (int *a, int len);
 
 #ifdef __cplusplus
 }

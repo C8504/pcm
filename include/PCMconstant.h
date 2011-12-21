@@ -4,10 +4,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    // POP type in PCMseqlist
-    enum PCMPOPTYPE {
-        PCMPOPQUEUE = 0, PCMPOPSTACK
-                  };
+   // POP type in PCMseqlist
+   enum PCMPOPTYPE 
+   {
+      PCMPOPQUEUE = 0, PCMPOPSTACK
+   };
 
 #define PCMLISTINITSIZE    5
 #define PCMLISTINCREMENT   5
@@ -16,68 +17,68 @@ extern "C" {
 #define PCMFILENAME            256
 #define PCMCHAR                128
 
-    enum BOOL
-    {
-        FALSE,
-        TRUE
-    };
-    // ERROR CODE
-    enum PCMERR
-    {
-        PCMERRSTART = 10000,
-        PCMERRNOMEMORY,
-        PCMERRNOTVALIDINDEX,
-        PCMERRNULLPOINTER,
-        PCMERRELEMENTNOTFOUND,
-        PCMERREMPTYLIST,
-        PCMERRNOTSTACKANDQUEUE,
-        PCMERRWRONGSORTALG,
-        PCMERREND   = 20000
-    };
+   enum BOOL
+   {
+      FALSE,
+      TRUE
+   };
+   // ERROR CODE
+   enum PCMERR
+   {
+      PCMERRSTART = 10000,
+      PCMERRNOMEMORY,
+      PCMERRNOTVALIDINDEX,
+      PCMERRNULLPOINTER,
+      PCMERRELEMENTNOTFOUND,
+      PCMERREMPTYLIST,
+      PCMERRNOTSTACKANDQUEUE,
+      PCMERRWRONGSORTALG,
+      PCMERREND   = 20000
+   };
 
-    // Alg
-    enum PCMSORTALG {PCMALGSORTSELECT = 80001,
-                     PCMALGSORTBUBBLE,
-                     PCMALGSORTQUICK,
-                     PCMALGSORTSHELL,
-                     PCMALGSORTINSERT
-                    };
-    enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
-                       PCMALGBINFIND
-                      };
+   // Alg
+   enum PCMSORTALG {PCMALGSORTSELECT = 80001,
+      PCMALGSORTBUBBLE,
+      PCMALGSORTQUICK,
+      PCMALGSORTSHELL,
+      PCMALGSORTINSERT
+   };
+   enum PCMSEARCHALG {PCMALGORIGINFIND = 90001,
+      PCMALGBINFIND
+   };
 
-    // function handle
+   // function handle
 
-    // free momery
-    typedef void (*FREEFUNC) (void* p);
+   // free momery
+   typedef void (*FREEFUNC) (void* p);
 
-    // macros
+   // macros
 #define THROW(function)  if ( error = function ) { \
-                              printf ("In %s, line %d ;",__FILE__, __LINE__); \
-                              goto TERMINATE;                  \
-                            }
+   printf ("In %s, line %d ;",__FILE__, __LINE__); \
+   goto TERMINATE;                  \
+   }
 
 #define CALL(function) if ( error = function ) goto TERMINATE;
 
 #define PCM_ALLOC(x,n,t)        do {                            \
-      assert(x == NULL);                                           \
-      x = malloc((n) * sizeof(t));                             \
-      if ( x == NULL ) {                                           \
-         THROW(PCMERRNOMEMORY);                                    \
-      }                                                            \
+   assert(x == NULL);                                           \
+   x = malloc((n) * sizeof(t));                             \
+   if ( x == NULL ) {                                           \
+   THROW(PCMERRNOMEMORY);                                    \
+   }                                                            \
    } while(0)
 
 #define PCM_FREE(x)        do {        \
-      if ( (x) != NULL) {                 \
-         free (x);                        \
-         (x) = NULL;                      \
-      }                                   \
+   if ( (x) != NULL) {                 \
+   free (x);                        \
+   (x) = NULL;                      \
+   }                                   \
    } while(0)
 
 #define DERROR int error = 0
 
 #define RETURN TERMINATE:      \
-                     return error
+   return error
 
 #define VER "1.0.0.0"
 

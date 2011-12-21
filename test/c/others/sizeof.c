@@ -8,8 +8,8 @@ int main(void)
    char ***c;
 
    assert(sizeof *c == sizeof **c
-         && sizeof *p == sizeof **c
-         && sizeof *d == sizeof **c); 
+      && sizeof *p == sizeof **c
+      && sizeof *d == sizeof **c); 
 
    return 0;
 }

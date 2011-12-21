@@ -3,146 +3,146 @@
 PCMfile*
 PCMfilecreate ()
 {
-    int error = 0;
-    int i     = 0;
-    PCMfile *fp = NULL;
+   int error = 0;
+   int i     = 0;
+   PCMfile *fp = NULL;
 
-    PCM_ALLOC(fp, 1, *fp);
+   PCM_ALLOC(fp, 1, *fp);
 
-    fp->p       = NULL;
-    PCMstrncpy (fp->name, "", sizeof fp->name + 1);
-    fp->nlines  = 0LL;
-    fp->nbytes  = 0LL;
-    fp->ndigits = 0LL;
-    fp->nwords  = 0LL;
+   fp->p       = NULL;
+   PCMstrncpy (fp->name, "", sizeof fp->name + 1);
+   fp->nlines  = 0LL;
+   fp->nbytes  = 0LL;
+   fp->ndigits = 0LL;
+   fp->nwords  = 0LL;
 
-    for (i = 0; i < PCMCHAR; ++i)
-    {
-        fp->countofchar[i] = 0;
-    }
+   for (i = 0; i < PCMCHAR; ++i)
+   {
+      fp->countofchar[i] = 0;
+   }
 
 TERMINATE:
-    return fp;
+   return fp;
 } /* End of PCMfilecreate*/
 
 void
 PCMfilefree (PCMfile *fp)
 {
-    assert(fp != NULL);
+   assert(fp != NULL);
 
-    if ( fp->p != NULL )
-    {
-        fclose(fp->p);
-        fp->p = NULL;
+   if ( fp->p != NULL )
+   {
+      fclose(fp->p);
+      fp->p = NULL;
 
-    }
+   }
 
-    PCM_FREE(fp);
+   PCM_FREE(fp);
 } /* End of PCMfilefree*/
 
 int
 PCMfileopen (PCMfile *fp, const char *name)
 {
-    DERROR;
+   DERROR;
 
-    assert(fp != NULL);
+   assert(fp != NULL);
 
-    if ((fp->p = fopen(name, "r")) == NULL)
-    {
-        THROW(errno);
-    }
-    else
-    {
-        THROW(PCMstrncpy(fp->name, name, sizeof fp->name - 1));
-    }
+   if ((fp->p = fopen(name, "r")) == NULL)
+   {
+      THROW(errno);
+   }
+   else
+   {
+      THROW(PCMstrncpy(fp->name, name, sizeof fp->name - 1));
+   }
 
-    RETURN;
+   RETURN;
 } /* End of PCMfileopen */
 
 static int
 PCMfilegetinfo (PCMfile *fp)
 {
-    DERROR;
-    int state = 0;
-    int c;
+   DERROR;
+   int state = 0;
+   int c;
 
-    assert(fp != NULL);
+   assert(fp != NULL);
 
-    while ((c = getc(fp->p)) != EOF)
-    {
-        ++fp->nbytes;
-        ++fp->countofchar[c];
+   while ((c = getc(fp->p)) != EOF)
+   {
+      ++fp->nbytes;
+      ++fp->countofchar[c];
 
-        if ( '\n' == c )
-        {
-            ++fp->nlines;
-        }
+      if ( '\n' == c )
+      {
+         ++fp->nlines;
+      }
 
-        if ( c >= '0' && c <= '9')
-        {
-            ++fp->ndigits;
-        }
+      if ( c >= '0' && c <= '9')
+      {
+         ++fp->ndigits;
+      }
 
-        if ( ( (c >= 91)  && (c <= 96)  )  ||
-                ( (c >= 0)   && (c <= 64)  )  ||
-                ( (c >= 123) && (c <= 127) ) )
-        {
-            state = 0;
-        }
-        else if (0 == state)
-        {
-            state = 1;
-            ++fp->nwords;
-        }
-    }
+      if ( ( (c >= 91)  && (c <= 96)  )  ||
+         ( (c >= 0)   && (c <= 64)  )  ||
+         ( (c >= 123) && (c <= 127) ) )
+      {
+         state = 0;
+      }
+      else if (0 == state)
+      {
+         state = 1;
+         ++fp->nwords;
+      }
+   }
 
-    // rewind to the head of file
-    rewind (fp->p);
+   // rewind to the head of file
+   rewind (fp->p);
 
-    RETURN;
+   RETURN;
 } /* End of PCMfilepgetinfo*/
 
 int
 PCMfilestat (PCMfile *fp)
 {
-    DERROR;
-    int i     = 0;
-    int j     = 0;
+   DERROR;
+   int i     = 0;
+   int j     = 0;
 
-    assert(fp != NULL);
+   assert(fp != NULL);
 
-    THROW(PCMfilegetinfo(fp));
+   THROW(PCMfilegetinfo(fp));
 
-    printf ("File name: %s\n", fp->name);
-    printf ("There are %lld lines\n", fp->nlines);
-    printf ("There are %lld words\n", fp->nwords);
-    printf ("There are %lld bytes\n", fp->nbytes);
-    printf ("There are %lld digits\n", fp->ndigits);
+   printf ("File name: %s\n", fp->name);
+   printf ("There are %lld lines\n", fp->nlines);
+   printf ("There are %lld words\n", fp->nwords);
+   printf ("There are %lld bytes\n", fp->nbytes);
+   printf ("There are %lld digits\n", fp->ndigits);
 
-    for (i = 0; i < PCMCHAR; ++i)
-    {
-        if (isprint(i))
-        {
-            if ( 0 != fp->countofchar[i] )
-            {
-                j++;
-                printf ("Count of char ");
-                putchar((char)(i));
-                putchar(':');
-                printf ("%8lld   ", fp->countofchar[i]);
-            }
+   for (i = 0; i < PCMCHAR; ++i)
+   {
+      if (isprint(i))
+      {
+         if ( 0 != fp->countofchar[i] )
+         {
+            j++;
+            printf ("Count of char ");
+            putchar((char)(i));
+            putchar(':');
+            printf ("%8lld   ", fp->countofchar[i]);
+         }
 
-            if ( 0 == j%3 && 0 != j )
-            {
-                printf("\n");
-                j = 0;
-            }
-        }
-    }
+         if ( 0 == j%3 && 0 != j )
+         {
+            printf("\n");
+            j = 0;
+         }
+      }
+   }
 
-    printf("\n");
+   printf("\n");
 
-    RETURN;
+   RETURN;
 } /* End of PCMfilestatistics*/
 
 int
@@ -151,29 +151,29 @@ PCMfilegetline (PCMfile *fp,
                 char    *line,
                 int     *length)
 {
-    DERROR;
-    int c     = 0;
-    int i     = 0;
+   DERROR;
+   int c     = 0;
+   int i     = 0;
 
-    assert(fp != NULL);
+   assert(fp != NULL);
 
-    while ((i < max-1               ) &&
-            ((c = getc(fp->p)) != EOF ) &&
-            (c != '\n'                )   )
-    {
-        line[i] = c;
-        ++i;
-    }
+   while ((i < max-1               ) &&
+      ((c = getc(fp->p)) != EOF ) &&
+      (c != '\n'                )   )
+   {
+      line[i] = c;
+      ++i;
+   }
 
-    if ( c == '\n' )
-    {
-        line[i] = '\n';
-    }
+   if ( c == '\n' )
+   {
+      line[i] = '\n';
+   }
 
-    line[i+1] = '\0';
-    *length = i;
+   line[i+1] = '\0';
+   *length = i;
 
-    RETURN;
+   RETURN;
 } /* End of PCMfilegetline */
 
 int
@@ -181,26 +181,26 @@ PCMfilegetmaxline (PCMfile *fp,
                    char     *maxline,
                    int      *max)
 {
-    DERROR;
-    int len   = 0;
-    char line[PCMFILEMAXLINE] = {0};
+   DERROR;
+   int len   = 0;
+   char line[PCMFILEMAXLINE] = {0};
 
-    assert(fp != NULL);
+   assert(fp != NULL);
 
-    *max = len;
-    do
-    {
-        THROW(PCMfilegetline (fp, PCMFILEMAXLINE, line, &len));
-        if ( len > *max )
-        {
-            *max = len;
-            THROW(PCMstrncpy (maxline, line, PCMFILEMAXLINE));
-        }
-    }
-    while ( len != 0 );
+   *max = len;
+   do
+   {
+      THROW(PCMfilegetline (fp, PCMFILEMAXLINE, line, &len));
+      if ( len > *max )
+      {
+         *max = len;
+         THROW(PCMstrncpy (maxline, line, PCMFILEMAXLINE));
+      }
+   }
+   while ( len != 0 );
 
-    rewind (fp->p);
+   rewind (fp->p);
 
-    RETURN;
+   RETURN;
 } /* End of PCMfilegetmaxline*/
 

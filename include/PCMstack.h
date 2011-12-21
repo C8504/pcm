@@ -6,18 +6,18 @@
 extern "C" {
 #endif
 #include "PCM.h"
-    typedef struct
-    {
-        int    top;
-        void   **data;
-        size_t size;
-    } PCMstack;
+   typedef struct
+   {
+      int    top;
+      void   **data;
+      size_t size;
+   } PCMstack;
 
-    int   PCMstackcreate  (PCMstack **sp, size_t size);
-    void  PCMstackfree    (PCMstack **sp, FREEFUNC freefunc);
-    void* PCMstackpop     (PCMstack *s);
-    int   PCMstackpush    (PCMstack *s, void *elem);
-    int   PCMstackisempty (PCMstack *s);
+   int   PCMstackcreate  (PCMstack **sp, size_t size);
+   void  PCMstackfree    (PCMstack **sp, FREEFUNC freefunc);
+   void* PCMstackpop     (PCMstack *s);
+   int   PCMstackpush    (PCMstack *s, void *elem);
+   int   PCMstackisempty (PCMstack *s);
 
 #ifdef __cplusplus
 }
