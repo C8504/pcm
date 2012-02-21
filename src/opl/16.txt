@@ -1,0 +1,63 @@
+100里面取1个数的情况:
+// solution with objective 1
+x = [1];
+
+100里面取2个数的情况:
+No solution
+
+100里面取3个数的情况:
+// solution with objective 6
+x = [2 3 6];
+
+100里面取4个数的情况:
+// solution with objective 12
+x = [2 4 6 12];
+
+100里面取5个数的情况:
+// solution with objective 15
+x = [2 4 10 12 15];
+
+100里面取6个数的情况:
+// solution with objective 15
+x = [3 4 6 10 12 15];
+
+100里面取7个数的情况:
+// solution with objective 18
+x = [3 4 9 10 12 15 18];
+
+100里面取8个数的情况:
+// solution with objective 20
+x = [4 5 6 9 10 15 18 20];
+
+100里面取9个数的情况:
+// solution with objective 24
+x = [4 6 8 9 10 12 15 18 24];
+
+100里面取10个数的情况:
+// solution with objective 24
+x = [5 6 8 9 10 12 15 18 20 24];
+
+100里面取11个数的情况:
+// solution with objective 28
+x = [6 7 8 9 10 12 14 15 18 24 28];
+
+100里面取12个数的情况:
+// solution with objective 30
+x = [6 7 8 9 10 14 15 18 20 24 28 30];
+
+100里面取13个数的情况:
+// solution with objective 33
+x = [7 8 9 10 11 12 14 15 18 22 24 28 33];
+
+100里面取14个数的情况:
+// solution with objective 33
+x = [7 8 9 10 11 14 15 18 20 22 24 28 30 33];
+
+100里面取15个数的情况:
+// solution with objective 35
+x = [6 8 9 11 14 15 18 20 21 22 24 28 30 33 35];
+
+100里面取16个数的情况:
+// solution with objective 36
+x = [6 8 11 12 14 15 18 20 21 22 24 28 30 33
+         35 36];
