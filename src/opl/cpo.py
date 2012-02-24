@@ -2,10 +2,10 @@
 import numpy as np
  
 prob = cplex.Cplex()
-N = 50  # range
-M = 14  # 数字的个数，10个还是几个改M的值
+N = 50  
+M = 14  
 
-numerical_adjuster = prod  # 希望能消去一点取倒数带来的数值影响
+numerical_adjuster = 1 
 var_names = ['x' + str(i) for i in range(1, 1 + N)]
  
 #obj_coef = range(1, 1 + N)
