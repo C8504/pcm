@@ -1,3 +1,5 @@
+//this is an example for logic constraints in OPl
+
 dvar boolean x;
 dvar boolean y;
 dvar boolean z;
