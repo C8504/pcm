@@ -26,6 +26,13 @@ compile =                                                 \
          $(CCOMPILE) $(OTHER) $(INCLUDE) $(CTESTDIR)$(1)$(C) $(CSRC) \
          -o $(EXEDIR)$(1)$(E);
 
+compileother =                                  \
+         if !(test -d exe); then mkdir exe; fi; \
+         if !(test -d log); then mkdir log; fi; \
+         if !(test -d profile); then mkdir profile; fi; \
+         if !(test -d splint); then mkdir splint; fi; \
+         $(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)$(1)$(C) -o $(EXEDIR)$(1)$(E);
+
 test =                                                        \
          if !(test -d exe); then mkdir exe; fi; \
          if !(test -d log); then mkdir log; fi; \
@@ -72,7 +79,7 @@ testclean:
 	@rm -f -r $(LOGDIR) $(PROFDIR) $(EXEDIR) $(SPLINTDIR)
 
 clean: testclean
-	rm -f error  */*.stackdump gmon.out *.o *.c *pyc *.so */*.a
+	rm -f error  */*.stackdump *.stackdump gmon.out *.o *.c *pyc *.so */*.a
 
 # C files
 
@@ -112,22 +119,22 @@ $(LOGDIR)test_PCM_link$(LOG): $(EXEDIR)test_PCM_link$(E)
 	$(call test,test_PCM_link)
 
 $(EXEDIR)memory_1$(E): $(OTHERS)memory_1$(C)
-	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_1$(C) -o $(EXEDIR)memory_1$(E);
+	$(call compileother,memory_1)
 $(LOGDIR)memory_1$(LOG):$(EXEDIR)memory_1$(E)
 	$(call test,memory_1)
 
 $(EXEDIR)memory_2$(E): $(OTHERS)memory_2$(C)
-	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_2$(C) -o $(EXEDIR)memory_2$(E);
+	$(call compileother,memory_2)
 $(LOGDIR)memory_2$(LOG):$(EXEDIR)memory_2$(E)
 	$(call test,memory_2)
 
 $(EXEDIR)memory_3$(E): $(OTHERS)memory_3$(C)
-	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_3$(C) -o $(EXEDIR)memory_3$(E);
+	$(call compileother,memory_3)
 $(LOGDIR)memory_3$(LOG):$(EXEDIR)memory_3$(E)
 	$(call test,memory_3)
 
 $(EXEDIR)memory_4$(E): $(OTHERS)memory_4$(C)
-	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_4$(C) -o $(EXEDIR)memory_4$(E);
+	$(call compileother,memory_4)
 $(LOGDIR)memory_4$(LOG):$(EXEDIR)memory_4$(E)
 	$(call test,memory_4)
 
