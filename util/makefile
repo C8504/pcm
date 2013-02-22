@@ -11,6 +11,7 @@ INCLUDE=../include/
 CSRCDIR=../src/c/
 
 CTESTDIR=../test/c/
+OTHERS=../test/c/others/
 CPPTESTDIR=../test/cpp/
 JAVATESTDIR=../test/java/
 

@@ -111,6 +111,26 @@ $(EXEDIR)test_PCM_link$(E): $(CSRC) $(CTESTDIR)test_PCM_link$(C)
 $(LOGDIR)test_PCM_link$(LOG): $(EXEDIR)test_PCM_link$(E)
 	$(call test,test_PCM_link)
 
+$(EXEDIR)memory_1$(E): $(OTHERS)memory_1$(C)
+	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_1$(C) -o $(EXEDIR)memory_1$(E);
+$(LOGDIR)memory_1$(LOG):$(EXEDIR)memory_1$(E)
+	$(call test,memory_1)
+
+$(EXEDIR)memory_2$(E): $(OTHERS)memory_2$(C)
+	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_2$(C) -o $(EXEDIR)memory_2$(E);
+$(LOGDIR)memory_2$(LOG):$(EXEDIR)memory_2$(E)
+	$(call test,memory_2)
+
+$(EXEDIR)memory_3$(E): $(OTHERS)memory_3$(C)
+	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_3$(C) -o $(EXEDIR)memory_3$(E);
+$(LOGDIR)memory_3$(LOG):$(EXEDIR)memory_3$(E)
+	$(call test,memory_3)
+
+$(EXEDIR)memory_4$(E): $(OTHERS)memory_4$(C)
+	$(CCOMPILE) $(OTHER) $(INCLUDE) $(OTHERS)memory_4$(C) -o $(EXEDIR)memory_4$(E);
+$(LOGDIR)memory_4$(LOG):$(EXEDIR)memory_4$(E)
+	$(call test,memory_4)
+
 # C++ files
 $(EXEDIR)cast$(E): $(CPPTESTDIR)cast$(CPP)
 	$(call cppcompile,cast)
