@@ -53,12 +53,12 @@ extern "C" {
    typedef void (*FREEFUNC) (void* p);
 
    // macros
-#define THROW(function)  if ( error = function ) { \
+#define THROW(function)  if ( error == function ) { \
    printf ("In %s, line %d ;",__FILE__, __LINE__); \
    goto TERMINATE;                  \
    }
 
-#define CALL(function) if ( error = function ) goto TERMINATE;
+#define CALL(function) if ( error == function ) goto TERMINATE;
 
 #define PCM_ALLOC(x,n,t)        do {                            \
    assert(x == NULL);                                           \
