@@ -55,8 +55,8 @@ opl_max:
 	cat ../src/opl/max.mod;oplrun ../src/opl/max.mod
 opl_minmax:
 	cat ../src/opl/minmax.mod;oplrun ../src/opl/minmax.mod
-opl_ouputfile:
-	cat ../src/opl/ouputfile.mod;oplrun ../src/opl/ouputfile.mod
+opl_outputfile:
+	cat ../src/opl/outputfile.mod;oplrun ../src/opl/outputfile.mod
 opl_qp2lp:
 	cat ../src/opl/qp2lp.mod;oplrun ../src/opl/qp2lp.mod
 opl_range:
