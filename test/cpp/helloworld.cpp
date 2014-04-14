@@ -1,5 +1,4 @@
 #include<iostream>
-#include <vector>
 #include <list>
 
 using namespace std;
@@ -8,9 +7,7 @@ int main()
 {
    cout<<"hello, STL\n";
 
-   vector<int> v(10);
-   list<double>  l(10);
-
+   list<double>  l;
    l.push_back(9.0);
 
    cout<<"l1"<<endl;
@@ -18,8 +15,6 @@ int main()
    {
       cout<<*itr;
    }
-
-
 
    list<double> l2(l);
 
