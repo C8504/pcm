@@ -7,6 +7,7 @@ help:
 	;echo "Choose a target:" \
 	;echo "" \
 	;echo "make [help]                               -- print this help screen" \
+	;echo "make [opl_all]                            -- run opl samples" \
 	;echo "make [exe/test_PCM_array]                 -- build test_PCM_array" \
 	;echo "make [log/test_PCM_link.log]              -- run test_PCM_link" \
 	;echo "make [profile/test_link.profile]          -- profile test_PCM_array" \
@@ -46,6 +47,27 @@ cppcompile =                                                  \
          -o $(EXEDIR)$(1)$(E);
 
 pcm: $(EXE)
+opl_logic:
+	cat ../src/opl/logic.mod;oplrun ../src/opl/logic.mod
+opl_ij:
+	cat ../src/opl/ij.mod;oplrun ../src/opl/ij.mod
+opl_max:
+	cat ../src/opl/max.mod;oplrun ../src/opl/max.mod
+opl_minmax:
+	cat ../src/opl/minmax.mod;oplrun ../src/opl/minmax.mod
+opl_ouputfile:
+	cat ../src/opl/ouputfile.mod;oplrun ../src/opl/ouputfile.mod
+opl_qp2lp:
+	cat ../src/opl/qp2lp.mod;oplrun ../src/opl/qp2lp.mod
+opl_range:
+	cat ../src/opl/range.mod;oplrun ../src/opl/range.mod
+opl_sudoku:
+	cat ../src/opl/sudoku.mod;oplrun ../src/opl/sudoku.mod
+opl_sum:
+	cat ../src/opl/sum.mod;oplrun ../src/opl/sum.mod
+opl_sumsum:
+	cat ../src/opl/sumsum.mod;oplrun ../src/opl/sumsum.mod
+opl_all:opl_logic opl_ij opl_max opl_minmax opl_ouputfile opl_qp2lp opl_range opl_sudoku opl_sum opl_sumsum
 
 lib:
 	$(CCOMPILE) -c $(OTHER) $(INCLUDE) $(CSRC)
