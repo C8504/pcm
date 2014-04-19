@@ -49,6 +49,8 @@ cppcompile =                                                  \
 pcm: $(EXE)
 opl_logic:
 	cat ../src/opl/logic.mod;oplrun ../src/opl/logic.mod
+opl_sparse:
+	cat ../src/opl/sparse.mod;oplrun -e ../src/opl/debug.lp ../src/opl/sparse.mod;
 opl_ij:
 	cat ../src/opl/ij.mod;oplrun ../src/opl/ij.mod
 opl_max:
