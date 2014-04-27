@@ -71,7 +71,13 @@ opl_sumsum:
 	cat ../src/opl/sumsum.mod;oplrun ../src/opl/sumsum.mod
 opl_sched_flowshop:
 	cat ../src/opl/sched_flowshop.mod;oplrun ../src/opl/sched_flowshop.mod ../src/opl/sched_flowshop.dat
-opl_all:opl_logic opl_ij opl_max opl_minmax opl_ouputfile opl_qp2lp opl_range opl_sudoku opl_sum opl_sumsum
+opl_sched_jobshop:
+	cat ../src/opl/sched_jobshop.mod;oplrun ../src/opl/sched_jobshop.mod ../src/opl/sched_jobshop.dat
+opl_sched_jobshopflex:
+	cat ../src/opl/sched_jobshopflex.mod;oplrun ../src/opl/sched_jobshopflex.mod ../src/opl/sched_jobshopflex.dat
+
+opl_all:opl_logic opl_ij opl_max opl_minmax opl_outputfile opl_qp2lp opl_range opl_sudoku opl_sum opl_sumsum opl_sched_flowshop \
+opl_sched_jobshop opl_sched_jobshopflex
 
 lib:
 	$(CCOMPILE) -c $(OTHER) $(INCLUDE) $(CSRC)
